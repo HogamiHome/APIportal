@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Singapur Plattform</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/freelancer.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="swagger-ui.css">
+
+   <!-- Esta linea inicializa swagger -->
+   <script src="swagger-ui-bundle.js"></script>
+   <script src="swagger-ui-standalone-preset.js"></script>
+
+
+  <script>
+    function show(swagger){
+      if(swagger.style.display!='none'){
+        swagger.style.display='none';
+      }else{
+        swagger.style.display='block';
+      }
+    }
+    </script>
+
+<script>
+  window.onload= function() {
+    const ui = SwaggerUIBundle({
+      url: "http://104.199.98.73/v2/api-docs?group=Singapur%20Maching%20api",
+      dom_id: '#swagger-ui',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui');
+    swagger.style.display='none';
+    const ui2 = SwaggerUIBundle({
+      url: "http://35.240.117.31/v2/api-docs?group=Singapur%20professional-api",
+      dom_id: '#swagger-ui2',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui2');
+    swagger.style.display='none';
+  
+    const ui3 = SwaggerUIBundle({
+      url: "http://35.241.162.109/v2/api-docs?group=Singapur%20client-api",
+      dom_id: '#swagger-ui3',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui3');
+    swagger.style.display='none';
+  
+  const ui4 = SwaggerUIBundle({
+      url: "http://34.76.225.149/v2/api-docs?group=Singapur%20Request%20Server",
+      dom_id: '#swagger-ui4',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui4');
+    swagger.style.display='none';
+    const ui5 = SwaggerUIBundle({
+      url: "http://35.195.103.252/v2/api-docs?group=singapur%20notifications",
+      dom_id: '#swagger-ui5',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui5');
+    swagger.style.display='none';
+    const ui6 = SwaggerUIBundle({
+      url: "http://35.195.64.134/v2/api-docs?group=Singapur%20Identity%20Server",
+      dom_id: '#swagger-ui6',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui6');
+    swagger.style.display='none';
+    const ui7 = SwaggerUIBundle({
+      url: "http://35.205.219.79/v2/api-docs?group=singapur%20offered%20services",
+      dom_id: '#swagger-ui7',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui7');
+    swagger.style.display='none';
+    const ui8 = SwaggerUIBundle({
+      url: "http://34.76.112.243/v2/api-docs?group=Singapur%20Operation",
+      dom_id: '#swagger-ui8',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui8');
+    swagger.style.display='none';
+	const ui11 = SwaggerUIBundle({
+      url: "http://34.76.40.179/v2/api-docs?group=singapur%20chat%20server",
+      dom_id: '#swagger-ui11',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui11');
+    swagger.style.display='none';
+	
+    const ui9 = SwaggerUIBundle({
+      url: "http://34.76.221.198//v2/api-docs?group=singapur%20payment%20server",
+      dom_id: '#swagger-ui9',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui9');
+    swagger.style.display='none';
+  
+  }
+  </script>
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <img class="img-fluid" src="img/portfolio/logo-singapur-verde.svg" alt="Singapur">
+    </a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Apis</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <img class="img-fluid mb-5 d-block mx-auto" src="img/portfolio/Dejar-casa-entre-familiares.jpg" alt="">
+      <h1 class="text-uppercase mb-0">Singapur portal developer</h1>
+      <hr class="star-light">
+      <h2 class="font-weight-light mb-0">Web Developer portal - Service Platform</h2>
+    </div>
+  </header>
+
+  <!-- Portfolio Grid Section -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-secondary mb-0">Apis</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-1">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i class="fas fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/trabajo.png" alt="">
+            </a>
+          <h6>Matching</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-2">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/portfolio/dyer.png" alt="">
+            </a>
+          <h6>Professional</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-3">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/portfolio/familia.png" alt="">
+            </a>
+          <h6>Client</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-9">
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+                </div>
+              <img class="img-fluid" src="img/portfolio/dinero.png" alt="">
+            </a>
+          <h6>Payment</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-5">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i class="fas fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/email.png" alt="">
+          </a>
+        <h6>Notification</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-8">
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+                </div>
+              <img class="img-fluid" src="img/portfolio/llave-inglesa.png" alt="">
+              </a>
+          <h6>Operation</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-4">
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/portfolio/signo-de-interrogacion.png" alt=""> 
+            </a>
+          <h6>Request Service</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-6">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i class="fas fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/contrasena.png" alt="">
+          </a>
+        <h6>Identity Server</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-7">
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fas fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/portfolio/rodillo-de-pintura.png" alt="">
+            </a>
+          <h6>Service Offer</h6>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-12">
+            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                <i>Under Construction</i>
+              </div>
+            </div>
+              <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
+            </a>
+          <h6>Rating</h6>
+        </div>
+                  <div class="col-md-6 col-lg-4">
+                      <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-13">
+                        <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                          <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+             
+                          </div>
+                        </div>
+                        <img class="img-fluid" src="img/portfolio/chat.png" alt="">
+                        </a>
+                      <h6>Chat</h6>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-14">
+                          <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                            <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                                <i>Under Construction</i>
+                            </div>
+                          </div>
+                          <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
+                        </a>
+                      <h6>Invoices</h6>
+                      </div>
+                      <div class="col-md-6 col-lg-4">
+                          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-15">
+                            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                                  <i>Under Construction</i>
+                              </div>
+                            </div>
+                            <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
+                            </a>
+                          <h6>Functional Administration</h6>
+                        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- About Section -->
+  <section class="bg-primary text-white mb-0" id="about">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-white">Database Model Singapur</h2>
+      <hr class="star-light mb-5">
+      <div class="row">
+          <a class="portfolio-item d-block mx-auto" href="#agrandarFoto">
+        <img class="imagenDatos" src="img/portfolio/base-de-datos.png" alt="">
+      </a>
+      </div>
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" href="img/portfolio/todo.png" download="completeDataBase">
+          <i class="fas fa-download mr-2"></i>
+          Descarga
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="copyright py-4 text-center text-white">
+    <div class="container">
+      <small>Copyright &copy; Everis 2019</small>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-to-top d-lg-none position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+
+  <!-- Portfolio Modals -->
+
+  <!-- Portfolio Modal 1 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-1">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Matching</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The Matching API provides the results of the matching process between offer and demand. 
+              Starting with the request from a Client characterized by 2 parameters:
+              <ol>
+                <li> A service level 3, included the "Others" label;</li>
+                <li> A specific place identified by the Postal Code.</li>
+              </ol>
+               Once the request is placed to the Platform, it returns as a result, 
+              a list of Professionals who matched the 2 parameters:
+              <ol>
+                  <li> Skills to execute the service;</li>
+                  <li> Offering the services at the Postal Code. </li>
+              </ol> 
+              An excluding condition for the Professional , is to be active at the moment of the request.
+              The results showed by the API Search are sorted using different algorithms.
+              The use of different algorithms allows the testing to choose the best alternative.
+              </p>
+            </div>
+            <a class="btn btn-primary btn-lg rounded-pill " href="#" onclick="show(document.getElementById('swagger-ui'))">
+              <i class="fa fa-close" ></i>
+              Api Definition</a>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                     Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui"></div>
+</div>
+</div>
+
+  <!-- Portfolio Modal 2 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-2">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Professional</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The Professional API gives the information identifying the Professional, based on the details provided by the Professional and the Platform. 
+              Those one give by the Professional:
+              <ol type="a">
+                  <li>Who (their ID, name, address, etc.);</li>
+                  <li>Where (places where they operate identified by the Postal Code); </li>
+                  <li>What (which services they offer, their skills); </li>
+                  <li>Additional information (legal, fiscal, complementary information);</li>
+                  <li>Activity status (active, on hold) </li>
+                </ol> 
+              Also manages the complementary information gathered by the Platform.
+              After the curation process made by the Platform, a final status is indicated as Validated or Not Validated.
+              Once the Professional is registered, the API Professional manages the login credentials for the Professional (user, password).
+              The microservice deals with the different status (change, recover,..) The Professional has access to their Jobs published in their private space. 
+              </p>
+            </br>
+          </div>
+              <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+              <img src="img/portfolio/professional.png" >
+            </br></br>
+            <a class="btn btn-primary btn-lg rounded-pill " href="#" onclick="show(document.getElementById('swagger-ui2'))">
+              <i class="fa fa-close"></i>
+              Api Definition</a>
+            <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+              <i class="fa fa-close"></i>
+              Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui2"></div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 3 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-3">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Client</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The Client API provides the information identifying the Client, based on the information provided by him in 2 different steps:
+                <ol type="a">
+                    <dt>"Light Register":</dt>
+                      <dd>email, name, telephone (optional). This step allows the Client to start Chatting with the Professionals. </dd>
+                    <dt>Register: </dt>
+                      <dd> Who (who is he Client, ID, address…); Where (specific address, the Postal Code is mandatory); </dd>
+                    <dt> Additional information (legal, fiscal, complementary information).</dt>
+                  </ol> 
+               Once the Client is registered, the API Client manages their login credentials (user, password).
+               The microservice deals with different status (change, recover).
+               The Clients has access to their Jobs published in their private space.
+              </p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+              <img src="img/portfolio/client.png" >
+            </br></br>
+            <a class="btn btn-primary btn-lg rounded-pill " href="#"  onclick="show(document.getElementById('swagger-ui3'))">
+              <i class="fa fa-close"></i>
+              Api Definition</a>
+            <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+              <i class="fa fa-close"></i>
+              Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui3"></div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 4 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-4">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Request Service</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The Request API provides the informations related to the exchanges between the Client and the Professional in the Chat.
+              These exchanges start at the moment that the Client and Professional start a new convertation in the Chat,
+               until they agree to open a Job, or unlike they finish the exchanges.
+               All the exchanges are stored.
+               In this microservice the Client and the Professional agree on the details of the future Job: service, price, place, date (day & hour)
+              </p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+              <img src="img/portfolio/request.png" >
+            </br></br>
+            <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui4'))">
+              <i class="fa fa-close"></i>
+              Api Definition</a>
+            <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+              <i class="fa fa-close"></i>
+              Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui4"></div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 5 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-5">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Notification</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The API Notification provides the information about the communications with the Client and the Professional.
+              The communications will be done by mail and by SMS for the Client and the Professional, and also messages Push to the Professional.
+              The communications include the messages generated by the loging processes, the messages generated in the chat, the Charges received by the PSP,
+               the Payments sent by the PSP, the Invoices and the ratings.
+              </p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+          </br>
+              <img src="img/portfolio/notification.png" >
+            </br></br>
+            <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui5'))" >
+              <i class="fa fa-close"></i>
+              Api Definition</a>
+            <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+              <i class="fa fa-close"></i>
+              Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui5"></div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 6 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-6">
+    <div class="portfolio-modal-dialog bg-white">
+      <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+        <i class="fa fa-3x fa-times"></i>
+      </a>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-secondary text-uppercase mb-0">Identity Server</h2>
+            <hr class="star-dark mb-5">
+            <div id= "text">
+            <p>The Identity Server API deals with the permissions logic to the API conexions.
+                It manages the credentials, tokens, permissions and roles, needed to allow the access to the APIs and the users.</p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+            <img src="img/portfolio/user.png" >
+          </br></br>
+            <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui6'))">
+              <i class="fa fa-close"></i>
+              Api Definition</a>
+            <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+              <i class="fa fa-close"></i>
+              Close</a>
+          </div>
+        </div>
+      </div>
+      <div id="swagger-ui6"></div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 7 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-7">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0">Service Offer</h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p >The Services Offer API provides the structured offer of services provided by Singapur. 
+                The Offer is structured in 3 levels:
+                <ol type="a">
+                    <li>Category (e.g., Maintenance);</li>
+                    <li>Business Vertical (e.g., Handyman);</li>
+                    <li>Jobs. The level 3 is the most granular detail. </li>
+                </ol> 
+                It is composed with the standardized packages associated to the Business Vertical.
+                 A Job could be also a non-identified standard package, identified as "Others". A Job has always a price associated.
+                   In this case each Job declared as "Others" will be storage with an ID.
+                    In a first stage, the information will not be treated, and all the Jobs "Others" could be different.
+                     In a second phase, an intelligent mechanism (could be a machine learning artifact), will be implemented to match the differences and
+                      classify properly the "Others" likewise. 
+                </p>
+              </br>
+              </div>
+              <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+                <img src="img/portfolio/offered_service.png" >
+              </br></br>
+              <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" >
+                <i class="fa fa-close"></i>
+                Api Definition</a>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#" onclick="show(document.getElementById('swagger-ui7'))">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+        <div id="swagger-ui7"></div>
+      </div>
+    </div>
+
+    <!-- Portfolio Modal 8 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-8">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0">Operation </h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p >The Operation API provides the Job details.
+                 Once the Client has agreed with the Professional on the Service to be done, the price, the place and the date (day and hour),
+                 a Job is created for the Client and the Professional, using the precedent variables.
+                 At this moment a first Charge will be done to the Client. 
+                 As the Job progress, more variables are created: checking the Professional arrival (day & hour) ; picture “before”; final date (day & hour);
+                 picture “after”; final price; Professional closing the Job; Client confirming (OK / KO) ; detail of services done; 
+                 detail of products included.  
+                 The Operation API gives a unique register for the Job created from the moment when the Client and the Professional agreed on a Job.
+                  During the Job execution additional Services and Products can be added.
+                </p>
+              </br>
+              </div>
+              <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+                <img src="img/portfolio/operation.png" >
+              </br></br>
+              <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui8'))">
+                <i class="fa fa-close"></i>
+                Api Definition</a>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+        <div id="swagger-ui8"></div>
+      </div>
+    </div>
+
+       <!-- Portfolio Modal 9 -->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-9">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0">Payment</h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p>The API Payment provides information about the Charges and Payments.
+                The Charges flows are sent from the Client to the PSP, and the Payments flows came from the PSP to the Professional.
+                The PSP includes the flows sent to the escrow accounts. The Charges are split in 3 amounts:
+                <ol type="a">
+                    <li>the PSP´s commission;</li>
+                    <li>the Platform commission over the price of the Job excluding the products;</li>
+                    <li>the Payment to the Professional.</li>
+                </ol> 
+                The Payment is calculated taking out the commissions and taxes from the Charges, and the PSP commission is assumed by the Platform.
+                </p>
+              </br>
+              </div>
+              <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+                <img src="img/portfolio/payment.png" >
+              </br></br>
+              <a class="swagger btn btn-primary btn-lg rounded-pill" href="#">
+                <i class="fa fa-close"></i>
+                Api Definition</a>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#" onclick="show(document.getElementById('swagger-ui9'))">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+        <div id="swagger-ui9"></div>
+      </div>
+    </div>
+
+  <!-- Portfolio Modal  12-->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-12">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0"> Rating </h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p>The API Rating provides the information that the Client done to the Professional, and the one done by the Professional to the Client.
+                 The Professional rating is public. Unlikewise, the Client rating will be kept for internal use of the Platform. 
+                 The rating will be performed using different indicators (cleaning, punctuality,...)
+                </p>
+              </br>
+              </div>
+              <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+            </br>
+                <i class="fa fa-close"></i>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio Modal  13-->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-13">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0"> Chat </h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p>The Chat API has the whole capacities to manage the information contained in the exchanges between the Client and the Professional.
+                It can read the conversations, allow the Customer Service can enter in the Chat, managing the pending conversations, extract information from the database.
+              </p>
+            </br>
+           
+          </br>
+          </div>
+              <a class="swagger btn btn-primary btn-lg rounded-pill" href="#">
+                <i class="fa fa-close"></i>
+                Api Definition</a>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#" onclick="show(document.getElementById('swagger-ui11'))">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+		  </div>
+		<div id="swagger-ui11"></div>
+	</div>
+    </div>
+
+     <!-- Portfolio Modal  14-->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-14">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0"> Invoices </h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p>The Invoices API interacts with the microservice Invoice generator.
+                The Invoices are created with the Client and Professional fiscal informations, the Job details (services, products, prices, taxes).
+                The microservice will send the forms to the Client, to the Customer, and externally to the LM main comptable module.
+                There will be 2 invoices created:
+                <ol>
+                  <li>From the Professional to the Client;</li>
+                  <li>From the Platform to the Professional.</li>
+                </ol>
+                The invoices must be stored on line at least for 4 years after the date of service. 
+              </p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+          </br>
+                <i class="fa fa-close"></i>
+                <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Portfolio Modal  15-->
+  <div class="portfolio-modal mfp-hide" id="portfolio-modal-15">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0">Functional Adminsitration </h2>
+              <hr class="star-dark mb-5">
+              <div id= "text">
+              <p>The API Functional Administration provides a set of back office functionalities.
+                The main features are the following manages the Professional curation process; manages the Customer Service; 
+                provides information about the Job, the status and the incidents declared by the Client or the Professional.
+                The API FA also allow to expel Professionals, change the service status in case of error and generate request with filters.
+              </p>
+            </br>
+            </div>
+            <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
+          </br>
+              <i class="fa fa-close"></i>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Agrandar foto -->
+  <div class="portfolio-modal mfp-hide" id="agrandarFoto">
+      <div class="portfolio-modal-dialog bg-white">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center">
+          <div class="row">
+              <img class="imagenModal" src="img/portfolio/todo.png" alt="">
+              <p class="mb-5"></p>
+              <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                <i class="fa fa-close"></i>
+                Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+
+
+  <!-- Custom scripts for this template -->
+  <script src="js/freelancer.min.js"></script>
+
+</body>
+
+</html>
