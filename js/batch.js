@@ -1,0 +1,1 @@
+var batch = {"swagger":"2.0","info":{"description":"Operation API to Singapur Project","version":"1.0","title":"Leroy Merlin Clients","termsOfService":"https://www.everis.com","license":{"name":"everis","url":"https://www.everis.com"}},"host":"localhost:8019","basePath":"/","tags":[{"name":"OperationRestController","description":"Operations related actions"}]}
