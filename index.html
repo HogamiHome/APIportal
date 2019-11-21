@@ -42,6 +42,7 @@
    <script src="js/chat.js"></script>
    <script src="js/backoffice.js"></script>
    <script src="js/identityServer.js"></script>
+   <script src="js/batch.js"></script>
 
 
   <script>
@@ -211,6 +212,19 @@
     })
     var swagger = document.getElementById('swagger-ui15');
     swagger.style.display='none';
+	
+	const ui16 = SwaggerUIBundle({
+      spec: batch,
+      dom_id: '#swagger-ui16',
+      docExpansion: 'none',
+      swagger: "2.0", 
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ]
+    })
+    var swagger = document.getElementById('swagger-ui16');
+    swagger.style.display='none';
   
   }
   </script>
@@ -362,7 +376,7 @@
             <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-12">
             <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
               <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i>Under Construction</i>
+               <i class="fas fa-search-plus fa-3x"></i>
               </div>
             </div>
               <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
@@ -395,7 +409,7 @@
                           <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-15">
                             <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                               <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                                  <i>Under Construction</i>
+                                 <i class="fas fa-search-plus fa-3x"></i>
                               </div>
                             </div>
                             <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
@@ -406,7 +420,7 @@
                           <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-16">
                             <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                               <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                                  <i>Under Construction</i>
+                                  <i class="fas fa-search-plus fa-3x"></i>
                               </div>
                             </div>
                             <img class="img-fluid" src="img/portfolio/cono-de-trafico.png" alt="">
@@ -856,9 +870,7 @@
               <p>The Chat API has the whole capacities to manage the information contained in the exchanges between the Client and the Professional.
                 It can read the conversations, allow the Customer Service can enter in the Chat, managing the pending conversations, extract information from the database.
               </p>
-            </br>
-           
-          </br>
+            </br></br>
           </div>
               <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui11'))">
                 <i class="fa fa-close"></i>
@@ -929,7 +941,7 @@
             </br>
             </div>
             <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
-          </br>
+          </br><br>
 			  <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui15'))">
                 <i class="fa fa-close"></i>
                 Api Definition</a>
@@ -961,10 +973,10 @@
             </br>
             </div>
             <h3 class="text-secondary text-uppercase mb-0">Data Base Model</h3>
-          </br>
-			  <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui16'))">
-                <i class="fa fa-close"></i>
-                Api Definition</a>
+          </br><br>
+			  <!-- <a class="swagger btn btn-primary btn-lg rounded-pill" href="#" onclick="show(document.getElementById('swagger-ui16'))"> -->
+                <!-- <i class="fa fa-close"></i> -->
+                <!-- Api Definition</a> -->
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close</a>
