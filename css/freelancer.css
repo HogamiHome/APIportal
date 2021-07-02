@@ -1,11 +1,12 @@
 /*!
  * Start Bootstrap - Freelancer v5.0.4 (https://startbootstrap.com/template-overviews/freelancer)
- * Copyright 2013-2019 Start Bootstrap
+ * Copyright 2013-2021 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 
+@charset "UTF-8";
 body {
-  font-family: 'Lato';
+  font-family: "Lato";
 }
 
 h1,
@@ -15,7 +16,7 @@ h4,
 h5,
 h6 {
   font-weight: 700;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 hr.star-light,
@@ -34,10 +35,10 @@ hr.star-dark {
 hr.star-light:after,
 hr.star-dark:after {
   position: relative;
-  top: -.8em;
+  top: -0.8em;
   display: inline-block;
   padding: 0 0.25em;
-  content: '\f005';
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 2em;
@@ -49,7 +50,7 @@ hr.star-light {
 
 hr.star-light:after {
   color: #fff;
-  background-color: #18BC9C;
+  background-color: #74C660;
 }
 
 hr.star-dark {
@@ -64,12 +65,10 @@ hr.star-dark:after {
 section {
   padding: 6rem 0;
 }
-
 section h2 {
   font-size: 2.25rem;
   line-height: 2rem;
 }
-
 @media (min-width: 992px) {
   section h2 {
     font-size: 3rem;
@@ -95,7 +94,6 @@ section h2 {
   bottom: 1rem;
   display: none;
 }
-
 .scroll-to-top a {
   width: 3.5rem;
   height: 3.5rem;
@@ -107,34 +105,27 @@ section h2 {
   padding-top: 1rem;
   padding-bottom: 1rem;
   font-weight: 700;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
-
 #mainNav .navbar-brand {
   color: #fff;
 }
-
 #mainNav .navbar-nav {
   margin-top: 1rem;
   letter-spacing: 0.0625rem;
 }
-
 #mainNav .navbar-nav li.nav-item a.nav-link {
   color: #fff;
 }
-
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: #18BC9C;
+  color: #74C660;
 }
-
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #fff;
 }
-
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: #18BC9C;
+  color: #74C660;
 }
-
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.8rem;
@@ -157,12 +148,13 @@ section h2 {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #18BC9C;
+    background: #74C660;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #18BC9C;
+    background: #74C660;
   }
+
   #mainNav.navbar-shrink {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -171,20 +163,17 @@ section h2 {
     font-size: 1.5em;
   }
 }
-
 header.masthead {
   padding-top: calc(6rem + 72px);
   padding-bottom: 6rem;
 }
-
 header.masthead h1 {
   font-size: 3rem;
   line-height: 3rem;
 }
-
 header.masthead h2 {
   font-size: 1.3rem;
-  font-family: 'Lato';
+  font-family: "Lato";
 }
 
 @media (min-width: 992px) {
@@ -200,33 +189,27 @@ header.masthead h2 {
     font-size: 1.75em;
   }
 }
-
 .portfolio {
   margin-bottom: -15px;
 }
-
 .portfolio .portfolio-item {
   position: relative;
   display: block;
   max-width: 25rem;
   margin-bottom: 15px;
 }
-
 .portfolio .portfolio-item .portfolio-item-caption {
   -webkit-transition: all ease 0.5s;
   transition: all ease 0.5s;
   opacity: 0;
-  background-color: rgba(24, 188, 156, 0.9);
+  background-color: rgba(116, 198, 96, 0.9);
 }
-
 .portfolio .portfolio-item .portfolio-item-caption:hover {
   opacity: 1;
 }
-
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
   font-size: 1.5rem;
 }
-
 @media (min-width: 576px) {
   .portfolio {
     margin-bottom: -30px;
@@ -245,21 +228,17 @@ header.masthead h2 {
   -webkit-box-shadow: 0 0 3rem 1rem rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 3rem 1rem rgba(0, 0, 0, 0.5);
 }
-
 .portfolio-modal .portfolio-modal-dialog .close-button {
   position: absolute;
   top: 2rem;
   right: 2rem;
 }
-
 .portfolio-modal .portfolio-modal-dialog .close-button i {
   line-height: 38px;
 }
-
 .portfolio-modal .portfolio-modal-dialog h2 {
   font-size: 2rem;
 }
-
 @media (min-width: 768px) {
   .portfolio-modal .portfolio-modal-dialog {
     min-height: 100vh;
@@ -275,7 +254,6 @@ header.masthead h2 {
   position: relative;
   border-bottom: 1px solid #e9ecef;
 }
-
 .floating-label-form-group input,
 .floating-label-form-group textarea {
   font-size: 1.5em;
@@ -290,7 +268,6 @@ header.masthead h2 {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
-
 .floating-label-form-group label {
   font-size: 0.85em;
   line-height: 1.764705882em;
@@ -305,7 +282,6 @@ header.masthead h2 {
   vertical-align: baseline;
   opacity: 0;
 }
-
 .floating-label-form-group:not(:first-child) {
   padding-left: 14px;
   border-left: 1px solid #e9ecef;
@@ -317,7 +293,7 @@ header.masthead h2 {
 }
 
 .floating-label-form-group-with-focus label {
-  color: #18BC9C;
+  color: #74C660;
 }
 
 form .row:first-child .floating-label-form-group {
@@ -336,11 +312,10 @@ form .row:first-child .floating-label-form-group {
 }
 
 a {
-  color: #18BC9C;
+  color: #74C660;
 }
-
 a:focus, a:hover, a:active {
-  color: #128f76;
+  color: #57b340;
 }
 
 .btn {
@@ -348,7 +323,7 @@ a:focus, a:hover, a:active {
 }
 
 .bg-primary {
-  background-color: #18BC9C !important;
+  background-color: #74C660 !important;
 }
 
 .bg-secondary {
@@ -356,7 +331,7 @@ a:focus, a:hover, a:active {
 }
 
 .text-primary {
-  color: #18BC9C !important;
+  color: #74C660 !important;
 }
 
 .text-secondary {
@@ -364,20 +339,18 @@ a:focus, a:hover, a:active {
 }
 
 .btn-primary {
-  background-color: #18BC9C;
-  border-color: #18BC9C;
+  background-color: #74C660;
+  border-color: #74C660;
 }
-
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #128f76;
-  border-color: #128f76;
+  background-color: #57b340;
+  border-color: #57b340;
 }
 
 .btn-secondary {
   background-color: #2C3E50;
   border-color: #2C3E50;
 }
-
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
   background-color: #1a252f;
   border-color: #1a252f;
