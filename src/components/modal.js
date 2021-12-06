@@ -35,12 +35,12 @@ export default function Modal({ current, close }) {
                                         {current.dbmodel && <img src={current.dbmodel} alt="database model" />}
                                         <br />
                                         <br />
-                                        <button
+                                        {current.apiDefintion &&<button
                                             className="swagger btn btn-primary btn-lg rounded-pill mr-1"
                                             onClick={() => setDisplay("block")}
                                         >
                                             Api Definition
-                                        </button>
+                                        </button>}
                                         <button
                                             className="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss ml-1"
                                             onClick={close}
@@ -50,9 +50,9 @@ export default function Modal({ current, close }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="swagger-ui" style={{ display: display }}>
+                            {current.apiDefintion && <div className="swagger-ui" style={{ display: display }}>
                                 <SwaggerUI url={current.apiDefintion} />
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>

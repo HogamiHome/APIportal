@@ -300,7 +300,7 @@ const modals = [
         "id": "operation_batch",
         "title": "Operation Batch",
         "image": "assets/img/portfolio/cono-de-trafico.png",
-        "apiDefintion": "assets/js/batch.json",
+        "apiDefintion": "",
         describtion: () => (<div id="text">
             <p>This batch runs every 48 hours. It checks which operations are pending confirmation, and if the necessary time has passed, it gets automatically confirmed.
             </p>
