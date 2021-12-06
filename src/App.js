@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import Link from 'react-anchor-link-smooth-scroll'
 import About from "./components/about";
 import modals from "./components/apis-list";
 import Copyright from "./components/copyright";
@@ -15,7 +14,6 @@ function App({history, match }) {
   const [openModal, setOpenModal] = useState(null);
   useEffect(()=> {
     const current = modals.find(item => `#${item.id}` === history.location.hash) || {};
-    console.log(current);
     setOpenModal(current)
   }, [history, match])
   return (

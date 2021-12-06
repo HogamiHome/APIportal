@@ -8,7 +8,7 @@ export default function Portfolio() {
                 <hr className="star-dark mb-5" />
                 <div className="row">
                     {modals.map(item => (
-                        <div className="col-md-6 col-lg-4">
+                        <div key={item.id} className="col-md-6 col-lg-4">
                         <a className="portfolio-item d-block mx-auto"  href={`#${item.id}`}>
                             <div className="portfolio-item-caption d-flex position-absolute h-100 w-100">
                                 <div className="portfolio-item-caption-content my-auto w-100 text-center text-white">
