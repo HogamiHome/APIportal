@@ -1,22 +1,31 @@
 
-import { BrowserRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import About from "./components/about";
+import modals from "./components/apis-list";
+import Modal from "./components/modal";
 import NavBar from "./components/navbar";
 import Portal from "./components/portal";
 import Portfolio from "./components/portfolio";
 
 
-function App() {
+function App({history, match }) {
+  const [openModal, setOpenModal] = useState(null);
+  useEffect(()=> {
+    const current = modals.find(item => `#${item.id}` === history.location.hash) || {};
+    console.log(current);
+    setOpenModal(current)
+  }, [history, match])
   return (
-    <BrowserRouter>
+    
     <div className="page-top" id="page-top">
       <NavBar />
       <Portal />
       <Portfolio />
       <About />
+      {openModal?.id && <Modal close={() => setOpenModal({})} current={openModal} />}
     </div>
-    </BrowserRouter>
   );
 }
 
-export default App;
+export default withRouter(App);
