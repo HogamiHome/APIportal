@@ -3,7 +3,7 @@ const modals = [
         "id": "matching",
         "title": "Matching",
         "image": "assets/img/portfolio/trabajo.png",
-        "dbmodel": null,
+        "dbmodel": "assets/img/portfolio/bbdd-matching.png",
         "apiDefintion": "assets/js/matching.json",
         describtion: () => (<div id="text">
             <p>
@@ -32,7 +32,7 @@ const modals = [
         "id": "professional",
         "title": "Professional",
         "image": "assets/img/portfolio/dyer.png",
-        "dbmodel": "assets/img/portfolio/professional.png",
+        "dbmodel": "assets/img/portfolio/bbdd-professional.png",
         "apiDefintion": "assets/js/professional.json",
         describtion: () => (<div id="text">
             <p>
@@ -63,6 +63,7 @@ const modals = [
         "title": "Client",
         "dbmodel": "assets/img/portfolio/client.png",
         "image": "assets/img/portfolio/familia.png",
+        "dbmodel": "assets/img/portfolio/bbdd-client.png",
         "apiDefintion": "assets/js/client.json",
         describtion: () => (<div id="text">
             <p>
@@ -97,6 +98,7 @@ const modals = [
         "title": "Payment",
         "dbmodel": "assets/img/portfolio/payment.png",
         "image": "assets/img/portfolio/dinero.png",
+        "dbmodel": "assets/img/portfolio/bbdd-payment.png",
         "apiDefintion": "assets/js/payment.json",
         describtion: () => (<div id="text">
             <p>
@@ -124,8 +126,8 @@ const modals = [
         "id": "Notification",
         "title": "Notification",
         "image": "assets/img/portfolio/email.png",
-        dbmodel: "assets/img/portfolio/notification.png",
         "apiDefintion": "assets/js/notification.json",
+        "dbmodel": "assets/img/portfolio/bbdd-notification.png",
         describtion: () => (<div id="text">
             <p>
                 The Matching API provides the results of the matching process between offer
@@ -152,9 +154,9 @@ const modals = [
     {
         "id": "Operation",
         "title": "Operation",
-        dbmodel: "assets/img/portfolio/operation.png",
         "image": "assets/img/portfolio/llave-inglesa.png",
         "apiDefintion": "assets/js/operation.json",
+        "dbmodel": "assets/img/portfolio/bbdd-operation.png",
         describtion: () => (<div id="text">
             <p>
                 The Operation API provides the Job details. Once the Client has agreed with
@@ -176,7 +178,7 @@ const modals = [
     {
         "id": "request",
         "title": "Request Service",
-        dbmodel: "assets/img/portfolio/request.png",
+        "dbmodel": "assets/img/portfolio/bbdd-request.png",
         "image": "assets/img/portfolio/signo-de-interrogacion.png",
         "apiDefintion": "assets/js/request.json",
         describtion: () => (<div id="text">
@@ -196,7 +198,7 @@ const modals = [
     {
         "id": "identity",
         "title": "Identity Server",
-        dbmodel: "assets/img/portfolio/user.png",
+        "dbmodel": "assets/img/portfolio/bbdd-identity.png",
         "image": "assets/img/portfolio/contrasena.png",
         "apiDefintion": "assets/js/identityServer.json",
         describtion: () => (<div id="text">
@@ -209,7 +211,7 @@ const modals = [
     {
         "id": "offered",
         "title": "Service Offer",
-        dbmodel: "assets/img/portfolio/offered_service.png",
+        "dbmodel": "assets/img/portfolio/bbdd-offered-service.png",
         "image": "assets/img/portfolio/rodillo-de-pintura.png",
         "apiDefintion": "assets/js/offeredServices.json",
         describtion: () => (<div id="text">
@@ -237,7 +239,7 @@ const modals = [
     {
         "id": "Rating",
         "title": "Rating",
-        dbmodel: "",
+        "dbmodel": "assets/img/portfolio/bbdd-rating.png",
         "image": "assets/img/portfolio/rating.png",
         "apiDefintion": "assets/js/rating.json",
         describtion: () => (<div id="text">
@@ -256,6 +258,7 @@ const modals = [
         "title": "Chat",
         "image": "assets/img/portfolio/chat.png",
         "apiDefintion": "assets/js/matching.json",
+        "dbmodel": "assets/img/portfolio/bbdd-chat.png",
         describtion: () => (<div id="text">
             <p>
                 The Chat API has the whole capacities to manage the information contained in the exchanges between the Client and the Professional.
@@ -287,6 +290,7 @@ const modals = [
         "id": "Functional_Administration",
         "title": "Functional Administration",
         "image": "assets/img/portfolio/headphones.png",
+        "dbmodel": "assets/img/portfolio/bbdd-backoffice.png",
         "apiDefintion": "assets/js/backoffice.json",
         describtion: () => (<div id="text">
             <p>The API Functional Administration provides a set of back office functionalities.
