@@ -263,7 +263,7 @@ const modals = [
             </p>
         </div>)
     },
-    {
+    /*{
         "id": "under_construction",
         "icon": "Under Construction",
         title: "Invoices",
@@ -282,7 +282,7 @@ const modals = [
                 The invoices must be stored on line at least for 4 years after the date of service.
             </p>
         </div>)
-    },
+    },*/
     {
         "id": "Functional_Administration",
         "title": "Functional Administration",

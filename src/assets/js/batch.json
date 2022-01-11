@@ -1,18 +1,21 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Operation Batch API to Singapur Project",
-    "version": "1.0",
-    "title": "Leroy Merlin Operation Batch",
-    "termsOfService": "https://www.everis.com",
-    "license": { "name": "everis", "url": "https://www.everis.com" }
-  },
-  "host": "localhost:8019",
-  "basePath": "/",
-  "tags": [
-    {
-      "name": "OperationRestController",
-      "description": "Operations related actions"
-    }
-  ]
+    "swagger": "2.0",
+    "info": {
+        "description": "Operation API to Singapur Project",
+        "version": "1.0",
+        "title": "Leroy Merlin Clients",
+        "termsOfService": "https://hogami.leroymerlin.es/",
+      "license": {
+          "name": "HOGAMI - Leroy Merlin",
+          "url": "https://hogami.leroymerlin.es/"
+      }
+    },
+    "host": "localhost:8019",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "OperationRestController",
+            "description": "Operations related actions"
+        }
+    ]
 }
