@@ -5673,6 +5673,12 @@
             "personType":{
                "$ref":"#/definitions/PersonTypeRest"
             },
+            "professionalCampaigns":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProfessionalCampaignRest"
+               }
+            },
             "professionalInformation":{
                "$ref":"#/definitions/ProfessionalInformationRest"
             },
