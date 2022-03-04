@@ -753,6 +753,54 @@
            "deprecated":false
         }
      },
+     "/professional/v1/professionals/elimination/campaigns":{
+        "delete":{
+           "tags":[
+              "ProfessionalRestController"
+           ],
+           "summary":"deleteCampaignForListProfessionals",
+           "operationId":"deleteCampaignForListProfessionalsUsingDELETE",
+           "produces":[
+              "application/json"
+           ],
+           "parameters":[
+              {
+                 "name":"Authorization",
+                 "in":"header",
+                 "description":"Authorization",
+                 "required":true,
+                 "type":"string"
+              },
+              {
+                 "in":"body",
+                 "name":"campaignsProfessionals",
+                 "description":"campaignsProfessionals",
+                 "required":true,
+                 "schema":{
+                    "$ref":"#/definitions/ProfessionalCampaignBodyRest"
+                 }
+              }
+           ],
+           "responses":{
+              "200":{
+                 "description":"OK",
+                 "schema":{
+                    "$ref":"#/definitions/SingapurResponse«List«ProfessionalCampaignRest»»"
+                 }
+              },
+              "204":{
+                 "description":"No Content"
+              },
+              "401":{
+                 "description":"Unauthorized"
+              },
+              "403":{
+                 "description":"Forbidden"
+              }
+           },
+           "deprecated":false
+        }
+     },
      "/professional/v1/professionals/filtered":{
         "post":{
            "tags":[
@@ -1178,7 +1226,7 @@
                  "description":"newPassword",
                  "required":true,
                  "schema":{
-                    "$ref":"#/definitions/PasswordChangeRest"
+                    "$ref":"#/definitions/NewPasswordRest"
                  }
               }
            ],
@@ -4704,6 +4752,19 @@
         "title":"MailNewProfessionalRest",
         "description":"This model represents a information of new professional"
      },
+     "NewPasswordRest":{
+        "type":"object",
+        "required":[
+           "newPassword"
+        ],
+        "properties":{
+           "newPassword":{
+              "type":"string",
+              "description":"New password encoded base64"
+           }
+        },
+        "title":"NewPasswordRest"
+     },
      "OfferedServiceCoverageRest":{
         "type":"object",
         "properties":{
@@ -5611,6 +5672,12 @@
            },
            "personType":{
               "$ref":"#/definitions/PersonTypeRest"
+           },
+           "professionalCampaigns":{
+              "type":"array",
+              "items":{
+                 "$ref":"#/definitions/ProfessionalCampaignRest"
+              }
            },
            "professionalInformation":{
               "$ref":"#/definitions/ProfessionalInformationRest"
