@@ -1226,7 +1226,7 @@
                   "description":"newPassword",
                   "required":true,
                   "schema":{
-                     "$ref":"#/definitions/NewPasswordRest"
+                     "$ref":"#/definitions/PasswordChangeRest"
                   }
                }
             ],
@@ -4620,6 +4620,10 @@
       "FilterProfessionalRest":{
          "type":"object",
          "properties":{
+            "campaign":{
+               "type":"integer",
+               "format":"int64"
+            },
             "createDateEnd":{
                "type":"string"
             },
@@ -4751,19 +4755,6 @@
          },
          "title":"MailNewProfessionalRest",
          "description":"This model represents a information of new professional"
-      },
-      "NewPasswordRest":{
-         "type":"object",
-         "required":[
-            "newPassword"
-         ],
-         "properties":{
-            "newPassword":{
-               "type":"string",
-               "description":"New password encoded base64"
-            }
-         },
-         "title":"NewPasswordRest"
       },
       "OfferedServiceCoverageRest":{
          "type":"object",
@@ -5756,6 +5747,12 @@
             },
             "personType":{
                "type":"string"
+            },
+            "professionalCampaigns":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProfessionalCampaignRest"
+               }
             },
             "professionalInformation":{
                "$ref":"#/definitions/ProfessionalInformationRest"
