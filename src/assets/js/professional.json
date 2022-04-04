@@ -1026,6 +1026,59 @@
             "deprecated":false
          }
       },
+      "/professional/v1/professionals/ratings/average/historical":{
+         "post":{
+            "tags":[
+               "rating-controller-impl"
+            ],
+            "summary":"Retrieves the average rating historical for a Professional",
+            "operationId":"averageHistoricalProfessionalRatingUsingPOST",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"filterRatingRest",
+                  "description":"filterRatingRest",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/FilterRatingRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A rating average associated to a pro is returned",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«AverageHistoricalRatingsRest»»"
+                  }
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
+      },
       "/professional/v1/professionals/registration/campaigns":{
          "post":{
             "tags":[
@@ -1226,7 +1279,7 @@
                   "description":"newPassword",
                   "required":true,
                   "schema":{
-                     "$ref":"#/definitions/PasswordChangeRest"
+                     "$ref":"#/definitions/NewPasswordRest"
                   }
                }
             ],
@@ -3304,6 +3357,14 @@
             ],
             "parameters":[
                {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "description":"offeredServiceId",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int64"
+               },
+               {
                   "name":"offset",
                   "in":"query",
                   "required":false,
@@ -4391,6 +4452,23 @@
          },
          "title":"AreaRest"
       },
+      "AverageHistoricalRatingsRest":{
+         "type":"object",
+         "properties":{
+            "accumulatedAverage":{
+               "$ref":"#/definitions/AverageRatingRest"
+            },
+            "activeServicesAccumulatedAverage":{
+               "$ref":"#/definitions/AverageRatingRest"
+            },
+            "professionalId":{
+               "type":"integer",
+               "format":"int64"
+            }
+         },
+         "title":"AverageHistoricalRatingsRest",
+         "description":"This model will represent the average of the types of rating history we have for a professional."
+      },
       "AverageRatingRest":{
          "type":"object",
          "properties":{
@@ -4417,6 +4495,10 @@
             "professionalId":{
                "type":"integer",
                "format":"int64"
+            },
+            "totalAverage":{
+               "type":"integer",
+               "format":"int32"
             }
          },
          "title":"AverageRatingRest",
@@ -4620,9 +4702,12 @@
       "FilterProfessionalRest":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "createDateEnd":{
                "type":"string"
@@ -4644,6 +4729,26 @@
             }
          },
          "title":"FilterProfessionalRest"
+      },
+      "FilterRatingRest":{
+         "type":"object",
+         "properties":{
+            "offeredServiceCode":{
+               "type":"string"
+            },
+            "offeredServiceId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "professionalIds":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "title":"FilterRatingRest"
       },
       "ImageRest":{
          "type":"object",
@@ -4755,6 +4860,19 @@
          },
          "title":"MailNewProfessionalRest",
          "description":"This model represents a information of new professional"
+      },
+      "NewPasswordRest":{
+         "type":"object",
+         "required":[
+            "newPassword"
+         ],
+         "properties":{
+            "newPassword":{
+               "type":"string",
+               "description":"New password encoded base64"
+            }
+         },
+         "title":"NewPasswordRest"
       },
       "OfferedServiceCoverageRest":{
          "type":"object",
@@ -5414,6 +5532,9 @@
                   "type":"integer",
                   "format":"int64"
                }
+            },
+            "token":{
+               "type":"string"
             }
          },
          "title":"ProfessionalCampaignBodyRest"
@@ -5958,6 +6079,10 @@
                "format":"int64",
                "description":"Id of the rating"
             },
+            "operationId":{
+               "type":"integer",
+               "format":"int64"
+            },
             "opinion":{
                "type":"string",
                "description":"Opinion about the professional"
@@ -5975,6 +6100,9 @@
                "type":"number",
                "format":"double",
                "description":"Satisfaction rating about the professional"
+            },
+            "titleOfferedService":{
+               "type":"string"
             }
          },
          "title":"RatingRest",
@@ -6458,6 +6586,32 @@
             }
          },
          "title":"SingapurResponse«List«AreaRest»»",
+         "description":"This model is the envelope"
+      },
+      "SingapurResponse«List«AverageHistoricalRatingsRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string",
+               "description":"Status code, extra information related to HTTP response"
+            },
+            "data":{
+               "type":"array",
+               "description":"Contain data related to request",
+               "items":{
+                  "$ref":"#/definitions/AverageHistoricalRatingsRest"
+               }
+            },
+            "message":{
+               "type":"string",
+               "description":"Specific message, result of the action"
+            },
+            "status":{
+               "type":"string",
+               "description":"Result of the action, for example \"Success\"."
+            }
+         },
+         "title":"SingapurResponse«List«AverageHistoricalRatingsRest»»",
          "description":"This model is the envelope"
       },
       "SingapurResponse«List«ImageRest»»":{
