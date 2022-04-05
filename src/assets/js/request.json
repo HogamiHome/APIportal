@@ -15,7 +15,7 @@
    "tags":[
       {
          "name":"Client request rest controller",
-         "description":"Client Request Controller Impl"
+         "description":"Client Details Rest Controller Impl"
       },
       {
          "name":"Request Rest Controller",
@@ -72,6 +72,61 @@
                   "description":"OK",
                   "schema":{
                      "$ref":"#/definitions/SingapurResponse«RequestAddressRest»"
+                  }
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
+      },
+      "/request-server/v1/clients/detail/{clientId}":{
+         "put":{
+            "tags":[
+               "Client request rest controller"
+            ],
+            "summary":"updateClientDetailsService",
+            "operationId":"updateClientDetailsServiceUsingPUT",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "description":"clientId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int64"
+               },
+               {
+                  "in":"body",
+                  "name":"request",
+                  "description":"request",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/ClientDetailsRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«ClientDetails»"
                   }
                },
                "201":{
@@ -1247,6 +1302,53 @@
             "deprecated":false
          }
       },
+      "/request-server/v1/rejection/rollback/detail":{
+         "put":{
+            "tags":[
+               "rejection-controller-impl"
+            ],
+            "summary":"rollbackRejectOperationUpdate",
+            "operationId":"rollbackRejectOperationUpdateUsingPUT",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json;charset=UTF-8"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"clientDetails",
+                  "description":"clientDetails",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/ClientDetailsRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«string»"
+                  }
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
+      },
       "/request-server/v1/requests":{
          "post":{
             "tags":[
@@ -1524,6 +1626,51 @@
             "deprecated":false
          }
       },
+      "/request-server/v1/requests/chat/{chatId}":{
+         "get":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"retrieveRequestByChatId",
+            "operationId":"retrieveRequestByChatIdUsingGET",
+            "produces":[
+               "application/json;charset=UTF-8"
+            ],
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "description":"chatId",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The request is found and returned to the user",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«RequestRest»"
+                  }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
+      },
       "/request-server/v1/requests/status":{
          "get":{
             "tags":[
@@ -1611,6 +1758,32 @@
       }
    },
    "definitions":{
+      "ClientDetails":{
+         "type":"object",
+         "properties":{
+            "avatar":{
+               "type":"string"
+            },
+            "clientId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "clientLastName":{
+               "type":"string"
+            },
+            "clientName":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "request":{
+               "$ref":"#/definitions/Request"
+            }
+         },
+         "title":"ClientDetails"
+      },
       "ClientDetailsRest":{
          "type":"object",
          "required":[
@@ -1644,6 +1817,22 @@
          "title":"ClientDetailsRest",
          "description":"This model represents the client"
       },
+      "Configurator":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "request":{
+               "$ref":"#/definitions/Request"
+            },
+            "response":{
+               "type":"string"
+            }
+         },
+         "title":"Configurator"
+      },
       "ConfiguratorRest":{
          "type":"object",
          "required":[
@@ -1665,9 +1854,12 @@
       "FilterRest":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "client":{
                "type":"string"
@@ -1876,6 +2068,105 @@
          },
          "title":"RejectionMessageRest"
       },
+      "Request":{
+         "type":"object",
+         "properties":{
+            "chatId":{
+               "type":"string"
+            },
+            "clientDetails":{
+               "$ref":"#/definitions/ClientDetails"
+            },
+            "configurator":{
+               "$ref":"#/definitions/Configurator"
+            },
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "endDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "offeredService":{
+               "$ref":"#/definitions/RequestOfferedService"
+            },
+            "operationDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "professionalId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "reasonChangeDate":{
+               "type":"string"
+            },
+            "requestAddress":{
+               "$ref":"#/definitions/RequestAddress"
+            },
+            "requestCampaigns":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/RequestCampaign"
+               }
+            },
+            "status":{
+               "$ref":"#/definitions/RequestStatus"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            }
+         },
+         "title":"Request"
+      },
+      "RequestAddress":{
+         "type":"object",
+         "properties":{
+            "address":{
+               "type":"string"
+            },
+            "city":{
+               "type":"string"
+            },
+            "complementAddress":{
+               "type":"string"
+            },
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "province":{
+               "type":"string"
+            },
+            "request":{
+               "$ref":"#/definitions/Request"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            },
+            "zipCode":{
+               "type":"string"
+            }
+         },
+         "title":"RequestAddress"
+      },
       "RequestAddressRest":{
          "type":"object",
          "properties":{
@@ -1904,6 +2195,35 @@
             }
          },
          "title":"RequestAddressRest"
+      },
+      "RequestCampaign":{
+         "type":"object",
+         "properties":{
+            "campaignId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "request":{
+               "$ref":"#/definitions/Request"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            }
+         },
+         "title":"RequestCampaign"
       },
       "RequestCampaignRest":{
          "type":"object",
@@ -1963,6 +2283,75 @@
             }
          },
          "title":"RequestNotification"
+      },
+      "RequestOfferedService":{
+         "type":"object",
+         "properties":{
+            "basePrice":{
+               "type":"number"
+            },
+            "code":{
+               "type":"string"
+            },
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "currency":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "displacementFee":{
+               "type":"number"
+            },
+            "duration":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "earlyPayment":{
+               "type":"number"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "image":{
+               "type":"string"
+            },
+            "offeredServiceId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "price":{
+               "type":"number"
+            },
+            "profitMargin":{
+               "type":"number"
+            },
+            "request":{
+               "$ref":"#/definitions/Request"
+            },
+            "taxDetails":{
+               "$ref":"#/definitions/TaxDetails"
+            },
+            "title":{
+               "type":"string"
+            },
+            "unit":{
+               "type":"string"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            }
+         },
+         "title":"RequestOfferedService"
       },
       "RequestRejectionRest":{
          "type":"object",
@@ -2066,6 +2455,31 @@
          },
          "title":"RequestRest"
       },
+      "RequestStatus":{
+         "type":"object",
+         "properties":{
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "name":{
+               "type":"string"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            }
+         },
+         "title":"RequestStatus"
+      },
       "RequestStatusRest":{
          "type":"object",
          "properties":{
@@ -2091,6 +2505,28 @@
          },
          "title":"RequestUpdateStatusRest",
          "description":"This model represents informations needed to update status of a deleted  request"
+      },
+      "SingapurResponse«ClientDetails»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string",
+               "description":"Status code, extra information related to HTTP response"
+            },
+            "data":{
+               "description":"Contain data related to request",
+               "$ref":"#/definitions/ClientDetails"
+            },
+            "message":{
+               "type":"string",
+               "description":"Specific message, result of the action"
+            },
+            "status":{
+               "type":"string",
+               "description":"Result of the action, for example \"Success\"."
+            }
+         },
+         "title":"SingapurResponse«ClientDetails»"
       },
       "SingapurResponse«List«RequestRest»»":{
          "type":"object",
@@ -2368,6 +2804,37 @@
          },
          "title":"StoreRest",
          "description":"This model represents the store"
+      },
+      "TaxDetails":{
+         "type":"object",
+         "properties":{
+            "createDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "createUser":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "requestOfferedService":{
+               "$ref":"#/definitions/RequestOfferedService"
+            },
+            "taxRate":{
+               "type":"number"
+            },
+            "taxType":{
+               "type":"string"
+            },
+            "updateDate":{
+               "$ref":"#/definitions/Timestamp"
+            },
+            "updateUser":{
+               "type":"string"
+            }
+         },
+         "title":"TaxDetails"
       },
       "TaxDetailsRest":{
          "type":"object",
