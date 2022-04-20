@@ -1,1636 +1,1810 @@
 {
-  "swagger": "2.0",
-  "info": {
-      "description": "This microservice deals with all the operations needed to search information",
-      "version": "1.0",
-      "title": "Singapur Search",
-      "termsOfService": "https://hogami.leroymerlin.es",
-      "license": {
-          "name": "HOGAMI - Leroy Merlin",
-          "url": "https://hogami.leroymerlin.es"
+   "swagger":"2.0",
+   "info":{
+      "description":"This microservice deals with all the operations needed to search information",
+      "version":"1.0",
+      "title":"Singapur Search",
+      "termsOfService":"https://hogami.leroymerlin.es",
+      "license":{
+         "name":"HOGAMI - Leroy Merlin",
+         "url":"https://hogami.leroymerlin.es"
       }
-  },
-  "host": "localhost:8004",
-  "basePath": "/",
-  "tags": [
+   },
+   "host":"localhost:8004",
+   "basePath":"/",
+   "tags":[
       {
-          "name": "CommunityRestController",
-          "description": "Community Controller Impl"
+         "name":"CommunityRestController",
+         "description":"Community Controller Impl"
       },
       {
-          "name": "OfferedServiceRestController",
-          "description": "Search offered services"
+         "name":"MenuControllerImpl",
+         "description":"Menu Controller Impl"
       },
       {
-          "name": "ProfessionalRestController",
-          "description": "Professional Rest Controller Impl"
+         "name":"OfferedServiceRestController",
+         "description":"Search offered services"
       },
       {
-          "name": "ProvinciaRestController",
-          "description": "Province Controller Impl"
+         "name":"ProfessionalRestController",
+         "description":"Professional Rest Controller Impl"
       },
       {
-          "name": "alive-controller-impl",
-          "description": "Alive Controller Impl"
+         "name":"ProvinciaRestController",
+         "description":"Province Controller Impl"
       },
       {
-          "name": "basic-error-controller",
-          "description": "Basic Error Controller"
+         "name":"alive-controller-impl",
+         "description":"Alive Controller Impl"
       },
       {
-          "name": "operation-handler",
-          "description": "Operation Handler"
+         "name":"basic-error-controller",
+         "description":"Basic Error Controller"
       },
       {
-          "name": "web-mvc-endpoint-handler-mapping",
-          "description": "Web Mvc Endpoint Handler Mapping"
+         "name":"operation-handler",
+         "description":"Operation Handler"
+      },
+      {
+         "name":"web-mvc-endpoint-handler-mapping",
+         "description":"Web Mvc Endpoint Handler Mapping"
       }
-  ],
-  "paths": {
-      "/actuator": {
-          "get": {
-              "tags": [
-                  "web-mvc-endpoint-handler-mapping"
-              ],
-              "summary": "links",
-              "operationId": "linksUsingGET",
-              "produces": [
-                  "application/json",
-                  "application/vnd.spring-boot.actuator.v2+json"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "type": "object",
-                          "additionalProperties": {
-                              "type": "object",
-                              "additionalProperties": {
-                                  "$ref": "#/definitions/Link"
-                              }
-                          }
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+   ],
+   "paths":{
+      "/actuator":{
+         "get":{
+            "tags":[
+               "web-mvc-endpoint-handler-mapping"
+            ],
+            "summary":"links",
+            "operationId":"linksUsingGET",
+            "produces":[
+               "application/json",
+               "application/vnd.spring-boot.actuator.v2+json"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "type":"object",
+                     "additionalProperties":{
+                        "type":"object",
+                        "additionalProperties":{
+                           "$ref":"#/definitions/Link"
+                        }
+                     }
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/actuator/health": {
-          "get": {
-              "tags": [
-                  "operation-handler"
-              ],
-              "summary": "handle",
-              "operationId": "handleUsingGET",
-              "produces": [
-                  "application/json",
-                  "application/vnd.spring-boot.actuator.v2+json"
-              ],
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "body",
-                      "description": "body",
-                      "required": false,
-                      "schema": {
-                          "type": "object",
-                          "additionalProperties": {
-                              "type": "string"
-                          }
-                      }
+      "/actuator/health":{
+         "get":{
+            "tags":[
+               "operation-handler"
+            ],
+            "summary":"handle",
+            "operationId":"handleUsingGET",
+            "produces":[
+               "application/json",
+               "application/vnd.spring-boot.actuator.v2+json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "description":"body",
+                  "required":false,
+                  "schema":{
+                     "type":"object",
+                     "additionalProperties":{
+                        "type":"string"
+                     }
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "type": "object"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "type":"object"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/actuator/info": {
-          "get": {
-              "tags": [
-                  "operation-handler"
-              ],
-              "summary": "handle",
-              "operationId": "handleUsingGET_1",
-              "produces": [
-                  "application/json",
-                  "application/vnd.spring-boot.actuator.v2+json"
-              ],
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "body",
-                      "description": "body",
-                      "required": false,
-                      "schema": {
-                          "type": "object",
-                          "additionalProperties": {
-                              "type": "string"
-                          }
-                      }
+      "/actuator/info":{
+         "get":{
+            "tags":[
+               "operation-handler"
+            ],
+            "summary":"handle",
+            "operationId":"handleUsingGET_1",
+            "produces":[
+               "application/json",
+               "application/vnd.spring-boot.actuator.v2+json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "description":"body",
+                  "required":false,
+                  "schema":{
+                     "type":"object",
+                     "additionalProperties":{
+                        "type":"string"
+                     }
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "type": "object"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "type":"object"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/error": {
-          "get": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingGET",
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+      "/error":{
+         "get":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingGET",
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "head": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingHEAD",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         },
+         "head":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingHEAD",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "post": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+               },
+               "204":{
+                  "description":"No Content"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               }
+            },
+            "deprecated":false
+         },
+         "post":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingPOST",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "put": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingPUT",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         },
+         "put":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingPUT",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "delete": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingDELETE",
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         },
+         "delete":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingDELETE",
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "options": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingOPTIONS",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
+               },
+               "204":{
+                  "description":"No Content"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               }
+            },
+            "deprecated":false
+         },
+         "options":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingOPTIONS",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          },
-          "patch": {
-              "tags": [
-                  "basic-error-controller"
-              ],
-              "summary": "errorHtml",
-              "operationId": "errorHtmlUsingPATCH",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "text/html"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/ModelAndView"
-                      }
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
+               },
+               "204":{
+                  "description":"No Content"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               }
+            },
+            "deprecated":false
+         },
+         "patch":{
+            "tags":[
+               "basic-error-controller"
+            ],
+            "summary":"errorHtml",
+            "operationId":"errorHtmlUsingPATCH",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "text/html"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ModelAndView"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "204":{
+                  "description":"No Content"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/health": {
-          "get": {
-              "tags": [
-                  "alive-controller-impl"
-              ],
-              "summary": "ping",
-              "operationId": "pingUsingGET",
-              "produces": [
-                  "application/json;charset=UTF-8"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+      "/health":{
+         "get":{
+            "tags":[
+               "alive-controller-impl"
+            ],
+            "summary":"ping",
+            "operationId":"pingUsingGET",
+            "produces":[
+               "application/json;charset=UTF-8"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«string»"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/health/live": {
-          "get": {
-              "tags": [
-                  "alive-controller-impl"
-              ],
-              "summary": "keepAlive",
-              "operationId": "keepAliveUsingGET",
-              "produces": [
-                  "application/json;charset=UTF-8"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+      "/health/live":{
+         "get":{
+            "tags":[
+               "alive-controller-impl"
+            ],
+            "summary":"keepAlive",
+            "operationId":"keepAliveUsingGET",
+            "produces":[
+               "application/json;charset=UTF-8"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«string»"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/communities/enable/{enable}": {
-          "get": {
-              "tags": [
-                  "CommunityRestController"
-              ],
-              "summary": "Retrieve communities by enable field",
-              "operationId": "retrieveCommunitiesByEnableUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "enable",
-                      "in": "path",
-                      "description": "enable",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int32"
+      "/search/v1/communities/enable/{enable}":{
+         "get":{
+            "tags":[
+               "CommunityRestController"
+            ],
+            "summary":"Retrieve communities by enable field",
+            "operationId":"retrieveCommunitiesByEnableUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"enable",
+                  "in":"path",
+                  "description":"enable",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«CommunityRest»»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«CommunityRest»»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/professionals": {
-          "get": {
-              "tags": [
-                  "ProfessionalRestController"
-              ],
-              "summary": "retrieveProfessionalsByService",
-              "operationId": "retrieveProfessionalsByServiceUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "hours",
-                      "in": "query",
-                      "description": "hours",
-                      "required": false,
-                      "type": "integer",
-                      "format": "int64"
-                  },
-                  {
-                      "name": "offeredServiceId",
-                      "in": "query",
-                      "description": "offeredServiceId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  },
-                  {
-                      "name": "zipCode",
-                      "in": "query",
-                      "description": "zipCode",
-                      "required": true,
-                      "type": "string"
+      "/search/v1/menu/{language}":{
+         "get":{
+            "tags":[
+               "MenuControllerImpl"
+            ],
+            "summary":"retrieveMenu",
+            "operationId":"retrieveMenuUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"language",
+                  "in":"path",
+                  "description":"language",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«MenuRest»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«ProfessionalRest»»"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/province": {
-          "get": {
-              "tags": [
-                  "ProvinciaRestController"
-              ],
-              "summary": "${ProvinceService.retrieveAllProvinces}",
-              "operationId": "retrieveAllProvincesUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«ProvinceRest»»"
-                      }
+      "/search/v1/professionals":{
+         "get":{
+            "tags":[
+               "ProfessionalRestController"
+            ],
+            "summary":"retrieveProfessionalsByService",
+            "operationId":"retrieveProfessionalsByServiceUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"campaigns",
+                  "in":"query",
+                  "description":"campaigns",
+                  "required":false,
+                  "type":"array",
+                  "items":{
+                     "type":"string"
                   },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
+                  "collectionFormat":"multi"
+               },
+               {
+                  "name":"hours",
+                  "in":"query",
+                  "description":"hours",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int64"
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "description":"offeredServiceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int64"
+               },
+               {
+                  "name":"zipCode",
+                  "in":"query",
+                  "description":"zipCode",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«ProfessionalRest»»"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/province/{zipCode}": {
-          "get": {
-              "tags": [
-                  "ProvinciaRestController"
-              ],
-              "summary": "Retrieve all provinces",
-              "operationId": "retrieveProvinciaByZipCodeUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "zipCode",
-                      "in": "path",
-                      "description": "zipCode",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int32"
+      "/search/v1/province":{
+         "get":{
+            "tags":[
+               "ProvinciaRestController"
+            ],
+            "summary":"${ProvinceService.retrieveAllProvinces}",
+            "operationId":"retrieveAllProvincesUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«ProvinceRest»»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«ProvinceRest»»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "Retrieve services corresponding the given level",
-              "operationId": "retrieveOfferedServiceByLevelsUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "level",
-                      "in": "query",
-                      "description": "level",
-                      "required": true,
-                      "type": "array",
-                      "items": {
-                          "type": "integer",
-                          "format": "int64"
-                      },
-                      "collectionFormat": "multi"
-                  },
-                  {
-                      "name": "offset",
-                      "in": "query",
-                      "required": false,
-                      "type": "integer",
-                      "format": "int64"
-                  },
-                  {
-                      "name": "pageNumber",
-                      "in": "query",
-                      "required": false,
-                      "type": "integer",
-                      "format": "int32"
-                  },
-                  {
-                      "name": "pageSize",
-                      "in": "query",
-                      "required": false,
-                      "type": "integer",
-                      "format": "int32"
-                  },
-                  {
-                      "name": "paged",
-                      "in": "query",
-                      "required": false,
-                      "type": "boolean"
-                  },
-                  {
-                      "name": "sort.sorted",
-                      "in": "query",
-                      "required": false,
-                      "type": "boolean"
-                  },
-                  {
-                      "name": "sort.unsorted",
-                      "in": "query",
-                      "required": false,
-                      "type": "boolean"
-                  },
-                  {
-                      "name": "unpaged",
-                      "in": "query",
-                      "required": false,
-                      "type": "boolean"
+      "/search/v1/province/{zipCode}":{
+         "get":{
+            "tags":[
+               "ProvinciaRestController"
+            ],
+            "summary":"Retrieve all provinces",
+            "operationId":"retrieveProvinciaByZipCodeUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "description":"zipCode",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«ProvinceRest»»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«OfferedServiceRest»»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services/landing/{landing}": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "Retrieve services corresponding the given level with landing page in url and province name in perameter",
-              "operationId": "retrieveOfferedServiceDetailsByLandingUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
+      "/search/v1/services":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"Retrieve services corresponding the given level",
+            "operationId":"retrieveOfferedServiceByLevelsUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"level",
+                  "in":"query",
+                  "description":"level",
+                  "required":true,
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
                   },
-                  {
-                      "name": "landing",
-                      "in": "path",
-                      "description": "landing",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "provinceName",
-                      "in": "query",
-                      "description": "provinceName",
-                      "required": true,
-                      "type": "string"
+                  "collectionFormat":"multi"
+               },
+               {
+                  "name":"offset",
+                  "in":"query",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int64"
+               },
+               {
+                  "name":"pageNumber",
+                  "in":"query",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               {
+                  "name":"pageSize",
+                  "in":"query",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               {
+                  "name":"paged",
+                  "in":"query",
+                  "required":false,
+                  "type":"boolean"
+               },
+               {
+                  "name":"sort.sorted",
+                  "in":"query",
+                  "required":false,
+                  "type":"boolean"
+               },
+               {
+                  "name":"sort.unsorted",
+                  "in":"query",
+                  "required":false,
+                  "type":"boolean"
+               },
+               {
+                  "name":"unpaged",
+                  "in":"query",
+                  "required":false,
+                  "type":"boolean"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«OfferedServiceRest»»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«OfferedServiceDetailRest»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services/province/{zipCode}": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "Retrieve services corresponding the given zip code in the url",
-              "operationId": "retrieveServicesByZipCodeUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "zipCode",
-                      "in": "path",
-                      "description": "zipCode",
-                      "required": true,
-                      "type": "string"
+      "/search/v1/services/landing/{landing}":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"Retrieve services corresponding the given level with landing page in url and province name in perameter",
+            "operationId":"retrieveOfferedServiceDetailsByLandingUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"landing",
+                  "in":"path",
+                  "description":"landing",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"provinceName",
+                  "in":"query",
+                  "description":"provinceName",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«OfferedServiceDetailRest»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«OfferedServiceRest»»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services/{offeredId}/province/{provinceId}": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "Retrieve visible content by offered service id and province id",
-              "operationId": "retriveVisibleContentByOfferedServiceIdAndProvinceIdUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "offeredId",
-                      "in": "path",
-                      "description": "offeredId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int32"
-                  },
-                  {
-                      "name": "provinceId",
-                      "in": "path",
-                      "description": "provinceId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int32"
+      "/search/v1/services/province/{zipCode}":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"Retrieve services corresponding the given zip code in the url",
+            "operationId":"retrieveServicesByZipCodeUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "description":"zipCode",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«OfferedServiceRest»»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The level is correct and the corresponding services are returned ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«OfferedServiceVisibleContentRest»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services/{offeredServiceId}": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "retrieveOfferedServiceDetails",
-              "operationId": "retrieveOfferedServiceDetailsUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "offeredServiceId",
-                      "in": "path",
-                      "description": "offeredServiceId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
+      "/search/v1/services/{offeredId}/province/{provinceId}":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"Retrieve visible content by offered service id and province id",
+            "operationId":"retriveVisibleContentByOfferedServiceIdAndProvinceIdUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"offeredId",
+                  "in":"path",
+                  "description":"offeredId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               {
+                  "name":"provinceId",
+                  "in":"path",
+                  "description":"provinceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«OfferedServiceVisibleContentRest»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«OfferedServiceDetailRest»"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  }
-              },
-              "deprecated": false
-          }
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
       },
-      "/search/v1/services/{offeredServiceId}/children": {
-          "get": {
-              "tags": [
-                  "OfferedServiceRestController"
-              ],
-              "summary": "retrieveOfferedServiceChildren",
-              "operationId": "retrieveOfferedServiceChildrenUsingGET",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Accept-Language",
-                      "in": "header",
-                      "description": "Accept-Language",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "offeredServiceId",
-                      "in": "path",
-                      "description": "offeredServiceId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
+      "/search/v1/services/{offeredServiceId}":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"retrieveOfferedServiceDetails",
+            "operationId":"retrieveOfferedServiceDetailsUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "description":"offeredServiceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int64"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«OfferedServiceDetailRest»"
                   }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«List«OfferedServiceRest»»"
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
+      },
+      "/search/v1/services/{offeredServiceId}/children":{
+         "get":{
+            "tags":[
+               "OfferedServiceRestController"
+            ],
+            "summary":"retrieveOfferedServiceChildren",
+            "operationId":"retrieveOfferedServiceChildrenUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "description":"Accept-Language",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "description":"offeredServiceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int64"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«OfferedServiceRest»»"
                   }
-              },
-              "deprecated": false
-          }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
       }
-  },
-  "securityDefinitions": {
-      "apiKey": {
-          "type": "apiKey",
-          "name": "api_key",
-          "in": "query"
+   },
+   "securityDefinitions":{
+      "apiKey":{
+         "type":"apiKey",
+         "name":"api_key",
+         "in":"query"
       }
-  },
-  "definitions": {
-      "CommunityRest": {
-          "type": "object",
-          "required": [
-              "communityProvinces",
-              "enable",
-              "name"
-          ],
-          "properties": {
-              "communityProvinces": {
-                  "type": "array",
-                  "description": "Provinces of community",
-                  "items": {
-                      "$ref": "#/definitions/ProvinceRest"
-                  }
-              },
-              "enable": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Name of community"
-              },
-              "id": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Id of community"
-              },
-              "name": {
-                  "type": "string",
-                  "description": "Name of community"
-              }
-          },
-          "title": "CommunityRest"
+   },
+   "definitions":{
+      "ButtonRest":{
+         "type":"object",
+         "properties":{
+            "href":{
+               "type":"string"
+            },
+            "isNav":{
+               "type":"boolean"
+            },
+            "nav":{
+               "type":"boolean"
+            },
+            "order":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "show":{
+               "type":"boolean"
+            },
+            "text":{
+               "type":"string"
+            }
+         },
+         "title":"ButtonRest"
       },
-      "Link": {
-          "type": "object",
-          "properties": {
-              "href": {
-                  "type": "string"
-              },
-              "templated": {
-                  "type": "boolean"
-              }
-          },
-          "title": "Link"
+      "CommunityRest":{
+         "type":"object",
+         "required":[
+            "communityProvinces",
+            "enable",
+            "name"
+         ],
+         "properties":{
+            "communityProvinces":{
+               "type":"array",
+               "description":"Provinces of community",
+               "items":{
+                  "$ref":"#/definitions/ProvinceRest"
+               }
+            },
+            "enable":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Name of community"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Id of community"
+            },
+            "name":{
+               "type":"string",
+               "description":"Name of community"
+            }
+         },
+         "title":"CommunityRest"
       },
-      "Map«string,Link»": {
-          "type": "object",
-          "title": "Map«string,Link»",
-          "additionalProperties": {
-              "$ref": "#/definitions/Link"
-          }
+      "Link":{
+         "type":"object",
+         "properties":{
+            "href":{
+               "type":"string"
+            },
+            "templated":{
+               "type":"boolean"
+            }
+         },
+         "title":"Link"
       },
-      "ModelAndView": {
-          "type": "object",
-          "properties": {
-              "empty": {
-                  "type": "boolean"
-              },
-              "model": {
-                  "type": "object"
-              },
-              "modelMap": {
-                  "type": "object",
-                  "additionalProperties": {
-                      "type": "object"
-                  }
-              },
-              "reference": {
-                  "type": "boolean"
-              },
-              "status": {
-                  "type": "string",
-                  "enum": [
-                      "100",
-                      "101",
-                      "102",
-                      "103",
-                      "200",
-                      "201",
-                      "202",
-                      "203",
-                      "204",
-                      "205",
-                      "206",
-                      "207",
-                      "208",
-                      "226",
-                      "300",
-                      "301",
-                      "302",
-                      "303",
-                      "304",
-                      "305",
-                      "307",
-                      "308",
-                      "400",
-                      "401",
-                      "402",
-                      "403",
-                      "404",
-                      "405",
-                      "406",
-                      "407",
-                      "408",
-                      "409",
-                      "410",
-                      "411",
-                      "412",
-                      "413",
-                      "414",
-                      "415",
-                      "416",
-                      "417",
-                      "418",
-                      "419",
-                      "420",
-                      "421",
-                      "422",
-                      "423",
-                      "424",
-                      "426",
-                      "428",
-                      "429",
-                      "431",
-                      "451",
-                      "500",
-                      "501",
-                      "502",
-                      "503",
-                      "504",
-                      "505",
-                      "506",
-                      "507",
-                      "508",
-                      "509",
-                      "510",
-                      "511"
-                  ]
-              },
-              "view": {
-                  "$ref": "#/definitions/View"
-              },
-              "viewName": {
-                  "type": "string"
-              }
-          },
-          "title": "ModelAndView"
+      "Map«string,Link»":{
+         "type":"object",
+         "title":"Map«string,Link»",
+         "additionalProperties":{
+            "$ref":"#/definitions/Link"
+         }
       },
-      "OfferedServiceAnswerRest": {
-          "type": "object",
-          "properties": {
-              "answer": {
-                  "type": "string"
-              },
-              "answerOrder": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "offeredServiceAnswerType": {
-                  "type": "string"
-              },
-              "subAnswers": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceAnswerRest"
-                  }
-              },
-              "subQuestions": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceQuestionRest"
-                  }
-              }
-          },
-          "title": "OfferedServiceAnswerRest"
+      "MenuRest":{
+         "type":"object",
+         "properties":{
+            "buttons":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ButtonRest"
+               }
+            },
+            "services":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ServiceRest"
+               }
+            },
+            "updatedAt":{
+               "type":"string",
+               "format":"date-time"
+            }
+         },
+         "title":"MenuRest"
       },
-      "OfferedServiceCoverageRest": {
-          "type": "object",
-          "properties": {
-              "description": {
-                  "type": "string"
-              },
-              "type": {
-                  "type": "string"
-              }
-          },
-          "title": "OfferedServiceCoverageRest",
-          "description": "This model represents the offered service coverage"
+      "ModelAndView":{
+         "type":"object",
+         "properties":{
+            "empty":{
+               "type":"boolean"
+            },
+            "model":{
+               "type":"object"
+            },
+            "modelMap":{
+               "type":"object",
+               "additionalProperties":{
+                  "type":"object"
+               }
+            },
+            "reference":{
+               "type":"boolean"
+            },
+            "status":{
+               "type":"string",
+               "enum":[
+                  "100",
+                  "101",
+                  "102",
+                  "103",
+                  "200",
+                  "201",
+                  "202",
+                  "203",
+                  "204",
+                  "205",
+                  "206",
+                  "207",
+                  "208",
+                  "226",
+                  "300",
+                  "301",
+                  "302",
+                  "303",
+                  "304",
+                  "305",
+                  "307",
+                  "308",
+                  "400",
+                  "401",
+                  "402",
+                  "403",
+                  "404",
+                  "405",
+                  "406",
+                  "407",
+                  "408",
+                  "409",
+                  "410",
+                  "411",
+                  "412",
+                  "413",
+                  "414",
+                  "415",
+                  "416",
+                  "417",
+                  "418",
+                  "419",
+                  "420",
+                  "421",
+                  "422",
+                  "423",
+                  "424",
+                  "426",
+                  "428",
+                  "429",
+                  "431",
+                  "451",
+                  "500",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "505",
+                  "506",
+                  "507",
+                  "508",
+                  "509",
+                  "510",
+                  "511"
+               ]
+            },
+            "view":{
+               "$ref":"#/definitions/View"
+            },
+            "viewName":{
+               "type":"string"
+            }
+         },
+         "title":"ModelAndView"
       },
-      "OfferedServiceDetailRest": {
-          "type": "object",
-          "properties": {
-              "chatQuestion": {
-                  "type": "string"
-              },
-              "code": {
-                  "type": "string"
-              },
-              "description": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "image": {
-                  "type": "string"
-              },
-              "level": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "metaDescription": {
-                  "type": "string"
-              },
-              "offeredServiceCoverage": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceCoverageRest"
-                  }
-              },
-              "offeredServiceQuantify": {
-                  "$ref": "#/definitions/OfferedServiceQuantifyRest"
-              },
-              "offeredServiceQuestions": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceQuestionRest"
-                  }
-              },
-              "parentId": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "tips": {
-                  "type": "string"
-              },
-              "title": {
-                  "type": "string"
-              },
-              "type": {
-                  "type": "integer",
-                  "format": "int64"
-              }
-          },
-          "title": "OfferedServiceDetailRest",
-          "description": "This model represents the offered service"
+      "OfferedServiceAnswerRest":{
+         "type":"object",
+         "properties":{
+            "answer":{
+               "type":"string"
+            },
+            "answerOrder":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "offeredServiceAnswerType":{
+               "type":"string"
+            },
+            "subAnswers":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceAnswerRest"
+               }
+            },
+            "subQuestions":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceQuestionRest"
+               }
+            }
+         },
+         "title":"OfferedServiceAnswerRest"
       },
-      "OfferedServiceQuantifyRest": {
-          "type": "object",
-          "properties": {
-              "max": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "min": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "question": {
-                  "type": "string"
-              },
-              "unit": {
-                  "type": "string"
-              }
-          },
-          "title": "OfferedServiceQuantifyRest",
-          "description": "This model represents the offered service quantify"
+      "OfferedServiceCoverageRest":{
+         "type":"object",
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "type":{
+               "type":"string"
+            }
+         },
+         "title":"OfferedServiceCoverageRest",
+         "description":"This model represents the offered service coverage"
       },
-      "OfferedServiceQuestionRest": {
-          "type": "object",
-          "properties": {
-              "offeredServiceAnswers": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceAnswerRest"
-                  }
-              },
-              "offeredServiceQuestionType": {
-                  "type": "string"
-              },
-              "questionOrder": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "required": {
-                  "type": "boolean"
-              },
-              "subTitle": {
-                  "type": "string"
-              },
-              "title": {
-                  "type": "string"
-              }
-          },
-          "title": "OfferedServiceQuestionRest"
+      "OfferedServiceDetailRest":{
+         "type":"object",
+         "properties":{
+            "chatQuestion":{
+               "type":"string"
+            },
+            "code":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "image":{
+               "type":"string"
+            },
+            "level":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "metaDescription":{
+               "type":"string"
+            },
+            "offeredServiceCoverage":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceCoverageRest"
+               }
+            },
+            "offeredServiceQuantify":{
+               "$ref":"#/definitions/OfferedServiceQuantifyRest"
+            },
+            "offeredServiceQuestions":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceQuestionRest"
+               }
+            },
+            "parentId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "sectionTitle":{
+               "type":"string"
+            },
+            "tips":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            },
+            "type":{
+               "type":"integer",
+               "format":"int64"
+            }
+         },
+         "title":"OfferedServiceDetailRest",
+         "description":"This model represents the offered service"
       },
-      "OfferedServiceRest": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "description": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "image": {
-                  "type": "string"
-              },
-              "keyWords": {
-                  "type": "array",
-                  "items": {
-                      "type": "string"
-                  }
-              },
-              "landingPage": {
-                  "type": "string"
-              },
-              "level": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "metaDescription": {
-                  "type": "string"
-              },
-              "show": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "type": {
-                  "type": "integer",
-                  "format": "int64"
-              }
-          },
-          "title": "OfferedServiceRest"
+      "OfferedServiceQuantifyRest":{
+         "type":"object",
+         "properties":{
+            "max":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "min":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "question":{
+               "type":"string"
+            },
+            "unit":{
+               "type":"string"
+            }
+         },
+         "title":"OfferedServiceQuantifyRest",
+         "description":"This model represents the offered service quantify"
       },
-      "OfferedServiceVisibleContentRest": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "metaDescription": {
-                  "type": "string"
-              },
-              "offeredServiceId": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "provinceId": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "text_content": {
-                  "type": "string"
-              },
-              "title": {
-                  "type": "string"
-              }
-          },
-          "title": "OfferedServiceVisibleContentRest"
+      "OfferedServiceQuestionRest":{
+         "type":"object",
+         "properties":{
+            "offeredServiceAnswers":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceAnswerRest"
+               }
+            },
+            "offeredServiceQuestionType":{
+               "type":"string"
+            },
+            "questionOrder":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "required":{
+               "type":"boolean"
+            },
+            "subTitle":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            }
+         },
+         "title":"OfferedServiceQuestionRest"
       },
-      "ProfessionalRest": {
-          "type": "object",
-          "properties": {
-              "additionalPrice": {
-                  "type": "number"
-              },
-              "avatar": {
-                  "type": "string"
-              },
-              "averageRating": {
-                  "type": "number",
-                  "format": "double"
-              },
-              "baseCost": {
-                  "type": "number"
-              },
-              "currency": {
-                  "type": "string"
-              },
-              "displacementFee": {
-                  "type": "number"
-              },
-              "earlyPayment": {
-                  "type": "number"
-              },
-              "firstPrice": {
-                  "type": "number"
-              },
-              "hours": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "id": {
-                  "type": "integer",
-                  "format": "int64"
-              },
-              "lastName": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "price": {
-                  "type": "number"
-              },
-              "profitMargin": {
-                  "type": "number"
-              },
-              "tax": {
-                  "type": "number"
-              },
-              "taxType": {
-                  "type": "string"
-              },
-              "title": {
-                  "type": "string"
-              },
-              "totalRating": {
-                  "type": "integer",
-                  "format": "int32"
-              }
-          },
-          "title": "ProfessionalRest"
+      "OfferedServiceRest":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "image":{
+               "type":"string"
+            },
+            "keyWords":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "landingPage":{
+               "type":"string"
+            },
+            "level":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "metaDescription":{
+               "type":"string"
+            },
+            "show":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "type":{
+               "type":"integer",
+               "format":"int64"
+            }
+         },
+         "title":"OfferedServiceRest"
       },
-      "ProvinceRest": {
-          "type": "object",
-          "required": [
-              "enable",
-              "landingPage",
-              "name",
-              "zipCode"
-          ],
-          "properties": {
-              "enable": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Enable field of province"
-              },
-              "id": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Id of privincia"
-              },
-              "landingPage": {
-                  "type": "string",
-                  "description": "Landing page of privincia"
-              },
-              "name": {
-                  "type": "string",
-                  "description": "Name of privincia"
-              },
-              "zipCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Zip code of privincia"
-              }
-          },
-          "title": "ProvinceRest"
+      "OfferedServiceVisibleContentRest":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "meta":{
+               "type":"string"
+            },
+            "metaDescription":{
+               "type":"string"
+            },
+            "offeredServiceId":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "provinceId":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "text_content":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            }
+         },
+         "title":"OfferedServiceVisibleContentRest"
       },
-      "SingapurResponse«List«CommunityRest»»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/CommunityRest"
-                  }
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«List«CommunityRest»»"
+      "ProfessionalRest":{
+         "type":"object",
+         "properties":{
+            "additionalPrice":{
+               "type":"number"
+            },
+            "avatar":{
+               "type":"string"
+            },
+            "averageRating":{
+               "type":"number",
+               "format":"double"
+            },
+            "averageRatingAccumulatedActive":{
+               "type":"number",
+               "format":"double"
+            },
+            "baseCost":{
+               "type":"number"
+            },
+            "currency":{
+               "type":"string"
+            },
+            "displacementFee":{
+               "type":"number"
+            },
+            "earlyPayment":{
+               "type":"number"
+            },
+            "firstPrice":{
+               "type":"number"
+            },
+            "hours":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "lastName":{
+               "type":"string"
+            },
+            "name":{
+               "type":"string"
+            },
+            "price":{
+               "type":"number"
+            },
+            "profitMargin":{
+               "type":"number"
+            },
+            "tax":{
+               "type":"number"
+            },
+            "taxType":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            },
+            "totalRating":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "totalRatingAccumulatedActive":{
+               "type":"integer",
+               "format":"int32"
+            }
+         },
+         "title":"ProfessionalRest"
       },
-      "SingapurResponse«List«OfferedServiceRest»»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/OfferedServiceRest"
-                  }
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«List«OfferedServiceRest»»"
+      "ProvinceRest":{
+         "type":"object",
+         "required":[
+            "enable",
+            "landingPage",
+            "name",
+            "zipCode"
+         ],
+         "properties":{
+            "enable":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Enable field of province"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Id of privincia"
+            },
+            "landingPage":{
+               "type":"string",
+               "description":"Landing page of privincia"
+            },
+            "name":{
+               "type":"string",
+               "description":"Name of privincia"
+            },
+            "zipCode":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Zip code of privincia"
+            }
+         },
+         "title":"ProvinceRest"
       },
-      "SingapurResponse«List«ProfessionalRest»»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/ProfessionalRest"
-                  }
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«List«ProfessionalRest»»"
+      "ServiceRest":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "landingPage":{
+               "type":"string"
+            },
+            "subServices":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/SubServiceRest"
+               }
+            },
+            "title":{
+               "type":"string"
+            }
+         },
+         "title":"ServiceRest"
       },
-      "SingapurResponse«List«ProvinceRest»»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/ProvinceRest"
-                  }
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«List«ProvinceRest»»"
+      "SingapurResponse«List«CommunityRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/CommunityRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«CommunityRest»»"
       },
-      "SingapurResponse«OfferedServiceDetailRest»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "$ref": "#/definitions/OfferedServiceDetailRest"
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«OfferedServiceDetailRest»"
+      "SingapurResponse«List«OfferedServiceRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/OfferedServiceRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«OfferedServiceRest»»"
       },
-      "SingapurResponse«OfferedServiceVisibleContentRest»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "$ref": "#/definitions/OfferedServiceVisibleContentRest"
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«OfferedServiceVisibleContentRest»"
+      "SingapurResponse«List«ProfessionalRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProfessionalRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«ProfessionalRest»»"
       },
-      "SingapurResponse«string»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string"
-              },
-              "data": {
-                  "type": "string"
-              },
-              "message": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          },
-          "title": "SingapurResponse«string»"
+      "SingapurResponse«List«ProvinceRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProvinceRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«ProvinceRest»»"
       },
-      "View": {
-          "type": "object",
-          "properties": {
-              "contentType": {
-                  "type": "string"
-              }
-          },
-          "title": "View"
+      "SingapurResponse«MenuRest»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "$ref":"#/definitions/MenuRest"
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«MenuRest»"
+      },
+      "SingapurResponse«OfferedServiceDetailRest»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "$ref":"#/definitions/OfferedServiceDetailRest"
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«OfferedServiceDetailRest»"
+      },
+      "SingapurResponse«OfferedServiceVisibleContentRest»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "$ref":"#/definitions/OfferedServiceVisibleContentRest"
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«OfferedServiceVisibleContentRest»"
+      },
+      "SingapurResponse«string»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"string"
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«string»"
+      },
+      "SubServiceRest":{
+         "type":"object",
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "id":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "landingPage":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         },
+         "title":"SubServiceRest"
+      },
+      "View":{
+         "type":"object",
+         "properties":{
+            "contentType":{
+               "type":"string"
+            }
+         },
+         "title":"View"
       }
-  }
+   }
 }

@@ -25,6 +25,10 @@
          "description":"Chat Controller Impl"
       },
       {
+         "name":"DirectRestController",
+         "description":"Direct Controller Impl"
+      },
+      {
          "name":"InvoiceRestController",
          "description":"Invoice Controller Impl"
       },
@@ -658,6 +662,36 @@
                   "description":"OK",
                   "schema":{
                      "$ref":"#/definitions/SingapurResponse«ChatRest»"
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            },
+            "deprecated":false
+         }
+      },
+      "/backoffice-server/api/v1/direct/stores":{
+         "get":{
+            "tags":[
+               "DirectRestController"
+            ],
+            "summary":"Retrieve al stores of the HOGAMI",
+            "operationId":"retrieveAllStoresUsingGET",
+            "produces":[
+               "application/json"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«StoreRest»»"
                   }
                },
                "401":{
@@ -1419,6 +1453,104 @@
             "deprecated":false
          }
       },
+      "/backoffice-server/api/v1/professionals/campaign":{
+         "post":{
+            "tags":[
+               "ProfessionalRestController"
+            ],
+            "summary":"registerCampaignsForProfessionals",
+            "operationId":"registerCampaignsForProfessionalsUsingPOST",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"campaignsProfessionals",
+                  "description":"campaignsProfessionals",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/ProfessionalCampaignBodyRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Add professionals to campaigns",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«ProfessionalCampaignRest»»"
+                  }
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         },
+         "delete":{
+            "tags":[
+               "ProfessionalRestController"
+            ],
+            "summary":"deleteCampaignsForProfessionals",
+            "operationId":"deleteCampaignsForProfessionalsUsingDELETE",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"campaignsProfessionals",
+                  "description":"campaignsProfessionals",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/ProfessionalCampaignBodyRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Delete professionals to campaigns",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«ProfessionalCampaignRest»»"
+                  }
+               },
+               "204":{
+                  "description":"No Content"
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
+      },
       "/backoffice-server/api/v1/professionals/filtered":{
          "post":{
             "tags":[
@@ -1636,6 +1768,66 @@
             "deprecated":false
          }
       },
+      "/backoffice-server/api/v1/ratings/average/historical":{
+         "post":{
+            "tags":[
+               "RatingRestController"
+            ],
+            "summary":"${rating.averageProfessionalRatingHistorical}",
+            "operationId":"averageHistoricalProfessionalRatingUsingPOST",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "description":"Authorization",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "in":"body",
+                  "name":"filterRatingRest",
+                  "description":"filterRatingRest",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/FilterRatingRest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A rating average associated to a pro is returned",
+                  "schema":{
+                     "$ref":"#/definitions/SingapurResponse«List«AverageHistoricalRatingsRest»»"
+                  }
+               },
+               "201":{
+                  "description":"Created"
+               },
+               "400":{
+                  "description":"Bad request"
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               },
+               "500":{
+                  "description":"Internal server error"
+               }
+            },
+            "deprecated":false
+         }
+      },
       "/backoffice-server/api/v1/ratings/{professionalId}":{
          "get":{
             "tags":[
@@ -1653,6 +1845,14 @@
                   "description":"Authorization",
                   "required":true,
                   "type":"string"
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "description":"offeredServiceId",
+                  "required":false,
+                  "type":"integer",
+                  "format":"int64"
                },
                {
                   "name":"offset",
@@ -2188,6 +2388,15 @@
             "operationId":"retrieveAllCampaingsUsingGET",
             "produces":[
                "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "description":"Authorization",
+                  "required":true,
+                  "type":"string"
+               }
             ],
             "responses":{
                "200":{
@@ -2899,6 +3108,23 @@
          },
          "title":"AreaRest"
       },
+      "AverageHistoricalRatingsRest":{
+         "type":"object",
+         "properties":{
+            "accumulatedAverage":{
+               "$ref":"#/definitions/AverageRatingRest"
+            },
+            "activeServicesAccumulatedAverage":{
+               "$ref":"#/definitions/AverageRatingRest"
+            },
+            "professionalId":{
+               "type":"integer",
+               "format":"int64"
+            }
+         },
+         "title":"AverageHistoricalRatingsRest",
+         "description":"This model will represent the average of the types of rating history we have for a professional."
+      },
       "AverageRatingRest":{
          "type":"object",
          "properties":{
@@ -2925,6 +3151,10 @@
             "professionalId":{
                "type":"integer",
                "format":"int64"
+            },
+            "totalAverage":{
+               "type":"integer",
+               "format":"int32"
             }
          },
          "title":"AverageRatingRest",
@@ -3156,9 +3386,12 @@
       "FilterBillingRest":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "commercialId":{
                "type":"integer",
@@ -3205,9 +3438,12 @@
       "FilterProfessionalRest":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "createDateEnd":{
                "type":"string"
@@ -3230,12 +3466,35 @@
          },
          "title":"FilterProfessionalRest"
       },
+      "FilterRatingRest":{
+         "type":"object",
+         "properties":{
+            "offeredServiceCode":{
+               "type":"string"
+            },
+            "offeredServiceId":{
+               "type":"integer",
+               "format":"int64"
+            },
+            "professionalIds":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "title":"FilterRatingRest"
+      },
       "FilterRest":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "client":{
                "type":"string"
@@ -3310,9 +3569,12 @@
       "FilterRestPaycometOperation":{
          "type":"object",
          "properties":{
-            "campaign":{
-               "type":"integer",
-               "format":"int64"
+            "campaigns":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
             },
             "commercialId":{
                "type":"integer",
@@ -3664,6 +3926,10 @@
             "provinceName":{
                "type":"string",
                "description":"Meta description of visible content"
+            },
+            "sectionTitle":{
+               "type":"string",
+               "description":"Section title of a service related to your province"
             },
             "text_content":{
                "type":"string",
@@ -4785,6 +5051,25 @@
          },
          "title":"ProfessionalAdditionalInfoRest"
       },
+      "ProfessionalCampaignBodyRest":{
+         "type":"object",
+         "properties":{
+            "campaignCode":{
+               "type":"string"
+            },
+            "professionalIds":{
+               "type":"array",
+               "items":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "token":{
+               "type":"string"
+            }
+         },
+         "title":"ProfessionalCampaignBodyRest"
+      },
       "ProfessionalCampaignRest":{
          "type":"object",
          "properties":{
@@ -4921,6 +5206,12 @@
             },
             "name":{
                "type":"string"
+            },
+            "professionalCampaigns":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProfessionalCampaignRest"
+               }
             }
          },
          "title":"ProfessionalRest"
@@ -5121,6 +5412,10 @@
                "format":"int64",
                "description":"Id of the rating"
             },
+            "operationId":{
+               "type":"integer",
+               "format":"int64"
+            },
             "opinion":{
                "type":"string",
                "description":"Opinion about the professional"
@@ -5138,6 +5433,9 @@
                "type":"number",
                "format":"double",
                "description":"Satisfaction rating about the professional"
+            },
+            "titleOfferedService":{
+               "type":"string"
             }
          },
          "title":"RatingRest",
@@ -5339,6 +5637,27 @@
          },
          "title":"SingapurResponse«DetailedOfferedServiceRest»"
       },
+      "SingapurResponse«List«AverageHistoricalRatingsRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/AverageHistoricalRatingsRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«AverageHistoricalRatingsRest»»"
+      },
       "SingapurResponse«List«OfferedServiceCampaignRest»»":{
          "type":"object",
          "properties":{
@@ -5423,6 +5742,27 @@
          },
          "title":"SingapurResponse«List«OperationsPaycometRest»»"
       },
+      "SingapurResponse«List«ProfessionalCampaignRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ProfessionalCampaignRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«ProfessionalCampaignRest»»"
+      },
       "SingapurResponse«List«RequestStatusRest»»":{
          "type":"object",
          "properties":{
@@ -5443,6 +5783,27 @@
             }
          },
          "title":"SingapurResponse«List«RequestStatusRest»»"
+      },
+      "SingapurResponse«List«StoreRest»»":{
+         "type":"object",
+         "properties":{
+            "code":{
+               "type":"string"
+            },
+            "data":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/StoreRest"
+               }
+            },
+            "message":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            }
+         },
+         "title":"SingapurResponse«List«StoreRest»»"
       },
       "SingapurResponse«List«TransactionTypeRest»»":{
          "type":"object",
