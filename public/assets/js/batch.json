@@ -1,18 +1,94 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Operation Batch API to Singapur Project",
-    "version": "1.0",
-    "title": "Leroy Merlin Operation Batch",
-    "termsOfService": "https://www.everis.com",
-    "license": { "name": "everis", "url": "https://www.everis.com" }
+  "openapi":"3.0.1",
+  "info":{
+     "title":"Direct API",
+     "description":"Operation API to Singapur Project",
+     "termsOfService":"https://www.everis.com",
+     "license":{
+        "name":"License",
+        "url":"https://www.everis.com"
+     },
+     "version":"1.0.0 "
   },
-  "host": "localhost:8019",
-  "basePath": "/",
-  "tags": [
-    {
-      "name": "OperationRestController",
-      "description": "Operations related actions"
-    }
-  ]
+  "servers":[
+     {
+        "url":"http://localhost:8019",
+        "description":"Generated server url"
+     }
+  ],
+  "tags":[
+     {
+        "name":"Alive Controller"
+     }
+  ],
+  "paths":{
+     "/health/live":{
+        "get":{
+           "tags":[
+              "Alive Controller"
+           ],
+           "operationId":"keepAlive",
+           "responses":{
+              "500":{
+                 "description":"Internal Server Error",
+                 "content":{
+                    "*/*":{
+                       "schema":{
+                          "$ref":"#/components/schemas/SingapurResponse"
+                       }
+                    }
+                 }
+              },
+              "200":{
+                 "description":"OK",
+                 "content":{
+                    "application/json;charset=UTF-8":{
+                       "schema":{
+                          "$ref":"#/components/schemas/SingapurResponseString"
+                       }
+                    }
+                 }
+              }
+           }
+        }
+     }
+  },
+  "components":{
+     "schemas":{
+        "SingapurResponse":{
+           "type":"object",
+           "properties":{
+              "status":{
+                 "type":"string"
+              },
+              "code":{
+                 "type":"string"
+              },
+              "message":{
+                 "type":"string"
+              },
+              "data":{
+                 "type":"object"
+              }
+           }
+        },
+        "SingapurResponseString":{
+           "type":"object",
+           "properties":{
+              "status":{
+                 "type":"string"
+              },
+              "code":{
+                 "type":"string"
+              },
+              "message":{
+                 "type":"string"
+              },
+              "data":{
+                 "type":"string"
+              }
+           }
+        }
+     }
+  }
 }

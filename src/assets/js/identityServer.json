@@ -1,860 +1,1209 @@
 {
-  "swagger": "2.0",
-  "info": {
-      "description": "Identity API to Singapur Project",
-      "version": "1.0",
-      "title": "Hogami Identity Services",
-      "termsOfService": "https://hogami.leroymerlin.es/",
-      "license": {
-          "name": "HOGAMI - Leroy Merlin",
-          "url": "https://hogami.leroymerlin.es/"
-      }
-  },
-  "host": "localhost:8093",
-  "basePath": "/identity-server/v1",
-  "tags": [
-      {
-          "name": "PasswordRestController",
-          "description": "Sesion related operations"
-      },
-      {
-          "name": "SessionRestController",
-          "description": "Sesion related operations"
-      },
-      {
-          "name": "TokenRestController",
-          "description": "Token related operations"
-      },
-      {
-          "name": "UserRestController",
-          "description": "User related operations"
-      },
-      {
-          "name": "alive-controller-impl",
-          "description": "Alive Controller Impl"
-      }
-  ],
-  "paths": {
-      "/health/live": {
-          "get": {
-              "tags": [
-                  "alive-controller-impl"
-              ],
-              "summary": "keepAlive",
-              "operationId": "keepAliveUsingGET",
-              "produces": [
-                  "application/json;charset=UTF-8"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+    "openapi":"3.0.1",
+    "info":{
+       "title":"Singapur identity server",
+       "description":"Client API to Singapur Project  ",
+       "termsOfService":"https://www.everis.com",
+       "license":{
+          "name":"License",
+          "url":"https://www.everis.com"
+       },
+       "version":"1.0.0"
+    },
+    "servers":[
+       {
+          "url":"http://localhost:8093/identity-server/v1",
+          "description":"Generated server url"
+       }
+    ],
+    "tags":[
+       {
+          "name":"TokenRestController",
+          "description":"Token related operations"
+       },
+       {
+          "name":"SessionRestController",
+          "description":"Session related operations"
+       },
+       {
+          "name":"PasswordRestController",
+          "description":"Password related operations"
+       },
+       {
+          "name":"UserRestController",
+          "description":"User related operations"
+       }
+    ],
+    "paths":{
+       "/oauth/users":{
+          "post":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Creates a  new user, saves it into the database",
+             "operationId":"createUser",
+             "requestBody":{
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/UserRest"
                       }
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "required":true
+             },
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly created and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/session/logout": {
-          "post": {
-              "tags": [
-                  "SessionRestController"
-              ],
-              "summary": "User logout actions",
-              "operationId": "logoutSessionUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "*/*"
-              ],
-              "parameters": [
-                  {
-                      "name": "Authorization",
-                      "in": "header",
-                      "description": "Authorization",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user logs out correctly ",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+       },
+       "/oauth/users/{userId}":{
+          "put":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Update a user, update his informations into the database",
+             "operationId":"updateUser",
+             "parameters":[
+                {
+                   "name":"userId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                }
+             ],
+             "requestBody":{
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/UserRest"
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "required":true
+             },
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly updated and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                }
+             }
+          },
+          "delete":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Deletes a user from the database",
+             "operationId":"deleteUser",
+             "parameters":[
+                {
+                   "name":"userId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The user is deleted from the database",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/user/{userId}/password": {
-          "post": {
-              "tags": [
-                  "PasswordRestController"
-              ],
-              "summary": "Change the password given by default",
-              "operationId": "changeDefaultPasswordUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Authorization",
-                      "in": "header",
-                      "description": "Authorization",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "body",
-                      "name": "changeDefaultPasswordRest",
-                      "description": "credentials",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/definitions/ChangeDefaultPasswordRest"
+       },
+       "/oauth/users/{email}/{password}":{
+          "put":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Reset the password of an existing user",
+             "operationId":"resetPassword",
+             "parameters":[
+                {
+                   "name":"email",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"password",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  {
-                      "name": "userId",
-                      "in": "path",
-                      "description": "userId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The default password is changed, the new password meets the requirements",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          },
-          "put": {
-              "tags": [
-                  "PasswordRestController"
-              ],
-              "summary": "Voluntary change of password",
-              "operationId": "changeKnownPasswordUsingPUT",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "changeKnownPasswordRest",
-                      "description": "credentials",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/definitions/ChangeKnownPasswordRest"
+                   }
+                },
+                "200":{
+                   "description":"The password has been reset successfully",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
                       }
-                  },
-                  {
-                      "name": "userId",
-                      "in": "path",
-                      "description": "userId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The previous and new passwords are correct and meet the requeriements",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
-                      }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                }
+             }
           }
-      },
-      "/oauth/user/{userId}/temporal": {
-          "post": {
-              "tags": [
-                  "TokenRestController"
-              ],
-              "summary": "Retrives a temporal token for the user to grant them access",
-              "operationId": "retrieveTemporalTokenUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "Authorization",
-                      "in": "header",
-                      "description": "Authorization",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "id",
-                      "in": "header",
-                      "description": "id",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  },
-                  {
-                      "name": "userId",
-                      "in": "path",
-                      "description": "userId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user id is correct and a token is returned",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«OAuth2AccessToken»"
+       },
+       "/oauth/users/username/{username}":{
+          "get":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Retrieve user data according to mail",
+             "operationId":"retrieveUserByEmail",
+             "parameters":[
+                {
+                   "name":"username",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserOauthRest"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"User has been successfully retrieved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserOauthRest"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users": {
-          "post": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Creates a  new user, saves it into the database",
-              "operationId": "createUserUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "userRest",
-                      "description": "newUser",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/definitions/UserRest"
+       },
+       "/oauth/users/unban":{
+          "put":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Unban a professional",
+             "operationId":"unbanProfessional",
+             "parameters":[
+                {
+                   "name":"email",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"password",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is correctly created and saved",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«UserRest»"
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly created and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users/ban": {
-          "delete": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Ban a professional ",
-              "operationId": "banProfessionalUsingDELETE",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "email",
-                      "in": "query",
-                      "description": "email",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is correctly created and saved",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+       },
+       "/oauth/users/role/{role}":{
+          "get":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Retrieve user data according to role",
+             "operationId":"retrieveUserByRole",
+             "parameters":[
+                {
+                   "name":"role",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly created and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users/create": {
-          "post": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Creat a new backoffice user , save it to the database",
-              "operationId": "createBackofficeUserUsingPOST",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "email",
-                      "in": "query",
-                      "description": "email",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "password",
-                      "in": "query",
-                      "description": "password",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is correctly created and saved",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«UserRest»"
+       },
+       "/oauth/users/last-activity":{
+          "get":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Obtain the list of users who had the last activity less than a specified date",
+             "operationId":"retrieveUserWithLastActivityLessThan",
+             "parameters":[
+                {
+                   "name":"dateTime",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string",
+                      "format":"date-time"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseListUserRest"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"User has been successfully retrieved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseListUserRest"
+                         }
+                      }
+                   }
+                }
+             }
+          },
+          "delete":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Delete the list of users who had the last activity less than a specified date",
+             "operationId":"deleteUserWithLastActivityLessThan",
+             "requestBody":{
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "type":"array",
+                         "items":{
+                            "$ref":"#/components/schemas/UserRest"
+                         }
+                      }
+                   }
+                },
+                "required":true
+             },
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"User has been successfully retrieved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users/unban": {
-          "put": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Unban a professional",
-              "operationId": "unbanProfessionalUsingPUT",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "email",
-                      "in": "query",
-                      "description": "email",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "password",
-                      "in": "query",
-                      "description": "password",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is correctly created and saved",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+       },
+       "/oauth/users/create":{
+          "post":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Creat a new backoffice user , save it to the database",
+             "operationId":"createBackofficeUser",
+             "parameters":[
+                {
+                   "name":"email",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"password",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly created and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseUserRest"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users/{email}/{password}": {
-          "put": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Reset the password of an existing user",
-              "operationId": "resetPasswordUsingPUT",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "*/*"
-              ],
-              "parameters": [
-                  {
-                      "name": "email",
-                      "in": "path",
-                      "description": "email",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "name": "password",
-                      "in": "path",
-                      "description": "password",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The password has been reset successfully",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+       },
+       "/oauth/users/ban":{
+          "delete":{
+             "tags":[
+                "UserRestController"
+             ],
+             "summary":"Ban a professional ",
+             "operationId":"banProfessional",
+             "parameters":[
+                {
+                   "name":"email",
+                   "in":"query",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                },
+                "200":{
+                   "description":"The user is correctly created and saved",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
           }
-      },
-      "/oauth/users/{userId}": {
-          "put": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Update a user, update his informations into the database",
-              "operationId": "updateUserUsingPUT",
-              "consumes": [
-                  "application/json"
-              ],
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "userId",
-                      "in": "path",
-                      "description": "userId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  },
-                  {
-                      "in": "body",
-                      "name": "userRest",
-                      "description": "newUser",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/definitions/UserRest"
+       },
+       "/oauth/user/{userId}/temporal":{
+          "post":{
+             "tags":[
+                "TokenRestController"
+             ],
+             "summary":"Retrives a temporal token for the user to grant them access",
+             "operationId":"retrieveTemporalToken",
+             "parameters":[
+                {
+                   "name":"Authorization",
+                   "in":"header",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"id",
+                   "in":"header",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                },
+                {
+                   "name":"userId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
                       }
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is correctly updated and saved",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«UserRest»"
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseOAuth2AccessToken"
+                         }
                       }
-                  },
-                  "201": {
-                      "description": "Created"
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "404": {
-                      "description": "Not Found"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
-          },
-          "delete": {
-              "tags": [
-                  "UserRestController"
-              ],
-              "summary": "Deletes a user from the database",
-              "operationId": "deleteUserUsingDELETE",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "name": "userId",
-                      "in": "path",
-                      "description": "userId",
-                      "required": true,
-                      "type": "integer",
-                      "format": "int64"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "The user is deleted from the database",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
+                   }
+                },
+                "200":{
+                   "description":"The user id is correct and a token is returned",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseOAuth2AccessToken"
+                         }
                       }
-                  },
-                  "204": {
-                      "description": "No Content",
-                      "schema": {
-                          "$ref": "#/definitions/SingapurResponse«string»"
-                      }
-                  },
-                  "400": {
-                      "description": "Bad request"
-                  },
-                  "401": {
-                      "description": "Unauthorized"
-                  },
-                  "403": {
-                      "description": "Forbidden"
-                  },
-                  "500": {
-                      "description": "Internal server error"
-                  }
-              },
-              "deprecated": false
+                   }
+                }
+             }
           }
-      }
-  },
-  "definitions": {
-      "ChangeDefaultPasswordRest": {
-          "type": "object",
-          "required": [
-              "newPassword"
-          ],
-          "properties": {
-              "newPassword": {
-                  "type": "string",
-                  "description": "New password encoded base64"
-              }
+       },
+       "/oauth/user/{userId}/password":{
+          "put":{
+             "tags":[
+                "PasswordRestController"
+             ],
+             "summary":"Voluntary change of password",
+             "operationId":"changeKnownPassword",
+             "parameters":[
+                {
+                   "name":"userId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                }
+             ],
+             "requestBody":{
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/ChangeKnownPasswordRest"
+                      }
+                   }
+                },
+                "required":true
+             },
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The previous and new passwords are correct and meet the requeriements",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
           },
-          "title": "ChangeDefaultPasswordRest"
-      },
-      "ChangeKnownPasswordRest": {
-          "type": "object",
-          "required": [
-              "currentPassword",
-              "newPassword"
-          ],
-          "properties": {
-              "currentPassword": {
-                  "type": "string",
-                  "description": "Current password encoded base64"
-              },
-              "newPassword": {
-                  "type": "string",
-                  "description": "New password encoded base64"
-              }
+          "post":{
+             "tags":[
+                "PasswordRestController"
+             ],
+             "summary":"Change the password given by default",
+             "operationId":"changeDefaultPassword",
+             "parameters":[
+                {
+                   "name":"Authorization",
+                   "in":"header",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"userId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"integer",
+                      "format":"int64"
+                   }
+                }
+             ],
+             "requestBody":{
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/ChangeDefaultPasswordRest"
+                      }
+                   }
+                },
+                "required":true
+             },
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The default password is changed, the new password meets the requirements",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
+          }
+       },
+       "/oauth/session/logout":{
+          "post":{
+             "tags":[
+                "SessionRestController"
+             ],
+             "summary":"User logout actions",
+             "operationId":"logoutSession",
+             "parameters":[
+                {
+                   "name":"Authorization",
+                   "in":"header",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                }
+             ],
+             "responses":{
+                "500":{
+                   "description":"Internal server error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"The user logs out correctly ",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                },
+                "400":{
+                   "description":"Bad request",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
+          }
+       },
+       "/health/live":{
+          "get":{
+             "tags":[
+                "alive-controller-impl"
+             ],
+             "operationId":"keepAlive",
+             "responses":{
+                "500":{
+                   "description":"Internal Server Error",
+                   "content":{
+                      "*/*":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponse"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"OK",
+                   "content":{
+                      "application/json;charset=UTF-8":{
+                         "schema":{
+                            "$ref":"#/components/schemas/SingapurResponseString"
+                         }
+                      }
+                   }
+                }
+             }
+          }
+       }
+    },
+    "components":{
+       "schemas":{
+          "SingapurResponse":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "type":"object",
+                   "description":"Contain data related to request"
+                }
+             }
           },
-          "title": "ChangeKnownPasswordRest"
-      },
-      "OAuth2AccessToken": {
-          "type": "object",
-          "properties": {
-              "additionalInformation": {
-                  "type": "object"
-              },
-              "expiration": {
-                  "type": "string",
-                  "format": "date-time"
-              },
-              "expired": {
-                  "type": "boolean"
-              },
-              "expiresIn": {
-                  "type": "integer",
-                  "format": "int32"
-              },
-              "refreshToken": {
-                  "$ref": "#/definitions/OAuth2RefreshToken"
-              },
-              "scope": {
-                  "type": "array",
-                  "items": {
-                      "type": "string"
-                  }
-              },
-              "tokenType": {
-                  "type": "string"
-              },
-              "value": {
-                  "type": "string"
-              }
+          "UserRest":{
+             "type":"object",
+             "properties":{
+                "userId":{
+                   "type":"integer",
+                   "description":"Number identifing the user",
+                   "format":"int64"
+                },
+                "username":{
+                   "type":"string",
+                   "description":"This atribute contains de emails user \n Must match the regular expression [A-Za-z0-9]+(?:[\\.\\-\\_]?[A-Za-z0-9]+)+@[A-Za-z0-9]+(?:[\\.\\-\\_][A-Za-z0-9]+)*(?:[\\.][A-Za-z0-9]+)+ when mandatory or filled."
+                },
+                "clientId":{
+                   "type":"string",
+                   "description":"Number identifing the user as a client"
+                },
+                "password":{
+                   "type":"string",
+                   "description":"This atribute contains de password \n Encoded in base 64"
+                },
+                "createDate":{
+                   "type":"string",
+                   "format":"date-time"
+                },
+                "updateDate":{
+                   "type":"string",
+                   "format":"date-time"
+                }
+             }
           },
-          "title": "OAuth2AccessToken"
-      },
-      "OAuth2RefreshToken": {
-          "type": "object",
-          "properties": {
-              "value": {
-                  "type": "string"
-              }
+          "SingapurResponseUserRest":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "$ref":"#/components/schemas/UserRest"
+                }
+             }
           },
-          "title": "OAuth2RefreshToken"
-      },
-      "SingapurResponse«OAuth2AccessToken»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string",
-                  "description": "Status code, extra information related to HTTP response"
-              },
-              "data": {
-                  "description": "Contain data related to request",
-                  "$ref": "#/definitions/OAuth2AccessToken"
-              },
-              "message": {
-                  "type": "string",
-                  "description": "Specific message, result of the action"
-              },
-              "status": {
-                  "type": "string",
-                  "description": "Result of the action, for example \"Success\"."
-              }
+          "SingapurResponseString":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "type":"string",
+                   "description":"Contain data related to request"
+                }
+             }
           },
-          "title": "SingapurResponse«OAuth2AccessToken»"
-      },
-      "SingapurResponse«UserRest»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string",
-                  "description": "Status code, extra information related to HTTP response"
-              },
-              "data": {
-                  "description": "Contain data related to request",
-                  "$ref": "#/definitions/UserRest"
-              },
-              "message": {
-                  "type": "string",
-                  "description": "Specific message, result of the action"
-              },
-              "status": {
-                  "type": "string",
-                  "description": "Result of the action, for example \"Success\"."
-              }
+          "SingapurResponseUserOauthRest":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "$ref":"#/components/schemas/UserOauthRest"
+                }
+             }
           },
-          "title": "SingapurResponse«UserRest»"
-      },
-      "SingapurResponse«string»": {
-          "type": "object",
-          "properties": {
-              "code": {
-                  "type": "string",
-                  "description": "Status code, extra information related to HTTP response"
-              },
-              "data": {
-                  "type": "string",
-                  "description": "Contain data related to request"
-              },
-              "message": {
-                  "type": "string",
-                  "description": "Specific message, result of the action"
-              },
-              "status": {
-                  "type": "string",
-                  "description": "Result of the action, for example \"Success\"."
-              }
+          "UserOauthRest":{
+             "type":"object",
+             "properties":{
+                "chatClient":{
+                   "type":"boolean"
+                },
+                "changePasswordRequired":{
+                   "type":"boolean"
+                },
+                "passwordForgotten":{
+                   "type":"boolean"
+                },
+                "id":{
+                   "type":"integer",
+                   "description":"Number identifing the user",
+                   "format":"int64"
+                },
+                "username":{
+                   "type":"string",
+                   "description":"Email of the client"
+                },
+                "isChangePasswordRequired":{
+                   "type":"boolean",
+                   "description":"This column represent if the user require a change password"
+                },
+                "isPasswordForgotten":{
+                   "type":"boolean",
+                   "description":"This flag indicates if the user has requested to change their password"
+                },
+                "enabled":{
+                   "type":"boolean",
+                   "description":"This column represent if the user is avaible"
+                },
+                "accountNonExpired":{
+                   "type":"boolean",
+                   "description":"This column represent if the user account has expired"
+                },
+                "credentialsNonExpired":{
+                   "type":"boolean",
+                   "description":"This column represent if the user credentials has expired"
+                },
+                "accountNonLocked":{
+                   "type":"boolean",
+                   "description":"This column represent if the user account is unlocked"
+                },
+                "loginAttempts":{
+                   "type":"integer",
+                   "description":"This column represents login attempts number",
+                   "format":"int32"
+                },
+                "isChatClient":{
+                   "type":"boolean",
+                   "description":"Is chat of the client"
+                }
+             },
+             "description":"Contain data related to request"
           },
-          "title": "SingapurResponse«string»"
-      },
-      "UserRest": {
-          "type": "object",
-          "properties": {
-              "username": {
-                  "type": "string",
-                  "description": "This atribute contains de emails user \n Must match the regular expression [A-Za-z0-9]+(?:[\\.\\-\\_]?[A-Za-z0-9]+)+@[A-Za-z0-9]+(?:[\\.\\-\\_][A-Za-z0-9]+)*(?:[\\.][A-Za-z0-9]+)+ when mandatory or filled."
-              },
-              "password": {
-                  "type": "string",
-                  "description": "This atribute contains de password \n Encoded in base 64"
-              },
-              "userId": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "Number identifing the user"
-              },
-              "clientId": {
-                  "type": "string",
-                  "description": "Number identifing the user as a client"
-              }
+          "SingapurResponseListUserRest":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "type":"array",
+                   "description":"Contain data related to request",
+                   "items":{
+                      "$ref":"#/components/schemas/UserRest"
+                   }
+                }
+             }
           },
-          "title": "UserRest"
-      }
-  }
-}
+          "OAuth2AccessToken":{
+             "type":"object",
+             "properties":{
+                "value":{
+                   "type":"string"
+                },
+                "expiration":{
+                   "type":"string",
+                   "format":"date-time"
+                },
+                "expired":{
+                   "type":"boolean"
+                },
+                "scope":{
+                   "uniqueItems":true,
+                   "type":"array",
+                   "items":{
+                      "type":"string"
+                   }
+                },
+                "additionalInformation":{
+                   "type":"object",
+                   "additionalProperties":{
+                      "type":"object"
+                   }
+                },
+                "tokenType":{
+                   "type":"string"
+                },
+                "expiresIn":{
+                   "type":"integer",
+                   "format":"int32"
+                },
+                "refreshToken":{
+                   "$ref":"#/components/schemas/OAuth2RefreshToken"
+                }
+             },
+             "description":"Contain data related to request"
+          },
+          "OAuth2RefreshToken":{
+             "type":"object",
+             "properties":{
+                "value":{
+                   "type":"string"
+                }
+             }
+          },
+          "SingapurResponseOAuth2AccessToken":{
+             "type":"object",
+             "properties":{
+                "status":{
+                   "type":"string",
+                   "description":"Result of the action, for example \"Success\"."
+                },
+                "code":{
+                   "type":"string",
+                   "description":"Status code, extra information related to HTTP response"
+                },
+                "message":{
+                   "type":"string",
+                   "description":"Specific message, result of the action"
+                },
+                "data":{
+                   "$ref":"#/components/schemas/OAuth2AccessToken"
+                }
+             }
+          },
+          "ChangeKnownPasswordRest":{
+             "required":[
+                "currentPassword",
+                "newPassword"
+             ],
+             "type":"object",
+             "properties":{
+                "newPassword":{
+                   "type":"string",
+                   "description":"New password encoded base64"
+                },
+                "currentPassword":{
+                   "type":"string",
+                   "description":"Current password encoded base64"
+                }
+             }
+          },
+          "ChangeDefaultPasswordRest":{
+             "required":[
+                "newPassword"
+             ],
+             "type":"object",
+             "properties":{
+                "newPassword":{
+                   "type":"string",
+                   "description":"New password encoded base64"
+                }
+             }
+          }
+       }
+    }
+ }
