@@ -1035,17 +1035,21 @@
          "SingapurResponse":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
-                  "type":"object"
+               "data":{
+                  "type":"object",
+                  "description":"Contain data related to request"
                }
             },
             "description":"This model is the envelope"
@@ -1074,54 +1078,73 @@
          "OfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Id, internal identifier for the offered service":{
+               "id":{
                   "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
                   "format":"int64"
                },
                "image":{
                   "type":"string"
                },
-               "Id  of the corresponding parent for this serive":{
+               "parentId":{
                   "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
                   "format":"int64"
                },
-               "Brief explanation about the service":{
-                  "type":"string"
+               "description":{
+                  "type":"string",
+                  "description":"Brief explanation about the service"
                },
-               "Service's internal code":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Service's internal code"
                },
-               "Level assigned to the service":{
+               "level":{
                   "type":"integer",
+                  "description":"Level assigned to the service",
                   "format":"int64"
                },
-               "String to create url to landing page":{
-                  "type":"string"
+               "landingPage":{
+                  "type":"string",
+                  "description":"String to create url to landing page"
                },
-               "Meta description for landing page":{
-                  "type":"string"
+               "metaDescription":{
+                  "type":"string",
+                  "description":"Meta description for landing page"
                },
-               "Show or not in searches":{
+               "show":{
                   "type":"integer",
+                  "description":"Show or not in searches",
                   "format":"int64"
                },
-               "Type of landigpage to be used":{
-                  "type":"string"
+               "type":{
+                  "type":"integer",
+                  "description":"Type of landigpage to be used",
+                  "format":"int64"
                },
-               "Offered Service chat question":{
-                  "type":"string"
+               "typeName":{
+                  "type":"string",
+                  "description":"Type of landigpage to be used"
                },
-               "Offered Service keywords":{
+               "chatQuestion":{
+                  "type":"string",
+                  "description":"Offered Service chat question"
+               },
+               "keyWords":{
                   "type":"array",
+                  "description":"Offered Service keywords",
                   "items":{
-                     "type":"string"
+                     "type":"string",
+                     "description":"Offered Service keywords"
                   }
                },
-               "Offered Service Active":{
-                  "type":"boolean"
+               "is_active":{
+                  "type":"boolean",
+                  "description":"Offered Service Active"
                },
-               "Offered Service Parent Name":{
-                  "type":"string"
+               "parentName":{
+                  "type":"string",
+                  "description":"Offered Service Parent Name"
                }
             },
             "description":"This model represents the offered service"
@@ -1154,20 +1177,21 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                }
-            }
+            },
+            "description":"Contain data related to request"
          },
          "PageableObject":{
             "type":"object",
@@ -1198,16 +1222,19 @@
          "SingapurResponsePageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "$ref":"#/components/schemas/PageOfferedServiceRest"
                }
             },
@@ -1230,33 +1257,45 @@
                "textContent":{
                   "type":"string"
                },
-               "Id, internal identifier for the visible content ":{
+               "id":{
                   "type":"integer",
+                  "description":"Id, internal identifier for the visible content ",
                   "format":"int64"
                },
-               "Id  of the corresponding offered service for this content":{
+               "offeredServiceId":{
                   "type":"integer",
+                  "description":"Id  of the corresponding offered service for this content",
                   "format":"int32"
                },
-               "Id  of the corresponding province for this content":{
+               "provinceId":{
                   "type":"integer",
+                  "description":"Id  of the corresponding province for this content",
                   "format":"int32"
                },
-               "Text content of visible content":{
-                  "type":"string"
+               "text_content":{
+                  "type":"string",
+                  "description":"Text content of visible content"
                },
-               "Meta description of visible content":{
-                  "type":"string"
+               "title":{
+                  "type":"string",
+                  "description":"Text content of visible content"
                },
-               "Province Name of visible content":{
-                  "type":"string"
+               "metaDescription":{
+                  "type":"string",
+                  "description":"Meta description of visible content"
                },
-               "Zip Code of the province":{
+               "provinceName":{
+                  "type":"string",
+                  "description":"Province Name of visible content"
+               },
+               "zipCode":{
                   "type":"integer",
+                  "description":"Zip Code of the province",
                   "format":"int32"
                },
-               "Section title of a service related to your province":{
-                  "type":"string"
+               "sectionTitle":{
+                  "type":"string",
+                  "description":"Section title of a service related to your province"
                },
                "meta":{
                   "type":"string"
@@ -1267,16 +1306,19 @@
          "SingapurResponseOfferedServiceVisibleContentRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
                }
             },
@@ -1285,16 +1327,19 @@
          "DetailedOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Id, internal identifier for the offered service":{
+               "id":{
                   "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
                   "format":"int64"
                },
-               "Id  of the corresponding parent for this serive":{
+               "parentId":{
                   "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
                   "format":"int64"
                },
-               "Level assigned to the service":{
+               "level":{
                   "type":"integer",
+                  "description":"Level assigned to the service",
                   "format":"int64"
                },
                "image":{
@@ -1333,8 +1378,10 @@
                      "$ref":"#/components/schemas/OfferedServiceQuestionRest"
                   }
                },
-               "Type of landigpage to be used":{
-                  "type":"string"
+               "type":{
+                  "type":"integer",
+                  "description":"Type of landigpage to be used",
+                  "format":"int64"
                },
                "visibelContentList":{
                   "type":"array",
@@ -1348,18 +1395,26 @@
                      "$ref":"#/components/schemas/ProvinceRest"
                   }
                },
-               "Offered Service Parent Name":{
-                  "type":"string"
+               "typeName":{
+                  "type":"string",
+                  "description":"Type of landigpage to be used"
                },
-               "Offered Service Active":{
-                  "type":"boolean"
+               "parentName":{
+                  "type":"string",
+                  "description":"Offered Service Parent Name"
                },
-               "Show or not in searches":{
+               "is_active":{
+                  "type":"boolean",
+                  "description":"Offered Service Active"
+               },
+               "show":{
                   "type":"integer",
+                  "description":"Show or not in searches",
                   "format":"int64"
                },
-               "Section title of a service related to your province":{
-                  "type":"string"
+               "sectionTitle":{
+                  "type":"string",
+                  "description":"Section title of a service related to your province"
                }
             },
             "description":"This model represents the offered service"
@@ -1452,29 +1507,34 @@
          },
          "ProvinceRest":{
             "required":[
-               "Enable field of province",
-               "Landing page of privincia",
-               "Name of privincia",
-               "Zip code of privincia"
+               "enable",
+               "landingPage",
+               "name",
+               "zipCode"
             ],
             "type":"object",
             "properties":{
-               "Id of privincia":{
+               "id":{
                   "type":"integer",
+                  "description":"Id of privincia",
                   "format":"int32"
                },
-               "Zip code of privincia":{
+               "zipCode":{
                   "type":"integer",
+                  "description":"Zip code of privincia",
                   "format":"int32"
                },
-               "Name of privincia":{
-                  "type":"string"
+               "name":{
+                  "type":"string",
+                  "description":"Name of privincia"
                },
-               "Landing page of privincia":{
-                  "type":"string"
+               "landingPage":{
+                  "type":"string",
+                  "description":"Landing page of privincia"
                },
-               "Enable field of province":{
+               "enable":{
                   "type":"integer",
+                  "description":"Enable field of province",
                   "format":"int32"
                }
             }
@@ -1482,16 +1542,19 @@
          "SingapurResponseDetailedOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "$ref":"#/components/schemas/DetailedOfferedServiceRest"
                }
             },
@@ -1534,21 +1597,25 @@
                "minPrice":{
                   "type":"number"
                }
-            }
+            },
+            "description":"Contain data related to request"
          },
          "SingapurResponsePriceRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "$ref":"#/components/schemas/PriceRest"
                }
             },
@@ -1557,17 +1624,21 @@
          "SingapurResponseListOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "type":"array",
+                  "description":"Contain data related to request",
                   "items":{
                      "$ref":"#/components/schemas/OfferedServiceRest"
                   }
@@ -1578,17 +1649,21 @@
          "SingapurResponseString":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
-                  "type":"string"
+               "data":{
+                  "type":"string",
+                  "description":"Contain data related to request"
                }
             },
             "description":"This model is the envelope"
@@ -1606,22 +1681,27 @@
                "description":{
                   "type":"string"
                }
-            }
+            },
+            "description":"Contain data related to request"
          },
          "SingapurResponseListOfferedServiceTypeRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "type":"array",
+                  "description":"Contain data related to request",
                   "items":{
                      "$ref":"#/components/schemas/OfferedServiceTypeRest"
                   }
@@ -1647,17 +1727,21 @@
          "SingapurResponseListDetailedOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "type":"array",
+                  "description":"Contain data related to request",
                   "items":{
                      "$ref":"#/components/schemas/DetailedOfferedServiceRest"
                   }
@@ -1686,22 +1770,27 @@
                   "type":"string",
                   "format":"date-time"
                }
-            }
+            },
+            "description":"Contain data related to request"
          },
          "SingapurResponseListOfferedServiceCampaignRest":{
             "type":"object",
             "properties":{
-               "Result of the action, for example \"Success\".":{
-                  "type":"string"
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
                },
-               "Status code, extra information related to HTTP response":{
-                  "type":"string"
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
                },
-               "Specific message, result of the action":{
-                  "type":"string"
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
                },
-               "Contain data related to request":{
+               "data":{
                   "type":"array",
+                  "description":"Contain data related to request",
                   "items":{
                      "$ref":"#/components/schemas/OfferedServiceCampaignRest"
                   }

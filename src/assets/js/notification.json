@@ -1,562 +1,614 @@
 {
-    "swagger":"2.0",
-    "info":{
-       "description":"Notification API to Singapur Project",
-       "version":"1.0",
-       "title":"Leroy Merlin Notification Server",
-       "termsOfService":"https://hogami.leroymerlin.es",
-       "license":{
-          "name":"HOGAMI - Leroy Merlin",
-          "url":"https://hogami.leroymerlin.es"
-       }
-    },
-    "host":"localhost:8011",
-    "basePath":"/",
-    "tags":[
-       {
-          "name":"Email Rest Controller",
-          "description":"Email Operations"
-       },
-       {
-          "name":"Notification Rest Controller",
-          "description":"Notification Operations"
-       },
-       {
-          "name":"Push Notification Rest Controller",
-          "description":"Push FCM Notification Controller Impl"
-       },
-       {
-          "name":"Push Rest Controller",
-          "description":"Push Operations"
-       },
-       {
-          "name":"Sms Rest Controller",
-          "description":"Sms Controller Impl"
-       }
-    ],
-    "paths":{
-       "/notification/v1/emails":{
-          "post":{
-             "tags":[
-                "Email Rest Controller"
-             ],
-             "summary":"Sends an email notification to the specified user",
-             "operationId":"processSendEmailUsingPOST",
-             "consumes":[
-                "application/json"
-             ],
-             "produces":[
-                "application/json"
-             ],
-             "parameters":[
-                {
-                   "in":"body",
-                   "name":"sendEmailRequestRest",
-                   "description":"sendEmailRequestRest",
-                   "required":true,
-                   "schema":{
-                      "$ref":"#/definitions/SendEmailRequestRest"
-                   }
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The email has been successfuly sent",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«string»"
-                   }
-                },
-                "201":{
-                   "description":"Created"
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       },
-       "/notification/v1/emails-attachment":{
-          "post":{
-             "tags":[
-                "Email Rest Controller"
-             ],
-             "summary":"Sends an email with an attachment to the specified user",
-             "operationId":"processSendEmailWithAttachmentUsingPOST",
-             "consumes":[
-                "application/json"
-             ],
-             "produces":[
-                "application/json"
-             ],
-             "parameters":[
-                {
-                   "in":"body",
-                   "name":"sendEmailRequestRest",
-                   "description":"sendEmailRequestRest",
-                   "required":true,
-                   "schema":{
-                      "$ref":"#/definitions/SendEmailRequestRest"
-                   }
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The email has been successfuly sent",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«string»"
-                   }
-                },
-                "201":{
-                   "description":"Created"
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       },
-       "/notification/v1/emails/suport":{
-          "post":{
-             "tags":[
-                "Email Rest Controller"
-             ],
-             "summary":"Sends an email notification to the specified user",
-             "operationId":"processSendEmailWithoutNotificationUsingPOST",
-             "consumes":[
-                "application/json"
-             ],
-             "produces":[
-                "application/json"
-             ],
-             "parameters":[
-                {
-                   "in":"body",
-                   "name":"sendEmailRequestRest",
-                   "description":"sendEmailRequestRest",
-                   "required":true,
-                   "schema":{
-                      "$ref":"#/definitions/SendEmailRequestRest"
-                   }
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The email has been successfuly sent",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«string»"
-                   }
-                },
-                "201":{
-                   "description":"Created"
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       },
-       "/notification/v1/notifications":{
-          "get":{
-             "tags":[
-                "Notification Rest Controller"
-             ],
-             "summary":"Retrieve the notification details by the provided reference and notification status",
-             "operationId":"getNotificationUsingGET",
-             "produces":[
-                "application/json;charset=UTF-8"
-             ],
-             "parameters":[
-                {
-                   "name":"appName",
-                   "in":"query",
-                   "description":"appName",
-                   "required":true,
-                   "type":"string"
-                },
-                {
-                   "name":"referenceId",
-                   "in":"query",
-                   "description":"referenceId",
-                   "required":true,
-                   "type":"integer",
-                   "format":"int64"
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The notification is found and it's returned to the user",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«NotificationRest»"
-                   }
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       },
-       "/notification/v1/pushs":{
-          "post":{
-             "tags":[
-                "Push Notification Rest Controller"
-             ],
-             "summary":"Sends a push notification to the specified professional",
-             "operationId":"processSendPushUsingPOST",
-             "consumes":[
-                "application/json"
-             ],
-             "produces":[
-                "application/json"
-             ],
-             "parameters":[
-                {
-                   "in":"body",
-                   "name":"pushNotificationRest",
-                   "description":"pushNotificationRest",
-                   "required":true,
-                   "schema":{
-                      "$ref":"#/definitions/PushNotificationRest"
-                   }
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The notification Push has been successfuly sent",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«string»"
-                   }
-                },
-                "201":{
-                   "description":"Created"
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       },
-       "/notification/v1/sms":{
-          "post":{
-             "tags":[
-                "Sms Rest Controller"
-             ],
-             "summary":"${sms.description}",
-             "operationId":"processSendSmsUsingPOST",
-             "consumes":[
-                "application/json"
-             ],
-             "produces":[
-                "application/json"
-             ],
-             "parameters":[
-                {
-                   "in":"body",
-                   "name":"sendSmsRequestRest",
-                   "description":"sendSmsRequestRest",
-                   "required":true,
-                   "schema":{
-                      "$ref":"#/definitions/SendSmsRequestRest"
-                   }
-                }
-             ],
-             "responses":{
-                "200":{
-                   "description":"The notification Sms has been successfuly sent",
-                   "schema":{
-                      "$ref":"#/definitions/SingapurResponse«string»"
-                   }
-                },
-                "201":{
-                   "description":"Created"
-                },
-                "400":{
-                   "description":"Bad request \r\n"
-                },
-                "401":{
-                   "description":"Unauthorized"
-                },
-                "403":{
-                   "description":"Forbidden"
-                },
-                "404":{
-                   "description":"Not Found"
-                },
-                "500":{
-                   "description":"Internal server error"
-                }
-             },
-             "deprecated":false
-          }
-       }
-    },
-    "definitions":{
-       "Attachment":{
-          "type":"object",
-          "properties":{
-             "file":{
-                "type":"string",
-                "format":"byte"
-             },
-             "name":{
-                "type":"string"
-             }
-          },
-          "title":"Attachment"
-       },
-       "NotificationRest":{
-          "type":"object",
-          "properties":{
-             "appName":{
-                "type":"string",
-                "description":"Name of the aplication sending the email/push"
-             },
-             "id":{
-                "type":"integer",
-                "format":"int64",
-                "description":"Notification id"
-             },
-             "referenceId":{
-                "type":"integer",
-                "format":"int64",
-                "description":"Notification reference Id"
-             },
-             "status":{
-                "type":"string",
-                "description":"Status of the notification"
-             },
-             "templateCode":{
-                "type":"string",
-                "description":"Template used to give content to the email/push notification"
-             },
-             "type":{
-                "type":"integer",
-                "format":"int64",
-                "description":"The type of the notification"
-             }
-          },
-          "title":"NotificationRest"
-       },
-       "PushNotificationRest":{
-          "type":"object",
-          "required":[
-             "appName",
-             "referenceId",
-             "templateCode"
-          ],
-          "properties":{
-             "appName":{
-                "type":"string",
-                "description":"Name of the aplication sending the email/push"
-             },
-             "data":{
-                "type":"object",
-                "description":"List with a data payload to be sent in a push notification",
-                "additionalProperties":{
-                   "type":"string"
-                }
-             },
-             "deviceIdKey":{
-                "type":"string",
-                "description":"The id of the phone receiver of push notification"
-             },
-             "dynamicParameters":{
-                "type":"object",
-                "description":"List of parameters which are different in every email/push notification ",
-                "additionalProperties":{
-                   "type":"string"
-                }
-             },
-             "referenceId":{
-                "type":"integer",
-                "format":"int64",
-                "description":"Notification reference Id"
-             },
-             "templateCode":{
-                "type":"string",
-                "description":"Template used to give content to the email/push notification"
-             }
-          },
-          "title":"PushNotificationRest"
-       },
-       "SendEmailRequestRest":{
-          "type":"object",
-          "required":[
-             "appName",
-             "receiver",
-             "referenceId",
-             "templateCode"
-          ],
-          "properties":{
-             "appName":{
-                "type":"string",
-                "description":"Name of the aplication sending the email/push"
-             },
-             "attachment":{
-                "$ref":"#/definitions/Attachment"
-             },
-             "copy":{
-                "type":"string",
-                "description":"People receiving the email in copy"
-             },
-             "dynamicParameters":{
-                "type":"object",
-                "description":"List of parameters which are different in every email/push notification ",
-                "additionalProperties":{
-                   "type":"string"
-                }
-             },
-             "receiver":{
-                "type":"string",
-                "description":" The receiver of the email"
-             },
-             "referenceId":{
-                "type":"integer",
-                "format":"int64",
-                "description":"Notification reference Id"
-             },
-             "templateCode":{
-                "type":"string",
-                "description":"Template used to give content to the email/push notification"
-             }
-          },
-          "title":"SendEmailRequestRest"
-       },
-       "SendSmsRequestRest":{
-          "type":"object",
-          "required":[
-             "appName",
-             "receiver",
-             "referenceId",
-             "templateCode"
-          ],
-          "properties":{
-             "appName":{
-                "type":"string",
-                "description":"Name of the aplication sending the email/push"
-             },
-             "dynamicParameters":{
-                "type":"object",
-                "description":"List of parameters which are different in every email/push notification ",
-                "additionalProperties":{
-                   "type":"string"
-                }
-             },
-             "receiver":{
-                "type":"string",
-                "description":" The receiver of the email"
-             },
-             "referenceId":{
-                "type":"integer",
-                "format":"int64",
-                "description":"Notification reference Id"
-             },
-             "templateCode":{
-                "type":"string",
-                "description":"Template used to give content to the email/push notification"
-             }
-          },
-          "title":"SendSmsRequestRest"
-       },
-       "SingapurResponse«NotificationRest»":{
-          "type":"object",
-          "properties":{
-             "code":{
-                "type":"string"
-             },
-             "data":{
-                "$ref":"#/definitions/NotificationRest"
-             },
-             "message":{
-                "type":"string"
-             },
-             "status":{
-                "type":"string"
-             }
-          },
-          "title":"SingapurResponse«NotificationRest»"
-       },
-       "SingapurResponse«string»":{
-          "type":"object",
-          "properties":{
-             "code":{
-                "type":"string"
-             },
-             "data":{
-                "type":"string"
-             },
-             "message":{
-                "type":"string"
-             },
-             "status":{
-                "type":"string"
-             }
-          },
-          "title":"SingapurResponse«string»"
-       }
-    }
- }
+   "openapi":"3.0.1",
+   "info":{
+      "title":"Notification Server",
+      "description":"Notification microservice for the Singapur Project. The microservice's objective is offering diferent notifications to the clients \n Email \n SMS \n Push notification \n Confluence URL: https://steps.everis.com/confluence/display/PROLEMER/Microservice+Notification+Server",
+      "termsOfService":"https://www.everis.com",
+      "license":{
+         "name":"License",
+         "url":"https://www.everis.com"
+      },
+      "version":"1.0.0 "
+   },
+   "servers":[
+      {
+         "url":"http://localhost:8011",
+         "description":"Generated server url"
+      }
+   ],
+   "tags":[
+      {
+         "name":"Notification Rest Controller"
+      },
+      {
+         "name":"Alive Controller"
+      },
+      {
+         "name":"Push Notification Rest Controller"
+      },
+      {
+         "name":"Email Rest Controller"
+      },
+      {
+         "name":"Sms Rest Controller"
+      }
+   ],
+   "paths":{
+      "/notification/v1/sms":{
+         "post":{
+            "tags":[
+               "Sms Rest Controller"
+            ],
+            "summary":"Process send sms",
+            "operationId":"processSendSms",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/SendSmsRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The notification Sms has been successfuly sent",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notification/v1/pushs":{
+         "post":{
+            "tags":[
+               "Push Notification Rest Controller"
+            ],
+            "summary":"Sends a push notification to the specified professional",
+            "operationId":"processSendPush",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PushNotificationRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The notification Push has been successfuly sent",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notification/v1/notifications":{
+         "get":{
+            "tags":[
+               "Notification Rest Controller"
+            ],
+            "summary":"Retrieve the notification details by the provided reference and notification status",
+            "operationId":"getNotification",
+            "parameters":[
+               {
+                  "name":"referenceId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"appName",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The notification is found and it's returned to the user",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseNotificationRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseNotificationRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notification/v1/emails":{
+         "post":{
+            "tags":[
+               "Email Rest Controller"
+            ],
+            "summary":"Sends an email notification to the specified user",
+            "operationId":"processSendEmail",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/SendEmailRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The email has been successfuly sent",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notification/v1/emails/suport":{
+         "post":{
+            "tags":[
+               "Email Rest Controller"
+            ],
+            "summary":"Process send email without notification",
+            "operationId":"processSendEmailWithoutNotification",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/SendEmailRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The email has been successfuly sent",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notification/v1/emails-attachment":{
+         "post":{
+            "tags":[
+               "Email Rest Controller"
+            ],
+            "summary":"Sends an email with an attachment to the specified user",
+            "operationId":"processSendEmailWithAttachment",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/SendEmailRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The email has been successfuly sent",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/health/live":{
+         "get":{
+            "tags":[
+               "Alive Controller"
+            ],
+            "operationId":"keepAlive",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   },
+   "components":{
+      "schemas":{
+         "SingapurResponse":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"object"
+               }
+            }
+         },
+         "SendSmsRequestRest":{
+            "required":[
+               "appName",
+               "receiver",
+               "referenceId",
+               "templateCode"
+            ],
+            "type":"object",
+            "properties":{
+               "referenceId":{
+                  "type":"integer",
+                  "description":"Notification reference Id",
+                  "format":"int64"
+               },
+               "appName":{
+                  "type":"string",
+                  "description":"Name of the aplication sending the email/push"
+               },
+               "templateCode":{
+                  "type":"string",
+                  "description":"Template used to give content to the email/push notification"
+               },
+               "dynamicParameters":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"string",
+                     "description":"List of parameters which are different in every email/push notification "
+                  },
+                  "description":"List of parameters which are different in every email/push notification "
+               },
+               "receiver":{
+                  "type":"string",
+                  "description":" The receiver of the email"
+               }
+            }
+         },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"string"
+               }
+            }
+         },
+         "PushNotificationRest":{
+            "required":[
+               "appName",
+               "referenceId",
+               "templateCode"
+            ],
+            "type":"object",
+            "properties":{
+               "referenceId":{
+                  "type":"integer",
+                  "description":"Notification reference Id",
+                  "format":"int64"
+               },
+               "appName":{
+                  "type":"string",
+                  "description":"Name of the aplication sending the email/push"
+               },
+               "templateCode":{
+                  "type":"string",
+                  "description":"Template used to give content to the email/push notification"
+               },
+               "dynamicParameters":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"string",
+                     "description":"List of parameters which are different in every email/push notification "
+                  },
+                  "description":"List of parameters which are different in every email/push notification "
+               },
+               "deviceIdKey":{
+                  "type":"string",
+                  "description":"The id of the phone receiver of push notification"
+               },
+               "data":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"string",
+                     "description":"List with a data payload to be sent in a push notification"
+                  },
+                  "description":"List with a data payload to be sent in a push notification"
+               }
+            }
+         },
+         "NotificationRest":{
+            "required":[
+               "appName",
+               "referenceId",
+               "status",
+               "templateCode",
+               "type"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Notification id",
+                  "format":"int64"
+               },
+               "status":{
+                  "type":"string",
+                  "description":"Status of the notification"
+               },
+               "referenceId":{
+                  "type":"integer",
+                  "description":"Notification reference Id",
+                  "format":"int64"
+               },
+               "templateCode":{
+                  "type":"string",
+                  "description":"Template used to give content to the email/push notification"
+               },
+               "appName":{
+                  "type":"string",
+                  "description":"Name of the aplication sending the email/push"
+               },
+               "type":{
+                  "type":"integer",
+                  "description":"The type of the notification",
+                  "format":"int64"
+               }
+            }
+         },
+         "SingapurResponseNotificationRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/NotificationRest"
+               }
+            }
+         },
+         "Attachment":{
+            "type":"object",
+            "properties":{
+               "file":{
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "format":"byte"
+                  }
+               },
+               "name":{
+                  "type":"string"
+               }
+            }
+         },
+         "SendEmailRequestRest":{
+            "required":[
+               "appName",
+               "receiver",
+               "referenceId",
+               "templateCode"
+            ],
+            "type":"object",
+            "properties":{
+               "referenceId":{
+                  "type":"integer",
+                  "description":"Notification reference Id",
+                  "format":"int64"
+               },
+               "appName":{
+                  "type":"string",
+                  "description":"Name of the aplication sending the email/push"
+               },
+               "templateCode":{
+                  "type":"string",
+                  "description":"Template used to give content to the email/push notification"
+               },
+               "dynamicParameters":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"string",
+                     "description":"List of parameters which are different in every email/push notification "
+                  },
+                  "description":"List of parameters which are different in every email/push notification "
+               },
+               "receiver":{
+                  "type":"string",
+                  "description":" The receiver of the email"
+               },
+               "copy":{
+                  "type":"string",
+                  "description":"People receiving the email in copy"
+               },
+               "attachment":{
+                  "$ref":"#/components/schemas/Attachment"
+               }
+            }
+         }
+      }
+   }
+}
