@@ -1172,6 +1172,13 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
                "title":{
                   "type":"string"
                }

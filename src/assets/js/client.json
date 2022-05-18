@@ -3867,48 +3867,6 @@
             }
          }
       },
-      "/client/v1/clients/retrieve-billing-data-id/{clientId}":{
-         "get":{
-            "tags":[
-               "${api.client.defs.bill-data.name}"
-            ],
-            "summary":"${api.client.defs.bill-data.getBillingData.description}",
-            "operationId":"getBillingData",
-            "parameters":[
-               {
-                  "name":"clientId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseBillingDataRest"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
       "/client/v1/clients/requests/{requestId}/address":{
          "put":{
             "tags":[
@@ -4573,7 +4531,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -4630,7 +4588,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -5726,6 +5684,9 @@
                   "items":{
                      "$ref":"#/components/schemas/PhoneRest"
                   }
+               },
+               "clientStatus":{
+                  "type":"string"
                }
             },
             "description":"This model represents the client"
@@ -6131,18 +6092,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "first":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6157,15 +6118,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -6173,6 +6125,15 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -6256,10 +6217,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -6528,11 +6489,11 @@
             ],
             "type":"object",
             "properties":{
-               "offeredServiceTaxRate":{
-                  "type":"number"
-               },
                "profitGreatherThanZero":{
                   "type":"boolean"
+               },
+               "offeredServiceTaxRate":{
+                  "type":"number"
                },
                "id":{
                   "type":"integer",

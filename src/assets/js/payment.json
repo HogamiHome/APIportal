@@ -570,6 +570,57 @@
             }
          }
       },
+      "/payment-server/api/v1/payments/clients/{clientId}":{
+         "get":{
+            "tags":[
+               "PaymentRestController"
+            ],
+            "summary":"This method retrieve information of operation by operationId",
+            "operationId":"retrieveFirstPaymentByClientIdAndErrorId",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"error",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"status successfully retrieved",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentsRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/payment/reference":{
          "get":{
             "tags":[
@@ -2503,21 +2554,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -2539,10 +2590,10 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -2679,10 +2730,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -3279,21 +3330,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },

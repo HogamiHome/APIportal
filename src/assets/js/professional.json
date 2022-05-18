@@ -1550,6 +1550,7 @@
                   }
                }
             },
+            "deprecated":true,
             "security":[
                {
                   "bearer-key":[
@@ -5648,13 +5649,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -5670,15 +5671,15 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
@@ -5699,18 +5700,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
                   "type":"boolean"
                }
             }
@@ -6058,13 +6059,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6080,15 +6081,15 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
@@ -7041,13 +7042,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7063,15 +7064,15 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
@@ -7106,13 +7107,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7128,15 +7129,15 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
@@ -7556,13 +7557,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7578,15 +7579,15 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
