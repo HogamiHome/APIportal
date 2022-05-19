@@ -1177,17 +1177,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },

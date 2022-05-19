@@ -13,7 +13,7 @@
    "servers":[
       {
          "url":"http://localhost:8007",
-         "description":"Generated server url"
+         "description":"Generated server URL"
       }
    ],
    "tags":[
@@ -1171,6 +1171,13 @@
                "id":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
                },
                "title":{
                   "type":"string"
