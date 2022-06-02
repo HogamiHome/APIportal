@@ -844,6 +844,47 @@
             }
          }
       },
+      "/offered-services-server/v1/services/all-services":{
+         "get":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Retrieve all offered services",
+            "operationId":"retrieveAllOfferedService",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v1/services/activeAndInactive/{id}":{
          "get":{
             "tags":[
@@ -1075,6 +1116,21 @@
                }
             }
          },
+         "OfferedServiceMasterRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id of the associated master service",
+                  "format":"int64"
+               },
+               "codeOfferedMaster":{
+                  "type":"string",
+                  "description":"Code offered service master"
+               }
+            },
+            "description":"This model represents the offered service master"
+         },
          "OfferedServiceRest":{
             "type":"object",
             "properties":{
@@ -1145,6 +1201,23 @@
                "parentName":{
                   "type":"string",
                   "description":"Offered Service Parent Name"
+               },
+               "startTimeOfferedService":{
+                  "type":"string",
+                  "description":"Start date of the active service offered",
+                  "format":"date-time"
+               },
+               "endTimeOfferedService":{
+                  "type":"string",
+                  "description":"End date of the active service offered",
+                  "format":"date-time"
+               },
+               "offeredServiceMaster":{
+                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
+               },
+               "isActiveDependingEndDate":{
+                  "type":"boolean",
+                  "description":"Id of the associated master service"
                }
             },
             "description":"This model represents the offered service"
@@ -1152,13 +1225,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -1177,17 +1250,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             },
@@ -1203,11 +1276,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
