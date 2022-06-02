@@ -45,6 +45,9 @@
          "name":"Rating Controller"
       },
       {
+         "name":"JourneyDetailsController"
+      },
+      {
          "name":"Request Controller"
       },
       {
@@ -2396,6 +2399,357 @@
             }
          }
       },
+      "/backoffice-server/api/v1/journey-details/{requestId}":{
+         "get":{
+            "tags":[
+               "JourneyDetailsController"
+            ],
+            "summary":"Retrieves main information of the journey",
+            "operationId":"retrieveMainInformation",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMainInformationRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMainInformationRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/journey-details/{requestId}/work":{
+         "get":{
+            "tags":[
+               "JourneyDetailsController"
+            ],
+            "summary":"Retrieves work data such as dates and services",
+            "operationId":"retrieveWorkData",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Bad request",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseWorkDataRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey work data is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseWorkDataRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/journey-details/{requestId}/timeline":{
+         "get":{
+            "tags":[
+               "JourneyDetailsController"
+            ],
+            "summary":"Retrieves request and operation status history",
+            "operationId":"retrieveTimeline",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Bad request",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey request and operation status history is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageTimelineRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageTimelineRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/journey-details/{requestId}/basic-data":{
+         "get":{
+            "tags":[
+               "JourneyDetailsController"
+            ],
+            "summary":"Retrieves basic data of the journey such as client and professional details",
+            "operationId":"retrieveBasicData",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBasicDataRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey basic data is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBasicDataRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/journey-details/{operationId}/transactions":{
+         "get":{
+            "tags":[
+               "JourneyDetailsController"
+            ],
+            "summary":"Retrieves Paycomet transactions",
+            "operationId":"retrieveTransactions_1",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int32"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Bad request",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Paycomet transactions are retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePagePaycometWithOperationRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePagePaycometWithOperationRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/documents/professional/{professionalId}":{
          "get":{
             "tags":[
@@ -3260,6 +3614,10 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "code":{
                   "type":"string"
                },
@@ -3423,8 +3781,31 @@
                "is_active":{
                   "type":"boolean",
                   "description":"Offered Service Active"
+               },
+               "offeredServiceQuantify":{
+                  "$ref":"#/components/schemas/OfferedServiceQuantifyRest"
                }
             }
+         },
+         "OfferedServiceQuantifyRest":{
+            "type":"object",
+            "properties":{
+               "max":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "min":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "unit":{
+                  "type":"string"
+               },
+               "question":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the offered service quantify"
          },
          "ProvinceRest":{
             "required":[
@@ -3541,11 +3922,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -3566,6 +3947,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -3573,12 +3960,6 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -3815,6 +4196,55 @@
                }
             }
          },
+         "AddressRest":{
+            "required":[
+               "address",
+               "addressType",
+               "city",
+               "province",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "addressType":{
+                  "$ref":"#/components/schemas/AddressTypeRest"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
+         "AddressTypeRest":{
+            "required":[
+               "type"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"string"
+               }
+            }
+         },
          "ClientDataRest":{
             "required":[
                "clientId",
@@ -3851,9 +4281,44 @@
                   "items":{
                      "$ref":"#/components/schemas/PhoneRest"
                   }
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
                }
             },
             "description":"This model represents the client"
+         },
+         "ConfiguratorRest":{
+            "required":[
+               "response"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "response":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the configurator"
+         },
+         "ContactPhoneRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "telephone":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
          },
          "PageRequestRest":{
             "type":"object",
@@ -3883,11 +4348,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -4112,6 +4577,12 @@
                },
                "acceptTermsData":{
                   "$ref":"#/components/schemas/AcceptTermsRest"
+               },
+               "contactphones":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ContactPhoneRest"
+                  }
                }
             }
          },
@@ -4155,6 +4626,13 @@
                   "format":"int64"
                },
                "campaignCode":{
+                  "type":"string"
+               },
+               "user":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "storeName":{
                   "type":"string"
                }
             }
@@ -4212,6 +4690,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "configurator":{
+                  "$ref":"#/components/schemas/ConfiguratorRest"
                }
             }
          },
@@ -4344,11 +4825,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -4510,55 +4991,6 @@
                }
             }
          },
-         "AddressRest":{
-            "required":[
-               "address",
-               "addressType",
-               "city",
-               "province",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "addressType":{
-                  "$ref":"#/components/schemas/AddressTypeRest"
-               },
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
-                  "type":"string"
-               }
-            }
-         },
-         "AddressTypeRest":{
-            "required":[
-               "type"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"string"
-               }
-            }
-         },
          "AreaRest":{
             "required":[
                "municipality",
@@ -4701,6 +5133,9 @@
                   "items":{
                      "$ref":"#/components/schemas/ProfessionalServiceRest"
                   }
+               },
+               "apiTokenExternal":{
+                  "type":"string"
                }
             },
             "description":"This model represents a professional"
@@ -4828,19 +5263,6 @@
                }
             }
          },
-         "ContactPhoneRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "telephone":{
-                  "type":"integer",
-                  "format":"int64"
-               }
-            }
-         },
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
@@ -4869,11 +5291,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -5180,6 +5602,9 @@
                },
                "documentNumber":{
                   "type":"string"
+               },
+               "addressData":{
+                  "$ref":"#/components/schemas/AddressRest"
                }
             }
          },
@@ -5426,6 +5851,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "configurator":{
+                  "$ref":"#/components/schemas/ConfiguratorRest"
                }
             }
          },
@@ -5478,11 +5906,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -5503,6 +5931,9 @@
                   "type":"number"
                },
                "currency":{
+                  "type":"string"
+               },
+               "createDate":{
                   "type":"string"
                }
             }
@@ -5734,6 +6165,603 @@
             },
             "description":"This model used to response to login and conatains all data about the client"
          },
+         "MainInformationRest":{
+            "type":"object",
+            "properties":{
+               "serviceImage":{
+                  "type":"string"
+               },
+               "friendlyCode":{
+                  "type":"string"
+               },
+               "serviceName":{
+                  "type":"string"
+               },
+               "serviceStatus":{
+                  "type":"boolean"
+               },
+               "reservationDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "SingapurResponseMainInformationRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/MainInformationRest"
+               }
+            }
+         },
+         "SingapurResponseWorkDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/WorkDataRest"
+               }
+            }
+         },
+         "WorkDataRest":{
+            "type":"object",
+            "properties":{
+               "mainService":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "services":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                  }
+               },
+               "extraProducts":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProductRest"
+                  }
+               },
+               "questions":{
+                  "$ref":"#/components/schemas/ConfiguratorRest"
+               },
+               "images":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ImageRest"
+                  }
+               },
+               "unit":{
+                  "type":"string"
+               },
+               "chatId":{
+                  "type":"string"
+               },
+               "clientEmail":{
+                  "type":"string"
+               },
+               "professionalEmail":{
+                  "type":"string"
+               }
+            }
+         },
+         "PageTimelineRest":{
+            "type":"object",
+            "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/TimelineRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            }
+         },
+         "ResponsableRest":{
+            "type":"object",
+            "properties":{
+               "email":{
+                  "type":"string"
+               },
+               "role":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePageTimelineRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageTimelineRest"
+               }
+            }
+         },
+         "TimelineRest":{
+            "type":"object",
+            "properties":{
+               "type":{
+                  "type":"string"
+               },
+               "initialStatus":{
+                  "type":"string"
+               },
+               "endStatus":{
+                  "type":"string"
+               },
+               "statusStartDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "statusEndDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "responsible":{
+                  "$ref":"#/components/schemas/ResponsableRest"
+               },
+               "comments":{
+                  "type":"string"
+               }
+            }
+         },
+         "BasicDataRest":{
+            "type":"object",
+            "properties":{
+               "creationDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "reservationDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "endDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "clientDataRest":{
+                  "$ref":"#/components/schemas/ClientDataRest"
+               },
+               "professionalDetails":{
+                  "$ref":"#/components/schemas/ProfessionalRest"
+               },
+               "requestAddressRest":{
+                  "$ref":"#/components/schemas/RequestAddressRest"
+               },
+               "operationAddressRest":{
+                  "$ref":"#/components/schemas/OperationAddressRest"
+               },
+               "operationPaymentBilling":{
+                  "$ref":"#/components/schemas/OperationPaymentBilling"
+               },
+               "listRequestCampaigns":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCampaignRest"
+                  }
+               },
+               "requestOfferedServiceRest":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "operationOfferedServiceRest":{
+                  "$ref":"#/components/schemas/OperationOfferedServicesRest"
+               }
+            }
+         },
+         "OfferedServiceOperationRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "offeredServiceID":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "basePrice":{
+                  "type":"number"
+               },
+               "displacementFee":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "duration":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "profitMargin":{
+                  "type":"number"
+               },
+               "paymentReference":{
+                  "type":"string"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRest"
+               }
+            }
+         },
+         "OperationPaymentBilling":{
+            "type":"object",
+            "properties":{
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationStatus":{
+                  "type":"string"
+               },
+               "operationInternal":{
+                  "type":"boolean"
+               },
+               "supplierProfessional":{
+                  "type":"string"
+               },
+               "emailProfessional":{
+                  "type":"string"
+               },
+               "nifProfessional":{
+                  "type":"string"
+               },
+               "listStatusTransferType":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "paymentClient":{
+                  "type":"number"
+               },
+               "totalCost":{
+                  "type":"number"
+               },
+               "taxRate":{
+                  "type":"number"
+               },
+               "taxBase":{
+                  "type":"number"
+               },
+               "hogamiComission":{
+                  "type":"number"
+               },
+               "taxes":{
+                  "type":"number"
+               },
+               "region":{
+                  "type":"string"
+               },
+               "postalCode":{
+                  "type":"string"
+               },
+               "offeredServiceOperationRest":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceOperationRest"
+                  }
+               },
+               "amountPriceProduct":{
+                  "type":"number"
+               },
+               "dateClosedOperation":{
+                  "type":"string"
+               },
+               "listPaycometInformation":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/PaycometInformationRest"
+                  }
+               },
+               "operationBilling":{
+                  "type":"boolean"
+               },
+               "operationNotBilling":{
+                  "type":"boolean"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "listOperationCampaigns":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCampaignRest"
+                  }
+               },
+               "storeRest":{
+                  "$ref":"#/components/schemas/StoreRest"
+               },
+               "commercialId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "isCanceledLessTwentyFourHours":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "PaycometInformationRest":{
+            "type":"object",
+            "properties":{
+               "paycometIDAssociate":{
+                  "type":"string"
+               },
+               "paycometOperationName":{
+                  "type":"string"
+               },
+               "paymentAmount":{
+                  "type":"number"
+               },
+               "paycometTransactionFee":{
+                  "type":"number"
+               }
+            }
+         },
+         "SingapurResponseBasicDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/BasicDataRest"
+               }
+            }
+         },
+         "PagePaycometWithOperationRest":{
+            "type":"object",
+            "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/PaycometWithOperationRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            }
+         },
+         "PaycometWithOperationRest":{
+            "type":"object",
+            "properties":{
+               "operationID":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "operationStatusName":{
+                  "type":"string"
+               },
+               "requestID":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "startTime":{
+                  "type":"string"
+               },
+               "endTime":{
+                  "type":"string"
+               },
+               "totalCost":{
+                  "type":"number"
+               },
+               "totalPaid":{
+                  "type":"number"
+               },
+               "emailClient":{
+                  "type":"string"
+               },
+               "emailProfessional":{
+                  "type":"string"
+               },
+               "productoOperationPaycomet":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProductOperationRest"
+                  }
+               },
+               "offeredServiceOperationPaycomet":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceOperationRest"
+                  }
+               },
+               "paycometID":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "paycometTimestamp":{
+                  "type":"string"
+               },
+               "paycometReference":{
+                  "type":"string"
+               },
+               "paycometOperationName":{
+                  "type":"string"
+               },
+               "paycometState":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "paycometAmount":{
+                  "type":"number"
+               },
+               "payccometAmountDisplay":{
+                  "type":"string"
+               },
+               "paycometComission":{
+                  "type":"number"
+               },
+               "paycometConcept":{
+                  "type":"string"
+               },
+               "paycometIsInternal":{
+                  "type":"boolean"
+               },
+               "listOperationCampaigns":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCampaignRest"
+                  }
+               },
+               "storeRest":{
+                  "$ref":"#/components/schemas/StoreRest"
+               },
+               "commercialId":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "ProductOperationRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "productDescription":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "createDate":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePagePaycometWithOperationRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PagePaycometWithOperationRest"
+               }
+            }
+         },
          "SingapurResponseListDocumentRest":{
             "type":"object",
             "properties":{
@@ -5844,11 +6872,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -6020,151 +7048,6 @@
                }
             }
          },
-         "OfferedServiceOperationRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "offeredServiceID":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "price":{
-                  "type":"number"
-               },
-               "basePrice":{
-                  "type":"number"
-               },
-               "displacementFee":{
-                  "type":"number"
-               },
-               "currency":{
-                  "type":"string"
-               },
-               "duration":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "profitMargin":{
-                  "type":"number"
-               },
-               "paymentReference":{
-                  "type":"string"
-               },
-               "taxDetails":{
-                  "$ref":"#/components/schemas/TaxDetailsRest"
-               }
-            }
-         },
-         "OperationPaymentBilling":{
-            "type":"object",
-            "properties":{
-               "operationId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "operationStatus":{
-                  "type":"string"
-               },
-               "operationInternal":{
-                  "type":"boolean"
-               },
-               "supplierProfessional":{
-                  "type":"string"
-               },
-               "emailProfessional":{
-                  "type":"string"
-               },
-               "nifProfessional":{
-                  "type":"string"
-               },
-               "listStatusTransferType":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               },
-               "paymentClient":{
-                  "type":"number"
-               },
-               "totalCost":{
-                  "type":"number"
-               },
-               "taxRate":{
-                  "type":"number"
-               },
-               "taxBase":{
-                  "type":"number"
-               },
-               "hogamiComission":{
-                  "type":"number"
-               },
-               "taxes":{
-                  "type":"number"
-               },
-               "region":{
-                  "type":"string"
-               },
-               "postalCode":{
-                  "type":"string"
-               },
-               "offeredServiceOperationRest":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceOperationRest"
-                  }
-               },
-               "amountPriceProduct":{
-                  "type":"number"
-               },
-               "dateClosedOperation":{
-                  "type":"string"
-               },
-               "listPaycometInformation":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/PaycometInformationRest"
-                  }
-               },
-               "operationBilling":{
-                  "type":"boolean"
-               },
-               "operationNotBilling":{
-                  "type":"boolean"
-               },
-               "requestId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "listOperationCampaigns":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OperationCampaignRest"
-                  }
-               },
-               "storeRest":{
-                  "$ref":"#/components/schemas/StoreRest"
-               },
-               "commercialId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "isCanceledLessTwentyFourHours":{
-                  "type":"boolean"
-               }
-            }
-         },
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
@@ -6193,11 +7076,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -6205,23 +7088,6 @@
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               }
-            }
-         },
-         "PaycometInformationRest":{
-            "type":"object",
-            "properties":{
-               "paycometIDAssociate":{
-                  "type":"string"
-               },
-               "paycometOperationName":{
-                  "type":"string"
-               },
-               "paymentAmount":{
-                  "type":"number"
-               },
-               "paycometTransactionFee":{
-                  "type":"number"
                }
             }
          },
@@ -6239,178 +7105,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOperationPaymentBilling"
-               }
-            }
-         },
-         "PagePaycometWithOperationRest":{
-            "type":"object",
-            "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "size":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "content":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/PaycometWithOperationRest"
-                  }
-               },
-               "number":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               }
-            }
-         },
-         "PaycometWithOperationRest":{
-            "type":"object",
-            "properties":{
-               "operationID":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "operationStatusName":{
-                  "type":"string"
-               },
-               "requestID":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "startTime":{
-                  "type":"string"
-               },
-               "endTime":{
-                  "type":"string"
-               },
-               "totalCost":{
-                  "type":"number"
-               },
-               "totalPaid":{
-                  "type":"number"
-               },
-               "emailClient":{
-                  "type":"string"
-               },
-               "emailProfessional":{
-                  "type":"string"
-               },
-               "productoOperationPaycomet":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/ProductOperationRest"
-                  }
-               },
-               "offeredServiceOperationPaycomet":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceOperationRest"
-                  }
-               },
-               "paycometID":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "paycometTimestamp":{
-                  "type":"string"
-               },
-               "paycometReference":{
-                  "type":"string"
-               },
-               "paycometOperationName":{
-                  "type":"string"
-               },
-               "paycometState":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "paycometAmount":{
-                  "type":"number"
-               },
-               "payccometAmountDisplay":{
-                  "type":"string"
-               },
-               "paycometComission":{
-                  "type":"number"
-               },
-               "paycometConcept":{
-                  "type":"string"
-               },
-               "paycometIsInternal":{
-                  "type":"boolean"
-               },
-               "listOperationCampaigns":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OperationCampaignRest"
-                  }
-               },
-               "storeRest":{
-                  "$ref":"#/components/schemas/StoreRest"
-               },
-               "commercialId":{
-                  "type":"integer",
-                  "format":"int64"
-               }
-            }
-         },
-         "ProductOperationRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "productDescription":{
-                  "type":"string"
-               },
-               "price":{
-                  "type":"number"
-               },
-               "currency":{
-                  "type":"string"
-               },
-               "taxDetails":{
-                  "$ref":"#/components/schemas/TaxDetailsRest"
-               }
-            }
-         },
-         "SingapurResponsePagePaycometWithOperationRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/PagePaycometWithOperationRest"
                }
             }
          }
