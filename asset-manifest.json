@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/APIportal/static/css/main.9c029a1f.chunk.css",
-    "main.js": "/APIportal/static/js/main.9e511494.chunk.js",
-    "main.js.map": "/APIportal/static/js/main.9e511494.chunk.js.map",
-    "runtime-main.js": "/APIportal/static/js/runtime-main.c92e1e78.js",
-    "runtime-main.js.map": "/APIportal/static/js/runtime-main.c92e1e78.js.map",
+    "main.js": "/APIportal/static/js/main.042408ea.chunk.js",
+    "main.js.map": "/APIportal/static/js/main.042408ea.chunk.js.map",
+    "runtime-main.js": "/APIportal/static/js/runtime-main.8800f4be.js",
+    "runtime-main.js.map": "/APIportal/static/js/runtime-main.8800f4be.js.map",
     "static/css/2.6f7ceb3f.chunk.css": "/APIportal/static/css/2.6f7ceb3f.chunk.css",
-    "static/js/2.0b200d07.chunk.js": "/APIportal/static/js/2.0b200d07.chunk.js",
-    "static/js/2.0b200d07.chunk.js.map": "/APIportal/static/js/2.0b200d07.chunk.js.map",
+    "static/js/2.1b0e83f2.chunk.js": "/APIportal/static/js/2.1b0e83f2.chunk.js",
+    "static/js/2.1b0e83f2.chunk.js.map": "/APIportal/static/js/2.1b0e83f2.chunk.js.map",
     "index.html": "/APIportal/index.html",
     "static/css/2.6f7ceb3f.chunk.css.map": "/APIportal/static/css/2.6f7ceb3f.chunk.css.map",
     "static/css/main.9c029a1f.chunk.css.map": "/APIportal/static/css/main.9c029a1f.chunk.css.map",
-    "static/js/2.0b200d07.chunk.js.LICENSE.txt": "/APIportal/static/js/2.0b200d07.chunk.js.LICENSE.txt"
+    "static/js/2.1b0e83f2.chunk.js.LICENSE.txt": "/APIportal/static/js/2.1b0e83f2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c92e1e78.js",
+    "static/js/runtime-main.8800f4be.js",
     "static/css/2.6f7ceb3f.chunk.css",
-    "static/js/2.0b200d07.chunk.js",
+    "static/js/2.1b0e83f2.chunk.js",
     "static/css/main.9c029a1f.chunk.css",
-    "static/js/main.9e511494.chunk.js"
+    "static/js/main.042408ea.chunk.js"
   ]
 }
