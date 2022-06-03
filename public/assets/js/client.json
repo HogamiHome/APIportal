@@ -208,6 +208,72 @@
             }
          }
       },
+		"/client/v1/rollback/sendAddress/{requestId}/client/{clientId}": {
+			"post": {
+				"tags": ["${api.client.defs.client-rollback.name}"],
+				"summary": "${api.client.defs.client-rollback.rollbackSendAddress.description}",
+				"operationId": "rollbackSendAddress",
+				"parameters": [{
+					"name": "Authorization",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "requestId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "clientId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Rollback could not be performed",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The rollback was successful",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/client/v1/rollback/rejectOperation/{operationId}":{
          "post":{
             "tags":[
