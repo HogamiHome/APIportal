@@ -208,72 +208,82 @@
             }
          }
       },
-		"/client/v1/rollback/sendAddress/{requestId}/client/{clientId}": {
-			"post": {
-				"tags": ["${api.client.defs.client-rollback.name}"],
-				"summary": "${api.client.defs.client-rollback.rollbackSendAddress.description}",
-				"operationId": "rollbackSendAddress",
-				"parameters": [{
-					"name": "Authorization",
-					"in": "header",
-					"required": true,
-					"schema": {
-						"type": "string"
-					}
-				}, {
-					"name": "requestId",
-					"in": "path",
-					"required": true,
-					"schema": {
-						"type": "integer",
-						"format": "int64"
-					}
-				}, {
-					"name": "clientId",
-					"in": "path",
-					"required": true,
-					"schema": {
-						"type": "integer",
-						"format": "int64"
-					}
-				}],
-				"responses": {
-					"500": {
-						"description": "Internal server error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Rollback could not be performed",
-						"content": {
-							"application/json;charset=UTF-8": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseString"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "The rollback was successful",
-						"content": {
-							"application/json;charset=UTF-8": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseString"
-								}
-							}
-						}
-					}
-				},
-				"security": [{
-					"bearer-key": []
-				}]
-			}
-		},
+      "/client/v1/rollback/sendAddress/{requestId}/client/{clientId}":{
+         "post":{
+            "tags":[
+               "${api.client.defs.client-rollback.name}"
+            ],
+            "summary":"${api.client.defs.client-rollback.rollbackSendAddress.description}",
+            "operationId":"rollbackSendAddress",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Rollback could not be performed",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The rollback was successful",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/client/v1/rollback/rejectOperation/{operationId}":{
          "post":{
             "tags":[
@@ -333,6 +343,82 @@
                },
                "400":{
                   "description":"Bad request \r\n SCLI-400-3 The email is already registered",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v1/rollback/reject/request/{requestId}":{
+         "post":{
+            "tags":[
+               "${api.client.defs.client-rollback.name}"
+            ],
+            "summary":"${api.client.defs.client-rollback.rollbackRejectRequest.description}",
+            "operationId":"rollbackRejectRequest",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"clientId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error, when executing the rollback of the reject request process",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \\r\\n ",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Successful rollback response from the reject request process.",
                   "content":{
                      "application/json;charset=UTF-8":{
                         "schema":{
@@ -4483,7 +4569,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -4540,7 +4626,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -4597,7 +4683,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -4654,7 +4740,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -4711,7 +4797,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -4768,7 +4854,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -5708,6 +5794,32 @@
                }
             }
          },
+         "AddressRest":{
+            "required":[
+               "address",
+               "city",
+               "province",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
          "ClientDataRest":{
             "required":[
                "avatar",
@@ -5753,6 +5865,12 @@
                },
                "clientStatus":{
                   "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
                }
             },
             "description":"This model represents the client"
@@ -6136,13 +6254,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -6161,15 +6279,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
                "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6184,14 +6302,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -6200,6 +6310,14 @@
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -6555,11 +6673,11 @@
             ],
             "type":"object",
             "properties":{
-               "profitGreatherThanZero":{
-                  "type":"boolean"
-               },
                "offeredServiceTaxRate":{
                   "type":"number"
+               },
+               "profitGreatherThanZero":{
+                  "type":"boolean"
                },
                "id":{
                   "type":"integer",
@@ -7311,32 +7429,6 @@
                }
             },
             "description":"This model represents the application and chat room"
-         },
-         "AddressRest":{
-            "required":[
-               "address",
-               "city",
-               "province",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
-                  "type":"string"
-               }
-            }
          },
          "BillingDataRest":{
             "required":[
