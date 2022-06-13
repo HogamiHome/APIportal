@@ -4029,6 +4029,64 @@
             ]
          }
       },
+      "/professional/v1/professionals/operation/{operationId}/professional/{professionalId}":{
+         "put":{
+            "tags":[
+               "OperationController"
+            ],
+            "summary":"The status of the operation will be defined at the time of starting the work, depending on the type of service it has.",
+            "operationId":"startWorkInOperation",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/professionals/municipality":{
          "post":{
             "tags":[
@@ -5767,21 +5825,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -5796,6 +5854,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -5803,12 +5867,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -6177,21 +6235,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -7160,21 +7218,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -7225,21 +7283,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -7675,21 +7733,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
