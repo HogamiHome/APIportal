@@ -37,6 +37,9 @@
       },
       {
          "name":"Client Request Controller"
+      },
+      {
+         "name":"Request Status History Controller"
       }
    ],
    "paths":{
@@ -130,6 +133,58 @@
             }
          }
       },
+      "/request-server/v1/requests/{requestId}/requestStatusHistory":{
+         "get":{
+            "tags":[
+               "Request Status History Controller"
+            ],
+            "summary":"Retrieve all records of the historical changes status by request Id",
+            "operationId":"retrieveRequestStatusHistoryByRequestId",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The status introduced is correct and a list of requests is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListRequestStatusHistoryRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListRequestStatusHistoryRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/requests/status":{
          "get":{
             "tags":[
@@ -216,6 +271,58 @@
                            "items":{
                               "$ref":"#/components/schemas/RequestRest"
                            }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/requests/requestStatusHistory/{requestStatusHistoryId}":{
+         "delete":{
+            "tags":[
+               "Request Status History Controller"
+            ],
+            "summary":"Delete a record of the request status history by Id",
+            "operationId":"deleteByRequestStatusHistoryId",
+            "parameters":[
+               {
+                  "name":"requestStatusHistoryId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The historical status has been deleted correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -1801,6 +1908,45 @@
                }
             }
          },
+         "RequestStatusHistoryRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestStatusRest":{
+                  "$ref":"#/components/schemas/RequestStatusRest"
+               },
+               "statusStartDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "statusEndDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "requestStatusPrevious":{
+                  "$ref":"#/components/schemas/RequestStatusRest"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "comment":{
+                  "type":"string"
+               }
+            },
+            "description":"Contain data related to request"
+         },
          "RequestStatusRest":{
             "type":"object",
             "properties":{
@@ -1811,8 +1957,31 @@
                "name":{
                   "type":"string"
                }
-            },
-            "description":"Contain data related to request"
+            }
+         },
+         "SingapurResponseListRequestStatusHistoryRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestStatusHistoryRest"
+                  }
+               }
+            }
          },
          "SingapurResponseListRequestStatusRest":{
             "type":"object",
@@ -2108,6 +2277,27 @@
                }
             }
          },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"string",
+                  "description":"Contain data related to request"
+               }
+            }
+         },
          "SingapurResponseRequestRest":{
             "type":"object",
             "properties":{
@@ -2231,13 +2421,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -2256,6 +2446,9 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -2264,9 +2457,6 @@
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
-                  "type":"boolean"
-               },
-               "first":{
                   "type":"boolean"
                }
             },
@@ -2282,12 +2472,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -2295,6 +2479,12 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -2326,27 +2516,6 @@
                },
                "unsorted":{
                   "type":"boolean"
-               }
-            }
-         },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"string",
-                  "description":"Contain data related to request"
                }
             }
          },

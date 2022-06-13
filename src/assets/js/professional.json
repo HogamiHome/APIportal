@@ -4910,6 +4910,22 @@
                },
                "acceptTermsAndConditions":{
                   "type":"boolean"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -5373,6 +5389,9 @@
                   "items":{
                      "$ref":"#/components/schemas/ProfessionalServiceRest"
                   }
+               },
+               "apiTokenExternal":{
+                  "type":"string"
                }
             },
             "description":"This model represents a professional"
@@ -5748,17 +5767,17 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
@@ -5777,18 +5796,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
                   "type":"boolean"
                }
             }
@@ -6158,17 +6177,17 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
@@ -7141,17 +7160,17 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
@@ -7206,17 +7225,17 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
@@ -7656,17 +7675,17 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
