@@ -1070,6 +1070,9 @@
        },
        "meta": {
         "type": "string"
+       },
+       "additionalTextContent": {
+        "type": "string"
        }
       }
      },
@@ -1212,6 +1215,9 @@
        "averageRatingAccumulatedActive": {
         "type": "number",
         "format": "double"
+       },
+       "friendlyUrl": {
+        "type": "string"
        }
       }
      },
@@ -1256,6 +1262,10 @@
        },
        "text": {
         "type": "string"
+       },
+       "orderMobile": {
+        "type": "integer",
+        "format": "int64"
        }
       }
      },
