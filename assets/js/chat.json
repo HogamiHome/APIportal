@@ -444,6 +444,68 @@
       }
      }
     },
+    "/chat/v1/chats/{chatId}/update-message": {
+     "put": {
+      "tags": [
+       "Chat Controller"
+      ],
+      "summary": "${api.chat-server.defs.chat.updateMessageByChatRoomIdAndTypeMessage.description}",
+      "operationId": "updateMessageByChatRoomIdAndTypeMessage",
+      "parameters": [
+       {
+        "name": "chatId",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "typeMessage",
+        "in": "query",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "additionalProperties": {
+           "type": "object"
+          }
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/SingapurResponseString"
+          }
+         }
+        }
+       },
+       "500": {
+        "description": "Internal Server Error",
+        "content": {
+         "*/*": {
+          "schema": {
+           "$ref": "#/components/schemas/SingapurResponse"
+          }
+         }
+        }
+       }
+      }
+     }
+    },
     "/chat/v1/chats/{chatId}/update-chat-room": {
      "put": {
       "tags": [
@@ -927,9 +989,6 @@
      "ButtonRest": {
       "type": "object",
       "properties": {
-       "nav": {
-        "type": "boolean"
-       },
        "href": {
         "type": "string"
        },
@@ -945,6 +1004,10 @@
        },
        "text": {
         "type": "string"
+       },
+       "orderMobile": {
+        "type": "integer",
+        "format": "int64"
        }
       }
      },
