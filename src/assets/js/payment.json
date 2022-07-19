@@ -1641,6 +1641,52 @@
                "endTime":{
                   "type":"boolean",
                   "description":"Sepa operation end time"
+               },
+               "transferBlock":{
+                  "$ref":"#/components/schemas/TransferBlockRest"
+               }
+            }
+         },
+         "TransferBlockRest":{
+            "required":[
+               "operationId",
+               "transferConcept"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "transferConcept":{
+                  "$ref":"#/components/schemas/TransferConceptRest"
+               },
+               "transferBlockStatusCode":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"Rest with the properties for transfer"
+         },
+         "TransferConceptRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
                }
             }
          },
@@ -2554,21 +2600,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -2730,10 +2776,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -2879,6 +2925,9 @@
                },
                "paytpvResponse":{
                   "$ref":"#/components/schemas/PaytpvResponseRest"
+               },
+               "transferBlock":{
+                  "$ref":"#/components/schemas/TransferBlockRest"
                }
             }
          },
@@ -3330,21 +3379,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },

@@ -3911,13 +3911,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -3933,21 +3933,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -3961,19 +3961,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -3997,10 +3997,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -4084,6 +4084,51 @@
                },
                "endTime":{
                   "type":"boolean"
+               },
+               "transferBlock":{
+                  "$ref":"#/components/schemas/TransferBlockRest"
+               }
+            }
+         },
+         "TransferBlockRest":{
+            "required":[
+               "operationId",
+               "transferConcept"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "transferConcept":{
+                  "$ref":"#/components/schemas/TransferConceptRest"
+               },
+               "transferBlockStatusCode":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "TransferConceptRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
                }
             }
          },
@@ -4340,13 +4385,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4362,21 +4407,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -4820,13 +4865,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4842,21 +4887,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -5286,13 +5331,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -5308,21 +5353,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -5901,13 +5946,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -5923,21 +5968,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -6291,13 +6336,13 @@
          "PageTimelineRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -6313,21 +6358,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -6613,13 +6658,13 @@
          "PagePaycometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -6635,21 +6680,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -6870,13 +6915,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -6892,21 +6937,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -7074,13 +7119,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -7096,21 +7141,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },

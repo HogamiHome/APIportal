@@ -4590,6 +4590,104 @@
             ]
          }
       },
+      "/client/v1/clients/requestRejectedService/request/{requestId}":{
+         "post":{
+            "tags":[
+               "${api.client.defs.request-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.request-offered-service.rejectRequestOfferedService.description}",
+            "operationId":"rejectRequestOfferedService",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v1/clients/requestRejectedProduct/request/{requestId}":{
+         "post":{
+            "tags":[
+               "${api.client.defs.operation-product.name}"
+            ],
+            "summary":"${api.client.defs.request-product.rejectRequestProduct.description}",
+            "operationId":"rejectRequestProduct",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/client/v1/clients/payments/{operationId}":{
          "get":{
             "tags":[
@@ -5018,7 +5116,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -5073,7 +5171,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -5130,7 +5228,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -5187,7 +5285,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -5244,7 +5342,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -5301,7 +5399,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -5358,7 +5456,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -6401,11 +6499,11 @@
             ],
             "type":"object",
             "properties":{
-               "offeredServiceTaxRate":{
-                  "type":"number"
-               },
                "profitGreatherThanZero":{
                   "type":"boolean"
+               },
+               "offeredServiceTaxRate":{
+                  "type":"number"
                },
                "id":{
                   "type":"integer",
@@ -7228,13 +7326,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7253,12 +7351,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
@@ -7279,19 +7377,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
