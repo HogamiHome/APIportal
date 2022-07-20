@@ -2290,6 +2290,48 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/operation-batch-results": {
+			"get": {
+				"tags": ["Operation Controller"],
+				"summary": "Retrieve last result from table OperationBatchResult",
+				"operationId": "retrieveLastOperationBatchResult",
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "A list of operations is returned",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseOperationBatchResultRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseOperationBatchResultRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/backoffice-server/api/v1/logout":{
          "delete":{
             "tags":[

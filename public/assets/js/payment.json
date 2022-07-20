@@ -795,6 +795,52 @@
             }
          }
       },
+      "/payment-server/api/v1/operationsPayCometDate": {
+			"get": {
+				"tags": ["PayCometSearchOperationController"],
+				"summary": "Retrieve Paycomet Operation by dates",
+				"operationId": "retrieveOperationByDates",
+				"parameters": [{
+					"name": "sinceDate",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "untilDate",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListPayCometOperationBatchRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/payment-server/api/v1/operations/{operationId}/transfers":{
          "get":{
             "tags":[
