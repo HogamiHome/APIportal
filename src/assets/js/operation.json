@@ -3448,6 +3448,31 @@
             },
             "description":"List  of the services performed in the operation"
          },
+         "OperationRejectionRest":{
+            "required":[
+               "message"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "message":{
+                  "maxLength":1000,
+                  "minLength":0,
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
          "OperationRest":{
             "required":[
                "startTime"
@@ -3561,6 +3586,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "operationRejectionRest":{
+                  "$ref":"#/components/schemas/OperationRejectionRest"
                }
             }
          },
@@ -3613,17 +3641,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                }
             }
@@ -3638,19 +3666,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -4329,27 +4357,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationOfferedServicesRest"
-               }
-            }
-         },
-         "OperationRejectionRest":{
-            "required":[
-               "message"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "operationId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "message":{
-                  "maxLength":1000,
-                  "minLength":0,
-                  "type":"string"
                }
             }
          },
