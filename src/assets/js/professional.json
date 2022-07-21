@@ -18,52 +18,19 @@
    ],
    "tags":[
       {
-         "name":"ProfessionalController"
-      },
-      {
-         "name":"ProfessionalStatusDescriptionController"
-      },
-      {
          "name":"OfferedServiceController"
-      },
-      {
-         "name":"AuthenticationRestController"
-      },
-      {
-         "name":"OperationOfferedSerController"
       },
       {
          "name":"ProfessionalStatusHistory"
       },
       {
-         "name":"RejectRequestController"
-      },
-      {
-         "name":"AcceptTermsController"
-      },
-      {
          "name":"RatingController"
-      },
-      {
-         "name":"PaymentController"
-      },
-      {
-         "name":"RejectOperationController"
       },
       {
          "name":"RequestAddressController"
       },
       {
-         "name":"ProfessionalStatusController"
-      },
-      {
-         "name":"DeviceInfoController"
-      },
-      {
          "name":"OperationAddressController"
-      },
-      {
-         "name":"${api.professional.version.request.name}"
       },
       {
          "name":"LogAPKController"
@@ -78,16 +45,52 @@
          "name":"RequestController"
       },
       {
+         "name":"PriceController"
+      },
+      {
+         "name":"AreaController"
+      },
+      {
+         "name":"ProfessionalController"
+      },
+      {
+         "name":"ProfessionalStatusDescriptionController"
+      },
+      {
+         "name":"AuthenticationRestController"
+      },
+      {
+         "name":"OperationOfferedSerController"
+      },
+      {
+         "name":"RejectRequestController"
+      },
+      {
+         "name":"AcceptTermsController"
+      },
+      {
+         "name":"PaymentController"
+      },
+      {
+         "name":"RejectOperationController"
+      },
+      {
+         "name":"ProfessionalStatusController"
+      },
+      {
+         "name":"DeviceInfoController"
+      },
+      {
+         "name":"${api.professional.version.request.name}"
+      },
+      {
          "name":"OperationController"
       },
       {
          "name":"NotificationController"
       },
       {
-         "name":"PriceController"
-      },
-      {
-         "name":"AreaController"
+         "name":"TimestampController"
       }
    ],
    "paths":{
@@ -361,6 +364,47 @@
                   ]
                }
             ]
+         }
+      },
+      "/professional/v1/timestamp":{
+         "get":{
+            "tags":[
+               "TimestampController"
+            ],
+            "summary":"The default server time is retrieved, in case there is a time zone, the latter is used to obtain the date.",
+            "operationId":"retrieveTimestempCurrent",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error - Timestamp retrieve",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad Request \\r\\n SPRO-400-1 - Timestamp retrieve",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseTimestampCurrentRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The timestamp has been successfully retrieved.",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseTimestampCurrentRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
       },
       "/professional/v1/services/{id}":{
@@ -5941,13 +5985,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -5963,18 +6007,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -5992,17 +6036,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
                "unpaged":{
                   "type":"boolean"
                },
-               "pageSize":{
+               "paged":{
+                  "type":"boolean"
+               },
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -6492,13 +6536,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6514,18 +6558,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6574,6 +6618,40 @@
                }
             },
             "description":"This model is the envelope"
+         },
+         "SingapurResponseTimestampCurrentRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/TimestampCurrentRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "TimestampCurrentRest":{
+            "type":"object",
+            "properties":{
+               "timestempCurrent":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "timeZone":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents a service information of a new professional"
          },
          "DetailedOfferedServiceRest":{
             "type":"object",
@@ -7518,13 +7596,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7540,18 +7618,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7583,13 +7661,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7605,18 +7683,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7866,13 +7944,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7888,18 +7966,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -8942,13 +9020,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8964,18 +9042,18 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "first":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
