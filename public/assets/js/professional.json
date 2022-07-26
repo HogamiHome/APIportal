@@ -6013,12 +6013,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6036,12 +6036,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -6049,6 +6043,12 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -6238,10 +6238,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -6564,12 +6564,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7624,12 +7624,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7689,12 +7689,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7972,12 +7972,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -9048,12 +9048,12 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
