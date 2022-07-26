@@ -2,7 +2,7 @@
    "openapi":"3.0.1",
    "info":{
       "title":"Operation Batch",
-      "description":"Operation API to Singapur Project",
+      "description":"Operation Batch to Singapur Project",
       "termsOfService":"https://www.everis.com",
       "license":{
          "name":"License",

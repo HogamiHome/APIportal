@@ -40,9 +40,247 @@
       },
       {
          "name":"Request Status History Controller"
+      },
+      {
+         "name":"Request Product Controller"
       }
    ],
    "paths":{
+      "/request-server/v2/professionals/{professionalId}/requests":{
+         "get":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"Retrieve requests by status taking in consideration that a request can have multiple offeredService",
+            "operationId":"retrieveRequestsByStatusV2",
+            "parameters":[
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"string"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The status introduced is correct and a list of requests is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageRequestV2Rest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageRequestV2Rest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v2/professionals/{professionalId}/requests/{requestId}":{
+         "get":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"Retrieve professional request taking in consideration that a request can have multiple offeredService",
+            "operationId":"retrieveProfessionalRequestV2",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The request is found and returned to the user",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v2/professionals/requests/{requestId}":{
+         "get":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"$api.request-server.defs.request.retrieveRequestById.v2.name}",
+            "operationId":"retrieveRequestByIdV2",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The request is found and returned to the user",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v2/clients/{clientId}/requests/{requestId}":{
+         "get":{
+            "tags":[
+               "Client Request Controller"
+            ],
+            "summary":"This method obtain the Request Info by clientId and requestId and it takes in consideration that a request can have multiple services",
+            "operationId":"retrieveClientRequestV2",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/requests":{
          "put":{
             "tags":[
@@ -178,6 +416,58 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListRequestStatusHistoryRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/requests/{requestId}/products":{
+         "post":{
+            "tags":[
+               "Request Product Controller"
+            ],
+            "summary":"Create and update request product",
+            "operationId":"createAndUpdateRequestProduct",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ProductRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProductRest"
                         }
                      }
                   }
@@ -484,6 +774,48 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponsePageRequestRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/requestRejectedProduct/requests/{requestId}/products":{
+         "post":{
+            "tags":[
+               "Request Product Controller"
+            ],
+            "summary":"Rejects a request product",
+            "operationId":"rejectRequestProduct",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -1138,6 +1470,100 @@
             }
          }
       },
+      "/request-server/v1/offered-service/requestRejectedService/request/{requestId}":{
+         "post":{
+            "tags":[
+               "Offereds Service"
+            ],
+            "summary":"Rejects a request extra service",
+            "operationId":"rejectOfferedService",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/offered-service/request/{requestId}":{
+         "post":{
+            "tags":[
+               "Offereds Service"
+            ],
+            "summary":"Creates a request service",
+            "operationId":"createRequestOfferedService",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OfferedServiceRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/clients/{clientId}":{
          "get":{
             "tags":[
@@ -1213,67 +1639,6 @@
                   "application/json":{
                      "schema":{
                         "$ref":"#/components/schemas/RequestRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "application/json;charset=UTF-8":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseRequestRest"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/request-server/v1/clients/{clientId}/requests/{requestId}updateDate":{
-         "put":{
-            "tags":[
-               "Request Rest Controller"
-            ],
-            "summary":"Update request date",
-            "operationId":"updateRequestDate",
-            "parameters":[
-               {
-                  "name":"clientId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               },
-               {
-                  "name":"requestId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/RequestChangeDateRest"
                      }
                   }
                },
@@ -1471,6 +1836,67 @@
                },
                "400":{
                   "description":"Bad request",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/clients/{clientId}/requests/{requestId}/updateDate":{
+         "put":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"Update request date",
+            "operationId":"updateRequestDate",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RequestChangeDateRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
                   "content":{
                      "application/json;charset=UTF-8":{
                         "schema":{
@@ -1908,6 +2334,467 @@
                }
             }
          },
+         "Pageable":{
+            "type":"object",
+            "properties":{
+               "page":{
+                  "minimum":0,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "minimum":1,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "ClientDetailsRest":{
+            "required":[
+               "clientId",
+               "lastName",
+               "name"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id,  internal identifier for the client",
+                  "format":"int64"
+               },
+               "clientId":{
+                  "type":"integer",
+                  "description":"Id,  internal identifier for the client",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Client name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Client last name"
+               },
+               "avatar":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the client"
+         },
+         "ConfiguratorRest":{
+            "required":[
+               "response"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "response":{
+                  "type":"string",
+                  "description":"Configurator response"
+               }
+            },
+            "description":"This model represents the configurator"
+         },
+         "OfferedServiceRest":{
+            "required":[
+               "currency",
+               "title"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string",
+                  "description":"Service name"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "basePrice":{
+                  "type":"number"
+               },
+               "earlyPayment":{
+                  "type":"number"
+               },
+               "profitMargin":{
+                  "type":"number"
+               },
+               "displacementFee":{
+                  "type":"number"
+               },
+               "currency":{
+                  "maxLength":3,
+                  "minLength":0,
+                  "type":"string"
+               },
+               "duration":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "unit":{
+                  "type":"string"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"This model represents the offered service"
+         },
+         "PageRequestV2Rest":{
+            "type":"object",
+            "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestV2Rest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "PageableObject":{
+            "type":"object",
+            "properties":{
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "ProductRest":{
+            "required":[
+               "currency",
+               "price",
+               "productDescription",
+               "taxDetails"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "productDescription":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRest"
+               }
+            }
+         },
+         "RequestAddressRest":{
+            "required":[
+               "address",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
+         "RequestCampaignRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "campaignId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "campaignCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "RequestV2Rest":{
+            "required":[
+               "chatId"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Request id",
+                  "format":"int64"
+               },
+               "createDate":{
+                  "type":"integer",
+                  "description":"Starting date of the request",
+                  "format":"int64"
+               },
+               "endDate":{
+                  "type":"integer",
+                  "description":"Finishing datee of the request",
+                  "format":"int64"
+               },
+               "requestAddress":{
+                  "$ref":"#/components/schemas/RequestAddressRest"
+               },
+               "requestStatus":{
+                  "type":"string",
+                  "description":"Status of the request"
+               },
+               "professionalId":{
+                  "type":"integer",
+                  "description":"Proffessional performing the service",
+                  "format":"int64"
+               },
+               "operationDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "chatId":{
+                  "type":"string"
+               },
+               "clientDetails":{
+                  "$ref":"#/components/schemas/ClientDetailsRest"
+               },
+               "offeredService":{
+                  "type":"array",
+                  "description":"The offered service of a request",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               },
+               "configurator":{
+                  "$ref":"#/components/schemas/ConfiguratorRest"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "listRequestCampaigns":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCampaignRest"
+                  }
+               },
+               "storeRest":{
+                  "$ref":"#/components/schemas/StoreRest"
+               },
+               "commercialId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestProducts":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProductRest"
+                  }
+               }
+            }
+         },
+         "SingapurResponsePageRequestV2Rest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageRequestV2Rest"
+               }
+            }
+         },
+         "Sort":{
+            "type":"object",
+            "properties":{
+               "unsorted":{
+                  "type":"boolean"
+               },
+               "sorted":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "StoreRest":{
+            "required":[
+               "leroyId",
+               "name"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id,  internal identifier for the store",
+                  "format":"int64"
+               },
+               "leroyId":{
+                  "type":"integer",
+                  "description":"Leroy Id,  internal identifier provided by Leroy Merlin",
+                  "format":"int32"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Store name"
+               }
+            },
+            "description":"This model represents the store"
+         },
+         "TaxDetailsRest":{
+            "required":[
+               "taxRate",
+               "taxType"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "taxType":{
+                  "type":"string"
+               },
+               "taxRate":{
+                  "type":"number"
+               }
+            }
+         },
+         "SingapurResponseRequestV2Rest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/RequestV2Rest"
+               }
+            }
+         },
          "RequestUpdateStatusRest":{
             "required":[
                "chat_id"
@@ -2054,6 +2941,26 @@
                }
             }
          },
+         "SingapurResponseProductRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProductRest"
+               }
+            }
+         },
          "SingapurResponseListRequestStatusRest":{
             "type":"object",
             "properties":{
@@ -2078,170 +2985,23 @@
                }
             }
          },
-         "ClientDetailsRest":{
-            "required":[
-               "clientId",
-               "lastName",
-               "name"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id,  internal identifier for the client",
-                  "format":"int64"
-               },
-               "clientId":{
-                  "type":"integer",
-                  "description":"Id,  internal identifier for the client",
-                  "format":"int64"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Client name"
-               },
-               "lastName":{
-                  "type":"string",
-                  "description":"Client last name"
-               },
-               "avatar":{
-                  "type":"string"
-               }
-            },
-            "description":"This model represents the client"
-         },
-         "ConfiguratorRest":{
-            "required":[
-               "response"
-            ],
+         "RequestRejectionRest":{
             "type":"object",
             "properties":{
                "id":{
                   "type":"integer",
                   "format":"int64"
-               },
-               "response":{
-                  "type":"string",
-                  "description":"Configurator response"
-               }
-            },
-            "description":"This model represents the configurator"
-         },
-         "OfferedServiceRest":{
-            "required":[
-               "currency",
-               "title"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "offeredServiceId":{
-                  "type":"integer",
-                  "description":"Id  of the corresponding parent for this serive",
-                  "format":"int64"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string",
-                  "description":"Service name"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "price":{
-                  "type":"number"
-               },
-               "basePrice":{
-                  "type":"number"
-               },
-               "earlyPayment":{
-                  "type":"number"
-               },
-               "profitMargin":{
-                  "type":"number"
-               },
-               "displacementFee":{
-                  "type":"number"
-               },
-               "currency":{
-                  "maxLength":3,
-                  "minLength":0,
-                  "type":"string"
-               },
-               "duration":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "unit":{
-                  "type":"string"
-               },
-               "image":{
-                  "type":"string"
-               },
-               "taxDetails":{
-                  "$ref":"#/components/schemas/TaxDetailsRest"
-               },
-               "createDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updateDate":{
-                  "type":"string",
-                  "format":"date-time"
-               }
-            },
-            "description":"This model represents the offered service"
-         },
-         "RequestAddressRest":{
-            "required":[
-               "address",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
                },
                "requestId":{
                   "type":"integer",
                   "format":"int64"
                },
-               "city":{
+               "message":{
                   "type":"string"
                },
-               "province":{
-                  "type":"string"
-               }
-            }
-         },
-         "RequestCampaignRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "campaignId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "campaignCode":{
-                  "type":"string"
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -2310,49 +3070,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
-               }
-            }
-         },
-         "StoreRest":{
-            "required":[
-               "leroyId",
-               "name"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id,  internal identifier for the store",
-                  "format":"int64"
                },
-               "leroyId":{
-                  "type":"integer",
-                  "description":"Leroy Id,  internal identifier provided by Leroy Merlin",
-                  "format":"int32"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Store name"
-               }
-            },
-            "description":"This model represents the store"
-         },
-         "TaxDetailsRest":{
-            "required":[
-               "taxRate",
-               "taxType"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "taxType":{
-                  "type":"string"
-               },
-               "taxRate":{
-                  "type":"number"
+               "requestRejectionRest":{
+                  "$ref":"#/components/schemas/RequestRejectionRest"
                }
             }
          },
@@ -2449,6 +3169,9 @@
                "concatenatedProvince":{
                   "type":"string"
                },
+               "countryCode":{
+                  "type":"string"
+               },
                "phoneClient":{
                   "type":"integer",
                   "format":"int64"
@@ -2473,27 +3196,6 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
-               }
-            }
-         },
-         "Pageable":{
-            "type":"object",
-            "properties":{
-               "page":{
-                  "minimum":0,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "size":{
-                  "minimum":1,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
                }
             }
          },
@@ -2525,8 +3227,8 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -2535,37 +3237,11 @@
                "first":{
                   "type":"boolean"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
-         },
-         "PageableObject":{
-            "type":"object",
-            "properties":{
-               "offset":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               }
-            }
          },
          "SingapurResponsePageRequestRest":{
             "type":"object",
@@ -2584,17 +3260,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageRequestRest"
-               }
-            }
-         },
-         "Sort":{
-            "type":"object",
-            "properties":{
-               "unsorted":{
-                  "type":"boolean"
-               },
-               "sorted":{
-                  "type":"boolean"
                }
             }
          },
@@ -2622,23 +3287,6 @@
                   "type":"string"
                }
             }
-         },
-         "RequestRejectionRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "requestId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "message":{
-                  "type":"string"
-               }
-            },
-            "description":"Contain data related to request"
          },
          "SingapurResponseRequestRejectionRest":{
             "type":"object",
@@ -2677,6 +3325,26 @@
                },
                "data":{
                   "$ref":"#/components/schemas/RequestAddressRest"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             }
          },
@@ -2752,26 +3420,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/RequestRejectionTimeRest"
-               }
-            }
-         },
-         "SingapurResponseOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             }
          },
@@ -2865,7 +3513,10 @@
                   "$ref":"#/components/schemas/RequestAddress"
                },
                "offeredService":{
-                  "$ref":"#/components/schemas/RequestOfferedService"
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestOfferedService"
+                  }
                },
                "configurator":{
                   "$ref":"#/components/schemas/Configurator"
@@ -2874,6 +3525,12 @@
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/RequestCampaign"
+                  }
+               },
+               "requestProducts":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestProduct"
                   }
                }
             }
@@ -3019,6 +3676,44 @@
                }
             }
          },
+         "RequestProduct":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"string"
+               },
+               "updateUser":{
+                  "type":"string"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "request":{
+                  "$ref":"#/components/schemas/Request"
+               },
+               "productDescription":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRequestProduct"
+               }
+            }
+         },
          "RequestStatus":{
             "type":"object",
             "properties":{
@@ -3094,6 +3789,21 @@
                },
                "requestOfferedService":{
                   "$ref":"#/components/schemas/RequestOfferedService"
+               }
+            }
+         },
+         "TaxDetailsRequestProduct":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "taxType":{
+                  "type":"string"
+               },
+               "taxRate":{
+                  "type":"number"
                }
             }
          }
