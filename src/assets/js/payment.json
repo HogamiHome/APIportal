@@ -44,6 +44,9 @@
          "name":"TransferRestController"
       },
       {
+         "name":"PaymentBlockController"
+      },
+      {
          "name":"PaymentNotificationRestController"
       }
    ],
@@ -662,6 +665,187 @@
             }
          }
       },
+      "/payment-server/api/v1/payment-block/operation/{operationId}":{
+         "get":{
+            "tags":[
+               "PaymentBlockController"
+            ],
+            "summary":"Retrieve the payment block record related to a transaction and a payment concept",
+            "operationId":"retrievePaymentBlockByOperationIdAndConcept",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The transaction was successful for the PaymentBlock entity query.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentBlockRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentBlockRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/payment-server/api/v1/payment-block/delete/operation/{operationId}":{
+         "delete":{
+            "tags":[
+               "PaymentBlockController"
+            ],
+            "summary":"Delete the payment block record related to a transaction and a payment concept",
+            "operationId":"deletePaymentBlockByOperationIdAndConcept",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The transaction was successful for the PaymentBlock entity elimination.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/payment-server/api/v1/payment-block/create":{
+         "post":{
+            "tags":[
+               "PaymentBlockController"
+            ],
+            "summary":"The transaction was successful for the PaymentBlock entity registration",
+            "operationId":"registerPaymentToBlock",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PaymentBlockRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "201":{
+                  "description":"The entity has been successfully registered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentBlockRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The transaction was successful for the PaymentBlock entity registration.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentBlockRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentBlockRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/payByPayment":{
          "post":{
             "tags":[
@@ -696,6 +880,50 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponsePayCometTransferPayByRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/payment-server/api/v1/operationsPayCometValidate":{
+         "post":{
+            "tags":[
+               "PayCometSearchOperationController"
+            ],
+            "summary":"Retrieve Paycomet Operation by dates",
+            "operationId":"retrieveOperationByDates",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "$ref":"#/components/schemas/PayCometOperationBatchRest"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListPayCometOperationBatchResponseRest"
                         }
                      }
                   }
@@ -902,6 +1130,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -1223,6 +1459,14 @@
                      "type":"integer",
                      "format":"int64"
                   }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "requestBody":{
@@ -1333,6 +1577,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -2428,6 +2680,84 @@
                }
             }
          },
+         "PaymentBlockRest":{
+            "required":[
+               "operationId"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "paymentConcept":{
+                  "$ref":"#/components/schemas/PaymentConceptRest"
+               },
+               "paymentBlockStatusCode":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "PaymentConceptRest":{
+            "required":[
+               "code"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePaymentBlockRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PaymentBlockRest"
+               }
+            }
+         },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"string"
+               }
+            }
+         },
          "PayCometTransferPayByBody":{
             "type":"object",
             "properties":{
@@ -2488,6 +2818,53 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PayCometTransferPayByRest"
+               }
+            }
+         },
+         "PayCometOperationBatchRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "transactionDate":{
+                  "type":"string"
+               }
+            }
+         },
+         "PayCometOperationBatchResponseRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "keyUnique":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseListPayCometOperationBatchResponseRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/PayCometOperationBatchResponseRest"
+                  }
                }
             }
          },
@@ -2578,13 +2955,13 @@
          "PagePayCometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -2603,18 +2980,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -2628,6 +3005,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -2635,12 +3018,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
                }
             }
          },
@@ -2776,10 +3153,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -3357,13 +3734,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -3382,18 +3759,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -3428,23 +3805,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOperationPaymentBilling"
-               }
-            }
-         },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "type":"string"
                }
             }
          }

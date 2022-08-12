@@ -1,8 +1,8 @@
 {
    "openapi":"3.0.1",
    "info":{
-      "title":"Operation Batch",
-      "description":"Operation Batch to Singapur Project",
+      "title": "Operation Batch",
+      "description":"Operation API to Singapur Project",
       "termsOfService":"https://www.everis.com",
       "license":{
          "name":"License",
@@ -19,9 +19,42 @@
    "tags":[
       {
          "name":"Alive Controller"
+      },
+      {
+         "name":"Operation Batch"
       }
    ],
    "paths":{
+      "/operation-batch/api/v1/operation-batch-result/last":{
+         "get":{
+            "tags":[
+               "Operation Batch"
+            ],
+            "operationId":"retrieveLastOperationBatchResults",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationBatchResultRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/health/live":{
          "get":{
             "tags":[
@@ -69,6 +102,49 @@
                },
                "data":{
                   "type":"object"
+               }
+            }
+         },
+         "OperationBatchResultRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "result":{
+                  "type":"string"
+               },
+               "start_date":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "end_date":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "create_user":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseOperationBatchResultRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OperationBatchResultRest"
                }
             }
          },
