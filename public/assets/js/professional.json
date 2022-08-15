@@ -30,6 +30,9 @@
          "name":"RequestAddressController"
       },
       {
+		"name": "MasterAreaController"
+      },
+      {
          "name":"OperationAddressController"
       },
       {
@@ -81,7 +84,16 @@
          "name":"DeviceInfoController"
       },
       {
-         "name":"${api.professional.version.request.name}"
+         "name": "LevelCostController"
+      },
+      {
+         "name": "MasterHierarchyController"
+      },
+      {
+            "name":"${api.professional.version.request.name}"
+      },
+      {
+         "name": "ProfessionalServiceLevelController"
       },
       {
          "name":"OperationController"
@@ -4096,6 +4108,47 @@
             }
          }
       },
+		"/professional/v1/professionals/sendNotificationOfProductAndService/{requestId}": {
+			"get": {
+				"tags": ["RequestController"],
+				"summary": "Send email for adding extra service or product in request",
+				"operationId": "sendNotificationOfProductAndService",
+				"parameters": [{
+					"name": "requestId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/professional/v1/professionals/requests":{
          "put":{
             "tags":[
@@ -5427,13 +5480,250 @@
                   }
                }
             },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/professional-service-level": {
+			"get": {
+				"tags": ["ProfessionalServiceLevelController"],
+				"summary": "All Professional Service Level records.",
+				"operationId": "findAllProfessionalServiceLevel",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve professional Service Level correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListProfessionalServiceLevelRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListProfessionalServiceLevelRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"post": {
+				"tags": ["ProfessionalServiceLevelController"],
+				"summary": "A new ProfessionalServiceLevel is registered.",
+				"operationId": "registerProfessionalServiceLevel",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RequestProfessionalServiceLevelRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered professional Service Level correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseProfessionalServiceLevelRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseProfessionalServiceLevelRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"delete": {
+				"tags": ["ProfessionalServiceLevelController"],
+				"summary": "Deleting a Professional Service Level.",
+				"operationId": "deleteProfessionalServiceLevel",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RequestProfessionalServiceLevelRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered professional Service Level correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/professional-service-level/{serviceLevelId}": {
+			"delete": {
+				"tags": ["ProfessionalServiceLevelController"],
+				"summary": "Deleting a Professional Service Level.",
+				"operationId": "deleteProfessionalServiceLevelById",
+				"parameters": [{
+					"name": "serviceLevelId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered professional Service Level correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/professional-service-level/professional-id": {
+			"get": {
+				"tags": ["ProfessionalServiceLevelController"],
+				"summary": "All Professional Service Level records.",
+				"operationId": "retrieveProfessionalServiceLevelByProfessionalId",
+				"parameters": [{
+					"name": "professionalId",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve professional Service Level correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListProfessionalServiceLevelRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListProfessionalServiceLevelRest"
+								}
+							}
                }
-            ]
+         }
+         }
          }
       },
       "/professional/v1/professional-list":{
@@ -5539,6 +5829,618 @@
             }
          }
       },
+		"/professional/v1/master-hierarchy": {
+			"get": {
+				"tags": ["MasterHierarchyController"],
+				"summary": "All Master Hierarchy records.",
+				"operationId": "retrieveAllMasterHierarchy",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve master hierarchy correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterHierarchyRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterHierarchyRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"put": {
+				"tags": ["MasterHierarchyController"],
+				"summary": "A master hierarchy is updated.",
+				"operationId": "updateMasterHierarchy",
+				"parameters": [{
+					"name": "levelCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MasterHierarchyRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Updating master hierarchy correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"post": {
+				"tags": ["MasterHierarchyController"],
+				"summary": "A new master hierarchy is registered.",
+				"operationId": "registerMasterHierarchy",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MasterHierarchyRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered master hierarchy correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"delete": {
+				"tags": ["MasterHierarchyController"],
+				"summary": "Deleting a master hierarchy by levelCode and language.",
+				"operationId": "deleteMasterHierarchy",
+				"parameters": [{
+					"name": "levelCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Deleting master hierarchy correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/master-hierarchy/level-code": {
+			"get": {
+				"tags": ["MasterHierarchyController"],
+				"summary": "All Master Hierarchy records.",
+				"operationId": "retrieveMasterHierarchyByLevelCodeAndLanguage",
+				"parameters": [{
+					"name": "levelCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve master hierarchy correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterHierarchyRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/master-area": {
+			"get": {
+				"tags": ["MasterAreaController"],
+				"summary": "A new master area is registered.",
+				"operationId": "retrieveAllMasterArea",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterAreaRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterAreaRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"post": {
+				"tags": ["MasterAreaController"],
+				"summary": "A new master area is registered.",
+				"operationId": "registerMasterArea",
+				"parameters": [{
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MasterAreaRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterAreaRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterAreaRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"delete": {
+				"tags": ["MasterAreaController"],
+				"summary": "Deleting a master area by levelCode and language.",
+				"operationId": "deleteMasterArea",
+				"parameters": [{
+					"name": "levelCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "areaCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Deleting master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/master-area/{idMasterArea}": {
+			"put": {
+				"tags": ["MasterAreaController"],
+				"summary": "A master area is updated.",
+				"operationId": "updateMaterArea",
+				"parameters": [{
+					"name": "idMasterArea",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MasterAreaRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Updating master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterAreaRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseMasterAreaRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"delete": {
+				"tags": ["MasterAreaController"],
+				"summary": "Deleting a Master Area by id.",
+				"operationId": "deleteMasterAreaById",
+				"parameters": [{
+					"name": "idMasterArea",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Deleting master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/master-area/area-code": {
+			"get": {
+				"tags": ["MasterAreaController"],
+				"summary": "Retrieve Master Area by levelCode.",
+				"operationId": "retrieveMaterAreaByMasterHierarchyLevelCodeAndLanguageAndAreaCode",
+				"parameters": [{
+					"name": "levelCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "areaCode",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve master area correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterAreaRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListMasterAreaRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/professional/v1/mail/{mail}":{
          "get":{
             "tags":[
@@ -5697,6 +6599,301 @@
             }
          }
       },
+		"/professional/v1/level-cost": {
+			"get": {
+				"tags": ["LevelCostController"],
+				"summary": "All LevelCostRest records.",
+				"operationId": "retrieveAllLevelCost",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve level cost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListLevelCostRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListLevelCostRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"post": {
+				"tags": ["LevelCostController"],
+				"summary": "A new LevelCost is registered.",
+				"operationId": "registerLevelCost",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RequestLevelCostRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Registered level cost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseLevelCostRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseLevelCostRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			},
+			"delete": {
+				"tags": ["LevelCostController"],
+				"summary": "Deleting al records.",
+				"operationId": "deleteAllLevelCost",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Deleting levelcost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/level-cost/{professionalId}": {
+			"get": {
+				"tags": ["LevelCostController"],
+				"summary": "All LevelCostRest records.",
+				"operationId": "retrieveLevelCostByProfessionalId",
+				"parameters": [{
+					"name": "professionalId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Retrieve level cost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListLevelCostRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListLevelCostRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/level-cost/{levelCostId}": {
+			"put": {
+				"tags": ["LevelCostController"],
+				"summary": "A LevelCost is updated.",
+				"operationId": "updatedLevelCost",
+				"parameters": [{
+					"name": "levelCostId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RequestLevelCostRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Updating level cost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseLevelCostRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseLevelCostRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/level-cost/professional/{professionalId}": {
+			"delete": {
+				"tags": ["LevelCostController"],
+				"summary": "Deleting a LevelCost by professionalId.",
+				"operationId": "deleteLevelCostByProfessionalId",
+				"parameters": [{
+					"name": "professionalId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Deleting levelcost correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/professional/v1/informationBilling/{emailProfessional}":{
          "get":{
             "tags":[
@@ -9329,6 +10526,153 @@
             },
             "description":"This model is the envelope"
          },
+			"RequestProfessionalServiceLevelRest": {
+				"type": "object",
+				"properties": {
+					"idProfessionalService": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"idMasterArea": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"description": "This model represents a requst service level"
+			},
+			"MasterAreaRest": {
+				"required": ["areaCode", "lastLevel", "parentLevel"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"masterHierarchy": {
+						"$ref": "#/components/schemas/MasterHierarchyRest"
+					},
+					"parentLevel": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"lastLevel": {
+						"type": "boolean"
+					},
+					"areaCode": {
+						"type": "string"
+					}
+				},
+				"description": "This model represents a master hierarchy"
+			},
+			"MasterHierarchyRest": {
+				"required": ["levelCode"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"description": "Id of the master hierarchy",
+						"format": "int64"
+					},
+					"levelCode": {
+						"type": "string",
+						"description": "Level Code of the master hierarchy"
+					},
+					"levelDescription": {
+						"type": "string",
+						"description": "Level Description of the hierarchy area"
+					},
+					"levelOrder": {
+						"type": "integer",
+						"description": "Order of the master hierarchy",
+						"format": "int32"
+					},
+					"language": {
+						"type": "string",
+						"description": "Language of the master hierarchy"
+					},
+					"createDate": {
+						"type": "string",
+						"description": "Create date of the master hierarchy",
+						"format": "date-time"
+					},
+					"updateDate": {
+						"type": "string",
+						"description": "Update date of the master hierarchy",
+						"format": "date-time"
+					},
+					"createUser": {
+						"type": "string",
+						"description": "Create user of the master hierarchy"
+					},
+					"updateUser": {
+						"type": "string",
+						"description": "Update user of the master hierarchy"
+					}
+				},
+				"description": "This model represents a master hierarchy"
+			},
+			"ProfessionalServiceLevelRest": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"masterArea": {
+						"$ref": "#/components/schemas/MasterAreaRest"
+					},
+					"professionalOfferedService": {
+						"$ref": "#/components/schemas/ProfessionalOfferedServiceRest"
+					}
+				},
+				"description": "This model represents a professional service level"
+			},
+			"SingapurResponseProfessionalServiceLevelRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ProfessionalServiceLevelRest"
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SingapurResponseListProfessionalServiceLevelRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"type": "array",
+						"description": "Contain data related to request",
+						"items": {
+							"$ref": "#/components/schemas/ProfessionalServiceLevelRest"
+						}
+					}
+				},
+				"description": "This model is the envelope"
+			},
          "SingapurResponseListProfessionalRest":{
             "type":"object",
             "properties":{
@@ -9444,6 +10788,98 @@
             },
             "description":"This model is the envelope"
          },
+			"SingapurResponseMasterHierarchyRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/MasterHierarchyRest"
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SingapurResponseListMasterHierarchyRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"type": "array",
+						"description": "Contain data related to request",
+						"items": {
+							"$ref": "#/components/schemas/MasterHierarchyRest"
+						}
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SingapurResponseMasterAreaRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/MasterAreaRest"
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SingapurResponseListMasterAreaRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"type": "array",
+						"description": "Contain data related to request",
+						"items": {
+							"$ref": "#/components/schemas/MasterAreaRest"
+						}
+					}
+				},
+				"description": "This model is the envelope"
+			},
          "UserCredentialsRest":{
             "required":[
                "password",
@@ -9520,6 +10956,113 @@
             },
             "description":"This model used to response to login and conatains all data about the client"
          },
+			"RequestLevelCostRest": {
+				"type": "object",
+				"properties": {
+					"idProfessionalServiceLevel": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"baseCost": {
+						"type": "number"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"tax": {
+						"type": "number"
+					},
+					"displacementFee": {
+						"type": "number"
+					}
+				},
+				"description": "This model represents a request level cost"
+			},
+			"LevelCostRest": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"professionalServiceLevel": {
+						"$ref": "#/components/schemas/ProfessionalServiceLevelRest"
+					},
+					"baseCost": {
+						"type": "number"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"tax": {
+						"type": "number"
+					},
+					"displacementFee": {
+						"type": "number"
+					},
+					"createDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updateDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createUser": {
+						"type": "string"
+					},
+					"updateUser": {
+						"type": "string"
+					}
+				},
+				"description": "This model represents a level cost"
+			},
+			"SingapurResponseLevelCostRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/LevelCostRest"
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SingapurResponseListLevelCostRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"type": "array",
+						"description": "Contain data related to request",
+						"items": {
+							"$ref": "#/components/schemas/LevelCostRest"
+						}
+					}
+				},
+				"description": "This model is the envelope"
+			},
          "ProfessionalInformationBillingRest":{
             "type":"object",
             "properties":{
