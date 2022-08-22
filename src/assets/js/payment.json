@@ -1622,6 +1622,47 @@
             }
          }
       },
+      "/payment-server/api/v1/cancelSepaOperation":{
+         "post":{
+            "tags":[
+               "PaymentRestController"
+            ],
+            "summary":"This method cancels a SEPA",
+            "operationId":"executeCancelSepaOperation",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PayCometCancelSepaRequest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePayCometCancelSepaResponseRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/billing/operation":{
          "post":{
             "tags":[
@@ -2977,21 +3018,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -3002,15 +3043,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -3018,6 +3050,15 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -3582,6 +3623,76 @@
                }
             }
          },
+         "PayCometCancelSepaRequest":{
+            "type":"object",
+            "properties":{
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPaid":{
+                  "type":"number"
+               },
+               "operationOrder":{
+                  "type":"string"
+               }
+            }
+         },
+         "ErrorRest":{
+            "type":"object",
+            "properties":{
+               "message":{
+                  "type":"string"
+               },
+               "detail":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "PayCometCancelSepaResponseRest":{
+            "type":"object",
+            "properties":{
+               "operationResult":{
+                  "type":"string"
+               },
+               "operationErrorCode":{
+                  "type":"string"
+               },
+               "operationOrder":{
+                  "type":"string"
+               },
+               "errorCode":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "error":{
+                  "$ref":"#/components/schemas/ErrorRest"
+               },
+               "response":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePayCometCancelSepaResponseRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PayCometCancelSepaResponseRest"
+               }
+            }
+         },
          "FilterBillingRest":{
             "type":"object",
             "properties":{
@@ -3756,21 +3867,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },

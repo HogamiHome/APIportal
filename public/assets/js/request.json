@@ -2477,13 +2477,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -2502,6 +2502,9 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "last":{
                   "type":"boolean"
                },
@@ -2511,9 +2514,6 @@
                },
                "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -2525,9 +2525,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -2536,10 +2533,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
                   "type":"boolean"
                }
             }
@@ -2724,10 +2724,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -3202,13 +3202,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -3227,6 +3227,9 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "last":{
                   "type":"boolean"
                },
@@ -3236,9 +3239,6 @@
                },
                "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
