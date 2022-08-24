@@ -337,6 +337,45 @@
             }
          }
       },
+      "/payment-server/api/v1/register-payments": {
+			"post": {
+				"tags": ["PaymentRestController"],
+				"summary": "Register payment for operation",
+				"operationId": "registerPayment",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PaymentsRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponsePaymentsRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/payment-server/api/v1/refunds/payment/{paymentId}":{
          "get":{
             "tags":[
@@ -379,6 +418,54 @@
             }
          }
       },
+      "/payment-server/api/v1/refunds/create/{paymentId}": {
+			"post": {
+				"tags": ["RefundRestController"],
+				"summary": "Create only refund in database",
+				"operationId": "createRefundFromBatch",
+				"parameters": [{
+					"name": "paymentId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RefundRest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseRefundRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/payment-server/api/v1/professionals/reportOperation":{
          "get":{
             "tags":[
@@ -887,6 +974,44 @@
             }
          }
       },
+      "/payment-server/api/v1/operationsPaycometBatchPayment": {
+			"get": {
+				"tags": ["PayCometSearchOperationController"],
+				"summary": "Retrieve Paycomet Operation by dates for Batch Process Error Payments",
+				"operationId": "retrieveOperationsPaycometFromDate",
+				"parameters": [{
+					"name": "fromDate",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListOperationsPaycometBatchRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/payment-server/api/v1/operationsPayCometValidate":{
          "post":{
             "tags":[
@@ -2585,7 +2710,10 @@
                },
                "currency":{
                   "type":"string"
-               }
+               },
+					"createUser": {
+						"type": "string"
+					}
             }
          },
          "SingapurResponseListPaymentsRest":{
@@ -2862,6 +2990,57 @@
                }
             }
          },
+         "OperationsPaycometBatchRest": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"operationId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"transactionDate": {
+						"type": "string"
+					},
+					"reference": {
+						"type": "string"
+					},
+					"operationName": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "string"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"concept": {
+						"type": "string"
+					}
+				}
+			},
+         "SingapurResponseListOperationsPaycometBatchRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OperationsPaycometBatchRest"
+						}
+					}
+				}
+			},
          "PayCometOperationBatchRest":{
             "type":"object",
             "properties":{
