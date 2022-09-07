@@ -3027,6 +3027,54 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/cancelSepaOperation":{
+         "post":{
+            "tags":[
+               "Payment Controller"
+            ],
+            "summary":"Cancels a Sepa operation",
+            "operationId":"executeCancelSepaOperation",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PayCometCancelSepaRequest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePayCometCancelSepaResponseRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/billing/send-excel-email":{
          "post":{
             "tags":[
@@ -3846,6 +3894,9 @@
                },
                "offeredServiceQuantify":{
                   "$ref":"#/components/schemas/OfferedServiceQuantifyRest"
+               },
+               "restriction":{
+                  "$ref":"#/components/schemas/RestrictionRest"
                }
             }
          },
@@ -3900,6 +3951,21 @@
                   "type":"integer",
                   "description":"Enable field of province",
                   "format":"int32"
+               }
+            }
+         },
+         "RestrictionRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "restrictionText":{
+                  "type":"string"
                }
             }
          },
@@ -3981,9 +4047,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -3996,6 +4059,9 @@
                },
                "first":{
                   "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -4006,6 +4072,14 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -4014,14 +4088,6 @@
                },
                "unpaged":{
                   "type":"boolean"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -4455,9 +4521,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -4469,6 +4532,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -4696,8 +4762,29 @@
                   "items":{
                      "$ref":"#/components/schemas/ContactPhoneRest"
                   }
+               },
+               "professionalStatus":{
+                  "$ref":"#/components/schemas/ProfessionalStatusRest"
                }
             }
+         },
+         "ProfessionalStatusRest":{
+            "required":[
+               "code"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Identifier of the professional status",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Code of the professional status"
+               }
+            },
+            "description":"This model represents a professional status"
          },
          "RequestAddressRest":{
             "required":[
@@ -4958,9 +5045,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -4972,6 +5056,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -5272,6 +5359,9 @@
                },
                "apiTokenExternal":{
                   "type":"string"
+               },
+               "professionalStatus":{
+                  "$ref":"#/components/schemas/ProfessionalStatusRest"
                }
             },
             "description":"This model represents a professional"
@@ -5424,9 +5514,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -5438,6 +5525,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -5524,6 +5614,9 @@
                   "items":{
                      "$ref":"#/components/schemas/ProfessionalCampaignRest"
                   }
+               },
+               "professionalStatus":{
+                  "$ref":"#/components/schemas/ProfessionalStatusRest"
                }
             }
          },
@@ -6067,9 +6160,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -6081,6 +6171,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -6500,9 +6593,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -6514,6 +6604,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -6828,9 +6921,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -6842,6 +6932,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -7085,9 +7178,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -7099,6 +7189,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -7196,6 +7289,76 @@
                }
             }
          },
+         "PayCometCancelSepaRequest":{
+            "type":"object",
+            "properties":{
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPaid":{
+                  "type":"number"
+               },
+               "operationOrder":{
+                  "type":"string"
+               }
+            }
+         },
+         "ErrorRest":{
+            "type":"object",
+            "properties":{
+               "message":{
+                  "type":"string"
+               },
+               "detail":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "PayCometCancelSepaResponseRest":{
+            "type":"object",
+            "properties":{
+               "operationResult":{
+                  "type":"string"
+               },
+               "operationErrorCode":{
+                  "type":"string"
+               },
+               "operationOrder":{
+                  "type":"string"
+               },
+               "errorCode":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "error":{
+                  "$ref":"#/components/schemas/ErrorRest"
+               },
+               "response":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePayCometCancelSepaResponseRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PayCometCancelSepaResponseRest"
+               }
+            }
+         },
          "FilterBillingRest":{
             "type":"object",
             "properties":{
@@ -7289,9 +7452,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -7303,6 +7463,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
