@@ -1,7 +1,7 @@
 {
    "openapi":"3.0.1",
    "info":{
-      "title":"Operation Batch",
+      "title":"Direct API",
       "description":"Operation API to Singapur Project",
       "termsOfService":"https://www.everis.com",
       "license":{
@@ -21,13 +21,49 @@
          "name":"Operation Batch Hierarchy Professional"
       },
       {
+         "name":"Adeo Dashboard Batch"
+      },
+      {
          "name":"Alive Controller"
       },
       {
          "name":"Operation Batch"
+      },
+      {
+         "name":"Operation Batch Update Billing Data"
       }
    ],
    "paths":{
+      "/operation-batch/api/v1/operation-billing-data":{
+         "post":{
+            "tags":[
+               "Operation Batch Update Billing Data"
+            ],
+            "operationId":"updateOperationBillingDataFromClientBillingInformation",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-batch/api/v1/operation-batch-result/last":{
          "get":{
             "tags":[
@@ -87,35 +123,37 @@
                }
             }
          }
-      },      
-      "/operation-batch/api/v1/adeo-dashboard": {
-			"post": {
-				"tags": ["Adeo Dashboard Batch"],
-				"operationId": "adeoDashboardBatch",
-				"responses": {
-					"500": {
-						"description": "Internal Server Error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json;charset=UTF-8": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseString"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
+      },
+      "/operation-batch/api/v1/adeo-dashboard":{
+         "post":{
+            "tags":[
+               "Adeo Dashboard Batch"
+            ],
+            "operationId":"adeoDashboardBatch",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/health/live":{
          "get":{
             "tags":[
@@ -166,6 +204,23 @@
                }
             }
          },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"string"
+               }
+            }
+         },
          "OperationBatchResultRest":{
             "type":"object",
             "properties":{
@@ -189,6 +244,9 @@
                },
                "create_user":{
                   "type":"string"
+               },
+               "description":{
+                  "type":"string"
                }
             }
          },
@@ -206,23 +264,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationBatchResultRest"
-               }
-            }
-         },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "type":"string"
                }
             }
          }
