@@ -18,6 +18,9 @@
    ],
    "tags":[
       {
+         "name":"Operation Batch Hierarchy Professional"
+      },
+      {
          "name":"Alive Controller"
       },
       {
@@ -55,6 +58,64 @@
             }
          }
       },
+      "/operation-batch/api/v1/hierarchy-professional":{
+         "post":{
+            "tags":[
+               "Operation Batch Hierarchy Professional"
+            ],
+            "operationId":"saveNewHierarchyPriceForProfessionals",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },      
+      "/operation-batch/api/v1/adeo-dashboard": {
+			"post": {
+				"tags": ["Adeo Dashboard Batch"],
+				"operationId": "adeoDashboardBatch",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/health/live":{
          "get":{
             "tags":[

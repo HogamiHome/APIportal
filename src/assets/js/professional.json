@@ -21,6 +21,9 @@
          "name":"OfferedServiceController"
       },
       {
+         "name":"HierarchyPriceController"
+      },
+      {
          "name":"ProfessionalStatusHistory"
       },
       {
@@ -7171,6 +7174,73 @@
             }
          }
       },
+      "/professional/v1/hierarchy-price":{
+         "post":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"Registration of data of the new price hierarchy for professionals",
+            "operationId":"saveNewHierarchyPriceForProfessionals",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"countryName",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SAVE_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SAVE_NEW_HIERARCHY_PRICE] The new hierarchy prices were created correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SAVE_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/error":{
          "post":{
             "tags":[
@@ -7443,18 +7513,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -7469,19 +7539,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -7671,10 +7741,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -7994,18 +8064,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9063,18 +9133,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9128,18 +9198,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9411,18 +9481,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -10487,18 +10557,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
