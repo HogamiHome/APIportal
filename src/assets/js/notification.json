@@ -27,6 +27,9 @@
          "name":"Push Notification Rest Controller"
       },
       {
+         "name": "Analytics Rest Controller"
+      },
+      {
          "name":"Email Rest Controller"
       },
       {
@@ -349,6 +352,58 @@
             }
          }
       },
+      "/notification/v1/analytics": {
+			"post": {
+				"tags": ["Analytics Rest Controller"],
+				"summary": "Sends Analytics",
+				"operationId": "pushAnalytics",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"additionalProperties": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The analytic has been successfuly sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request \r\n",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/health/live":{
          "get":{
             "tags":[
