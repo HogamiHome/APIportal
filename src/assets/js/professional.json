@@ -4240,6 +4240,14 @@
                   "schema":{
                      "type":"string"
                   }
+               },
+               {
+                  "name":"newStatus",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "responses":{
@@ -7446,6 +7454,14 @@
                         "type":"string"
                      }
                   }
+               },
+               {
+                  "name":"applicationName",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "responses":{
@@ -7754,9 +7770,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -7766,6 +7779,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -7780,11 +7796,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
@@ -8305,9 +8321,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -8317,6 +8330,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9374,9 +9390,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -9386,6 +9399,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9439,9 +9455,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -9451,6 +9464,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9722,9 +9738,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -9734,6 +9747,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -10798,9 +10814,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
@@ -10810,6 +10823,9 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
