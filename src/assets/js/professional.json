@@ -42,6 +42,9 @@
          "name":"LogAPKController"
       },
       {
+         "name": "AppParameterController"
+      },
+      {
          "name":"${api.professional.tax-detail.request.name}"
       },
       {
@@ -7589,6 +7592,109 @@
             }
          }
       },
+      "/professional/v1/app-parameters": {
+			"get": {
+				"tags": ["AppParameterController"],
+				"summary": "Retrieve All App parameters.",
+				"operationId": "retrieveAllAppParameters",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The registration of a app paramerter's  was performed correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/app-parameters/keys": {
+			"get": {
+				"tags": ["AppParameterController"],
+				"summary": "Search app parameters by a list of keys.",
+				"operationId": "retrieveAppParameterByKeys",
+				"parameters": [{
+					"name": "version",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}, {
+					"name": "key",
+					"in": "query",
+					"required": false,
+					"schema": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The app parameter has been found.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/health/live":{
          "get":{
             "tags":[
@@ -11844,7 +11950,52 @@
                }
             },
             "description":"This model is the envelope"
-         }
+         },
+			"AppParameterRest": {
+				"required": ["key", "value"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"key": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"description": "Contain data related to request"
+			},
+			"SingapurResponseListAppParameterRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"type": "array",
+						"description": "Contain data related to request",
+						"items": {
+							"$ref": "#/components/schemas/AppParameterRest"
+						}
+					}
+				},
+				"description": "This model is the envelope"
+			}
       },
       "securitySchemes":{
          "bearer-key":{
