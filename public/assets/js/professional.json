@@ -7595,52 +7595,10 @@
             }
          }
       },
-      "/professional/v1/app-parameters": {
+      "/professional/v1/app-parameters/keys": {
 			"get": {
 				"tags": ["AppParameterController"],
-				"summary": "Retrieve All App parameters.",
-				"operationId": "retrieveAllAppParameters",
-				"responses": {
-					"500": {
-						"description": "Internal Server Error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "The registration of a app paramerter's  was performed correctly",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
-								}
-							}
-						}
-					}
-				},
-				"security": [{
-					"bearer-key": []
-				}]
-			}
-		},
-		"/professional/v1/app-parameters/keys": {
-			"get": {
-				"tags": ["AppParameterController"],
-				"summary": "Search app parameters by a list of keys.",
+				"summary": "Search app parameters by a list of keys and version.",
 				"operationId": "retrieveAppParameterByKeys",
 				"parameters": [{
 					"name": "version",
@@ -7649,16 +7607,6 @@
 					"schema": {
 						"type": "integer",
 						"format": "int32"
-					}
-				}, {
-					"name": "key",
-					"in": "query",
-					"required": false,
-					"schema": {
-						"type": "array",
-						"items": {
-							"type": "string"
-						}
 					}
 				}],
 				"responses": {
@@ -7688,6 +7636,64 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/SingapurResponseListAppParameterRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
+		"/professional/v1/app-parameters/key": {
+			"get": {
+				"tags": ["AppParameterController"],
+				"summary": "Search app parameters by a key and version.",
+				"operationId": "retrieveAppParameterByKey",
+				"parameters": [{
+					"name": "version",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}, {
+					"name": "key",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The registration of a app paramerter's  was performed correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseAppParameterRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseAppParameterRest"
 								}
 							}
 						}
