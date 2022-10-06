@@ -7657,7 +7657,7 @@
 						"format": "int32"
 					}
 				}, {
-					"name": "key",
+					"name": "keyParameter",
 					"in": "query",
 					"required": true,
 					"schema": {
