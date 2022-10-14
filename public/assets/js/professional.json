@@ -7595,11 +7595,11 @@
             }
          }
       },
-      "/professional/v1/app-parameters/keys": {
+      "/professional/v1/app-parameters": {
 			"get": {
 				"tags": ["AppParameterController"],
-				"summary": "Search app parameters by a list of keys and version.",
-				"operationId": "retrieveAppParameterByKeys",
+				"summary": "Search app parameters by version.",
+				"operationId": "retrieveAppParametersByVersion",
 				"parameters": [{
 					"name": "version",
 					"in": "query",
@@ -7646,7 +7646,7 @@
 				}]
 			}
 		},
-		"/professional/v1/app-parameters/key": {
+		"/professional/v1/app-parameters/{keyParameter}": {
 			"get": {
 				"tags": ["AppParameterController"],
 				"summary": "Search app parameters by a key and version.",
@@ -7660,8 +7660,8 @@
 						"format": "int32"
 					}
 				}, {
-					"name": "key",
-					"in": "query",
+					"name": "keyParameter",
+					"in": "path",
 					"required": true,
 					"schema": {
 						"type": "string"
