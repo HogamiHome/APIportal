@@ -5513,6 +5513,73 @@
             ]
          }
       },
+      "/professional/v1/professional":{
+         "post":{
+            "tags":[
+               "ProfessionalController"
+            ],
+            "summary":"Change the status for the professional",
+            "operationId":"changeProfessionalStatus",
+            "parameters":[
+               {
+                  "name":"token",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"professionalEmail",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Bad request",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The professional is banned ",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/professional/v1/professional-status":{
          "get":{
             "tags":[
@@ -7891,6 +7958,14 @@
                   "schema":{
                      "type":"boolean"
                   }
+               },
+               {
+                  "name":"tokenBoForAudit",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "responses":{
@@ -8653,13 +8728,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8685,11 +8760,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -8744,10 +8819,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -8773,13 +8848,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8805,11 +8880,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9263,6 +9338,14 @@
                },
                "friendlyCode":{
                   "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -9287,13 +9370,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -9319,11 +9402,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -10100,13 +10183,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10132,11 +10215,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -10383,13 +10466,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10415,11 +10498,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -11434,13 +11517,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11466,11 +11549,11 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
