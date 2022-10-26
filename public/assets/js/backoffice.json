@@ -1435,6 +1435,71 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/professionals/{professionalId}/status-history": {
+			"get": {
+				"tags": ["Professional Controller"],
+				"summary": "Obtain the status history of a professional.",
+				"operationId": "retrieveProfessionalStatusHistory",
+				"parameters": [{
+					"name": "professionalId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "pageable",
+					"in": "query",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/Pageable"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The status history of a professional is displayed correctly.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponsePageTimelineRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponsePageTimelineRest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/backoffice-server/api/v1/professionals/unban":{
          "put":{
             "tags":[
