@@ -5589,71 +5589,61 @@
         }
      },
      "/professional/v1/professional":{
-        "post":{
-           "tags":[
-              "ProfessionalController"
-           ],
-           "summary":"Change the status for the professional",
-           "operationId":"changeProfessionalStatus",
-           "parameters":[
-              {
-                 "name":"token",
-                 "in":"query",
-                 "required":true,
-                 "schema":{
-                    "type":"string"
-                 }
-              },
-              {
-                 "name":"professionalEmail",
-                 "in":"query",
-                 "required":true,
-                 "schema":{
-                    "type":"string"
-                 }
-              },
-              {
-                 "name":"status",
-                 "in":"query",
-                 "required":true,
-                 "schema":{
-                    "type":"string"
-                 }
-              }
-           ],
-           "responses":{
-              "500":{
-                 "description":"Bad request",
-                 "content":{
-                    "*/*":{
-                       "schema":{
-                          "$ref":"#/components/schemas/SingapurResponse"
-                       }
-                    }
-                 }
-              },
-              "200":{
-                 "description":"The professional is banned ",
-                 "content":{
-                    "application/json":{
-                       "schema":{
-                          "$ref":"#/components/schemas/SingapurResponseString"
-                       }
-                    }
-                 }
-              },
-              "400":{
-                 "description":"Bad request",
-                 "content":{
-                    "application/json":{
-                       "schema":{
-                          "$ref":"#/components/schemas/SingapurResponseString"
-                       }
-                    }
-                 }
-              }
-           }
-        }
+      "post": {
+         "tags": ["ProfessionalController"],
+         "summary": "Change the status for the professional",
+         "operationId": "changeProfessionalStatus",
+         "parameters": [{
+            "name": "Accept-Language",
+            "in": "header",
+            "required": true,
+            "schema": {
+               "type": "string"
+            }
+         }],
+         "requestBody": {
+            "content": {
+               "application/json": {
+                  "schema": {
+                     "$ref": "#/components/schemas/ChangeStatusRest"
+                  }
+               }
+            },
+            "required": true
+         },
+         "responses": {
+            "500": {
+               "description": "Bad request",
+               "content": {
+                  "*/*": {
+                     "schema": {
+                        "$ref": "#/components/schemas/SingapurResponse"
+                     }
+                  }
+               }
+            },
+            "200": {
+               "description": "The professional is banned ",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/SingapurResponseString"
+                     }
+                  }
+               }
+            },
+            "400": {
+               "description": "Bad request",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/SingapurResponseString"
+                     }
+                  }
+               }
+            }
+         }
+      }
      },
      "/professional/v1/professional-status":{
         "get":{
@@ -12072,6 +12062,23 @@
            },
            "description":"This model is the envelope"
         },
+        "ChangeStatusRest": {
+         "type": "object",
+         "properties": {
+            "token": {
+               "type": "string"
+            },
+            "emailProfessional": {
+               "type": "string"
+            },
+            "newStatus": {
+               "type": "string"
+            },
+            "comment": {
+               "type": "string"
+            }
+         }
+      },
         "SingapurResponseProfessionalStatusRest":{
            "type":"object",
            "properties":{
