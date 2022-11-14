@@ -646,13 +646,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -668,20 +668,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -696,6 +696,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -703,12 +709,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
                }
             }
          },
