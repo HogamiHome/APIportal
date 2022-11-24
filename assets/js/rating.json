@@ -668,9 +668,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -680,6 +677,9 @@
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -795,10 +795,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }

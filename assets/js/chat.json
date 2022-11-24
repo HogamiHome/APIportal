@@ -1,1539 +1,1763 @@
 {
-   "openapi": "3.0.1",
-   "info": {
-    "title": "Chat Service",
-    "description": "Chat Server API to Singapur Project\r\n This microservice is in charge of the integration with the Firebase Platform. \r\n URL Confluence: https://steps.everis.com/confluence/display/PROLEMER/Microservice+Chat+Server",
-    "termsOfService": "https://www.everis.com",
-    "license": {
-     "name": "License",
-     "url": "https://www.everis.com"
-    },
-    "version": "1.0.0"
+   "openapi":"3.0.1",
+   "info":{
+      "title":"Chat Service",
+      "description":"Chat Server API to Singapur Project\r\n This microservice is in charge of the integration with the Firebase Platform. \r\n URL Confluence: https://steps.everis.com/confluence/display/PROLEMER/Microservice+Chat+Server",
+      "termsOfService":"https://www.everis.com",
+      "license":{
+         "name":"License",
+         "url":"https://www.everis.com"
+      },
+      "version":"1.0.0"
    },
-   "servers": [
-    {
-     "url": "http://localhost:8007",
-     "description": "Generated server url"
-    }
+   "servers":[
+      {
+         "url":"http://localhost:8007",
+         "description":"Generated server url"
+      }
    ],
-   "tags": [
-    {
-     "name": "User Controller"
-    },
-    {
-     "name": "Alive Controller"
-    },
-    {
-     "name": "Banner Controller"
-    },
-    {
-     "name": "UserAuth Controller"
-    },
-    {
-     "name": "Chat Controller"
-    },
-    {
-     "name": "Menu Controller"
-    }
+   "tags":[
+      {
+         "name":"User Controller"
+      },
+      {
+         "name":"Alive Controller"
+      },
+      {
+         "name":"Media Gallery Controller"
+      },
+      {
+         "name":"Banner Controller"
+      },
+      {
+         "name":"UserAuth Controller"
+      },
+      {
+         "name":"Chat Controller"
+      },
+      {
+         "name":"Menu Controller"
+      }
    ],
-   "paths": {
-    "/health/live": {
-     "get": {
-      "tags": [
-       "Alive Controller"
-      ],
-      "operationId": "keepAlive",
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json;charset=UTF-8": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
+   "paths":{
+      "/health/live":{
+         "get":{
+            "tags":[
+               "Alive Controller"
+            ],
+            "operationId":"keepAlive",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/users": {
-     "post": {
-      "tags": [
-       "User Controller"
-      ],
-      "operationId": "createUser",
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "$ref": "#/components/schemas/UserRest"
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseUserRest"
-          }
+      "/chat/v1/users":{
+         "post":{
+            "tags":[
+               "User Controller"
+            ],
+            "operationId":"createUser",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UserRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseUserRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/users/{userUid}": {
-     "put": {
-      "tags": [
-       "User Controller"
-      ],
-      "operationId": "updateUser",
-      "parameters": [
-       {
-        "name": "userUid",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "$ref": "#/components/schemas/UserRest"
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseUserRest"
-          }
+      "/chat/v1/users/{userUid}":{
+         "put":{
+            "tags":[
+               "User Controller"
+            ],
+            "operationId":"updateUser",
+            "parameters":[
+               {
+                  "name":"userUid",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UserRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseUserRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/users/{userUid}/auth": {
-     "get": {
-      "tags": [
-       "UserAuth Controller"
-      ],
-      "operationId": "getAuthToken",
-      "parameters": [
-       {
-        "name": "userUid",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseAuthTokenRest"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/users/delete": {
-     "delete": {
-      "tags": [
-       "User Controller"
-      ],
-      "operationId": "deleteUser",
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "type": "array",
-          "items": {
-           "type": "string"
-          }
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
+      "/chat/v1/users/{userUid}/auth":{
+         "get":{
+            "tags":[
+               "UserAuth Controller"
+            ],
+            "operationId":"getAuthToken",
+            "parameters":[
+               {
+                  "name":"userUid",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseAuthTokenRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/menu/{language}": {
-     "get": {
-      "tags": [
-       "Menu Controller"
-      ],
-      "summary": "Retrieves the menu list from Firebase",
-      "operationId": "retrieveMenu",
-      "parameters": [
-       {
-        "name": "language",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseMenuRest"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}": {
-     "get": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Retrieves the chat by chat ID",
-      "operationId": "retrieveChat",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseChatRest"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/update-status": {
-     "put": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Updates the chat status",
-      "operationId": "updateChatRoomStatus",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "status",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "requestStatus",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseBoolean"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/update-status-active": {
-     "put": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Updates the state of enable or disable of the chat room in firebase",
-      "operationId": "updateChatRoomStatusAndActive",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "status",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "requestStatus",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "isActive",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "boolean"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseBoolean"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/update-message": {
-     "put": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "${api.chat-server.defs.chat.updateMessageByChatRoomIdAndTypeMessage.description}",
-      "operationId": "updateMessageByChatRoomIdAndTypeMessage",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "typeMessage",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "type": "object",
-          "additionalProperties": {
-           "type": "object"
-          }
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
+      "/chat/v1/users/userFirebase":{
+         "post":{
+            "tags":[
+               "User Controller"
+            ],
+            "operationId":"createUserFirebaseClient",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UserFirebaseRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/update-chat-room": {
-     "put": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Updates and deletes the values Status, RequestStatus, IsActive if the OperationId field of the chat room exists in FIREBASE",
-      "operationId": "updateChatRoom",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "status",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "requestStatus",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "isActive",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "boolean"
-        }
-       },
-       {
-        "name": "existsOperationId",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "boolean"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseBoolean"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/update-chat-room-chatid": {
-     "put": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Updates the ChatRoom using HashMap",
-      "operationId": "updateChatRoomByChatId",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "type": "object",
-          "additionalProperties": {
-           "type": "object"
-          }
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseBoolean"
-          }
+      "/chat/v1/users/delete":{
+         "delete":{
+            "tags":[
+               "User Controller"
+            ],
+            "operationId":"deleteUser",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "type":"string"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/delete": {
-     "delete": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Delete of the chat room in FIREBASE",
-      "operationId": "deleteChanRoomById",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/delete-message": {
-     "delete": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Delete messages of the chat room in FIREBASE",
-      "operationId": "deleteMessagesByChatId",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       },
-       {
-        "name": "types",
-        "in": "query",
-        "required": true,
-        "schema": {
-         "type": "array",
-         "items": {
-          "type": "string"
-         }
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/{chatId}/create-messages": {
-     "post": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Creates the messages for chat room in FIREBASE",
-      "operationId": "createMessagesCollection",
-      "parameters": [
-       {
-        "name": "chatId",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "type": "array",
-          "items": {
-           "$ref": "#/components/schemas/MeesageRest"
-          }
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "204": {
-        "description": "No Content",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
+      "/chat/v1/menu/{language}":{
+         "get":{
+            "tags":[
+               "Menu Controller"
+            ],
+            "summary":"Retrieves the menu list from Firebase",
+            "operationId":"retrieveMenu",
+            "parameters":[
+               {
+                  "name":"language",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMenuRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    },
-    "/chat/v1/chats/create-chat-room": {
-     "post": {
-      "tags": [
-       "Chat Controller"
-      ],
-      "summary": "Creates a new chat room",
-      "operationId": "createChatRoom",
-      "requestBody": {
-       "content": {
-        "application/json": {
-         "schema": {
-          "$ref": "#/components/schemas/ChatRequestRest"
-         }
-        }
-       },
-       "required": true
       },
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseString"
-          }
+      "/chat/v1/media-gallery":{
+         "post":{
+            "tags":[
+               "Media Gallery Controller"
+            ],
+            "summary":"Create of the media gallery from web client for the ulpload to storage GCP",
+            "operationId":"createMediaGallery",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FileUploadRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseFileUploadRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
+      },
+      "/chat/v1/chats/{chatId}":{
+         "get":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Retrieves the chat by chat ID",
+            "operationId":"retrieveChat",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseChatRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
-        }
-       }
+      },
+      "/chat/v1/chats/{chatId}/update-status":{
+         "put":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Updates the chat status",
+            "operationId":"updateChatRoomStatus",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestStatus",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/update-status-active":{
+         "put":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Updates the state of enable or disable of the chat room in firebase",
+            "operationId":"updateChatRoomStatusAndActive",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestStatus",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"isActive",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"boolean"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/update-message":{
+         "put":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"${api.chat-server.defs.chat.updateMessageByChatRoomIdAndTypeMessage.description}",
+            "operationId":"updateMessageByChatRoomIdAndTypeMessage",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"typeMessage",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "additionalProperties":{
+                           "type":"object"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/update-chat-room":{
+         "put":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Updates and deletes the values Status, RequestStatus, IsActive if the OperationId field of the chat room exists in FIREBASE",
+            "operationId":"updateChatRoom",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"requestStatus",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"isActive",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"boolean"
+                  }
+               },
+               {
+                  "name":"existsOperationId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"boolean"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/update-chat-room-chatid":{
+         "put":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Updates the ChatRoom using HashMap",
+            "operationId":"updateChatRoomByChatId",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "additionalProperties":{
+                           "type":"object"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/delete":{
+         "delete":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Delete of the chat room in FIREBASE",
+            "operationId":"deleteChanRoomById",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/delete-message":{
+         "delete":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Delete messages of the chat room in FIREBASE",
+            "operationId":"deleteMessagesByChatId",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"types",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"string"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/create-messages":{
+         "post":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Creates the messages for chat room in FIREBASE",
+            "operationId":"createMessagesCollection",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "$ref":"#/components/schemas/MeesageRest"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "204":{
+                  "description":"No Content",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/create-chat-room":{
+         "post":{
+            "tags":[
+               "Chat Controller"
+            ],
+            "summary":"Creates a new chat room",
+            "operationId":"createChatRoom",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ChatRequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/banner/{language}":{
+         "get":{
+            "tags":[
+               "Banner Controller"
+            ],
+            "summary":"retrieves the list of all valid banner that have date between (start date < now < end date) from Firebase",
+            "operationId":"retrieveBanners",
+            "parameters":[
+               {
+                  "name":"language",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListBannerRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
       }
-     }
-    },
-    "/chat/v1/banner/{language}": {
-     "get": {
-      "tags": [
-       "Banner Controller"
-      ],
-      "summary": "retrieves the list of all valid banner that have date between (start date < now < end date) from Firebase",
-      "operationId": "retrieveBanners",
-      "parameters": [
-       {
-        "name": "language",
-        "in": "path",
-        "required": true,
-        "schema": {
-         "type": "string"
-        }
-       }
-      ],
-      "responses": {
-       "200": {
-        "description": "OK",
-        "content": {
-         "application/json": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponseListBannerRest"
-          }
-         }
-        }
-       },
-       "500": {
-        "description": "Internal Server Error",
-        "content": {
-         "*/*": {
-          "schema": {
-           "$ref": "#/components/schemas/SingapurResponse"
-          }
-         }
-        }
-       }
-      }
-     }
-    }
    },
-   "components": {
-    "schemas": {
-     "SingapurResponse": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "type": "object",
-        "description": "Contain data related to request"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "SingapurResponseString": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "type": "string",
-        "description": "Contain data related to request"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "UserRest": {
-      "required": [
-       "email",
-       "name",
-       "password"
-      ],
-      "type": "object",
-      "properties": {
-       "email": {
-        "type": "string"
-       },
-       "password": {
-        "type": "string"
-       },
-       "clientId": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "name": {
-        "type": "string"
-       },
-       "userUid": {
-        "type": "string"
-       }
+   "components":{
+      "schemas":{
+         "SingapurResponse":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"object",
+                  "description":"Contain data related to request"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"string",
+                  "description":"Contain data related to request"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "UserRest":{
+            "required":[
+               "email",
+               "name",
+               "password"
+            ],
+            "type":"object",
+            "properties":{
+               "email":{
+                  "type":"string"
+               },
+               "password":{
+                  "type":"string"
+               },
+               "clientId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "userUid":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseUserRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/UserRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "AuthTokenRest":{
+            "type":"object",
+            "properties":{
+               "authToken":{
+                  "type":"string"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "SingapurResponseAuthTokenRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/AuthTokenRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "UserFirebaseRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"string"
+               },
+               "uid":{
+                  "type":"string"
+               }
+            }
+         },
+         "ButtonRest":{
+            "type":"object",
+            "properties":{
+               "href":{
+                  "type":"string"
+               },
+               "isNav":{
+                  "type":"boolean"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "show":{
+                  "type":"boolean"
+               },
+               "text":{
+                  "type":"string"
+               },
+               "orderMobile":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "MenuRest":{
+            "type":"object",
+            "properties":{
+               "buttons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ButtonRest"
+                  }
+               },
+               "services":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ServiceRest"
+                  }
+               },
+               "updatedAt":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "ServiceRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "subServices":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/SubServiceRest"
+                  }
+               },
+               "title":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseMenuRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/MenuRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SubServiceRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "landingPage":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "FileUploadRequestRest":{
+            "type":"object",
+            "properties":{
+               "chatId":{
+                  "type":"string"
+               },
+               "files":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/MultiPartFileContentRest"
+                  }
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ownerId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ownerType":{
+                  "type":"string"
+               },
+               "senderUid":{
+                  "type":"string"
+               },
+               "conceptImage":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data request for upload files"
+         },
+         "MultiPartFileContentRest":{
+            "type":"object",
+            "properties":{
+               "contentFile":{
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "format":"byte"
+                  }
+               },
+               "typeFile":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data in bytes of the files"
+         },
+         "FileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "owner":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "visibleBy":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "documentSubType":{
+                  "type":"string"
+               },
+               "date":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"This model represents the data for files"
+         },
+         "FileUploadRest":{
+            "type":"object",
+            "properties":{
+               "chatId":{
+                  "type":"string"
+               },
+               "mediaGallery":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               },
+               "response":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for upload files"
+         },
+         "SingapurResponseFileUploadRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/FileUploadRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "ChatRest":{
+            "type":"object",
+            "properties":{
+               "messages":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/MessageDto"
+                  }
+               },
+               "users":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/UserDto"
+                  }
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "MessageDto":{
+            "type":"object",
+            "properties":{
+               "message":{
+                  "type":"string"
+               },
+               "sender":{
+                  "type":"string"
+               },
+               "sent":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "type":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "idMessage":{
+                  "type":"string"
+               },
+               "seen":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseChatRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ChatRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "UserDto":{
+            "type":"object",
+            "properties":{
+               "idUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "idMember":{
+                  "type":"string"
+               },
+               "type":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseBoolean":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"boolean",
+                  "description":"Contain data related to request"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "MeesageRest":{
+            "type":"object",
+            "properties":{
+               "seen":{
+                  "type":"boolean"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "sender":{
+                  "type":"string"
+               },
+               "sent":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "isSeen":{
+                  "type":"boolean"
+               },
+               "type":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "idMessage":{
+                  "type":"string"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "value2":{
+                  "type":"string"
+               },
+               "status":{
+                  "type":"string"
+               },
+               "text":{
+                  "type":"string"
+               },
+               "timeStampServer":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "valueDate":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "earlyPayment":{
+                  "type":"string"
+               },
+               "toValorate":{
+                  "type":"boolean"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"string"
+               }
+            }
+         },
+         "ChatRequestRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "accepted":{
+                  "type":"boolean"
+               },
+               "active":{
+                  "type":"boolean"
+               },
+               "earlyPayment":{
+                  "type":"string"
+               },
+               "lastUpdate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "members":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professionalProfileRest":{
+                  "$ref":"#/components/schemas/ProfessionalProfileRest"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestStatus":{
+                  "type":"string"
+               },
+               "status":{
+                  "type":"string"
+               },
+               "toValorate":{
+                  "type":"boolean"
+               },
+               "messageRest":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/MeesageRest"
+                  }
+               },
+               "service":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               }
+            }
+         },
+         "OfferedServiceRest":{
+            "required":[
+               "title"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the offered service"
+         },
+         "ProfessionalProfileRest":{
+            "type":"object",
+            "properties":{
+               "name":{
+                  "type":"string"
+               },
+               "lastName":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "avatar":{
+                  "type":"string"
+               },
+               "hours":{
+                  "type":"string"
+               }
+            }
+         },
+         "AccessibilityRest":{
+            "type":"object",
+            "properties":{
+               "alt":{
+                  "type":"string"
+               }
+            }
+         },
+         "ActionRest":{
+            "type":"object",
+            "properties":{
+               "code":{
+                  "type":"string"
+               }
+            }
+         },
+         "BannerRest":{
+            "type":"object",
+            "properties":{
+               "action":{
+                  "$ref":"#/components/schemas/ActionRest"
+               },
+               "layout":{
+                  "$ref":"#/components/schemas/LayoutRest"
+               },
+               "link":{
+                  "$ref":"#/components/schemas/LinkRest"
+               },
+               "media":{
+                  "$ref":"#/components/schemas/MediaRest"
+               },
+               "priority":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "text":{
+                  "$ref":"#/components/schemas/TextRest"
+               },
+               "validity":{
+                  "$ref":"#/components/schemas/ValidityRest"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "LayoutRest":{
+            "type":"object",
+            "properties":{
+               "hAlign":{
+                  "type":"string"
+               },
+               "template":{
+                  "type":"string"
+               },
+               "vAlign":{
+                  "type":"string"
+               }
+            }
+         },
+         "LinkRest":{
+            "type":"object",
+            "properties":{
+               "target":{
+                  "type":"string"
+               },
+               "type":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "text":{
+                  "type":"string"
+               }
+            }
+         },
+         "MediaRest":{
+            "type":"object",
+            "properties":{
+               "accessibility":{
+                  "$ref":"#/components/schemas/AccessibilityRest"
+               },
+               "default":{
+                  "type":"string"
+               },
+               "lg":{
+                  "type":"string"
+               },
+               "md":{
+                  "type":"string"
+               },
+               "sm":{
+                  "type":"string"
+               },
+               "type":{
+                  "type":"string"
+               },
+               "thumbnail":{
+                  "$ref":"#/components/schemas/ThumbnailRest"
+               }
+            }
+         },
+         "SingapurResponseListBannerRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/BannerRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "TextRest":{
+            "type":"object",
+            "properties":{
+               "body":{
+                  "type":"string"
+               },
+               "subTitle":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               }
+            }
+         },
+         "ThumbnailRest":{
+            "type":"object",
+            "properties":{
+               "default":{
+                  "type":"string"
+               },
+               "lg":{
+                  "type":"string"
+               },
+               "md":{
+                  "type":"string"
+               },
+               "sm":{
+                  "type":"string"
+               }
+            }
+         },
+         "ValidityRest":{
+            "type":"object",
+            "properties":{
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         }
       }
-     },
-     "SingapurResponseUserRest": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "$ref": "#/components/schemas/UserRest"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "AuthTokenRest": {
-      "type": "object",
-      "properties": {
-       "authToken": {
-        "type": "string"
-       }
-      },
-      "description": "Contain data related to request"
-     },
-     "SingapurResponseAuthTokenRest": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "$ref": "#/components/schemas/AuthTokenRest"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "ButtonRest": {
-      "type": "object",
-      "properties": {
-       "href": {
-        "type": "string"
-       },
-       "isNav": {
-        "type": "boolean"
-       },
-       "order": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "show": {
-        "type": "boolean"
-       },
-       "text": {
-        "type": "string"
-       },
-       "orderMobile": {
-        "type": "integer",
-        "format": "int64"
-       }
-      }
-     },
-     "MenuRest": {
-      "type": "object",
-      "properties": {
-       "buttons": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/ButtonRest"
-        }
-       },
-       "services": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/ServiceRest"
-        }
-       },
-       "updatedAt": {
-        "type": "string",
-        "format": "date-time"
-       }
-      },
-      "description": "Contain data related to request"
-     },
-     "ServiceRest": {
-      "type": "object",
-      "properties": {
-       "id": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "landingPage": {
-        "type": "string"
-       },
-       "subServices": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/SubServiceRest"
-        }
-       },
-       "title": {
-        "type": "string"
-       }
-      }
-     },
-     "SingapurResponseMenuRest": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "$ref": "#/components/schemas/MenuRest"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "SubServiceRest": {
-      "type": "object",
-      "properties": {
-       "id": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "description": {
-        "type": "string"
-       },
-       "landingPage": {
-        "type": "array",
-        "items": {
-         "type": "string"
-        }
-       }
-      }
-     },
-     "ChatRest": {
-      "type": "object",
-      "properties": {
-       "messages": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/MessageDto"
-        }
-       },
-       "users": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/UserDto"
-        }
-       }
-      },
-      "description": "Contain data related to request"
-     },
-     "MessageDto": {
-      "type": "object",
-      "properties": {
-       "message": {
-        "type": "string"
-       },
-       "sender": {
-        "type": "string"
-       },
-       "sent": {
-        "type": "string",
-        "format": "date-time"
-       },
-       "type": {
-        "type": "string"
-       },
-       "documentType": {
-        "type": "string"
-       },
-       "idMessage": {
-        "type": "string"
-       },
-       "seen": {
-        "type": "boolean"
-       }
-      }
-     },
-     "SingapurResponseChatRest": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "$ref": "#/components/schemas/ChatRest"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "UserDto": {
-      "type": "object",
-      "properties": {
-       "idUser": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "idMember": {
-        "type": "string"
-       },
-       "type": {
-        "type": "string"
-       }
-      }
-     },
-     "SingapurResponseBoolean": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "type": "boolean",
-        "description": "Contain data related to request"
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "MeesageRest": {
-      "type": "object",
-      "properties": {
-       "seen": {
-        "type": "boolean"
-       },
-       "message": {
-        "type": "string"
-       },
-       "sender": {
-        "type": "string"
-       },
-       "sent": {
-        "type": "string",
-        "format": "date-time"
-       },
-       "isSeen": {
-        "type": "boolean"
-       },
-       "type": {
-        "type": "string"
-       },
-       "documentType": {
-        "type": "string"
-       },
-       "idMessage": {
-        "type": "string"
-       },
-       "value": {
-        "type": "string"
-       },
-       "value2": {
-        "type": "string"
-       },
-       "status": {
-        "type": "string"
-       },
-       "text": {
-        "type": "string"
-       },
-       "timeStampServer": {
-        "type": "string",
-        "format": "date-time"
-       },
-       "address": {
-        "type": "string"
-       },
-       "city": {
-        "type": "string"
-       },
-       "complementAddress": {
-        "type": "string"
-       },
-       "province": {
-        "type": "string"
-       },
-       "zipCode": {
-        "type": "string"
-       },
-       "valueDate": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "earlyPayment": {
-        "type": "string"
-       }
-      }
-     },
-     "ChatRequestRest": {
-      "type": "object",
-      "properties": {
-       "id": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "accepted": {
-        "type": "boolean"
-       },
-       "active": {
-        "type": "boolean"
-       },
-       "earlyPayment": {
-        "type": "string"
-       },
-       "lastUpdate": {
-        "type": "string",
-        "format": "date-time"
-       },
-       "members": {
-        "type": "array",
-        "items": {
-         "type": "string"
-        }
-       },
-       "operationId": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "professionalProfileRest": {
-        "$ref": "#/components/schemas/ProfessionalProfileRest"
-       },
-       "requestId": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "requestStatus": {
-        "type": "string"
-       },
-       "status": {
-        "type": "string"
-       },
-       "toValorate": {
-        "type": "boolean"
-       },
-       "messageRest": {
-        "type": "array",
-        "items": {
-         "$ref": "#/components/schemas/MeesageRest"
-        }
-       },
-       "service": {
-        "$ref": "#/components/schemas/OfferedServiceRest"
-       }
-      }
-     },
-     "OfferedServiceRest": {
-      "required": [
-       "title"
-      ],
-      "type": "object",
-      "properties": {
-       "id": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "offeredServiceId": {
-        "type": "integer",
-        "format": "int64"
-       },
-       "code": {
-        "type": "string"
-       },
-       "title": {
-        "type": "string"
-       }
-      },
-      "description": "This model represents the offered service"
-     },
-     "ProfessionalProfileRest": {
-      "type": "object",
-      "properties": {
-       "name": {
-        "type": "string"
-       },
-       "lastName": {
-        "type": "string"
-       },
-       "title": {
-        "type": "string"
-       },
-       "avatar": {
-        "type": "string"
-       },
-       "hours": {
-        "type": "string"
-       }
-      }
-     },
-     "AccessibilityRest": {
-      "type": "object",
-      "properties": {
-       "alt": {
-        "type": "string"
-       }
-      }
-     },
-     "ActionRest": {
-      "type": "object",
-      "properties": {
-       "code": {
-        "type": "string"
-       }
-      }
-     },
-     "BannerRest": {
-      "type": "object",
-      "properties": {
-       "action": {
-        "$ref": "#/components/schemas/ActionRest"
-       },
-       "layout": {
-        "$ref": "#/components/schemas/LayoutRest"
-       },
-       "link": {
-        "$ref": "#/components/schemas/LinkRest"
-       },
-       "media": {
-        "$ref": "#/components/schemas/MediaRest"
-       },
-       "priority": {
-        "type": "integer",
-        "format": "int32"
-       },
-       "text": {
-        "$ref": "#/components/schemas/TextRest"
-       },
-       "validity": {
-        "$ref": "#/components/schemas/ValidityRest"
-       }
-      },
-      "description": "Contain data related to request"
-     },
-     "LayoutRest": {
-      "type": "object",
-      "properties": {
-       "hAlign": {
-        "type": "string"
-       },
-       "template": {
-        "type": "string"
-       },
-       "vAlign": {
-        "type": "string"
-       }
-      }
-     },
-     "LinkRest": {
-      "type": "object",
-      "properties": {
-       "target": {
-        "type": "string"
-       },
-       "type": {
-        "type": "string"
-       },
-       "url": {
-        "type": "string"
-       },
-       "text": {
-        "type": "string"
-       }
-      }
-     },
-     "MediaRest": {
-      "type": "object",
-      "properties": {
-       "accessibility": {
-        "$ref": "#/components/schemas/AccessibilityRest"
-       },
-       "default": {
-        "type": "string"
-       },
-       "lg": {
-        "type": "string"
-       },
-       "md": {
-        "type": "string"
-       },
-       "sm": {
-        "type": "string"
-       },
-       "type": {
-        "type": "string"
-       },
-       "thumbnail": {
-        "$ref": "#/components/schemas/ThumbnailRest"
-       }
-      }
-     },
-     "SingapurResponseListBannerRest": {
-      "type": "object",
-      "properties": {
-       "status": {
-        "type": "string",
-        "description": "Result of the action, for example \"Success\"."
-       },
-       "code": {
-        "type": "string",
-        "description": "Status code, extra information related to HTTP response"
-       },
-       "message": {
-        "type": "string",
-        "description": "Specific message, result of the action"
-       },
-       "data": {
-        "type": "array",
-        "description": "Contain data related to request",
-        "items": {
-         "$ref": "#/components/schemas/BannerRest"
-        }
-       }
-      },
-      "description": "This model is the envelope"
-     },
-     "TextRest": {
-      "type": "object",
-      "properties": {
-       "body": {
-        "type": "string"
-       },
-       "subTitle": {
-        "type": "string"
-       },
-       "title": {
-        "type": "string"
-       }
-      }
-     },
-     "ThumbnailRest": {
-      "type": "object",
-      "properties": {
-       "default": {
-        "type": "string"
-       },
-       "lg": {
-        "type": "string"
-       },
-       "md": {
-        "type": "string"
-       },
-       "sm": {
-        "type": "string"
-       }
-      }
-     },
-     "ValidityRest": {
-      "type": "object",
-      "properties": {
-       "startDate": {
-        "type": "string",
-        "format": "date-time"
-       },
-       "endDate": {
-        "type": "string",
-        "format": "date-time"
-       }
-      }
-     }
-    }
    }
-  }
+}
