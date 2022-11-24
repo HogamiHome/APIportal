@@ -1418,6 +1418,78 @@
             }
          }
       },
+      "/request-server/v1/professionals/{professionalId}/requests/operation-date":{
+         "get":{
+            "tags":[
+               "Request Rest Controller"
+            ],
+            "summary":"This method retrieves requests by professionalId, operationDate and status to be excluded",
+            "operationId":"retrieveRequestsByStatusNotInAndOperationDate",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationDate",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"integer",
+                        "format":"int64"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The status introduced is correct and a list of requests is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListRequestRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListRequestRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/professionals/requests/{requestId}":{
          "get":{
             "tags":[
@@ -1979,6 +2051,75 @@
             }
          }
       },
+      "/request-server/v1/clients/{clientId}/requests/{requestId}/state/{state}":{
+         "put":{
+            "tags":[
+               "Client Request Controller"
+            ],
+            "summary":"Update client request",
+            "operationId":"acceptDateClientRequest",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"state",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RequestRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/clients/{clientId}/requests/{requestId}/rejection":{
          "post":{
             "tags":[
@@ -2477,13 +2618,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -2502,17 +2643,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             },
@@ -2525,6 +2666,9 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -2532,9 +2676,6 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
                   "type":"boolean"
@@ -2724,10 +2865,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -3202,13 +3343,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -3227,17 +3368,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             },
@@ -3328,26 +3469,6 @@
                }
             }
          },
-         "SingapurResponseOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/OfferedServiceRest"
-               }
-            }
-         },
          "SingapurResponseListRequestRest":{
             "type":"object",
             "properties":{
@@ -3369,6 +3490,26 @@
                   "items":{
                      "$ref":"#/components/schemas/RequestRest"
                   }
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             }
          },

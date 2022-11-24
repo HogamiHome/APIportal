@@ -39,6 +39,9 @@
          "name":"Operation Controller"
       },
       {
+         "name":"Analytics Controller"
+      },
+      {
          "name":"Client Operation Controller"
       },
       {
@@ -1297,6 +1300,78 @@
             }
          }
       },
+      "/operation-server/api/v1/professionals/{professionalId}/operations/operation-date":{
+         "get":{
+            "tags":[
+               "Operation Controller"
+            ],
+            "summary":"This method retrieves operations by professionalId, operationDate and status to be excluded",
+            "operationId":"retrieveOperationsByStatusNotInAndStartTime",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"startTime",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"status",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"integer",
+                        "format":"int64"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A list of operations is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/professionals/{professionalId}/offered-services-id":{
          "get":{
             "tags":[
@@ -1762,6 +1837,58 @@
             }
          }
       },
+      "/operation-server/api/v1/operations/professionals/{professionalId}":{
+         "get":{
+            "tags":[
+               "Operation Controller"
+            ],
+            "summary":"${api.operation-server.defs.operation.retrieveOperationsByProfessionalId.name}",
+            "operationId":"retrieveOperationsByProfessionalId",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The id is correct and a list of the related operations is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/operations/operationStatusHistory/{operationStatusHistoryId}":{
          "delete":{
             "tags":[
@@ -1802,6 +1929,57 @@
                },
                "400":{
                   "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/operation-server/api/v1/operations/analytics":{
+         "post":{
+            "tags":[
+               "Analytics Controller"
+            ],
+            "summary":"Push analytics",
+            "operationId":"pushAnalytics",
+            "parameters":[
+               {
+                  "name":"type",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
                   "content":{
                      "application/json":{
                         "schema":{
@@ -2752,6 +2930,75 @@
             }
          }
       },
+      "/operation-server/api/v1/clients/{clientId}/operations/{operationId}/state/{state}":{
+         "put":{
+            "tags":[
+               "Client Operation Controller"
+            ],
+            "summary":"The update for accepted date operation according to the client ID and operation is carried out.",
+            "operationId":"acceptDateClientOperation",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"state",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/clients/{clientId}/operations/{operationId}/rejection":{
          "post":{
             "tags":[
@@ -3589,6 +3836,14 @@
                },
                "operationRejectionRest":{
                   "$ref":"#/components/schemas/OperationRejectionRest"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -3638,6 +3893,12 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -3646,12 +3907,6 @@
                   "format":"int32"
                },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -3663,22 +3918,22 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -3732,10 +3987,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
