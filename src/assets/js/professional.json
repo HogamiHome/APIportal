@@ -225,7 +225,7 @@
                   }
                },
                {
-                  "name":"professionalCampaignsRest",
+                  "name":"campaigns",
                   "in":"query",
                   "required":false,
                   "schema":{
@@ -8415,6 +8415,73 @@
          }
       },
       "/professional/v1/hierarchy-price":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the areas hierarchy of a professional",
+            "operationId":"retrieveHierarchyZonesProfessional",
+            "parameters":[
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Professionals have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               }
+            }
+         },
          "post":{
             "tags":[
                "HierarchyPriceController"
@@ -8954,13 +9021,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8982,15 +9049,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -9002,16 +9069,16 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "paged":{
                   "type":"boolean"
@@ -9045,10 +9112,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -9376,13 +9443,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -9404,15 +9471,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -9898,13 +9965,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -9926,15 +9993,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -10711,13 +10778,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -10739,15 +10806,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -10994,13 +11061,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -11022,15 +11089,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -12045,13 +12112,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -12073,15 +12140,15 @@
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -12972,6 +13039,12 @@
                "deviceInfoId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "permissions":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
                }
             },
             "description":"This model used to response to login and conatains all data about the client"
@@ -13119,6 +13192,132 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ProfessionalInformationBillingRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "LevelInfoRest":{
+            "type":"object",
+            "properties":{
+               "levelId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelLabel":{
+                  "type":"string"
+               },
+               "levelCode":{
+                  "type":"string"
+               },
+               "levelOrder":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents a level of the hierarchy information"
+         },
+         "LevelRest":{
+            "type":"object",
+            "properties":{
+               "levelInfoRest":{
+                  "$ref":"#/components/schemas/LevelInfoRest"
+               },
+               "costRest":{
+                  "$ref":"#/components/schemas/CostRest"
+               },
+               "levelRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/LevelRest"
+                  }
+               }
+            },
+            "description":"This model represents a level of the hierarchy"
+         },
+         "PageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProfessionalHierarchyRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "ProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "professionalServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelRest":{
+                  "$ref":"#/components/schemas/LevelRest"
+               },
+               "statusHierarchy":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageProfessionalHierarchyRest"
                }
             },
             "description":"This model is the envelope"
