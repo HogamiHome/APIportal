@@ -557,7 +557,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v2/professionals/{professionalId}/requests":{
@@ -1307,7 +1308,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          },
          "post":{
             "tags":[
@@ -1686,7 +1688,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/{professionalId}/services/details/{offeredServiceId}":{
@@ -1755,7 +1758,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/{professionalId}/requests":{
@@ -4837,7 +4841,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/sendNotificationOfProductAndService/{requestId}":{
@@ -5485,7 +5490,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/areas/{zipCode}":{
@@ -9046,14 +9052,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -9072,6 +9078,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -9079,12 +9091,6 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -9468,14 +9474,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -9990,14 +9996,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -10803,14 +10809,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -11086,14 +11092,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -12137,14 +12143,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
@@ -13262,14 +13268,14 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
