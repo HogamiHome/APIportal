@@ -1556,7 +1556,7 @@
             "tags":[
                "Coupon Version Controller"
             ],
-            "summary":"Create Coupon Version",
+            "summary":"Create or Update Coupon Version. To update, the value of the id must be reported.",
             "operationId":"createOrUpdateCouponVersion",
             "requestBody":{
                "content":{
@@ -1667,7 +1667,7 @@
             "tags":[
                "Coupon Version Controller"
             ],
-            "summary":"Create or Update Coupon Version",
+            "summary":"Create or Update Coupon Version Description",
             "operationId":"createOrUpdateCouponVersionDescription",
             "requestBody":{
                "content":{
@@ -1928,7 +1928,7 @@
             "tags":[
                "Coupon Terms And Agreements Controller"
             ],
-            "summary":"Retrieve coupon terms and agreements by coupon code",
+            "summary":"Create or Update terms and agreements of a coupon",
             "operationId":"createOrUpdateCouponTermsAndAgreements",
             "requestBody":{
                "content":{
@@ -2382,7 +2382,7 @@
             "tags":[
                "Coupon Scope Controller"
             ],
-            "summary":"Create coupon scope",
+            "summary":"Create or Update coupon scope",
             "operationId":"createOrUpdateCouponScope",
             "requestBody":{
                "content":{
@@ -2532,6 +2532,57 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListCouponScopeDescriptionDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/coupon-entity-relation":{
+         "post":{
+            "tags":[
+               "Coupon Entity Relation Controller"
+            ],
+            "summary":"Create or Update coupon entity relation. To update, the value of the id must be reported.",
+            "operationId":"createOrUpdateCouponEntityRelation",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponEntityRelationDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -3201,15 +3252,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -3227,19 +3278,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -3267,10 +3318,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -4693,6 +4744,43 @@
             },
             "description":"This model is the envelope"
          },
+         "CouponEntityRelationDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponDto":{
+                  "$ref":"#/components/schemas/CouponDto"
+               },
+               "platformEntityDto":{
+                  "$ref":"#/components/schemas/PlatformEntityDto"
+               },
+               "couponEntityRelationTypeDto":{
+                  "$ref":"#/components/schemas/CouponEntityRelationTypeDto"
+               },
+               "value":{
+                  "type":"string"
+               }
+            }
+         },
          "CouponEntityRelationTypeDto":{
             "type":"object",
             "properties":{
@@ -4753,44 +4841,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "CouponEntityRelationDto":{
-            "type":"object",
-            "properties":{
-               "createDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updateDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "createUserId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "updateUserId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "couponDto":{
-                  "$ref":"#/components/schemas/CouponDto"
-               },
-               "platformEntityDto":{
-                  "$ref":"#/components/schemas/PlatformEntityDto"
-               },
-               "couponEntityRelationTypeDto":{
-                  "$ref":"#/components/schemas/CouponEntityRelationTypeDto"
-               },
-               "value":{
-                  "type":"string"
-               }
-            },
-            "description":"Contain data related to request"
          },
          "SingapurResponseListCouponEntityRelationDto":{
             "type":"object",
