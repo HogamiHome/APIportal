@@ -1360,6 +1360,70 @@
             }
          }
       },
+      "/offered-services-server/v1/coupon/validate-is-assignable/{couponCode}": {
+			"post": {
+				"tags": ["${api.offered-services-server.defs.coupon.name}"],
+				"summary": "${api.offered-services-server.defs.coupon.validateIsAssignable.description}",
+				"operationId": "validateIsAssignable",
+				"parameters": [{
+					"name": "couponCode",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": false,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CouponValidationDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request \r\n",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseCouponValidateResponseDTO"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Data returned correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseCouponValidateResponseDTO"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/offered-services-server/v1/coupon/type":{
          "get":{
             "tags":[
@@ -4075,6 +4139,63 @@
             },
             "description":"This model is the envelope"
          },
+         "CouponValidationDTO": {
+				"type": "object",
+				"properties": {
+					"currentDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"offeredService": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"clientLogin": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					}
+				}
+			},
+			"CouponValidateResponseDTO": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"description": "Contain data related to request"
+			},
+			"SingapurResponseCouponValidateResponseDTO": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/CouponValidateResponseDTO"
+					}
+				},
+				"description": "This model is the envelope"
+			},
          "CouponTypeDto":{
             "type":"object",
             "properties":{
