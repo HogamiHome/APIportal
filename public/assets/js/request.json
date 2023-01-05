@@ -120,75 +120,69 @@
              }
           }
        },
-       "/request-server/v2/professionals/{professionalId}/requests/{requestId}":{
-          "get":{
-             "tags":[
-                "Request Rest Controller"
-             ],
-             "summary":"Retrieve professional request taking in consideration that a request can have multiple offeredService",
-             "operationId":"retrieveProfessionalRequestV2",
-             "parameters":[
-                {
-                   "name":"Accept-Language",
-                   "in":"header",
-                   "required":false,
-                   "schema":{
-                      "type":"string"
-                   }
-                },
-                {
-                   "name":"professionalId",
-                   "in":"path",
-                   "required":true,
-                   "schema":{
-                      "type":"integer",
-                      "format":"int64"
-                   }
-                },
-                {
-                   "name":"requestId",
-                   "in":"path",
-                   "required":true,
-                   "schema":{
-                      "type":"integer",
-                      "format":"int64"
-                   }
-                }
-             ],
-             "responses":{
-                "500":{
-                   "description":"Internal server error",
-                   "content":{
-                      "*/*":{
-                         "schema":{
-                            "$ref":"#/components/schemas/SingapurResponse"
-                         }
-                      }
-                   }
-                },
-                "200":{
-                   "description":"The request is found and returned to the user",
-                   "content":{
-                      "application/json;charset=UTF-8":{
-                         "schema":{
-                            "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
-                         }
-                      }
-                   }
-                },
-                "400":{
-                   "description":"Bad request",
-                   "content":{
-                      "application/json;charset=UTF-8":{
-                         "schema":{
-                            "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
-                         }
-                      }
-                   }
-                }
-             }
-          }
-       },
+       "/request-server/v2/professionals/{professionalId}/requests/{requestId}": {
+			"get": {
+				"tags": ["Request Rest Controller"],
+				"summary": "Retrieve professional request taking in consideration that a request can have multiple offeredService",
+				"operationId": "retrieveProfessionalRequestV2",
+				"parameters": [{
+					"name": "Accept-Language",
+					"in": "header",
+					"required": false,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "professionalId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "requestId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The request is found and returned to the user",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseRequestV2Rest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseRequestV2Rest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
        "/request-server/v2/professionals/requests/{requestId}":{
           "get":{
              "tags":[

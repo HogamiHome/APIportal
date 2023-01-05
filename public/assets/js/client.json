@@ -130,72 +130,69 @@
             }
          }
       },
-      "/client/v2/clients/{clientId}/{requestId}":{
-         "get":{
-            "tags":[
-               "${api.client.defs.request.name}"
-            ],
-            "summary":"${api.client.defs.request.retrieveRequest.description}",
-            "operationId":"retrieveRequestV2",
-            "parameters":[
-               {
-                  "name":"Authorization",
-                  "in":"header",
-                  "required":true,
-                  "schema":{
-                     "type":"string"
-                  }
-               },
-               {
-                  "name":"clientId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               },
-               {
-                  "name":"requestId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "application/json;charset=UTF-8":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseRequestV2Rest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
+      "/client/v2/clients/{clientId}/{requestId}": {
+			"get": {
+				"tags": ["${api.client.defs.request.name}"],
+				"summary": "${api.client.defs.request.retrieveRequest.description}",
+				"operationId": "retrieveRequestV2",
+				"parameters": [{
+					"name": "Authorization",
+					"in": "header",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}, {
+					"name": "clientId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "requestId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}, {
+					"name": "Accept-Language",
+					"in": "header",
+					"required": false,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseRequestV2Rest"
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"bearer-key": []
+				}]
+			}
+		},
       "/client/v2/clients/{clientId}/operations":{
          "get":{
             "tags":[
