@@ -337,45 +337,47 @@
             }
          }
       },
-      "/payment-server/api/v1/register-payments": {
-			"post": {
-				"tags": ["PaymentRestController"],
-				"summary": "Register payment for operation",
-				"operationId": "registerPayment",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/PaymentsRest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"500": {
-						"description": "Internal Server Error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json;charset=UTF-8": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponsePaymentsRest"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
+      "/payment-server/api/v1/register-payments":{
+         "post":{
+            "tags":[
+               "PaymentRestController"
+            ],
+            "summary":"Register payment for operation",
+            "operationId":"registerPayment",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PaymentsRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentsRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/refunds/payment/{paymentId}":{
          "get":{
             "tags":[
@@ -418,54 +420,58 @@
             }
          }
       },
-      "/payment-server/api/v1/refunds/create/{paymentId}": {
-			"post": {
-				"tags": ["RefundRestController"],
-				"summary": "Create only refund in database",
-				"operationId": "createRefundFromBatch",
-				"parameters": [{
-					"name": "paymentId",
-					"in": "path",
-					"required": true,
-					"schema": {
-						"type": "integer",
-						"format": "int64"
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/RefundRest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"500": {
-						"description": "Internal Server Error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseRefundRest"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
+      "/payment-server/api/v1/refunds/create/{paymentId}":{
+         "post":{
+            "tags":[
+               "RefundRestController"
+            ],
+            "summary":"Create only refund in database",
+            "operationId":"createRefundFromBatch",
+            "parameters":[
+               {
+                  "name":"paymentId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RefundRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRefundRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/professionals/reportOperation":{
          "get":{
             "tags":[
@@ -974,44 +980,48 @@
             }
          }
       },
-      "/payment-server/api/v1/operationsPaycometBatchPayment": {
-			"get": {
-				"tags": ["PayCometSearchOperationController"],
-				"summary": "Retrieve Paycomet Operation by dates for Batch Process Error Payments",
-				"operationId": "retrieveOperationsPaycometFromDate",
-				"parameters": [{
-					"name": "fromDate",
-					"in": "query",
-					"required": true,
-					"schema": {
-						"type": "integer",
-						"format": "int64"
-					}
-				}],
-				"responses": {
-					"500": {
-						"description": "Internal Server Error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json;charset=UTF-8": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseListOperationsPaycometBatchRest"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
+      "/payment-server/api/v1/operationsPaycometBatchPayment":{
+         "get":{
+            "tags":[
+               "PayCometSearchOperationController"
+            ],
+            "summary":"Retrieve Paycomet Operation by dates for Batch Process Error Payments",
+            "operationId":"retrieveOperationsPaycometFromDate",
+            "parameters":[
+               {
+                  "name":"fromDate",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationsPaycometBatchRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/operationsPayCometValidate":{
          "post":{
             "tags":[
@@ -1803,6 +1813,14 @@
                   "schema":{
                      "$ref":"#/components/schemas/Pageable"
                   }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "requestBody":{
@@ -2411,6 +2429,80 @@
                }
             }
          },
+         "ClientDetailsRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "clientId":{
+                  "type":"integer",
+                  "description":"Id of the client",
+                  "format":"int64"
+               },
+               "clientName":{
+                  "type":"string",
+                  "description":"Name of the client"
+               },
+               "clientLastName":{
+                  "type":"string",
+                  "description":"Lastname of the client"
+               },
+               "avatar":{
+                  "type":"string"
+               }
+            }
+         },
+         "PaymentsRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "signature":{
+                  "type":"string"
+               },
+               "accountCode":{
+                  "type":"string"
+               },
+               "authCode":{
+                  "type":"string"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "clientDetailsRest":{
+                  "$ref":"#/components/schemas/ClientDetailsRest"
+               },
+               "paytpvResponseRest":{
+                  "$ref":"#/components/schemas/PaytpvResponseRest"
+               },
+               "refundsRest":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RefundRest"
+                  }
+               },
+               "amount":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "createUser":{
+                  "type":"string"
+               }
+            }
+         },
          "RefundRest":{
             "required":[
                "refundType"
@@ -2439,6 +2531,23 @@
                }
             }
          },
+         "SingapurResponsePaymentsRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PaymentsRest"
+               }
+            }
+         },
          "SingapurResponseListRefundRest":{
             "type":"object",
             "properties":{
@@ -2456,6 +2565,23 @@
                   "items":{
                      "$ref":"#/components/schemas/RefundRest"
                   }
+               }
+            }
+         },
+         "SingapurResponseRefundRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/RefundRest"
                }
             }
          },
@@ -2642,80 +2768,6 @@
                }
             }
          },
-         "ClientDetailsRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "clientId":{
-                  "type":"integer",
-                  "description":"Id of the client",
-                  "format":"int64"
-               },
-               "clientName":{
-                  "type":"string",
-                  "description":"Name of the client"
-               },
-               "clientLastName":{
-                  "type":"string",
-                  "description":"Lastname of the client"
-               },
-               "avatar":{
-                  "type":"string"
-               }
-            }
-         },
-         "PaymentsRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "reference":{
-                  "type":"string"
-               },
-               "signature":{
-                  "type":"string"
-               },
-               "accountCode":{
-                  "type":"string"
-               },
-               "authCode":{
-                  "type":"string"
-               },
-               "operationId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "clientDetailsRest":{
-                  "$ref":"#/components/schemas/ClientDetailsRest"
-               },
-               "paytpvResponseRest":{
-                  "$ref":"#/components/schemas/PaytpvResponseRest"
-               },
-               "refundsRest":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/RefundRest"
-                  }
-               },
-               "amount":{
-                  "type":"number"
-               },
-               "currency":{
-                  "type":"string"
-               },
-					"createUser": {
-						"type": "string"
-					}
-            }
-         },
          "SingapurResponseListPaymentsRest":{
             "type":"object",
             "properties":{
@@ -2829,23 +2881,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ProcessPaymentRest"
-               }
-            }
-         },
-         "SingapurResponsePaymentsRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/PaymentsRest"
                }
             }
          },
@@ -2990,57 +3025,57 @@
                }
             }
          },
-         "OperationsPaycometBatchRest": {
-				"type": "object",
-				"properties": {
-					"id": {
-						"type": "integer",
-						"format": "int64"
-					},
-					"operationId": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"transactionDate": {
-						"type": "string"
-					},
-					"reference": {
-						"type": "string"
-					},
-					"operationName": {
-						"type": "string"
-					},
-					"amount": {
-						"type": "string"
-					},
-					"currency": {
-						"type": "string"
-					},
-					"concept": {
-						"type": "string"
-					}
-				}
-			},
-         "SingapurResponseListOperationsPaycometBatchRest": {
-				"type": "object",
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"code": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"type": "array",
-						"items": {
-							"$ref": "#/components/schemas/OperationsPaycometBatchRest"
-						}
-					}
-				}
-			},
+         "OperationsPaycometBatchRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "transactionDate":{
+                  "type":"string"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "operationName":{
+                  "type":"string"
+               },
+               "amount":{
+                  "type":"string"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "concept":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseListOperationsPaycometBatchRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationsPaycometBatchRest"
+                  }
+               }
+            }
+         },
          "PayCometOperationBatchRest":{
             "type":"object",
             "properties":{
@@ -3175,13 +3210,13 @@
          "PagePayCometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -3197,6 +3232,10 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "last":{
                   "type":"boolean"
                },
@@ -3205,10 +3244,6 @@
                },
                "first":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
@@ -3222,14 +3257,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -3238,6 +3265,14 @@
                },
                "paged":{
                   "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -3373,10 +3408,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -3923,6 +3958,64 @@
                }
             }
          },
+         "OperationCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "OperationPaymentBilling":{
             "type":"object",
             "properties":{
@@ -3955,6 +4048,9 @@
                   "type":"number"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "taxRate":{
@@ -4018,19 +4114,25 @@
                },
                "isCanceledLessTwentyFourHours":{
                   "type":"boolean"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             }
          },
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4046,6 +4148,10 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "last":{
                   "type":"boolean"
                },
@@ -4054,10 +4160,6 @@
                },
                "first":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
