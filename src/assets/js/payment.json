@@ -3232,21 +3232,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -3260,15 +3260,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "paged":{
                   "type":"boolean"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
                },
                "pageNumber":{
                   "type":"integer",
@@ -3408,10 +3408,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -3982,6 +3982,18 @@
                   "type":"string",
                   "format":"date-time"
                },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionFrom":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionTo":{
+                  "type":"string",
+                  "format":"date-time"
+               },
                "couponCode":{
                   "type":"string"
                },
@@ -3993,6 +4005,14 @@
                },
                "couponScope":{
                   "type":"string"
+               },
+               "usageLimit":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "usageLimitPerUser":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "minimumAmount":{
                   "type":"number"
@@ -4148,21 +4168,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             }
          },
