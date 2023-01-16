@@ -1542,6 +1542,9 @@
                },
                "service":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "requestCouponRest":{
+                  "$ref":"#/components/schemas/RequestCouponRest"
                }
             }
          },
@@ -1585,6 +1588,64 @@
                },
                "hours":{
                   "type":"string"
+               }
+            }
+         },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
                }
             }
          },
