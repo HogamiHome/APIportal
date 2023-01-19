@@ -45,6 +45,9 @@
          "name":"OperationAddressController"
       },
       {
+         "name":"CouponVersionController"
+      },
+      {
          "name":"LogAPKController"
       },
       {
@@ -106,9 +109,6 @@
       },
       {
          "name":"ProfessionalServiceLevelController"
-      },
-      {
-         "name":"${api.backoffice-api.defs.coupon-version.name}"
       },
       {
          "name":"ProfessionalStatusAllowed"
@@ -7912,6 +7912,65 @@
             ]
          }
       },
+      "/professional/v1/master-area/zip-code-name-and-province-name/{zipCode}":{
+         "get":{
+            "tags":[
+               "MasterAreaController"
+            ],
+            "summary":"Retrieve ZipCode Name and Province name by zipCode",
+            "operationId":"retrieveMasterAreaZipCodeCityByZipCode",
+            "parameters":[
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Retrieve master area correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/professional/v1/master-area/area-code":{
          "get":{
             "tags":[
@@ -8823,9 +8882,9 @@
       "/professional/v1/coupons-versions/{couponVersionId}":{
          "get":{
             "tags":[
-               "${api.backoffice-api.defs.coupon-version.name}"
+               "CouponVersionController"
             ],
-            "summary":"${api.backoffice-api.defs.coupon-version.retrieveCouponVersionById.description}",
+            "summary":"Retrieve data of coupon version filtering by id version",
             "operationId":"retrieveCouponVersionById",
             "parameters":[
                {
@@ -9240,12 +9299,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -9253,6 +9306,12 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -13259,6 +13318,45 @@
                   "items":{
                      "$ref":"#/components/schemas/MasterAreaRest"
                   }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "MasterAreaZipCodeCityRest":{
+            "required":[
+               "city",
+               "provinceName"
+            ],
+            "type":"object",
+            "properties":{
+               "city":{
+                  "type":"string",
+                  "description":"Area Label (City) of zip code on Master Area"
+               },
+               "provinceName":{
+                  "type":"string",
+                  "description":"Province Name (Master Area lvl 3) of zip code on Master Area"
+               }
+            },
+            "description":"This model represents a city and province name for a zip code"
+         },
+         "SingapurResponseMasterAreaZipCodeCityRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/MasterAreaZipCodeCityRest"
                }
             },
             "description":"This model is the envelope"
