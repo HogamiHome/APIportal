@@ -63,6 +63,9 @@
          "name":"RequestController"
       },
       {
+         "name":"${api.professional.defs.request-offered-service.name}"
+      },
+      {
          "name":"PriceController"
       },
       {
@@ -2070,6 +2073,83 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseRequestRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/services/{requestServiceId}":{
+         "put":{
+            "tags":[
+               "${api.professional.defs.request-offered-service.name}"
+            ],
+            "summary":"Update Operation Offered Service",
+            "operationId":"updateRequestService",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OfferedServiceRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRest"
                         }
                      }
                   }
@@ -9270,9 +9350,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -9281,6 +9358,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -9339,10 +9419,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -9692,9 +9772,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -9703,6 +9780,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -10461,9 +10541,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -10472,6 +10549,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -11252,9 +11332,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -11263,6 +11340,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -11377,6 +11457,27 @@
                },
                "data":{
                   "$ref":"#/components/schemas/RequestRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             },
             "description":"This model is the envelope"
@@ -11535,9 +11636,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -11546,6 +11644,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -12489,9 +12590,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -12500,6 +12598,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -13653,9 +13754,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -13664,6 +13762,9 @@
                   "format":"int32"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
