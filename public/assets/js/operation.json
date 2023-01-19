@@ -3876,6 +3876,10 @@
                   "type":"number",
                   "description":"Total cost of the operation without discount"
                },
+               "amountDiscount":{
+                  "type":"number",
+                  "description":"The amount discount to operation"
+               },
                "totalPaid":{
                   "type":"number",
                   "description":"Total cost of the operation"
@@ -4000,13 +4004,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4025,6 +4029,10 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "first":{
                   "type":"boolean"
                },
@@ -4033,10 +4041,6 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -4050,12 +4054,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -4063,6 +4061,12 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -4116,10 +4120,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -5125,6 +5129,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },

@@ -3167,6 +3167,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -3210,13 +3213,13 @@
          "PagePayCometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -3232,21 +3235,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
                   "type":"boolean"
                },
-               "last":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -3257,22 +3260,22 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -3297,6 +3300,9 @@
                   "type":"string"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -3955,6 +3961,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -4073,6 +4082,9 @@
                "totalCostOriginal":{
                   "type":"number"
                },
+               "amountDiscount":{
+                  "type":"number"
+               },
                "taxRate":{
                   "type":"number"
                },
@@ -4146,13 +4158,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -4168,21 +4180,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
                   "type":"boolean"
                },
-               "last":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
