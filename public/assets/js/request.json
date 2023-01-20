@@ -1197,7 +1197,7 @@
             "tags":[
                "Offereds Service"
             ],
-            "summary":"${api.request-server.defs.offered-service.updateRequestService.name}",
+            "summary":"Update request service",
             "operationId":"updateRequestService",
             "parameters":[
                {
@@ -1316,6 +1316,76 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseRequestRejectionRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/professionals/{professionalId}/requests/{requestId}/products/{productId}":{
+         "put":{
+            "tags":[
+               "Request Product Controller"
+            ],
+            "summary":"Update requst product",
+            "operationId":"updateRequestProduct",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"productId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ProductRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProductRest"
                         }
                      }
                   }
@@ -2795,15 +2865,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -2829,10 +2899,10 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -3615,15 +3685,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "first":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
