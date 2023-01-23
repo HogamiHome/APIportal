@@ -4428,21 +4428,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -4453,20 +4453,20 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "paged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "unpaged":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "paged":{
+                  "type":"boolean"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -4492,10 +4492,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4768,6 +4768,9 @@
                   "type":"string"
                },
                "price":{
+                  "type":"number"
+               },
+               "priceOriginal":{
                   "type":"number"
                },
                "currency":{
@@ -5064,21 +5067,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -5335,6 +5338,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -5684,21 +5690,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6138,6 +6144,15 @@
                "clientDetails":{
                   "$ref":"#/components/schemas/ClientDataRest"
                },
+               "totalPrice":{
+                  "type":"number"
+               },
+               "totalPriceOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
+               },
                "offeredService":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
                },
@@ -6297,21 +6312,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6724,21 +6739,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6972,21 +6987,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -7484,6 +7499,9 @@
                   "type":"number",
                   "description":"Amount to charge for the service"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -7573,6 +7591,12 @@
                "totalCost":{
                   "type":"number",
                   "description":"Total cost of the operation"
+               },
+               "totalCostOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
                },
                "totalPaid":{
                   "type":"number",
@@ -7711,21 +7735,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -7821,6 +7845,10 @@
                "totalCost":{
                   "type":"number",
                   "description":"Total cost of the operation"
+               },
+               "totalCostOriginal":{
+                  "type":"number",
+                  "description":"Total cost of the operation without discount"
                },
                "totalPaid":{
                   "type":"number",
@@ -8400,6 +8428,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -8459,6 +8490,9 @@
                   "type":"number"
                },
                "totalCostOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
                   "type":"number"
                },
                "taxRate":{
@@ -8590,21 +8624,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -8629,6 +8663,9 @@
                   "type":"string"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -8845,21 +8882,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -9280,6 +9317,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -9325,21 +9365,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
