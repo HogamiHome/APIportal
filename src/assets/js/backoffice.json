@@ -36,6 +36,9 @@
          "name":"Coupon Version Controller"
       },
       {
+         "name":"Batch Execution Controller"
+      },
+      {
          "name":"Hierarchy Price Controller"
       },
       {
@@ -4169,6 +4172,55 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/batch-execution/{batchCode}":{
+         "get":{
+            "tags":[
+               "Batch Execution Controller"
+            ],
+            "summary":"Execution Batch Manually on Demand",
+            "operationId":"executeBatchManually",
+            "parameters":[
+               {
+                  "name":"batchCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"batchParametersRest",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/BatchParametersRest"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/backoffice-server/api/v1/backofficeOperations":{
          "get":{
             "tags":[
@@ -4406,13 +4458,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -4435,11 +4487,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -4456,17 +4508,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
                "paged":{
                   "type":"boolean"
                },
-               "pageSize":{
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -5045,13 +5097,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -5074,11 +5126,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -5668,13 +5720,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -5697,11 +5749,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6290,13 +6342,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6319,11 +6371,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6717,13 +6769,13 @@
          "PageTimelineRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6746,11 +6798,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -6965,13 +7017,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6994,11 +7046,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7713,13 +7765,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7742,11 +7794,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -8602,13 +8654,13 @@
          "PagePaycometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8631,11 +8683,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -8860,13 +8912,13 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8889,11 +8941,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -9343,13 +9395,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -9372,11 +9424,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -9397,6 +9449,49 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOperationPaymentBilling"
+               }
+            }
+         },
+         "BatchParametersRest":{
+            "type":"object",
+            "properties":{
+               "parameterJobReportOperationBillingRests":{
+                  "$ref":"#/components/schemas/ParameterJobReportOperationBillingRest"
+               }
+            }
+         },
+         "ParameterJobReportOperationBillingRest":{
+            "required":[
+               "endEndTime",
+               "receiverEmailReportBilling",
+               "startEndTime"
+            ],
+            "type":"object",
+            "properties":{
+               "receiverEmailReportBilling":{
+                  "type":"string"
+               },
+               "receiverInCopyEmailReportBilling":{
+                  "type":"string"
+               },
+               "receiverInBlingCarbonCopyEmailReportBilling":{
+                  "type":"string"
+               },
+               "startEndTime":{
+                  "type":"string"
+               },
+               "endEndTime":{
+                  "type":"string"
+               },
+               "existsTotalPaid":{
+                  "type":"boolean"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
                }
             }
          }

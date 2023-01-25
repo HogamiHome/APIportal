@@ -473,11 +473,20 @@
          }
       },
       "/payment-server/api/v1/professionals/reportOperation":{
-         "get":{
+         "post":{
             "tags":[
                "BillableOperationsReportController"
             ],
             "operationId":"retrieveProfessionalBillingReports",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FilterReportBillingRest"
+                     }
+                  }
+               }
+            },
             "responses":{
                "500":{
                   "description":"Internal Server Error",
@@ -2585,6 +2594,30 @@
                }
             }
          },
+         "FilterReportBillingRest":{
+            "type":"object",
+            "properties":{
+               "startEndTime":{
+                  "type":"string",
+                  "description":"Start of range for date filter"
+               },
+               "endEndTime":{
+                  "type":"string",
+                  "description":"End of range for date filter"
+               },
+               "existsTotalPaid":{
+                  "type":"boolean",
+                  "description":"Apply the filter of total paid greater than 0"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            }
+         },
          "ProfessionalBillingReportRest":{
             "type":"object",
             "properties":{
@@ -3213,13 +3246,13 @@
          "PagePayCometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -3235,21 +3268,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -3260,6 +3293,15 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -3267,15 +3309,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -4009,6 +4042,9 @@
                "couponType":{
                   "type":"string"
                },
+               "couponTypeCode":{
+                  "type":"string"
+               },
                "couponTargetType":{
                   "type":"string"
                },
@@ -4158,13 +4194,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4180,21 +4216,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },

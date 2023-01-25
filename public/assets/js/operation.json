@@ -4026,6 +4026,9 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -4034,9 +4037,6 @@
                   "format":"int32"
                },
                "first":{
-                  "type":"boolean"
-               },
-               "last":{
                   "type":"boolean"
                },
                "pageable":{
@@ -4062,10 +4062,10 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -5149,6 +5149,13 @@
                "existsTotalPaid":{
                   "type":"boolean",
                   "description":"Apply the filter of total paid greater than 0"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
                }
             }
          },
