@@ -1236,6 +1236,9 @@
                },
                "typeFile":{
                   "type":"string"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
                }
             },
             "description":"This model represents the data in bytes of the files"
@@ -1265,6 +1268,9 @@
                "date":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
                }
             },
             "description":"This model represents the data for files"

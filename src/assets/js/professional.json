@@ -45,6 +45,9 @@
          "name":"ProfessionalLegacyController"
       },
       {
+         "name":"MediaGalleryController"
+      },
+      {
          "name":"OperationAddressController"
       },
       {
@@ -7444,6 +7447,73 @@
             }
          }
       },
+      "/professional/v1/media-gallery/chats/{chatId}":{
+         "post":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"Upload the documents from APK to Google Storage",
+            "operationId":"createMediaGallery",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "properties":{
+                           "files":{
+                              "type":"array",
+                              "items":{
+                                 "type":"string",
+                                 "format":"binary"
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseFileUploadRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/master-hierarchy":{
          "get":{
             "tags":[
@@ -9408,13 +9478,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -9433,18 +9503,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9459,10 +9529,10 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
                "pageSize":{
@@ -9830,13 +9900,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -9855,18 +9925,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -10599,13 +10669,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10624,18 +10694,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -11082,6 +11152,10 @@
                "document":{
                   "type":"string"
                },
+               "userId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "professionalInformation":{
                   "$ref":"#/components/schemas/ProfessionalInformationRest"
                },
@@ -11390,13 +11464,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11415,18 +11489,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -11715,13 +11789,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11740,18 +11814,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -12648,13 +12722,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -12673,18 +12747,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -13411,6 +13485,74 @@
             },
             "description":"This model is the envelope"
          },
+         "FileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "owner":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "visibleBy":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "documentSubType":{
+                  "type":"string"
+               },
+               "date":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"This model represents the data for files"
+         },
+         "FileUploadRest":{
+            "type":"object",
+            "properties":{
+               "chatId":{
+                  "type":"string"
+               },
+               "mediaGallery":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               },
+               "response":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for upload files"
+         },
+         "SingapurResponseFileUploadRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/FileUploadRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "SingapurResponseMasterHierarchyRest":{
             "type":"object",
             "properties":{
@@ -13620,6 +13762,9 @@
                   "items":{
                      "type":"string"
                   }
+               },
+               "status":{
+                  "type":"string"
                }
             },
             "description":"This model used to response to login and conatains all data about the client"
@@ -13812,13 +13957,13 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -13837,18 +13982,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"

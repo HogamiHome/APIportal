@@ -21,6 +21,9 @@
          "name":"${api.offered-services-server.defs.campaign.name}"
       },
       {
+         "name":"${api.offered-services-server.defs.document-type.name}"
+      },
+      {
          "name":"${api.offered-services-server.defs.offered-service.name}"
       },
       {
@@ -1278,6 +1281,47 @@
             }
          }
       },
+      "/offered-services-server/v1/document-type":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.document-type.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.document-type.retrieveAllDocumentTypeActives.description}",
+            "operationId":"retrieveAllDocumentTypeActives",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListDocumentTypeDto"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Document type returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v1/coupon":{
          "get":{
             "tags":[
@@ -1697,7 +1741,7 @@
             "tags":[
                "${api.offered-services-server.defs.coupon-version.name}"
             ],
-            "summary":"${api.offered-services-server.defs.coupon-target-type.retrieveAllCouponVersions.description}",
+            "summary":"${api.offered-services-server.defs.coupon-version.retrieveAllCouponVersions.description}",
             "operationId":"retrieveAllCouponVersions",
             "responses":{
                "500":{
@@ -1736,7 +1780,7 @@
             "tags":[
                "${api.offered-services-server.defs.coupon-version.name}"
             ],
-            "summary":"${api.offered-services-server.defs.coupon-target-type.createOrUpdateCouponVersion.description}",
+            "summary":"${api.offered-services-server.defs.coupon-version.createOrUpdateCouponVersion.description}",
             "operationId":"createOrUpdateCouponVersion",
             "requestBody":{
                "content":{
@@ -1847,7 +1891,7 @@
             "tags":[
                "${api.offered-services-server.defs.coupon-version.name}"
             ],
-            "summary":"${api.offered-services-server.defs.coupon-target-type.createOrUpdateCouponVersionDescription.description}",
+            "summary":"${api.offered-services-server.defs.coupon-version.createOrUpdateCouponVersionDescription.description}",
             "operationId":"createOrUpdateCouponVersionDescription",
             "requestBody":{
                "content":{
@@ -2821,6 +2865,58 @@
             }
          }
       },
+      "/offered-services-server/v1/coupon-entity-relation/{id}":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.coupon-entity-relation.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.coupon-entity-relation.retrieveCouponEntityRelationById.description}",
+            "operationId":"retrieveCouponEntityRelationById",
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponEntityRelationDto"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponEntityRelationDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v1/coupon-entity-relation/type":{
          "get":{
             "tags":[
@@ -3535,22 +3631,22 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -3676,6 +3772,9 @@
                   "format":"int64"
                },
                "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
                   "type":"string"
                },
                "level":{
@@ -4236,6 +4335,69 @@
             },
             "description":"This model is the envelope"
          },
+         "DocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "extension":{
+                  "type":"string"
+               },
+               "typeMime":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "SingapurResponseListDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/DocumentTypeDto"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "CouponDto":{
             "type":"object",
             "properties":{
@@ -4714,6 +4876,12 @@
                   "type":"string",
                   "format":"date-time"
                },
+               "startDateString":{
+                  "type":"string"
+               },
+               "endDateString":{
+                  "type":"string"
+               },
                "versionFrom":{
                   "type":"string",
                   "format":"date-time"
@@ -5126,6 +5294,27 @@
                   "format":"date-time"
                }
             }
+         },
+         "SingapurResponseCouponEntityRelationDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/CouponEntityRelationDto"
+               }
+            },
+            "description":"This model is the envelope"
          },
          "SingapurResponseListCouponEntityRelationTypeDto":{
             "type":"object",
