@@ -473,11 +473,20 @@
          }
       },
       "/payment-server/api/v1/professionals/reportOperation":{
-         "get":{
+         "post":{
             "tags":[
                "BillableOperationsReportController"
             ],
             "operationId":"retrieveProfessionalBillingReports",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FilterReportBillingRest"
+                     }
+                  }
+               }
+            },
             "responses":{
                "500":{
                   "description":"Internal Server Error",
@@ -2585,6 +2594,30 @@
                }
             }
          },
+         "FilterReportBillingRest":{
+            "type":"object",
+            "properties":{
+               "startEndTime":{
+                  "type":"string",
+                  "description":"Start of range for date filter"
+               },
+               "endEndTime":{
+                  "type":"string",
+                  "description":"End of range for date filter"
+               },
+               "existsTotalPaid":{
+                  "type":"boolean",
+                  "description":"Apply the filter of total paid greater than 0"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            }
+         },
          "ProfessionalBillingReportRest":{
             "type":"object",
             "properties":{
@@ -3167,6 +3200,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -3235,6 +3271,9 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -3243,9 +3282,6 @@
                   "format":"int32"
                },
                "first":{
-                  "type":"boolean"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -3260,15 +3296,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
                },
                "paged":{
                   "type":"boolean"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageNumber":{
                   "type":"integer",
@@ -3297,6 +3333,9 @@
                   "type":"string"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -3955,6 +3994,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -3998,6 +4040,9 @@
                   "type":"string"
                },
                "couponType":{
+                  "type":"string"
+               },
+               "couponTypeCode":{
                   "type":"string"
                },
                "couponTargetType":{
@@ -4071,6 +4116,9 @@
                   "type":"number"
                },
                "totalCostOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
                   "type":"number"
                },
                "taxRate":{
@@ -4171,6 +4219,9 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "last":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -4179,9 +4230,6 @@
                   "format":"int32"
                },
                "first":{
-                  "type":"boolean"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
