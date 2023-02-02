@@ -30,6 +30,12 @@
          "name":"Offered Service Controller"
       },
       {
+         "name":"Coupon Controller"
+      },
+      {
+         "name":"Coupon Entity Relation Controller"
+      },
+      {
          "name":"Alive Controller"
       },
       {
@@ -870,6 +876,148 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponsePageOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/services/offered-service-role-document-type":{
+         "post":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Create a new Service Role DocumentType",
+            "operationId":"createOfferedServiceRoleDocumentTypeService",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CreateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/services/offered-service-role-document-type/offered-service-id/{offeredServiceId}/role-name/{roleName}/document-type-id/{documentTypeId}":{
+         "put":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Update current Service Role DocumentType",
+            "operationId":"updateOfferedServiceRoleDocumentTypeService",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"documentTypeId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UpdateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
                         }
                      }
                   }
@@ -3816,6 +3964,445 @@
             }
          }
       },
+      "/backoffice-server/api/v1/coupons-versions/{couponCode}":{
+         "put":{
+            "tags":[
+               "Coupon Version Controller"
+            ],
+            "summary":"Update coupon version",
+            "operationId":"updateCouponVersion",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"couponCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponVersionDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "post":{
+            "tags":[
+               "Coupon Version Controller"
+            ],
+            "summary":"Create coupon version",
+            "operationId":"createCouponVersion",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"couponCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponVersionDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon":{
+         "post":{
+            "tags":[
+               "Coupon Controller"
+            ],
+            "summary":"Create a coupon",
+            "operationId":"createCoupon",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon/{couponCode}":{
+         "put":{
+            "tags":[
+               "Coupon Controller"
+            ],
+            "summary":"Update a coupon",
+            "operationId":"updateCoupon",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"couponCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon-entity-relation":{
+         "post":{
+            "tags":[
+               "Coupon Entity Relation Controller"
+            ],
+            "summary":"Create coupon entity relation",
+            "operationId":"createEntityRelation",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponEntityRelationDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon-entity-relation/{id}":{
+         "put":{
+            "tags":[
+               "Coupon Entity Relation Controller"
+            ],
+            "summary":"Update coupon entity relation",
+            "operationId":"updateEntityRelation",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponEntityRelationDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/chat/{chatId}":{
          "get":{
             "tags":[
@@ -4173,7 +4760,7 @@
          }
       },
       "/backoffice-server/api/v1/batch-execution/{batchCode}":{
-         "get":{
+         "post":{
             "tags":[
                "Batch Execution Controller"
             ],
@@ -4187,16 +4774,18 @@
                   "schema":{
                      "type":"string"
                   }
-               },
-               {
-                  "name":"batchParametersRest",
-                  "in":"query",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/components/schemas/BatchParametersRest"
-                  }
                }
             ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/BatchParametersRest"
+                     }
+                  }
+               },
+               "required":true
+            },
             "responses":{
                "500":{
                   "description":"Internal Server Error",
@@ -4218,7 +4807,14 @@
                      }
                   }
                }
-            }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/backoffice-server/api/v1/backofficeOperations":{
@@ -4458,13 +5054,23 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -4483,17 +5089,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -4501,17 +5097,10 @@
          "PageableObject":{
             "type":"object",
             "properties":{
-               "offset":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                },
                "pageNumber":{
@@ -4521,6 +5110,13 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -5097,13 +5693,23 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -5122,17 +5728,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -5151,6 +5747,135 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOfferedServiceRest"
+               }
+            }
+         },
+         "CreateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "documentTypeId",
+               "isActive",
+               "offeredServiceId",
+               "roleName"
+            ],
+            "type":"object",
+            "properties":{
+               "isActive":{
+                  "type":"boolean",
+                  "description":"Indicates if OfferedService Role DocumentType is active"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType offeredServiceId primary key",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
+               "documentTypeId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType documentTypeId primary key",
+                  "format":"int64"
+               }
+            }
+         },
+         "DocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "extension":{
+                  "type":"string"
+               },
+               "typeMime":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "OfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "$ref":"#/components/schemas/DocumentTypeDto"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRoleDocumentTypeDto"
+               }
+            }
+         },
+         "UpdateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "isActive"
+            ],
+            "type":"object",
+            "properties":{
+               "isActive":{
+                  "type":"boolean",
+                  "description":"Indicates if OfferedService Role DocumentType is active"
                }
             }
          },
@@ -5720,13 +6445,23 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -5745,17 +6480,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -6342,13 +7067,23 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -6367,17 +7102,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -6769,13 +7494,23 @@
          "PageTimelineRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -6794,17 +7529,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -7017,13 +7742,23 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -7042,17 +7777,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -7765,13 +8490,23 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -7790,17 +8525,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -8654,13 +9379,23 @@
          "PagePaycometWithOperationRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -8679,17 +9414,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -8912,13 +9637,23 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -8937,17 +9672,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }
@@ -9035,11 +9760,33 @@
          "CouponDto":{
             "type":"object",
             "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "id":{
                   "type":"integer",
                   "format":"int64"
                },
                "code":{
+                  "type":"string"
+               },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
                   "type":"string"
                }
             }
@@ -9095,6 +9842,22 @@
          "CouponVersionDto":{
             "type":"object",
             "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "id":{
                   "type":"integer",
                   "format":"int64"
@@ -9115,6 +9878,12 @@
                "endDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "startDateString":{
+                  "type":"string"
+               },
+               "endDateString":{
+                  "type":"string"
                },
                "versionFrom":{
                   "type":"string",
@@ -9153,6 +9922,12 @@
                      "$ref":"#/components/schemas/CouponVersionDescriptionDto"
                   }
                },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
+                  "type":"string"
+               },
                "cumulative":{
                   "type":"boolean"
                }
@@ -9172,6 +9947,121 @@
                },
                "data":{
                   "$ref":"#/components/schemas/CouponVersionDto"
+               }
+            }
+         },
+         "CouponEntityRelationDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponDto":{
+                  "$ref":"#/components/schemas/CouponDto"
+               },
+               "platformEntityDto":{
+                  "$ref":"#/components/schemas/PlatformEntityDto"
+               },
+               "couponEntityRelationTypeDto":{
+                  "$ref":"#/components/schemas/CouponEntityRelationTypeDto"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponEntityRelationTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "PlatformEntityDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -9395,13 +10285,23 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
-               "totalElements":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "size":{
                   "type":"integer",
@@ -9420,17 +10320,7 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
                   "type":"boolean"
                }
             }

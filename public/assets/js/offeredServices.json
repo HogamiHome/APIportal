@@ -21,15 +21,6 @@
          "name":"${api.offered-services-server.defs.campaign.name}"
       },
       {
-         "name":"${api.offered-services-server.defs.document-type.name}"
-      },
-      {
-         "name":"${api.offered-services-server.defs.offered-service.name}"
-      },
-      {
-         "name":"${api.offered-services-server.defs.coupon-entity-relation.name}"
-      },
-      {
          "name":"${api.offered-services-server.defs.coupon-target-type.name}"
       },
       {
@@ -39,10 +30,7 @@
          "name":"${api.offered-services-server.defs.alive.name}"
       },
       {
-         "name":"${api.offered-services-server.defs.coupon.name}"
-      },
-      {
-         "name":"${api.offered-services-server.defs.coupon-version.name}"
+         "name":"${api.offered-services-server.defs.service-role-document-type.name}"
       },
       {
          "name":"${api.offered-services-server.defs.platform-entity.name}"
@@ -52,6 +40,21 @@
       },
       {
          "name":"${api.offered-services-server.defs.coupon-terms-and-agreements.name}"
+      },
+      {
+         "name":"${api.offered-services-server.defs.document-type.name}"
+      },
+      {
+         "name":"${api.offered-services-server.defs.offered-service.name}"
+      },
+      {
+         "name":"${api.offered-services-server.defs.coupon-entity-relation.name}"
+      },
+      {
+         "name":"${api.offered-services-server.defs.coupon.name}"
+      },
+      {
+         "name":"${api.offered-services-server.defs.coupon-version.name}"
       }
    ],
    "paths":{
@@ -1274,6 +1277,196 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListPlatformEntityDescriptionDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/offered-service-role-document-type":{
+         "post":{
+            "tags":[
+               "${api.offered-services-server.defs.service-role-document-type.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.service-role-document-type.createOfferedServiceRoleDocumentTypeService.description}",
+            "operationId":"createOfferedServiceRoleDocumentTypeService",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CreateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/offered-service-role-document-type/offered-service-id/{offeredServiceId}":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.service-role-document-type.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.service-role-document-type.retrieveOfferedServiceRoleDocumentTypesByServiceId.description}",
+            "operationId":"retrieveOfferedServiceRoleDocumentTypesByServiceId",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceWithRoleNamesDto"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceWithRoleNamesDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/offered-service-role-document-type/offered-service-id/{offeredServiceId}/role-name/{roleName}/document-type-id/{documentTypeId}":{
+         "put":{
+            "tags":[
+               "${api.offered-services-server.defs.service-role-document-type.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.service-role-document-type.updateOfferedServiceRoleDocumentTypeService.description}",
+            "operationId":"updateOfferedServiceRoleDocumentTypeService",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"documentTypeId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UpdateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
                         }
                      }
                   }
@@ -3583,11 +3776,24 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
                },
-               "totalPages":{
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
@@ -3607,19 +3813,6 @@
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -3627,26 +3820,26 @@
          "PageableObject":{
             "type":"object",
             "properties":{
-               "offset":{
+               "pageNumber":{
                   "type":"integer",
-                  "format":"int64"
+                  "format":"int32"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "unpaged":{
+                  "type":"boolean"
                },
                "paged":{
                   "type":"boolean"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -4335,6 +4528,35 @@
             },
             "description":"This model is the envelope"
          },
+         "CreateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "documentTypeId",
+               "isActive",
+               "offeredServiceId",
+               "roleName"
+            ],
+            "type":"object",
+            "properties":{
+               "isActive":{
+                  "type":"boolean",
+                  "description":"Indicates if OfferedService Role DocumentType is active"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType offeredServiceId primary key",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
+               "documentTypeId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType documentTypeId primary key",
+                  "format":"int64"
+               }
+            }
+         },
          "DocumentTypeDto":{
             "type":"object",
             "properties":{
@@ -4370,8 +4592,132 @@
                "isActive":{
                   "type":"boolean"
                }
+            }
+         },
+         "OfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "$ref":"#/components/schemas/DocumentTypeDto"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
             },
             "description":"Contain data related to request"
+         },
+         "SingapurResponseOfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRoleDocumentTypeDto"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "OfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roles":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RoleNameWithDocumentTypesDto"
+                  }
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "RoleNameWithDocumentTypesDto":{
+            "type":"object",
+            "properties":{
+               "name":{
+                  "type":"string"
+               },
+               "documentTypes":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/DocumentTypeDto"
+                  }
+               },
+               "extensions":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceWithRoleNamesDto"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "UpdateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "isActive"
+            ],
+            "type":"object",
+            "properties":{
+               "isActive":{
+                  "type":"boolean",
+                  "description":"Indicates if OfferedService Role DocumentType is active"
+               }
+            }
          },
          "SingapurResponseListDocumentTypeDto":{
             "type":"object",
