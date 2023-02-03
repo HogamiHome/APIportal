@@ -3776,24 +3776,11 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
                },
-               "first":{
-                  "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
-               },
-               "numberOfElements":{
+               "totalPages":{
                   "type":"integer",
                   "format":"int32"
                },
@@ -3813,6 +3800,19 @@
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -3820,26 +3820,26 @@
          "PageableObject":{
             "type":"object",
             "properties":{
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "offset":{
                   "type":"integer",
                   "format":"int64"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -4531,22 +4531,19 @@
          "CreateOfferedServiceRoleDocumentTypeDto":{
             "required":[
                "documentTypeId",
-               "isActive",
                "offeredServiceId",
                "roleName"
             ],
             "type":"object",
             "properties":{
-               "isActive":{
-                  "type":"boolean",
-                  "description":"Indicates if OfferedService Role DocumentType is active"
-               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",
                   "format":"int64"
                },
                "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
                   "type":"string",
                   "description":"OfferedService Role DocumentType roleName primary key"
                },
@@ -4713,6 +4710,12 @@
             ],
             "type":"object",
             "properties":{
+               "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
                "isActive":{
                   "type":"boolean",
                   "description":"Indicates if OfferedService Role DocumentType is active"

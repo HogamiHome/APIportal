@@ -5062,16 +5062,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -5091,16 +5081,33 @@
                },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
          "PageableObject":{
             "type":"object",
             "properties":{
-               "unpaged":{
-                  "type":"boolean"
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
                   "type":"boolean"
                },
                "pageNumber":{
@@ -5110,13 +5117,6 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "offset":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -5140,10 +5140,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -5701,16 +5701,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -5729,6 +5719,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -5753,22 +5753,19 @@
          "CreateOfferedServiceRoleDocumentTypeDto":{
             "required":[
                "documentTypeId",
-               "isActive",
                "offeredServiceId",
                "roleName"
             ],
             "type":"object",
             "properties":{
-               "isActive":{
-                  "type":"boolean",
-                  "description":"Indicates if OfferedService Role DocumentType is active"
-               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",
                   "format":"int64"
                },
                "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
                   "type":"string",
                   "description":"OfferedService Role DocumentType roleName primary key"
                },
@@ -5873,6 +5870,12 @@
             ],
             "type":"object",
             "properties":{
+               "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
                "isActive":{
                   "type":"boolean",
                   "description":"Indicates if OfferedService Role DocumentType is active"
@@ -6453,16 +6456,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -6481,6 +6474,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -7075,16 +7078,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -7103,6 +7096,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -7502,16 +7505,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -7530,6 +7523,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -7750,16 +7753,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -7778,6 +7771,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -8498,16 +8501,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -8526,6 +8519,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -9387,16 +9390,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -9415,6 +9408,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -9645,16 +9648,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -9673,6 +9666,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -10293,16 +10296,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
-               },
                "size":{
                   "type":"integer",
                   "format":"int32"
@@ -10321,6 +10314,16 @@
                   "$ref":"#/components/schemas/Sort"
                },
                "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
