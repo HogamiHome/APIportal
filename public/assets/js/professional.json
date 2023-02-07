@@ -9118,6 +9118,142 @@
             }
          }
       },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the provinces is professional working",
+            "operationId":"retrieveProvincesWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Provinces in which a professional works have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the zonas by provinces is professional working",
+            "operationId":"retrieveZonesByProvincesWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaParentLevelId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] The zones by province in which a professional works have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/error":{
          "post":{
             "tags":[
@@ -9553,10 +9689,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -9565,6 +9697,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -9579,19 +9715,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -9975,10 +10111,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -9987,6 +10119,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -10744,10 +10880,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -10756,6 +10888,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -11539,10 +11675,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -11551,6 +11683,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -11864,10 +12000,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -11876,6 +12008,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -12797,10 +12933,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -12809,6 +12941,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -13304,6 +13440,12 @@
                   "type":"boolean"
                },
                "areaCode":{
+                  "type":"string"
+               },
+               "searchAreaId":{
+                  "type":"string"
+               },
+               "areaLabel":{
                   "type":"string"
                }
             },
@@ -14126,10 +14268,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
@@ -14138,6 +14276,10 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
