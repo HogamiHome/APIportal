@@ -21,6 +21,9 @@
          "name":"${api.offered-services-server.defs.campaign.name}"
       },
       {
+         "name": "${api.offered-services-server.defs.sitemap.name}"
+      },
+      {
          "name":"${api.offered-services-server.defs.coupon-target-type.name}"
       },
       {
@@ -117,6 +120,45 @@
             }
          }
       },
+      "/offered-services-server/v1/sitemap": {
+			"get": {
+				"tags": ["${api.offered-services-server.defs.sitemap.name}"],
+				"summary": "${api.offered-services-server.defs.sitemap.retrieveSiteMapInformation.description}",
+				"operationId": "retrieveSiteMapInformation",
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request \r\n",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseSiteMapRest"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Data returned correctly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseSiteMapRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/offered-services-server/v1/services":{
          "get":{
             "tags":[
@@ -3752,6 +3794,45 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseSiteMapRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "Result of the action, for example \"Success\"."
+					},
+					"code": {
+						"type": "string",
+						"description": "Status code, extra information related to HTTP response"
+					},
+					"message": {
+						"type": "string",
+						"description": "Specific message, result of the action"
+					},
+					"data": {
+						"$ref": "#/components/schemas/SiteMapRest"
+					}
+				},
+				"description": "This model is the envelope"
+			},
+			"SiteMapRest": {
+				"type": "object",
+				"properties": {
+					"parentServices": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"childServices": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "Contain data related to request"
+			},
          "Pageable":{
             "type":"object",
             "properties":{
