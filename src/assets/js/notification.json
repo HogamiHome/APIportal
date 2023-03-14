@@ -37,6 +37,66 @@
       }
    ],
    "paths":{
+      "/notification/v1/template/{templateCode}": {
+			"post": {
+				"tags": ["Notification Rest Controller"],
+				"summary": "Retrieve the notification template by code",
+				"operationId": "getTemplateByTemplateCode",
+				"parameters": [{
+					"name": "templateCode",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"additionalProperties": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "The notification is found and it's returned to the user",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseNotificationTemplateRest"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request \r\n",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseNotificationTemplateRest"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/notification/v1/sms":{
          "post":{
             "tags":[
@@ -454,6 +514,42 @@
                }
             }
          },
+         "NotificationTemplateRest": {
+				"required": ["id", "subject", "template", "templateCode"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"template": {
+						"type": "string"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"templateCode": {
+						"type": "string"
+					}
+				}
+			},
+			"SingapurResponseNotificationTemplateRest": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/NotificationTemplateRest"
+					}
+				}
+			},
          "SendSmsRequestRest":{
             "required":[
                "appName",

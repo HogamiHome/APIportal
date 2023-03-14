@@ -21,6 +21,9 @@
          "name":"${api.offered-services-server.defs.campaign.name}"
       },
       {
+         "name":"${api.offered-services-server.defs.sitemap.name}"
+      },
+      {
          "name":"${api.offered-services-server.defs.coupon-target-type.name}"
       },
       {
@@ -58,6 +61,70 @@
       }
    ],
    "paths":{
+      "/offered-services-server/v2/services":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retrieveOfferedServiceById.description}",
+            "operationId":"retrieveOfferedServiceById",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "uniqueItems":true,
+                     "type":"array",
+                     "items":{
+                        "type":"integer",
+                        "format":"int64"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListDetailedOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListDetailedOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v2/services/province/{zipCode}":{
          "get":{
             "tags":[
@@ -110,6 +177,47 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/sitemap":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.sitemap.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.sitemap.retrieveSiteMapInformation.description}",
+            "operationId":"retrieveSiteMapInformation",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseSiteMapRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Data returned correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseSiteMapRest"
                         }
                      }
                   }
@@ -1561,6 +1669,17 @@
             ],
             "summary":"${api.offered-services-server.defs.coupon.createOrUpdateCoupon.description}",
             "operationId":"createOrUpdateCoupon",
+            "parameters":[
+               {
+                  "name":"userId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
             "requestBody":{
                "content":{
                   "application/json":{
@@ -1975,6 +2094,17 @@
             ],
             "summary":"${api.offered-services-server.defs.coupon-version.createOrUpdateCouponVersion.description}",
             "operationId":"createOrUpdateCouponVersion",
+            "parameters":[
+               {
+                  "name":"userId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
             "requestBody":{
                "content":{
                   "application/json":{
@@ -3014,6 +3144,17 @@
             ],
             "summary":"${api.offered-services-server.defs.coupon-entity-relation.createOrUpdateCouponEntityRelation.description}",
             "operationId":"createOrUpdateCouponEntityRelation",
+            "parameters":[
+               {
+                  "name":"userId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
             "requestBody":{
                "content":{
                   "application/json":{
@@ -3617,340 +3758,6 @@
             },
             "description":"This model is the envelope"
          },
-         "OfferedServiceMasterRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id of the associated master service",
-                  "format":"int64"
-               },
-               "codeOfferedMaster":{
-                  "type":"string",
-                  "description":"Code offered service master"
-               }
-            },
-            "description":"This model represents the offered service master"
-         },
-         "OfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id, internal identifier for the offered service",
-                  "format":"int64"
-               },
-               "image":{
-                  "type":"string"
-               },
-               "parentId":{
-                  "type":"integer",
-                  "description":"Id  of the corresponding parent for this serive",
-                  "format":"int64"
-               },
-               "description":{
-                  "type":"string",
-                  "description":"Brief explanation about the service"
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Service's internal code"
-               },
-               "level":{
-                  "type":"integer",
-                  "description":"Level assigned to the service",
-                  "format":"int64"
-               },
-               "landingPage":{
-                  "type":"string",
-                  "description":"String to create url to landing page"
-               },
-               "metaDescription":{
-                  "type":"string",
-                  "description":"Meta description for landing page"
-               },
-               "show":{
-                  "type":"integer",
-                  "description":"Show or not in searches",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"integer",
-                  "description":"Type of landigpage to be used",
-                  "format":"int64"
-               },
-               "typeName":{
-                  "type":"string",
-                  "description":"Type of landigpage to be used"
-               },
-               "chatQuestion":{
-                  "type":"string",
-                  "description":"Offered Service chat question"
-               },
-               "keyWords":{
-                  "type":"array",
-                  "description":"Offered Service keywords",
-                  "items":{
-                     "type":"string",
-                     "description":"Offered Service keywords"
-                  }
-               },
-               "is_active":{
-                  "type":"boolean",
-                  "description":"Offered Service Active"
-               },
-               "parentName":{
-                  "type":"string",
-                  "description":"Offered Service Parent Name"
-               },
-               "parentCode":{
-                  "type":"string",
-                  "description":"Offered Service Parent Code"
-               },
-               "startTimeOfferedService":{
-                  "type":"string",
-                  "description":"Start date of the active service offered",
-                  "format":"date-time"
-               },
-               "endTimeOfferedService":{
-                  "type":"string",
-                  "description":"End date of the active service offered",
-                  "format":"date-time"
-               },
-               "offeredServiceMaster":{
-                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
-               },
-               "isActiveDependingEndDate":{
-                  "type":"boolean",
-                  "description":"Id of the associated master service"
-               }
-            },
-            "description":"This model represents the offered service"
-         },
-         "SingapurResponseListOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceRest"
-                  }
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "Pageable":{
-            "type":"object",
-            "properties":{
-               "page":{
-                  "minimum":0,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "size":{
-                  "minimum":1,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               }
-            }
-         },
-         "PageOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "size":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "content":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceRest"
-                  }
-               },
-               "number":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "first":{
-                  "type":"boolean"
-               },
-               "last":{
-                  "type":"boolean"
-               }
-            },
-            "description":"Contain data related to request"
-         },
-         "PageableObject":{
-            "type":"object",
-            "properties":{
-               "offset":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               }
-            }
-         },
-         "SingapurResponsePageOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/PageOfferedServiceRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "Sort":{
-            "type":"object",
-            "properties":{
-               "sorted":{
-                  "type":"boolean"
-               },
-               "unsorted":{
-                  "type":"boolean"
-               }
-            }
-         },
-         "OfferedServiceVisibleContentRest":{
-            "type":"object",
-            "properties":{
-               "textContent":{
-                  "type":"string"
-               },
-               "id":{
-                  "type":"integer",
-                  "description":"Id, internal identifier for the visible content ",
-                  "format":"int64"
-               },
-               "offeredServiceId":{
-                  "type":"integer",
-                  "description":"Id  of the corresponding offered service for this content",
-                  "format":"int32"
-               },
-               "provinceId":{
-                  "type":"integer",
-                  "description":"Id  of the corresponding province for this content",
-                  "format":"int32"
-               },
-               "text_content":{
-                  "type":"string",
-                  "description":"Text content of visible content"
-               },
-               "title":{
-                  "type":"string",
-                  "description":"Text content of visible content"
-               },
-               "metaDescription":{
-                  "type":"string",
-                  "description":"Meta description of visible content"
-               },
-               "provinceName":{
-                  "type":"string",
-                  "description":"Province Name of visible content"
-               },
-               "zipCode":{
-                  "type":"integer",
-                  "description":"Zip Code of the province",
-                  "format":"int32"
-               },
-               "sectionTitle":{
-                  "type":"string",
-                  "description":"Section title of a service related to your province"
-               },
-               "meta":{
-                  "type":"string"
-               },
-               "additionalTextContent":{
-                  "type":"string"
-               }
-            },
-            "description":"This model represents the offered service visible content"
-         },
-         "SingapurResponseOfferedServiceVisibleContentRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
          "DetailedOfferedServiceRest":{
             "type":"object",
             "properties":{
@@ -4051,6 +3858,9 @@
                },
                "restriction":{
                   "$ref":"#/components/schemas/RestrictionRest"
+               },
+               "parentOfferedService":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             },
             "description":"This model represents the offered service"
@@ -4093,6 +3903,21 @@
                }
             },
             "description":"This model represents the offered service coverage"
+         },
+         "OfferedServiceMasterRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id of the associated master service",
+                  "format":"int64"
+               },
+               "codeOfferedMaster":{
+                  "type":"string",
+                  "description":"Code offered service master"
+               }
+            },
+            "description":"This model represents the offered service master"
          },
          "OfferedServiceQuantifyRest":{
             "type":"object",
@@ -4140,6 +3965,156 @@
                   "type":"boolean"
                }
             }
+         },
+         "OfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
+                  "format":"int64"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "parentId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string",
+                  "description":"Brief explanation about the service"
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Service's internal code"
+               },
+               "level":{
+                  "type":"integer",
+                  "description":"Level assigned to the service",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string",
+                  "description":"String to create url to landing page"
+               },
+               "metaDescription":{
+                  "type":"string",
+                  "description":"Meta description for landing page"
+               },
+               "show":{
+                  "type":"integer",
+                  "description":"Show or not in searches",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"integer",
+                  "description":"Type of landigpage to be used",
+                  "format":"int64"
+               },
+               "typeName":{
+                  "type":"string",
+                  "description":"Type of landigpage to be used"
+               },
+               "chatQuestion":{
+                  "type":"string",
+                  "description":"Offered Service chat question"
+               },
+               "keyWords":{
+                  "type":"array",
+                  "description":"Offered Service keywords",
+                  "items":{
+                     "type":"string",
+                     "description":"Offered Service keywords"
+                  }
+               },
+               "is_active":{
+                  "type":"boolean",
+                  "description":"Offered Service Active"
+               },
+               "parentName":{
+                  "type":"string",
+                  "description":"Offered Service Parent Name"
+               },
+               "parentCode":{
+                  "type":"string",
+                  "description":"Offered Service Parent Code"
+               },
+               "startTimeOfferedService":{
+                  "type":"string",
+                  "description":"Start date of the active service offered",
+                  "format":"date-time"
+               },
+               "endTimeOfferedService":{
+                  "type":"string",
+                  "description":"End date of the active service offered",
+                  "format":"date-time"
+               },
+               "offeredServiceMaster":{
+                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
+               },
+               "isActiveDependingEndDate":{
+                  "type":"boolean",
+                  "description":"Id of the associated master service"
+               }
+            },
+            "description":"This model represents the offered service"
+         },
+         "OfferedServiceVisibleContentRest":{
+            "type":"object",
+            "properties":{
+               "textContent":{
+                  "type":"string"
+               },
+               "id":{
+                  "type":"integer",
+                  "description":"Id, internal identifier for the visible content ",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding offered service for this content",
+                  "format":"int32"
+               },
+               "provinceId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding province for this content",
+                  "format":"int32"
+               },
+               "text_content":{
+                  "type":"string",
+                  "description":"Text content of visible content"
+               },
+               "title":{
+                  "type":"string",
+                  "description":"Text content of visible content"
+               },
+               "metaDescription":{
+                  "type":"string",
+                  "description":"Meta description of visible content"
+               },
+               "provinceName":{
+                  "type":"string",
+                  "description":"Province Name of visible content"
+               },
+               "zipCode":{
+                  "type":"integer",
+                  "description":"Zip Code of the province",
+                  "format":"int32"
+               },
+               "sectionTitle":{
+                  "type":"string",
+                  "description":"Section title of a service related to your province"
+               },
+               "meta":{
+                  "type":"string"
+               },
+               "additionalTextContent":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the offered service visible content"
          },
          "ProvinceRest":{
             "required":[
@@ -4189,6 +4164,239 @@
                   "type":"string"
                }
             }
+         },
+         "SingapurResponseListDetailedOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/DetailedOfferedServiceRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseListOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseSiteMapRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/SiteMapRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SiteMapRest":{
+            "type":"object",
+            "properties":{
+               "parentServices":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "childServices":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "Pageable":{
+            "type":"object",
+            "properties":{
+               "page":{
+                  "minimum":0,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "minimum":1,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "PageOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "PageableObject":{
+            "type":"object",
+            "properties":{
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponsePageOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageOfferedServiceRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "Sort":{
+            "type":"object",
+            "properties":{
+               "sorted":{
+                  "type":"boolean"
+               },
+               "unsorted":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceVisibleContentRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
+               }
+            },
+            "description":"This model is the envelope"
          },
          "SingapurResponseDetailedOfferedServiceRest":{
             "type":"object",
@@ -4377,31 +4585,6 @@
             },
             "description":"This model is the envelope"
          },
-         "SingapurResponseListDetailedOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "$ref":"#/components/schemas/DetailedOfferedServiceRest"
-                  }
-               }
-            },
-            "description":"This model is the envelope"
-         },
          "PlatformEntityDto":{
             "type":"object",
             "properties":{
@@ -4536,6 +4719,9 @@
             ],
             "type":"object",
             "properties":{
+               "active":{
+                  "type":"boolean"
+               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",
@@ -4824,6 +5010,9 @@
          "CouponValidationDTO":{
             "type":"object",
             "properties":{
+               "component":{
+                  "type":"string"
+               },
                "currentDate":{
                   "type":"string",
                   "format":"date-time"
@@ -5186,6 +5375,15 @@
             }
          },
          "CouponVersionDto":{
+            "required":[
+               "couponDto",
+               "couponScopeDto",
+               "couponTargetTypeDto",
+               "couponTermsAndAgreementsDto",
+               "couponTypeDto",
+               "couponVersionDescriptionDtos",
+               "value"
+            ],
             "type":"object",
             "properties":{
                "createDate":{

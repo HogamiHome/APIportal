@@ -9313,6 +9313,91 @@
             ]
          }
       },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/services":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List of the offered service by zone of professional Id",
+            "operationId":"retrieveProfessionalServicesByZoneId",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaZoneId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] List of services for which a professional works by zones have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/error":{
          "post":{
             "tags":[
@@ -9723,13 +9808,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -9745,21 +9830,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9774,19 +9859,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -9814,10 +9899,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -10145,13 +10230,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10167,21 +10252,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -10914,13 +10999,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10936,21 +11021,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -11749,13 +11834,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11771,21 +11856,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -12074,13 +12159,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -12096,21 +12181,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -12995,13 +13080,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -13017,21 +13102,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -14305,6 +14390,10 @@
                "levelOrder":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "levelIdInTable":{
+                  "type":"integer",
+                  "format":"int64"
                }
             },
             "description":"This model represents a level of the hierarchy information"
@@ -14330,13 +14419,13 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -14352,21 +14441,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"

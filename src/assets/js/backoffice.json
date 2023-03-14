@@ -4783,8 +4783,7 @@
                         "$ref":"#/components/schemas/BatchParametersRest"
                      }
                   }
-               },
-               "required":true
+               }
             },
             "responses":{
                "500":{
@@ -6678,7 +6677,13 @@
                },
                "avatar":{
                   "type":"string"
-               },
+               },               
+               "contactEmails": {
+                  "items": {
+                      "$ref": "#/components/schemas/ContactEmailRest"
+                  },
+                  "type": "array"
+              },
                "country":{
                   "type":"string"
                },
