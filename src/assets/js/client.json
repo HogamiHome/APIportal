@@ -5865,7 +5865,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -5920,7 +5920,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -6091,7 +6091,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -6148,7 +6148,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -6205,7 +6205,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -6717,6 +6717,66 @@
             ]
          }
       },
+      "/client/v1/average/ratings/{ratingType}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.rating.name}"
+            ],
+            "summary":"${api.client.defs.rating.retrieveAverageRatingsByType.description}",
+            "operationId":"retrieveAverageRatingsByType",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"ratingType",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A rating average associated to a pro is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/client/v1/autologin":{
          "post":{
             "tags":[
@@ -6916,6 +6976,9 @@
                },
                "nameType":{
                   "type":"string"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             },
             "description":"This model represents the offered service"
@@ -6941,6 +7004,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -7431,6 +7497,9 @@
                },
                "nameType":{
                   "type":"string"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -7634,13 +7703,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7659,15 +7728,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7685,19 +7754,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -7788,10 +7857,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -8335,6 +8404,9 @@
          "CouponValidationDTO":{
             "type":"object",
             "properties":{
+               "component":{
+                  "type":"string"
+               },
                "currentDate":{
                   "type":"string",
                   "format":"date-time"
@@ -10166,6 +10238,68 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ErrorInformation"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "AverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ratingType":{
+                  "type":"string"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "SingapurResponseListAverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageRatingTotalRest"
+                  }
                }
             },
             "description":"This model is the envelope"
