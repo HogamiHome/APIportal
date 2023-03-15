@@ -9313,6 +9313,83 @@
             ]
          }
       },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/zipcodes":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List of the postal codes by identifier zone works professional",
+            "operationId":"retrieveZipCodesByZoneIdWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaZoneId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] List of postal codes for which a professional works by zones have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/services":{
          "get":{
             "tags":[
@@ -9830,18 +9907,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -9859,19 +9936,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -10252,18 +10329,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -11021,18 +11098,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -11856,18 +11933,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -12181,18 +12258,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -13102,18 +13179,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
@@ -14441,18 +14518,18 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
