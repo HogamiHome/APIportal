@@ -2805,6 +2805,9 @@
                "profitMargin":{
                   "type":"number"
                },
+               "profitMarginDiscount":{
+                  "type":"number"
+               },
                "displacementFee":{
                   "type":"number"
                },
@@ -2833,6 +2836,9 @@
                "updateDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             },
             "description":"This model represents the offered service"
@@ -2840,13 +2846,13 @@
          "PageRequestV2Rest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -2865,9 +2871,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
                },
@@ -2877,6 +2880,9 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -2891,11 +2897,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
@@ -2935,6 +2941,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -3044,6 +3053,26 @@
                }
             }
          },
+         "RequestRejectionRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
          "RequestV2Rest":{
             "required":[
                "chatId"
@@ -3114,6 +3143,9 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "requestRejectionRest":{
+                  "$ref":"#/components/schemas/RequestRejectionRest"
+               },
                "requestProducts":{
                   "type":"array",
                   "items":{
@@ -3151,10 +3183,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -3412,26 +3444,6 @@
                }
             }
          },
-         "RequestRejectionRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "requestId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "createDate":{
-                  "type":"string",
-                  "format":"date-time"
-               }
-            }
-         },
          "RequestRest":{
             "required":[
                "chatId"
@@ -3660,13 +3672,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -3685,9 +3697,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "first":{
                   "type":"boolean"
                },
@@ -3697,6 +3706,9 @@
                },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -4229,6 +4241,9 @@
                },
                "code":{
                   "type":"string"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -4267,6 +4282,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRequestProduct"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
