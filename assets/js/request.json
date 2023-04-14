@@ -18,6 +18,9 @@
    ],
    "tags":[
       {
+         "name":"${api.request-server.defs.request-coupon.name}"
+      },
+      {
          "name":"Client Details Controller"
       },
       {
@@ -126,6 +129,14 @@
             "operationId":"retrieveProfessionalRequestV2",
             "parameters":[
                {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
                   "name":"professionalId",
                   "in":"path",
                   "required":true,
@@ -186,6 +197,14 @@
             "summary":"$api.request-server.defs.request.retrieveRequestById.v2.name}",
             "operationId":"retrieveRequestByIdV2",
             "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
                {
                   "name":"requestId",
                   "in":"path",
@@ -254,6 +273,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -1165,6 +1192,76 @@
             }
          }
       },
+      "/request-server/v1/professionals/{professionalId}/requests/{requestId}/services/{serviceId}":{
+         "put":{
+            "tags":[
+               "Offereds Service"
+            ],
+            "summary":"Update request service",
+            "operationId":"updateRequestService",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"serviceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OfferedServiceRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/request-server/v1/professionals/{professionalId}/requests/{requestId}/rejection":{
          "post":{
             "tags":[
@@ -1219,6 +1316,76 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseRequestRejectionRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/professionals/{professionalId}/requests/{requestId}/products/{productId}":{
+         "put":{
+            "tags":[
+               "Request Product Controller"
+            ],
+            "summary":"Update requst product",
+            "operationId":"updateRequestProduct",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"productId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ProductRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProductRest"
                         }
                      }
                   }
@@ -1629,6 +1796,58 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/request-server/v1/coupons":{
+         "put":{
+            "tags":[
+               "${api.request-server.defs.request-coupon.name}"
+            ],
+            "summary":"${api.request-server.defs.request-coupon.createOrUpdateRequestCoupon.name}",
+            "operationId":"updateRequestCoupon",
+            "parameters":[
+               {
+                  "name":"userId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RequestCouponDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRequestCouponDto"
                         }
                      }
                   }
@@ -2574,6 +2793,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -2581,6 +2803,9 @@
                   "type":"number"
                },
                "profitMargin":{
+                  "type":"number"
+               },
+               "profitMarginDiscount":{
                   "type":"number"
                },
                "displacementFee":{
@@ -2611,6 +2836,9 @@
                "updateDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             },
             "description":"This model represents the offered service"
@@ -2650,11 +2878,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -2669,18 +2897,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -2713,6 +2941,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -2761,6 +2992,84 @@
                },
                "campaignCode":{
                   "type":"string"
+               }
+            }
+         },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "RequestRejectionRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -2834,10 +3143,19 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "requestRejectionRest":{
+                  "$ref":"#/components/schemas/RequestRejectionRest"
+               },
                "requestProducts":{
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/ProductRest"
+                  }
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
                   }
                }
             }
@@ -3126,26 +3444,6 @@
                }
             }
          },
-         "RequestRejectionRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "requestId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "createDate":{
-                  "type":"string",
-                  "format":"date-time"
-               }
-            }
-         },
          "RequestRest":{
             "required":[
                "chatId"
@@ -3189,6 +3487,15 @@
                "clientDetails":{
                   "$ref":"#/components/schemas/ClientDetailsRest"
                },
+               "totalPrice":{
+                  "type":"number"
+               },
+               "totalPriceOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
+               },
                "offeredService":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
                },
@@ -3214,6 +3521,25 @@
                },
                "requestRejectionRest":{
                   "$ref":"#/components/schemas/RequestRejectionRest"
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
+                  }
+               },
+               "offeredServiceRests":{
+                  "type":"array",
+                  "description":"The offered service of a request",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               },
+               "requestProducts":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProductRest"
+                  }
                }
             }
          },
@@ -3337,6 +3663,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -3375,11 +3704,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -3413,6 +3742,26 @@
                "status":{
                   "type":"string",
                   "description":"Status of the request"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             }
          },
@@ -3493,7 +3842,41 @@
                }
             }
          },
-         "SingapurResponseOfferedServiceRest":{
+         "RequestCouponDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"string"
+               },
+               "updateUser":{
+                  "type":"string"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "isApplied":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseRequestCouponDto":{
             "type":"object",
             "properties":{
                "status":{
@@ -3509,7 +3892,7 @@
                   "description":"Specific message, result of the action"
                },
                "data":{
-                  "$ref":"#/components/schemas/OfferedServiceRest"
+                  "$ref":"#/components/schemas/RequestCouponDto"
                }
             }
          },
@@ -3668,6 +4051,12 @@
                      "$ref":"#/components/schemas/RequestCampaign"
                   }
                },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCoupon"
+                  }
+               },
                "requestProducts":{
                   "type":"array",
                   "items":{
@@ -3747,6 +4136,41 @@
                }
             }
          },
+         "RequestCoupon":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "request":{
+                  "$ref":"#/components/schemas/Request"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "isApplied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "RequestOfferedService":{
             "type":"object",
             "properties":{
@@ -3784,6 +4208,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -3813,6 +4240,9 @@
                   "$ref":"#/components/schemas/TaxDetails"
                },
                "code":{
+                  "type":"string"
+               },
+               "idMessageFirebase":{
                   "type":"string"
                }
             }
@@ -3852,6 +4282,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRequestProduct"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },

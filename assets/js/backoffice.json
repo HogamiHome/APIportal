@@ -21,13 +21,28 @@
          "name":"Authentication Controller"
       },
       {
+         "name":"Level Cost Controller"
+      },
+      {
          "name":"Professional Controller"
       },
       {
          "name":"Offered Service Controller"
       },
       {
+         "name":"Coupon Controller"
+      },
+      {
+         "name":"Coupon Entity Relation Controller"
+      },
+      {
          "name":"Alive Controller"
+      },
+      {
+         "name":"Coupon Version Controller"
+      },
+      {
+         "name":"Batch Execution Controller"
       },
       {
          "name":"Hierarchy Price Controller"
@@ -55,6 +70,9 @@
       },
       {
          "name":"Request Controller"
+      },
+      {
+         "name":"Media Gallery Controller"
       },
       {
          "name":"Payment Controller"
@@ -102,7 +120,7 @@
             "tags":[
                "Professional Controller"
             ],
-            "summary":"${api.backoffice-api.defs.professional.retrieveServiceDetailsWithFilterV3.name}",
+            "summary":"Retrieve details offered services with filter V3",
             "operationId":"retrieveServiceDetailsWithFilterV3",
             "parameters":[
                {
@@ -875,6 +893,148 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/services/offered-service-role-document-type":{
+         "post":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Create a new Service Role DocumentType",
+            "operationId":"createOfferedServiceRoleDocumentTypeService",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CreateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/services/offered-service-role-document-type/offered-service-id/{offeredServiceId}/role-name/{roleName}/document-type-id/{documentTypeId}":{
+         "put":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Update current Service Role DocumentType",
+            "operationId":"updateOfferedServiceRoleDocumentTypeService",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"documentTypeId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/UpdateOfferedServiceRoleDocumentTypeDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/services/campaigns":{
          "get":{
             "tags":[
@@ -1107,6 +1267,120 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponsePageRequestRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/requests/{requestId}/media-gallery":{
+         "get":{
+            "tags":[
+               "Media Gallery Controller"
+            ],
+            "summary":"Information is retrieved from the files of a request. The entire gallery of images and files uploaded to GCP.",
+            "operationId":"retrieveMediaGallery",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListFileRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/requests/{requestId}/media-gallery/{fileId}":{
+         "get":{
+            "tags":[
+               "Media Gallery Controller"
+            ],
+            "summary":"File is retrieved in bytes array by identifier file",
+            "operationId":"retrieveFileFromMediaGalleryById",
+            "parameters":[
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"fileId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"messageId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseByte[]"
                         }
                      }
                   }
@@ -1800,66 +2074,74 @@
             ]
          }
       },
-      "/backoffice-server/api/v1/professionals/status-change": {
-			"post": {
-				"tags": ["Professional Status Change Controller"],
-				"summary": "Change the professional status",
-				"operationId": "changeProfessionalStatus",
-				"parameters": [{
-					"name": "Accept-Language",
-					"in": "header",
-					"required": true,
-					"schema": {
-						"type": "string"
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/ChangeStatusRest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"500": {
-						"description": "Internal server error",
-						"content": {
-							"*/*": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponse"
-								}
-							}
-						}
-					},
-					"200": {
-						"description": "A list of requests is returned",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseString"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SingapurResponseString"
-								}
-							}
-						}
-					}
-				},
-				"security": [{
-					"bearer-key": []
-				}]
-			}
-		},
+      "/backoffice-server/api/v1/professionals/status-change":{
+         "post":{
+            "tags":[
+               "Professional Status Change Controller"
+            ],
+            "summary":"Change the professional status",
+            "operationId":"changeProfessionalStatus",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ChangeStatusRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A list of requests is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/professionals/status-allowed":{
          "get":{
             "tags":[
@@ -1912,6 +2194,72 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListProfessionalStatusAllowedRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/professionals/permitted-and-forbidden-status/{codeStatus}":{
+         "get":{
+            "tags":[
+               "Professional Status Change Controller"
+            ],
+            "summary":"Obtain permitted and forbidden state actions by status code.",
+            "operationId":"retrievePermittedAndForbiddenStatusActionByStatusCode",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"codeStatus",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Bad request",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalPermittedAndForbiddenActionRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalPermittedAndForbiddenActionRest"
                         }
                      }
                   }
@@ -2930,6 +3278,75 @@
             }
          }
       },
+      "/backoffice-server/api/v1/level-cost/{levelCostId}":{
+         "put":{
+            "tags":[
+               "Level Cost Controller"
+            ],
+            "summary":"Update level cost by level cost Id",
+            "operationId":"updatedLevelCost",
+            "parameters":[
+               {
+                  "name":"levelCostId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RequestLevelCostRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Updating level cost correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseLevelCostRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseLevelCostRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/journey-details/{requestId}":{
          "get":{
             "tags":[
@@ -3163,6 +3580,14 @@
                      "type":"integer",
                      "format":"int64"
                   }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "responses":{
@@ -3282,6 +3707,80 @@
          }
       },
       "/backoffice-server/api/v1/hierarchy-price":{
+         "get":{
+            "tags":[
+               "Hierarchy Price Controller"
+            ],
+            "summary":"Retrieve a hierarchy areas for a professional and service",
+            "operationId":"retrieveHierarchyZonesProfessional",
+            "parameters":[
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Professionals have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
          "post":{
             "tags":[
                "Hierarchy Price Controller"
@@ -3522,6 +4021,489 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/coupons-versions":{
+         "put":{
+            "tags":[
+               "Coupon Version Controller"
+            ],
+            "summary":"Update coupon version",
+            "operationId":"updateCouponVersion",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponVersionDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "post":{
+            "tags":[
+               "Coupon Version Controller"
+            ],
+            "summary":"Create coupon version",
+            "operationId":"createCouponVersion",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponVersionDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupons-versions/{couponVersionId}":{
+         "get":{
+            "tags":[
+               "Coupon Version Controller"
+            ],
+            "summary":"Retrieve a version of coupon by version Id",
+            "operationId":"retrieveCouponVersionById",
+            "parameters":[
+               {
+                  "name":"couponVersionId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Coupon version is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponVersionDto"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponVersionDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/backoffice-server/api/v1/coupon":{
+         "post":{
+            "tags":[
+               "Coupon Controller"
+            ],
+            "summary":"Create a coupon",
+            "operationId":"createCoupon",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon/{couponCode}":{
+         "put":{
+            "tags":[
+               "Coupon Controller"
+            ],
+            "summary":"Update a coupon",
+            "operationId":"updateCoupon",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"couponCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon-entity-relation":{
+         "post":{
+            "tags":[
+               "Coupon Entity Relation Controller"
+            ],
+            "summary":"Create coupon entity relation",
+            "operationId":"createEntityRelation",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponEntityRelationDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/coupon-entity-relation/{id}":{
+         "put":{
+            "tags":[
+               "Coupon Entity Relation Controller"
+            ],
+            "summary":"Update coupon entity relation",
+            "operationId":"updateEntityRelation",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponEntityRelationDto"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Journey details informations is retrieved",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/chat/{chatId}":{
          "get":{
             "tags":[
@@ -3649,6 +4631,14 @@
                   "schema":{
                      "type":"string"
                   }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "requestBody":{
@@ -3724,6 +4714,14 @@
                   "required":true,
                   "schema":{
                      "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -3801,6 +4799,14 @@
                   "schema":{
                      "type":"string"
                   }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
                }
             ],
             "requestBody":{
@@ -3840,6 +4846,63 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/ExcelFileRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/batch-execution/{batchCode}":{
+         "post":{
+            "tags":[
+               "Batch Execution Controller"
+            ],
+            "summary":"Execution Batch Manually on Demand",
+            "operationId":"executeBatchManually",
+            "parameters":[
+               {
+                  "name":"batchCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/BatchParametersRest"
+                     }
+                  }
+               }
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -4116,18 +5179,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -4138,6 +5201,9 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -4146,13 +5212,10 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -4177,10 +5240,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4455,6 +5518,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "currency":{
                   "type":"string"
                },
@@ -4505,6 +5571,12 @@
                "updateDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "profitMargin":{
+                  "type":"number"
+               },
+               "profitMarginDiscount":{
+                  "type":"number"
                }
             }
          },
@@ -4752,18 +5824,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -4781,6 +5853,141 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOfferedServiceRest"
+               }
+            }
+         },
+         "CreateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "documentTypeId",
+               "offeredServiceId",
+               "roleName"
+            ],
+            "type":"object",
+            "properties":{
+               "active":{
+                  "type":"boolean"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType offeredServiceId primary key",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
+               "documentTypeId":{
+                  "type":"integer",
+                  "description":"OfferedService Role DocumentType documentTypeId primary key",
+                  "format":"int64"
+               }
+            }
+         },
+         "DocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "extension":{
+                  "type":"string"
+               },
+               "typeMime":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "OfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roleName":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "$ref":"#/components/schemas/DocumentTypeDto"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceRoleDocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRoleDocumentTypeDto"
+               }
+            }
+         },
+         "UpdateOfferedServiceRoleDocumentTypeDto":{
+            "required":[
+               "isActive"
+            ],
+            "type":"object",
+            "properties":{
+               "roleName":{
+                  "maxLength":255,
+                  "minLength":1,
+                  "type":"string",
+                  "description":"OfferedService Role DocumentType roleName primary key"
+               },
+               "isActive":{
+                  "type":"boolean",
+                  "description":"Indicates if OfferedService Role DocumentType is active"
                }
             }
          },
@@ -5020,6 +6227,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -5148,6 +6358,18 @@
             },
             "description":"This model represents the configurator"
          },
+         "ContactEmailRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               }
+            }
+         },
          "ContactPhoneRest":{
             "type":"object",
             "properties":{
@@ -5158,6 +6380,189 @@
                "telephone":{
                   "type":"integer",
                   "format":"int64"
+               }
+            }
+         },
+         "CouponScopeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponScopeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponScopeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponScopeDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponScopeDescriptionDto"
+                  }
+               }
+            }
+         },
+         "CouponTargetTypeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponTargetTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponTargetTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTargetTypeDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponTargetTypeDescriptionDto"
+                  }
+               }
+            }
+         },
+         "CouponTypeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTypeDescriptions":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponTypeDescriptionDto"
+                  }
                }
             }
          },
@@ -5189,18 +6594,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -5430,6 +6835,12 @@
                },
                "professionalStatus":{
                   "$ref":"#/components/schemas/ProfessionalStatusRest"
+               },
+               "contactEmails":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ContactEmailRest"
+                  }
                }
             }
          },
@@ -5506,6 +6917,85 @@
                }
             }
          },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionFrom":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionTo":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTypeDto":{
+                  "$ref":"#/components/schemas/CouponTypeDto"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponTargetTypeDto":{
+                  "$ref":"#/components/schemas/CouponTargetTypeDto"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "couponScopeDto":{
+                  "$ref":"#/components/schemas/CouponScopeDto"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "RequestRejectionRest":{
             "type":"object",
             "properties":{
@@ -5561,6 +7051,15 @@
                "clientDetails":{
                   "$ref":"#/components/schemas/ClientDataRest"
                },
+               "totalPrice":{
+                  "type":"number"
+               },
+               "totalPriceOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
+               },
                "offeredService":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
                },
@@ -5585,6 +7084,12 @@
                },
                "requestRejectionRest":{
                   "$ref":"#/components/schemas/RequestRejectionRest"
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
+                  }
                }
             }
          },
@@ -5628,6 +7133,91 @@
                }
             },
             "description":"This model represents the store"
+         },
+         "FileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "owner":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "senderUid":{
+                  "type":"string"
+               },
+               "senderType":{
+                  "type":"string"
+               },
+               "visibleBy":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "documentSubType":{
+                  "type":"string"
+               },
+               "date":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "fileType":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for files"
+         },
+         "SingapurResponseListFileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               }
+            }
+         },
+         "SingapurResponseByte[]":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "format":"byte"
+                  }
+               }
+            }
          },
          "RequestStatusRest":{
             "type":"object",
@@ -5717,18 +7307,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6144,18 +7734,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6215,23 +7805,23 @@
                }
             }
          },
-         "ChangeStatusRest": {
-				"type": "object",
-				"properties": {
-					"token": {
-						"type": "string"
-					},
-					"emailProfessional": {
-						"type": "string"
-					},
-					"newStatus": {
-						"type": "string"
-					},
-					"comment": {
-						"type": "string"
-					}
-				}
-			},
+         "ChangeStatusRest":{
+            "type":"object",
+            "properties":{
+               "token":{
+                  "type":"string"
+               },
+               "emailProfessional":{
+                  "type":"string"
+               },
+               "newStatus":{
+                  "type":"string"
+               },
+               "comment":{
+                  "type":"string"
+               }
+            }
+         },
          "ProfessionalStatusAllowedRest":{
             "type":"object",
             "properties":{
@@ -6270,6 +7860,58 @@
                }
             }
          },
+         "ProfessionalActionRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "actionCode":{
+                  "type":"string"
+               },
+               "permission":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               }
+            }
+         },
+         "ProfessionalPermittedAndForbiddenActionRest":{
+            "type":"object",
+            "properties":{
+               "permittedProfessionalActionRest":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProfessionalActionRest"
+                  }
+               },
+               "forbiddenProfessionalActionRest":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProfessionalActionRest"
+                  }
+               }
+            }
+         },
+         "SingapurResponseProfessionalPermittedAndForbiddenActionRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProfessionalPermittedAndForbiddenActionRest"
+               }
+            }
+         },
          "FilterProfessionalRest":{
             "type":"object",
             "properties":{
@@ -6297,18 +7939,6 @@
                      "type":"integer",
                      "format":"int64"
                   }
-               }
-            }
-         },
-         "ContactEmailRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "email":{
-                  "type":"string"
                }
             }
          },
@@ -6340,18 +7970,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -6727,6 +8357,93 @@
                }
             }
          },
+         "OperationCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionFrom":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionTo":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTypeDto":{
+                  "$ref":"#/components/schemas/CouponTypeDto"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponTargetTypeDto":{
+                  "$ref":"#/components/schemas/CouponTargetTypeDto"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "couponScopeDto":{
+                  "$ref":"#/components/schemas/CouponScopeDto"
+               },
+               "usageLimit":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "usageLimitPerUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "OperationOfferedServicesRest":{
             "required":[
                "code",
@@ -6734,6 +8451,7 @@
                "description",
                "price",
                "profitMargin",
+               "profitMarginDiscount",
                "taxDetails",
                "title"
             ],
@@ -6762,6 +8480,9 @@
                   "type":"number",
                   "description":"Amount to charge for the service"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -6780,6 +8501,9 @@
                   "format":"int64"
                },
                "profitMargin":{
+                  "type":"number"
+               },
+               "profitMarginDiscount":{
                   "type":"number"
                },
                "paymentReference":{
@@ -6851,6 +8575,12 @@
                "totalCost":{
                   "type":"number",
                   "description":"Total cost of the operation"
+               },
+               "totalCostOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
                },
                "totalPaid":{
                   "type":"number",
@@ -6934,6 +8664,12 @@
                },
                "operationRejectionRest":{
                   "$ref":"#/components/schemas/OperationRejectionRest"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             }
          },
@@ -6986,18 +8722,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -7093,6 +8829,10 @@
                "totalCost":{
                   "type":"number",
                   "description":"Total cost of the operation"
+               },
+               "totalCostOriginal":{
+                  "type":"number",
+                  "description":"Total cost of the operation without discount"
                },
                "totalPaid":{
                   "type":"number",
@@ -7288,6 +9028,202 @@
             },
             "description":"This model used to response to login and conatains all data about the client"
          },
+         "RequestLevelCostRest":{
+            "type":"object",
+            "properties":{
+               "idProfessionalServiceLevel":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "baseCost":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "tax":{
+                  "type":"number"
+               },
+               "displacementFee":{
+                  "type":"number"
+               }
+            },
+            "description":"This model represents a request level cost"
+         },
+         "LevelCostRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professionalServiceLevel":{
+                  "$ref":"#/components/schemas/ProfessionalServiceLevelRest"
+               },
+               "baseCost":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "tax":{
+                  "type":"number"
+               },
+               "displacementFee":{
+                  "type":"number"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"string"
+               },
+               "updateUser":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents a level cost"
+         },
+         "MasterAreaRest":{
+            "required":[
+               "areaCode",
+               "lastLevel",
+               "parentLevel"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "masterHierarchy":{
+                  "$ref":"#/components/schemas/MasterHierarchyRest"
+               },
+               "parentLevel":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "lastLevel":{
+                  "type":"boolean"
+               },
+               "areaCode":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents a master hierarchy"
+         },
+         "MasterHierarchyRest":{
+            "required":[
+               "levelCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id of the master hierarchy",
+                  "format":"int64"
+               },
+               "levelCode":{
+                  "type":"string",
+                  "description":"Level Code of the master hierarchy"
+               },
+               "levelDescription":{
+                  "type":"string",
+                  "description":"Level Description of the hierarchy area"
+               },
+               "levelOrder":{
+                  "type":"integer",
+                  "description":"Order of the master hierarchy",
+                  "format":"int32"
+               },
+               "language":{
+                  "type":"string",
+                  "description":"Language of the master hierarchy"
+               },
+               "createDate":{
+                  "type":"string",
+                  "description":"Create date of the master hierarchy",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "description":"Update date of the master hierarchy",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"string",
+                  "description":"Create user of the master hierarchy"
+               },
+               "updateUser":{
+                  "type":"string",
+                  "description":"Update user of the master hierarchy"
+               }
+            },
+            "description":"This model represents a master hierarchy"
+         },
+         "ProfessionalOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "active":{
+                  "type":"boolean"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professional":{
+                  "$ref":"#/components/schemas/ProfessionalRest"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "ProfessionalServiceLevelRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "masterArea":{
+                  "$ref":"#/components/schemas/MasterAreaRest"
+               },
+               "professionalOfferedService":{
+                  "$ref":"#/components/schemas/ProfessionalOfferedServiceRest"
+               }
+            },
+            "description":"This model represents a professional service level"
+         },
+         "SingapurResponseLevelCostRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/LevelCostRest"
+               }
+            }
+         },
          "MainInformationRest":{
             "type":"object",
             "properties":{
@@ -7438,6 +9374,21 @@
                },
                "operationRejectionRest":{
                   "$ref":"#/components/schemas/OperationRejectionRest"
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
+                  }
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
+               },
+               "requestBillingDataRest":{
+                  "$ref":"#/components/schemas/RequestBillingDataRest"
                }
             }
          },
@@ -7462,6 +9413,9 @@
                   "type":"string"
                },
                "price":{
+                  "type":"number"
+               },
+               "priceOriginal":{
                   "type":"number"
                },
                "basePrice":{
@@ -7520,6 +9474,12 @@
                   "type":"number"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
                   "type":"number"
                },
                "taxRate":{
@@ -7583,6 +9543,12 @@
                },
                "isCanceledLessTwentyFourHours":{
                   "type":"boolean"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             }
          },
@@ -7599,6 +9565,39 @@
                   "type":"number"
                },
                "paycometTransactionFee":{
+                  "type":"number"
+               }
+            }
+         },
+         "RequestBillingDataRest":{
+            "type":"object",
+            "properties":{
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPrice":{
+                  "type":"number"
+               },
+               "totalPriceOriginal":{
+                  "type":"number"
+               },
+               "amountDiscount":{
+                  "type":"number"
+               },
+               "taxRate":{
+                  "type":"number"
+               },
+               "taxBase":{
+                  "type":"number"
+               },
+               "hogamiComission":{
+                  "type":"number"
+               },
+               "taxes":{
+                  "type":"number"
+               },
+               "amountPriceProduct":{
                   "type":"number"
                }
             }
@@ -7648,18 +9647,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -7684,6 +9683,9 @@
                   "type":"string"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -7813,6 +9815,151 @@
                }
             }
          },
+         "CostRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "country":{
+                  "type":"string"
+               },
+               "baseCost":{
+                  "type":"number"
+               },
+               "tax":{
+                  "type":"number"
+               },
+               "displacementFee":{
+                  "type":"number"
+               }
+            }
+         },
+         "LevelInfoRest":{
+            "type":"object",
+            "properties":{
+               "levelId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelLabel":{
+                  "type":"string"
+               },
+               "levelCode":{
+                  "type":"string"
+               },
+               "levelOrder":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents a level of the hierarchy information"
+         },
+         "LevelRest":{
+            "type":"object",
+            "properties":{
+               "levelInfoRest":{
+                  "$ref":"#/components/schemas/LevelInfoRest"
+               },
+               "costRest":{
+                  "$ref":"#/components/schemas/CostRest"
+               },
+               "levelRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/LevelRest"
+                  }
+               }
+            },
+            "description":"This model represents a level of the hierarchy"
+         },
+         "PageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProfessionalHierarchyRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               }
+            }
+         },
+         "ProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "professionalServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelRest":{
+                  "$ref":"#/components/schemas/LevelRest"
+               },
+               "statusHierarchy":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageProfessionalHierarchyRest"
+               }
+            }
+         },
          "SingapurResponseListDocumentRest":{
             "type":"object",
             "properties":{
@@ -7850,6 +9997,323 @@
                   "items":{
                      "$ref":"#/components/schemas/StoreRest"
                   }
+               }
+            }
+         },
+         "CouponDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponTermsAndAgreementsDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "CouponVersionDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponVersionDto":{
+            "required":[
+               "value"
+            ],
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponDto":{
+                  "$ref":"#/components/schemas/CouponDto"
+               },
+               "couponTypeDto":{
+                  "$ref":"#/components/schemas/CouponTypeDto"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "startDateString":{
+                  "type":"string"
+               },
+               "endDateString":{
+                  "type":"string"
+               },
+               "versionFrom":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionTo":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTargetTypeDto":{
+                  "$ref":"#/components/schemas/CouponTargetTypeDto"
+               },
+               "couponScopeDto":{
+                  "$ref":"#/components/schemas/CouponScopeDto"
+               },
+               "usageLimit":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "usageLimitPerUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "couponTermsAndAgreementsDto":{
+                  "$ref":"#/components/schemas/CouponTermsAndAgreementsDto"
+               },
+               "couponVersionDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponVersionDescriptionDto"
+                  }
+               },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
+                  "type":"string"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponseCouponVersionDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/CouponVersionDto"
+               }
+            }
+         },
+         "CouponEntityRelationDto":{
+            "required":[
+               "couponEntityRelationTypeDto",
+               "couponVersionDto",
+               "platformEntityDto",
+               "value"
+            ],
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDto":{
+                  "$ref":"#/components/schemas/CouponVersionDto"
+               },
+               "platformEntityDto":{
+                  "$ref":"#/components/schemas/PlatformEntityDto"
+               },
+               "couponEntityRelationTypeDto":{
+                  "$ref":"#/components/schemas/CouponEntityRelationTypeDto"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "createDateString":{
+                  "type":"string"
+               },
+               "updateDateString":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponEntityRelationTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "PlatformEntityDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
                }
             }
          },
@@ -8047,6 +10511,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -8095,18 +10562,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "last":{
                   "type":"boolean"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -8124,6 +10591,49 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PageOperationPaymentBilling"
+               }
+            }
+         },
+         "BatchParametersRest":{
+            "type":"object",
+            "properties":{
+               "parameterJobReportOperationBillingRests":{
+                  "$ref":"#/components/schemas/ParameterJobReportOperationBillingRest"
+               }
+            }
+         },
+         "ParameterJobReportOperationBillingRest":{
+            "required":[
+               "endEndTime",
+               "receiverEmailReportBilling",
+               "startEndTime"
+            ],
+            "type":"object",
+            "properties":{
+               "receiverEmailReportBilling":{
+                  "type":"string"
+               },
+               "receiverInCopyEmailReportBilling":{
+                  "type":"string"
+               },
+               "receiverInBlingCarbonCopyEmailReportBilling":{
+                  "type":"string"
+               },
+               "startEndTime":{
+                  "type":"string"
+               },
+               "endEndTime":{
+                  "type":"string"
+               },
+               "existsTotalPaid":{
+                  "type":"boolean"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
                }
             }
          }

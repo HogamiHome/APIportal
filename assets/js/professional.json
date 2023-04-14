@@ -21,6 +21,9 @@
          "name":"OfferedServiceController"
       },
       {
+         "name":"RequestOfferedServiceController"
+      },
+      {
          "name":"HierarchyPriceController"
       },
       {
@@ -42,7 +45,13 @@
          "name":"ProfessionalLegacyController"
       },
       {
+         "name":"MediaGalleryController"
+      },
+      {
          "name":"OperationAddressController"
+      },
+      {
+         "name":"CouponVersionController"
       },
       {
          "name":"LogAPKController"
@@ -115,6 +124,9 @@
       },
       {
          "name":"NotificationController"
+      },
+      {
+         "name":"RequestProductController"
       },
       {
          "name":"TimestampController"
@@ -225,7 +237,7 @@
                   }
                },
                {
-                  "name":"professionalCampaignsRest",
+                  "name":"campaigns",
                   "in":"query",
                   "required":false,
                   "schema":{
@@ -557,7 +569,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v2/professionals/{professionalId}/requests":{
@@ -647,6 +660,14 @@
             "operationId":"retrieveRequestV2",
             "parameters":[
                {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
                   "name":"professionalId",
                   "in":"path",
                   "required":true,
@@ -704,6 +725,48 @@
                   ]
                }
             ]
+         }
+      },
+      "/professional/v2/professionals/{professionalId}/public-profile":{
+         "get":{
+            "tags":[
+               "ProfessionalController"
+            ],
+            "summary":"Retrieve public profile from a professional V2",
+            "operationId":"retrieveProfessionalPublicProfileV2",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalPublicProfileRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
       },
       "/professional/v2/professionals/{professionalId}/operations":{
@@ -794,6 +857,14 @@
                   "name":"Authorization",
                   "in":"header",
                   "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
                   "schema":{
                      "type":"string"
                   }
@@ -1026,6 +1097,47 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/professional/v1/zip-code/{zipCode}/service-ids":{
+         "get":{
+            "tags":[
+               "OfferedServiceController"
+            ],
+            "summary":"Retrieve professional offered service ids by ZipCode",
+            "operationId":"retrieveProfessionalServiceIdsByZipCode",
+            "parameters":[
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListLong"
                         }
                      }
                   }
@@ -1307,7 +1419,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          },
          "post":{
             "tags":[
@@ -1452,6 +1565,65 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseProfessionalRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/status/active":{
+         "get":{
+            "tags":[
+               "ProfessionalController"
+            ],
+            "summary":"The current professional status will be interpreted to indicate to the APK whether it is active or not.",
+            "operationId":"retrieveStatusActiveOrInactiveByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The professional status is active or no retrieved correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseBoolean"
                         }
                      }
                   }
@@ -1686,7 +1858,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/{professionalId}/services/details/{offeredServiceId}":{
@@ -1755,7 +1928,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/{professionalId}/requests":{
@@ -1978,6 +2152,160 @@
             ]
          }
       },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/services/{requestServiceId}":{
+         "put":{
+            "tags":[
+               "RequestOfferedServiceController"
+            ],
+            "summary":"Update offered service by request service id",
+            "operationId":"updateRequestService",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OfferedServiceRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/products/{productId}":{
+         "put":{
+            "tags":[
+               "RequestProductController"
+            ],
+            "summary":"Update request product by request product id",
+            "operationId":"updateRequestProduct",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"productId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ProductRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProductRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/professionals/{professionalId}/requests/{requestId}/notifications":{
          "post":{
             "tags":[
@@ -2032,6 +2360,138 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/media-gallery":{
+         "get":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"Information is retrieved from the files of a request. The entire gallery of images and files uploaded to GCP.",
+            "operationId":"retrieveMediaGallery",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListFileRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/media-gallery/{fileId}":{
+         "get":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"File is retrieved in bytes array by identifier file",
+            "operationId":"retrieveFileFromMediaGalleryById",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"fileId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"messageId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseByte[]"
                         }
                      }
                   }
@@ -4837,7 +5297,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/sendNotificationOfProductAndService/{requestId}":{
@@ -5485,7 +5946,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/professional/v1/professionals/areas/{zipCode}":{
@@ -7135,6 +7597,56 @@
             ]
          }
       },
+      "/professional/v1/offered-service-role-document-type/offered-service-id/{offeredServiceId}":{
+         "get":{
+            "tags":[
+               "OfferedServiceController"
+            ],
+            "summary":"Retrieve a list of Service Role DocumentType by OfferedService Id",
+            "operationId":"retrieveOfferedServiceRoleDocumentTypesByServiceId",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceWithRoleNamesDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/professional/v1/newpro":{
          "post":{
             "tags":[
@@ -7174,6 +7686,73 @@
                   }
                }
             }
+         }
+      },
+      "/professional/v1/media-gallery/chats/{chatId}":{
+         "post":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"Upload the documents from APK to Google Storage",
+            "operationId":"createMediaGallery",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "properties":{
+                           "files":{
+                              "type":"array",
+                              "items":{
+                                 "type":"string",
+                                 "format":"binary"
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseFileUploadRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/professional/v1/master-hierarchy":{
@@ -7804,6 +8383,65 @@
             ]
          }
       },
+      "/professional/v1/master-area/zip-code-name-and-province-name/{zipCode}":{
+         "get":{
+            "tags":[
+               "MasterAreaController"
+            ],
+            "summary":"Retrieve ZipCode Name and Province name by zipCode",
+            "operationId":"retrieveMasterAreaZipCodeCityByZipCode",
+            "parameters":[
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Retrieve master area correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/professional/v1/master-area/area-code":{
          "get":{
             "tags":[
@@ -8415,6 +9053,73 @@
          }
       },
       "/professional/v1/hierarchy-price":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the areas hierarchy of a professional",
+            "operationId":"retrieveHierarchyZonesProfessional",
+            "parameters":[
+               {
+                  "name":"pageable",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/components/schemas/Pageable"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Professionals have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageProfessionalHierarchyRest"
+                        }
+                     }
+                  }
+               }
+            }
+         },
          "post":{
             "tags":[
                "HierarchyPriceController"
@@ -8604,6 +9309,304 @@
             }
          }
       },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the provinces is professional working",
+            "operationId":"retrieveProvincesWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Provinces in which a professional works have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List the zonas by provinces is professional working",
+            "operationId":"retrieveZonesByProvincesWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaParentLevelId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] The zones by province in which a professional works have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/zipcodes":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List of the postal codes by identifier zone works professional",
+            "operationId":"retrieveZipCodesByZoneIdWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaZoneId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] List of postal codes for which a professional works by zones have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/services":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List of the offered service by zone of professional Id",
+            "operationId":"retrieveProfessionalServicesByZoneId",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaZoneId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] List of services for which a professional works by zones have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/error":{
          "post":{
             "tags":[
@@ -8638,6 +9641,66 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseAPKLogRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/professional/v1/coupons-versions/{couponVersionId}":{
+         "get":{
+            "tags":[
+               "CouponVersionController"
+            ],
+            "summary":"Retrieve data of coupon version filtering by id version",
+            "operationId":"retrieveCouponVersionById",
+            "parameters":[
+               {
+                  "name":"couponVersionId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Coupon version is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponVersionDto"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponVersionDto"
                         }
                      }
                   }
@@ -8976,21 +10039,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9002,22 +10065,22 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -9045,10 +10108,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -9398,21 +10461,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -9501,6 +10564,61 @@
             },
             "description":"This model represents the configurator"
          },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "RequestV2Rest":{
             "required":[
                "chatId"
@@ -9576,6 +10694,12 @@
                   "items":{
                      "$ref":"#/components/schemas/ProductRest"
                   }
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
+                  }
                }
             }
          },
@@ -9636,6 +10760,125 @@
                },
                "data":{
                   "$ref":"#/components/schemas/RequestV2Rest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "AddressRest":{
+            "required":[
+               "address",
+               "addressType",
+               "city",
+               "province",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "addressType":{
+                  "$ref":"#/components/schemas/AddressTypeRest"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
+         "AddressTypeRest":{
+            "required":[
+               "type"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"string"
+               }
+            }
+         },
+         "ProfessionalPublicProfileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Unique id ",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Professional's name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Professional's last name"
+               },
+               "avatar":{
+                  "type":"string"
+               },
+               "country":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "slogan":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
+               },
+               "provincesProfessional":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "friendlyUrl":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents a professional"
+         },
+         "SingapurResponseProfessionalPublicProfileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProfessionalPublicProfileRest"
                }
             },
             "description":"This model is the envelope"
@@ -9719,6 +10962,61 @@
             },
             "description":"This model represents the configurator"
          },
+         "OperationCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "OperationOfferedServicesRest":{
             "required":[
                "basePrice",
@@ -9747,6 +11045,9 @@
                   "type":"string"
                },
                "price":{
+                  "type":"number"
+               },
+               "priceOriginal":{
                   "type":"number"
                },
                "basePrice":{
@@ -9805,6 +11106,9 @@
                   "format":"int64"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -9874,6 +11178,12 @@
                "updateDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             }
          },
@@ -9920,21 +11230,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -10055,6 +11365,33 @@
                "data":{
                   "type":"string",
                   "description":"Contain data related to request"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseListLong":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "type":"integer",
+                     "description":"Contain data related to request",
+                     "format":"int64"
+                  }
                }
             },
             "description":"This model is the envelope"
@@ -10212,6 +11549,18 @@
                }
             }
          },
+         "ContactEmailRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               }
+            }
+         },
          "ContactPhoneRest":{
             "type":"object",
             "properties":{
@@ -10354,6 +11703,10 @@
                "document":{
                   "type":"string"
                },
+               "userId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "professionalInformation":{
                   "$ref":"#/components/schemas/ProfessionalInformationRest"
                },
@@ -10389,6 +11742,12 @@
                },
                "professionalStatus":{
                   "$ref":"#/components/schemas/ProfessionalStatusRest"
+               },
+               "contactEmails":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ContactEmailRest"
+                  }
                }
             },
             "description":"This model represents a professional"
@@ -10484,55 +11843,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "AddressRest":{
-            "required":[
-               "address",
-               "addressType",
-               "city",
-               "province",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "addressType":{
-                  "$ref":"#/components/schemas/AddressTypeRest"
-               },
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
-                  "type":"string"
-               }
-            }
-         },
-         "AddressTypeRest":{
-            "required":[
-               "type"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"string"
-               }
-            }
          },
          "ProfessionalRegisterRest":{
             "required":[
@@ -10708,6 +12018,28 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseBoolean":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"boolean",
+                  "description":"Contain data related to request"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "PageRequestRest":{
             "type":"object",
             "properties":{
@@ -10733,21 +12065,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -10862,6 +12194,48 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseProductRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProductRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "RequestMailTypeRest":{
             "required":[
                "chatId",
@@ -10885,6 +12259,102 @@
                   "type":"string"
                }
             }
+         },
+         "FileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "owner":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "senderUid":{
+                  "type":"string"
+               },
+               "senderType":{
+                  "type":"string"
+               },
+               "visibleBy":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "documentSubType":{
+                  "type":"string"
+               },
+               "date":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "fileType":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for files"
+         },
+         "SingapurResponseListFileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseByte[]":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "type":"string",
+                     "description":"Contain data related to request",
+                     "format":"byte"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
          },
          "SingapurResponseRequestAddressRest":{
             "type":"object",
@@ -11016,21 +12486,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -11107,76 +12577,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/AverageRatingRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "ProfessionalPublicProfileRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Unique id ",
-                  "format":"int64"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Professional's name"
-               },
-               "lastName":{
-                  "type":"string",
-                  "description":"Professional's last name"
-               },
-               "avatar":{
-                  "type":"string"
-               },
-               "country":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string"
-               },
-               "slogan":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "addresses":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/AddressRest"
-                  }
-               },
-               "provincesProfessional":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               },
-               "friendlyUrl":{
-                  "type":"string"
-               }
-            },
-            "description":"This model represents a professional"
-         },
-         "SingapurResponseProfessionalPublicProfileRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/ProfessionalPublicProfileRest"
                }
             },
             "description":"This model is the envelope"
@@ -11277,27 +12677,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationRejectionRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "SingapurResponseProductRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/ProductRest"
                }
             },
             "description":"This model is the envelope"
@@ -11767,33 +13146,6 @@
             },
             "description":"This model represents informations needed to update a status of a deleted request"
          },
-         "SingapurResponseListLong":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "type":"integer",
-                     "description":"Contain data related to request",
-                     "format":"int64"
-                  }
-               }
-            },
-            "description":"This model is the envelope"
-         },
          "ProfessionalCampaignBodyRest":{
             "type":"object",
             "properties":{
@@ -12030,18 +13382,6 @@
                }
             }
          },
-         "ContactEmailRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "email":{
-                  "type":"string"
-               }
-            }
-         },
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
@@ -12067,21 +13407,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                }
             },
             "description":"Contain data related to request"
@@ -12578,6 +13918,12 @@
                },
                "areaCode":{
                   "type":"string"
+               },
+               "searchAreaId":{
+                  "type":"string"
+               },
+               "areaLabel":{
+                  "type":"string"
                }
             },
             "description":"This model represents a master hierarchy"
@@ -12718,6 +14064,100 @@
             },
             "description":"This model is the envelope"
          },
+         "DocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "extension":{
+                  "type":"string"
+               },
+               "typeMime":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "OfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roles":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RoleNameWithDocumentTypesDto"
+                  }
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "RoleNameWithDocumentTypesDto":{
+            "type":"object",
+            "properties":{
+               "name":{
+                  "type":"string"
+               },
+               "documentTypes":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/DocumentTypeDto"
+                  }
+               },
+               "extensions":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceWithRoleNamesDto"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "MailNewProfessionalRest":{
             "required":[
                "email",
@@ -12804,6 +14244,45 @@
                },
                "data":{
                   "$ref":"#/components/schemas/MailNewProfessionalRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "FileUploadRest":{
+            "type":"object",
+            "properties":{
+               "chatId":{
+                  "type":"string"
+               },
+               "mediaGallery":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               },
+               "response":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for upload files"
+         },
+         "SingapurResponseFileUploadRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/FileUploadRest"
                }
             },
             "description":"This model is the envelope"
@@ -12900,6 +14379,45 @@
             },
             "description":"This model is the envelope"
          },
+         "MasterAreaZipCodeCityRest":{
+            "required":[
+               "city",
+               "provinceName"
+            ],
+            "type":"object",
+            "properties":{
+               "city":{
+                  "type":"string",
+                  "description":"Area Label (City) of zip code on Master Area"
+               },
+               "provinceName":{
+                  "type":"string",
+                  "description":"Province Name (Master Area lvl 3) of zip code on Master Area"
+               }
+            },
+            "description":"This model represents a city and province name for a zip code"
+         },
+         "SingapurResponseMasterAreaZipCodeCityRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/MasterAreaZipCodeCityRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "UserCredentialsRest":{
             "required":[
                "password",
@@ -12972,6 +14490,15 @@
                "deviceInfoId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "permissions":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "status":{
+                  "type":"string"
                }
             },
             "description":"This model used to response to login and conatains all data about the client"
@@ -13123,6 +14650,136 @@
             },
             "description":"This model is the envelope"
          },
+         "LevelInfoRest":{
+            "type":"object",
+            "properties":{
+               "levelId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelLabel":{
+                  "type":"string"
+               },
+               "levelCode":{
+                  "type":"string"
+               },
+               "levelOrder":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "levelIdInTable":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "description":"This model represents a level of the hierarchy information"
+         },
+         "LevelRest":{
+            "type":"object",
+            "properties":{
+               "levelInfoRest":{
+                  "$ref":"#/components/schemas/LevelInfoRest"
+               },
+               "costRest":{
+                  "$ref":"#/components/schemas/CostRest"
+               },
+               "levelRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/LevelRest"
+                  }
+               }
+            },
+            "description":"This model represents a level of the hierarchy"
+         },
+         "PageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ProfessionalHierarchyRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "ProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "professionalServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "levelRest":{
+                  "$ref":"#/components/schemas/LevelRest"
+               },
+               "statusHierarchy":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponsePageProfessionalHierarchyRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageProfessionalHierarchyRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "ProfessionalSearchNewHierarchyRest":{
             "type":"object",
             "properties":{
@@ -13240,6 +14897,337 @@
                },
                "data":{
                   "$ref":"#/components/schemas/APKLogRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "CouponDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponScopeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponScopeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponScopeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponScopeDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponScopeDescriptionDto"
+                  }
+               }
+            }
+         },
+         "CouponTargetTypeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponTargetTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponTargetTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTargetTypeDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponTargetTypeDescriptionDto"
+                  }
+               }
+            }
+         },
+         "CouponTermsAndAgreementsDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "CouponTypeDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTypeDescriptions":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponTypeDescriptionDto"
+                  }
+               }
+            }
+         },
+         "CouponVersionDescriptionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "languageCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponVersionDto":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponDto":{
+                  "$ref":"#/components/schemas/CouponDto"
+               },
+               "couponTypeDto":{
+                  "$ref":"#/components/schemas/CouponTypeDto"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionFrom":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "versionTo":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponTargetTypeDto":{
+                  "$ref":"#/components/schemas/CouponTargetTypeDto"
+               },
+               "couponScopeDto":{
+                  "$ref":"#/components/schemas/CouponScopeDto"
+               },
+               "usageLimit":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "usageLimitPerUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "couponTermsAndAgreementsDto":{
+                  "$ref":"#/components/schemas/CouponTermsAndAgreementsDto"
+               },
+               "couponVersionDescriptionDtos":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/CouponVersionDescriptionDto"
+                  }
+               },
+               "cumulative":{
+                  "type":"boolean"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "SingapurResponseCouponVersionDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/CouponVersionDto"
                }
             },
             "description":"This model is the envelope"

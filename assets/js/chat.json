@@ -30,6 +30,9 @@
          "name":"Banner Controller"
       },
       {
+         "name":"UploadFileToGCP"
+      },
+      {
          "name":"UserAuth Controller"
       },
       {
@@ -254,6 +257,47 @@
                         "items":{
                            "type":"string"
                         }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/upload-file":{
+         "post":{
+            "tags":[
+               "UploadFileToGCP"
+            ],
+            "summary":"${api.chat-server.defs.upload-file.uploadSiteMap.description}",
+            "operationId":"uploadFile",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FileToUploadRest"
                      }
                   }
                },
@@ -717,6 +761,112 @@
             }
          }
       },
+      "/chat/v1/chats/{chatId}/media-gallery":{
+         "get":{
+            "tags":[
+               "Media Gallery Controller"
+            ],
+            "summary":"The entire gallery of files that a chat has is retrieved, including the start and end of work.",
+            "operationId":"retrieveMediaGallery",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"role",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListFileRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/chats/{chatId}/media-gallery/{fileId}":{
+         "get":{
+            "tags":[
+               "Media Gallery Controller"
+            ],
+            "summary":"A file is retrieved in bytes, filtering by its identifier in Firebase or database.",
+            "operationId":"retrieveFileFromMediaGalleryById",
+            "parameters":[
+               {
+                  "name":"chatId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"messageId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"fileId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseByte[]"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/chat/v1/chats/{chatId}/delete":{
          "delete":{
             "tags":[
@@ -1085,6 +1235,36 @@
                }
             }
          },
+         "FileToUploadRest":{
+            "type":"object",
+            "properties":{
+               "bucket":{
+                  "type":"string"
+               },
+               "folder":{
+                  "type":"string"
+               },
+               "contentType":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "contentFile":{
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "format":"byte"
+                  }
+               },
+               "extensionFile":{
+                  "type":"string"
+               },
+               "createBackup":{
+                  "type":"boolean"
+               }
+            }
+         },
          "ButtonRest":{
             "type":"object",
             "properties":{
@@ -1236,6 +1416,9 @@
                },
                "typeFile":{
                   "type":"string"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
                }
             },
             "description":"This model represents the data in bytes of the files"
@@ -1253,6 +1436,12 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "senderUid":{
+                  "type":"string"
+               },
+               "senderType":{
+                  "type":"string"
+               },
                "visibleBy":{
                   "type":"string"
                },
@@ -1265,6 +1454,15 @@
                "date":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "fileType":{
+                  "type":"string"
                }
             },
             "description":"This model represents the data for files"
@@ -1411,6 +1609,58 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseListFileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseByte[]":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "type":"string",
+                     "description":"Contain data related to request",
+                     "format":"byte"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "MeesageRest":{
             "type":"object",
             "properties":{
@@ -1542,6 +1792,9 @@
                },
                "service":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "requestCouponRest":{
+                  "$ref":"#/components/schemas/RequestCouponRest"
                }
             }
          },
@@ -1585,6 +1838,64 @@
                },
                "hours":{
                   "type":"string"
+               }
+            }
+         },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
                }
             }
          },

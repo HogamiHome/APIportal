@@ -601,6 +601,66 @@
                }
             }
          }
+      },
+      "/rating-server/api/v1/average/ratings/{ratingType}":{
+         "get":{
+            "tags":[
+               "RatingAverageController"
+            ],
+            "summary":"${api.rating.defs.rating-average.retrieveAverageRatingsByType.description}",
+            "operationId":"retrieveAverageRatingsByType",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"ratingType",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A list of ratings associated to a professional is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
       }
    },
    "components":{
@@ -646,13 +706,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -671,18 +731,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "first":{
+                  "type":"boolean"
+               },
+               "last":{
+                  "type":"boolean"
+               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "first":{
-                  "type":"boolean"
-               },
-               "last":{
-                  "type":"boolean"
                }
             }
          },
@@ -696,19 +756,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -1001,6 +1061,63 @@
                },
                "data":{
                   "$ref":"#/components/schemas/RatingRest"
+               }
+            }
+         },
+         "AverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ratingType":{
+                  "type":"string"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "SingapurResponseListAverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageRatingTotalRest"
+                  }
                }
             }
          }

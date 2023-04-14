@@ -63,6 +63,9 @@
          "name":"${api.client.defs.payment-data.name}"
       },
       {
+         "name":"${api.client.defs.offered-service.name}"
+      },
+      {
          "name":"${api.client.defs.request-offered-service.name}"
       },
       {
@@ -76,6 +79,9 @@
       },
       {
          "name":"${api.client.defs.bill-data.name}"
+      },
+      {
+         "name":"${api.client.defs.coupon.name}"
       },
       {
          "name":"${api.client.defs.operation-product.name}"
@@ -159,6 +165,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -1191,6 +1205,56 @@
             ]
          }
       },
+      "/client/v1/offered-service-role-document-type/offered-service-id/{offeredServiceId}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.offered-service.name}"
+            ],
+            "summary":"${api.client.defs.offered-services-server.service-role-document-type.retrieveOfferedServiceRoleDocumentTypesByServiceId.description}",
+            "operationId":"retrieveOfferedServiceRoleDocumentTypesByServiceId",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"roleName",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceWithRoleNamesDto"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/client/v1/media-gallery/chats/{chatId}":{
          "post":{
             "tags":[
@@ -1403,6 +1467,75 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/client/v1/coupon/validate-is-assignable/{couponCode}":{
+         "post":{
+            "tags":[
+               "${api.client.defs.coupon.name}"
+            ],
+            "summary":"${api.client.defs.coupon.validateIsAssignable.description}",
+            "operationId":"validateIsAssignable",
+            "parameters":[
+               {
+                  "name":"couponCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CouponValidationDTO"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The coupon doesn't exist in the platform",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponValidateResponseDTO"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400-3 The coupon is already registered",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseCouponValidateResponseDTO"
                         }
                      }
                   }
@@ -2711,6 +2844,138 @@
             ]
          }
       },
+      "/client/v1/clients/{clientId}/requests/{requestId}/media-gallery":{
+         "get":{
+            "tags":[
+               "${api.client.defs.media-gallery.name}"
+            ],
+            "summary":"${api.client.defs.media-gallery.retrieveMediaGallery.description}",
+            "operationId":"retrieveMediaGallery",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListFileRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v1/clients/{clientId}/requests/{requestId}/media-gallery/{fileId}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.media-gallery.name}"
+            ],
+            "summary":"${api.client.defs.media-gallery.retrieveFileFromMediaGalleryById.description}",
+            "operationId":"retrieveFileFromMediaGalleryById",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"fileId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"messageId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseByte[]"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/client/v1/clients/{clientId}/requests/direct":{
          "post":{
             "tags":[
@@ -3436,6 +3701,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -5724,7 +5997,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -5775,120 +6048,6 @@
             ]
          },
          "put":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "post":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "delete":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
@@ -5945,12 +6104,126 @@
                }
             ]
          },
-         "options":{
+         "post":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "delete":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
             "operationId":"createOperationService_6",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "options":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -6064,7 +6337,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -6576,6 +6849,66 @@
             ]
          }
       },
+      "/client/v1/average/ratings/{ratingType}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.rating.name}"
+            ],
+            "summary":"${api.client.defs.rating.retrieveAverageRatingsByType.description}",
+            "operationId":"retrieveAverageRatingsByType",
+            "parameters":[
+               {
+                  "name":"offeredServiceId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"ratingType",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A rating average associated to a pro is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAverageRatingTotalRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/client/v1/autologin":{
          "post":{
             "tags":[
@@ -6742,6 +7075,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "currency":{
                   "type":"string"
                },
@@ -6772,6 +7108,9 @@
                },
                "nameType":{
                   "type":"string"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             },
             "description":"This model represents the offered service"
@@ -6797,6 +7136,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -6892,6 +7234,64 @@
             },
             "description":"This model represents the configurator"
          },
+         "RequestCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "RequestV2Rest":{
             "type":"object",
             "properties":{
@@ -6957,6 +7357,12 @@
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/ProductRest"
+                  }
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
                   }
                }
             },
@@ -7099,6 +7505,64 @@
             },
             "description":"This model represents the configurator"
          },
+         "OperationCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "OperationOfferedServicesRest":{
             "required":[
                "currency",
@@ -7107,11 +7571,11 @@
             ],
             "type":"object",
             "properties":{
-               "offeredServiceTaxRate":{
-                  "type":"number"
-               },
                "profitGreatherThanZero":{
                   "type":"boolean"
+               },
+               "offeredServiceTaxRate":{
+                  "type":"number"
                },
                "id":{
                   "type":"integer",
@@ -7131,6 +7595,9 @@
                   "type":"string"
                },
                "price":{
+                  "type":"number"
+               },
+               "priceOriginal":{
                   "type":"number"
                },
                "basePrice":{
@@ -7161,6 +7628,9 @@
                   "$ref":"#/components/schemas/TaxDetailsRest"
                },
                "nameType":{
+                  "type":"string"
+               },
+               "idMessageFirebase":{
                   "type":"string"
                }
             }
@@ -7200,6 +7670,9 @@
                   "format":"int64"
                },
                "totalCost":{
+                  "type":"number"
+               },
+               "totalCostOriginal":{
                   "type":"number"
                },
                "totalPaid":{
@@ -7267,6 +7740,12 @@
                },
                "cancellationPolicies":{
                   "type":"string"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             },
             "description":"Contain data related to request"
@@ -7381,10 +7860,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "last":{
                   "type":"boolean"
                },
@@ -7393,6 +7868,10 @@
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -7411,15 +7890,15 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "unpaged":{
                   "type":"boolean"
                },
                "paged":{
                   "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -7510,10 +7989,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -7790,6 +8269,100 @@
             },
             "description":"This model is the envelope"
          },
+         "DocumentTypeDto":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "extension":{
+                  "type":"string"
+               },
+               "typeMime":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "OfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "roles":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RoleNameWithDocumentTypesDto"
+                  }
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "RoleNameWithDocumentTypesDto":{
+            "type":"object",
+            "properties":{
+               "name":{
+                  "type":"string"
+               },
+               "documentTypes":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/DocumentTypeDto"
+                  }
+               },
+               "extensions":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceWithRoleNamesDto":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceWithRoleNamesDto"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "FileRest":{
             "type":"object",
             "properties":{
@@ -7803,6 +8376,12 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "senderUid":{
+                  "type":"string"
+               },
+               "senderType":{
+                  "type":"string"
+               },
                "visibleBy":{
                   "type":"string"
                },
@@ -7815,6 +8394,15 @@
                "date":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "fileType":{
+                  "type":"string"
                }
             },
             "description":"This model represents the data for files"
@@ -7956,6 +8544,66 @@
                },
                "data":{
                   "$ref":"#/components/schemas/WebLogRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "CouponValidationDTO":{
+            "type":"object",
+            "properties":{
+               "component":{
+                  "type":"string"
+               },
+               "currentDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "offeredService":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "clientLogin":{
+                  "type":"string"
+               },
+               "address":{
+                  "type":"string"
+               }
+            }
+         },
+         "CouponValidateResponseDTO":{
+            "type":"object",
+            "properties":{
+               "code":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "SingapurResponseCouponValidateResponseDTO":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/CouponValidateResponseDTO"
                }
             },
             "description":"This model is the envelope"
@@ -8252,6 +8900,12 @@
                },
                "cancellationPolicies":{
                   "type":"string"
+               },
+               "requestCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestCouponRest"
+                  }
                }
             }
          },
@@ -8388,6 +9042,58 @@
                   "type":"string"
                }
             }
+         },
+         "SingapurResponseListFileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseByte[]":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "type":"string",
+                     "description":"Contain data related to request",
+                     "format":"byte"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
          },
          "SingapurResponseProductRest":{
             "type":"object",
@@ -8969,6 +9675,9 @@
                   "items":{
                      "$ref":"#/components/schemas/MeesageRest"
                   }
+               },
+               "requestCouponRest":{
+                  "$ref":"#/components/schemas/RequestCouponRest"
                }
             },
             "description":"Information of the chat room to create"
@@ -9728,6 +10437,68 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ErrorInformation"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "AverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ratingType":{
+                  "type":"string"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "SingapurResponseListAverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageRatingTotalRest"
+                  }
                }
             },
             "description":"This model is the envelope"

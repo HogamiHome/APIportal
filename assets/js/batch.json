@@ -1,8 +1,8 @@
 {
    "openapi":"3.0.1",
    "info":{
-      "title":"Direct API",
-      "description":"Operation API to Singapur Project",
+      "title":"Operation Batch",
+      "description":"Operation Batch to Singapur Project",
       "termsOfService":"https://www.everis.com",
       "license":{
          "name":"License",
@@ -27,6 +27,9 @@
          "name":"Alive Controller"
       },
       {
+         "name": "Generate Sitemap file in storage"
+      },
+      {
          "name":"Operation Batch"
       },
       {
@@ -34,6 +37,34 @@
       }
    ],
    "paths":{
+      "/operation-batch/api/v1/sitemap": {
+			"get": {
+				"tags": ["Generate Sitemap file in storage"],
+				"operationId": "generateSitemap",
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponse"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json;charset=UTF-8": {
+								"schema": {
+									"$ref": "#/components/schemas/SingapurResponseString"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
       "/operation-batch/api/v1/operation-billing-data":{
          "post":{
             "tags":[

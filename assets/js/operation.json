@@ -141,6 +141,14 @@
             "operationId":"retrieveProfessionalOperationV2",
             "parameters":[
                {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
                   "name":"professionalId",
                   "in":"path",
                   "required":true,
@@ -1940,6 +1948,47 @@
             }
          }
       },
+      "/operation-server/api/v1/operations/operation-analytics-cid":{
+         "post":{
+            "tags":[
+               "Analytics Controller"
+            ],
+            "summary":"register a new record with the information to be used in the analysis shipment.",
+            "operationId":"registerOperationAnalyticsCid",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationAnalyticsCidRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/operations/analytics":{
          "post":{
             "tags":[
@@ -2785,6 +2834,14 @@
                   "schema":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               },
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
                   }
                }
             ],
@@ -3635,6 +3692,64 @@
                }
             }
          },
+         "OperationCouponRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "couponVersionDescription":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "value":{
+                  "type":"string"
+               },
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "couponCode":{
+                  "type":"string"
+               },
+               "couponType":{
+                  "type":"string"
+               },
+               "couponTargetType":{
+                  "type":"string"
+               },
+               "couponScope":{
+                  "type":"string"
+               },
+               "minimumAmount":{
+                  "type":"number"
+               },
+               "maximumAmount":{
+                  "type":"number"
+               },
+               "cumulative":{
+                  "type":"boolean"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "applied":{
+                  "type":"boolean"
+               }
+            }
+         },
          "OperationOfferedServicesRest":{
             "type":"object",
             "properties":{
@@ -3660,6 +3775,10 @@
                "price":{
                   "type":"number",
                   "description":"Amount to charge for the service"
+               },
+               "priceOriginal":{
+                  "type":"number",
+                  "description":"Amount to charge for the service without discount"
                },
                "basePrice":{
                   "type":"number"
@@ -3753,6 +3872,14 @@
                   "type":"number",
                   "description":"Total cost of the operation"
                },
+               "totalCostOriginal":{
+                  "type":"number",
+                  "description":"Total cost of the operation without discount"
+               },
+               "amountDiscount":{
+                  "type":"number",
+                  "description":"The amount discount to operation"
+               },
                "totalPaid":{
                   "type":"number",
                   "description":"Total cost of the operation"
@@ -3844,6 +3971,12 @@
                "updateDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCouponRest"
+                  }
                }
             }
          },
@@ -3893,9 +4026,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "last":{
                   "type":"boolean"
                },
@@ -3908,6 +4038,9 @@
                },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -3918,11 +4051,8 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "pageSize":{
                   "type":"integer",
@@ -3932,8 +4062,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -3987,10 +4120,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -4195,6 +4328,9 @@
                "totalCost":{
                   "type":"number"
                },
+               "totalCostOriginal":{
+                  "type":"number"
+               },
                "totalPaid":{
                   "type":"number"
                },
@@ -4233,6 +4369,12 @@
                "chatId":{
                   "type":"string"
                },
+               "operationCoupons":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationCoupon"
+                  }
+               },
                "operationNotifications":{
                   "type":"array",
                   "items":{
@@ -4259,6 +4401,9 @@
                   "items":{
                      "$ref":"#/components/schemas/OperationCampaign"
                   }
+               },
+               "operationRejection":{
+                  "$ref":"#/components/schemas/OperationRejection"
                }
             }
          },
@@ -4330,6 +4475,41 @@
                "campaignId":{
                   "type":"integer",
                   "format":"int64"
+               }
+            }
+         },
+         "OperationCoupon":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operation":{
+                  "$ref":"#/components/schemas/Operation"
+               },
+               "couponVersionId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "isApplied":{
+                  "type":"boolean"
                }
             }
          },
@@ -4472,6 +4652,9 @@
                "price":{
                   "type":"number"
                },
+               "priceOriginal":{
+                  "type":"number"
+               },
                "basePrice":{
                   "type":"number"
                },
@@ -4531,6 +4714,35 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetails"
+               }
+            }
+         },
+         "OperationRejection":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"string"
+               },
+               "updateUser":{
+                  "type":"string"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operation":{
+                  "$ref":"#/components/schemas/Operation"
+               },
+               "message":{
+                  "type":"string"
                }
             }
          },
@@ -4825,6 +5037,25 @@
                }
             }
          },
+         "OperationAnalyticsCidRest":{
+            "required":[
+               "cid"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "cid":{
+                  "type":"string"
+               }
+            }
+         },
          "FilterRest":{
             "type":"object",
             "properties":{
@@ -4898,6 +5129,9 @@
                "commercialId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "couponCode":{
+                  "type":"string"
                }
             }
          },
@@ -4915,6 +5149,13 @@
                "existsTotalPaid":{
                   "type":"boolean",
                   "description":"Apply the filter of total paid greater than 0"
+               },
+               "professionalIds":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
                }
             }
          },
