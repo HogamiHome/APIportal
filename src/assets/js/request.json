@@ -2871,18 +2871,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -2897,6 +2897,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -2904,12 +2910,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
                }
             }
          },
@@ -3183,10 +3183,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -3444,6 +3444,43 @@
                }
             }
          },
+         "RequestProductLmesRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "price":{
+                  "maximum":3000,
+                  "minimum":1,
+                  "type":"number"
+               }
+            }
+         },
          "RequestRest":{
             "required":[
                "chatId"
@@ -3539,6 +3576,12 @@
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/ProductRest"
+                  }
+               },
+               "requestProductLmesRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestProductLmesRest"
                   }
                }
             }
@@ -3697,18 +3740,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -4062,6 +4105,12 @@
                   "items":{
                      "$ref":"#/components/schemas/RequestProduct"
                   }
+               },
+               "requestProductLmes":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestProductLmes"
+                  }
                }
             }
          },
@@ -4285,6 +4334,40 @@
                },
                "idMessageFirebase":{
                   "type":"string"
+               }
+            }
+         },
+         "RequestProductLmes":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "request":{
+                  "$ref":"#/components/schemas/Request"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
                }
             }
          },
