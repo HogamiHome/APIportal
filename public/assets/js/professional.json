@@ -2374,6 +2374,138 @@
             ]
          }
       },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/media-gallery":{
+         "get":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"Information is retrieved from the files of a request. The entire gallery of images and files uploaded to GCP.",
+            "operationId":"retrieveMediaGallery",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListFileRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/requests/{requestId}/media-gallery/{fileId}":{
+         "get":{
+            "tags":[
+               "MediaGalleryController"
+            ],
+            "summary":"File is retrieved in bytes array by identifier file",
+            "operationId":"retrieveFileFromMediaGalleryById",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"requestId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"fileId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"messageId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseByte[]"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/professionals/{professionalId}/requests/{requestId}/address":{
          "post":{
             "tags":[
@@ -9313,6 +9445,83 @@
             ]
          }
       },
+      "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/zipcodes":{
+         "get":{
+            "tags":[
+               "HierarchyPriceController"
+            ],
+            "summary":"List of the postal codes by identifier zone works professional",
+            "operationId":"retrieveZipCodesByZoneIdWorkByProfessional",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaProvinceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"masterAreaZoneId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] Bad Request \\r\\n SPRO-400 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"[SEARCH_NEW_HIERARCHY_PRICE] List of postal codes for which a professional works by zones have successfully recovered",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListMasterAreaRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/hierarchy-price/professionals/{professionalId}/provinces/{masterAreaProvinceId}/zones/{masterAreaZoneId}/services":{
          "get":{
             "tags":[
@@ -9830,20 +10039,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -9856,20 +10065,20 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "unpaged":{
+                  "type":"boolean"
                },
                "paged":{
                   "type":"boolean"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -9899,10 +10108,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -10252,20 +10461,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -11021,20 +11230,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -11856,20 +12065,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -12051,6 +12260,102 @@
                }
             }
          },
+         "FileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"string"
+               },
+               "url":{
+                  "type":"string"
+               },
+               "owner":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "senderUid":{
+                  "type":"string"
+               },
+               "senderType":{
+                  "type":"string"
+               },
+               "visibleBy":{
+                  "type":"string"
+               },
+               "documentType":{
+                  "type":"string"
+               },
+               "documentSubType":{
+                  "type":"string"
+               },
+               "date":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "fileNameOriginal":{
+                  "type":"string"
+               },
+               "fileName":{
+                  "type":"string"
+               },
+               "fileType":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the data for files"
+         },
+         "SingapurResponseListFileRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/FileRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseByte[]":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "type":"string",
+                     "description":"Contain data related to request",
+                     "format":"byte"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "SingapurResponseRequestAddressRest":{
             "type":"object",
             "properties":{
@@ -12181,20 +12486,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -13102,20 +13407,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
@@ -13943,35 +14248,6 @@
             },
             "description":"This model is the envelope"
          },
-         "FileRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"string"
-               },
-               "url":{
-                  "type":"string"
-               },
-               "owner":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "visibleBy":{
-                  "type":"string"
-               },
-               "documentType":{
-                  "type":"string"
-               },
-               "documentSubType":{
-                  "type":"string"
-               },
-               "date":{
-                  "type":"string",
-                  "format":"date-time"
-               }
-            },
-            "description":"This model represents the data for files"
-         },
          "FileUploadRest":{
             "type":"object",
             "properties":{
@@ -14441,20 +14717,20 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                }
             },
