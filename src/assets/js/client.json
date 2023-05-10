@@ -5997,7 +5997,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_3",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -6052,7 +6052,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_3",
             "parameters":[
                {
                   "name":"operationId",
@@ -6109,7 +6109,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -6166,7 +6166,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -6223,7 +6223,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -6337,7 +6337,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -7571,11 +7571,11 @@
             ],
             "type":"object",
             "properties":{
-               "profitGreatherThanZero":{
-                  "type":"boolean"
-               },
                "offeredServiceTaxRate":{
                   "type":"number"
+               },
+               "profitGreatherThanZero":{
+                  "type":"boolean"
                },
                "id":{
                   "type":"integer",
@@ -7860,18 +7860,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -7886,10 +7886,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "unpaged":{
                   "type":"boolean"
                },
@@ -7897,6 +7893,10 @@
                   "type":"boolean"
                },
                "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -8843,6 +8843,43 @@
             },
             "description":"This model is the envelope"
          },
+         "RequestProductLmesRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "reference":{
+                  "type":"string"
+               },
+               "price":{
+                  "maximum":3000,
+                  "minimum":1,
+                  "type":"number"
+               }
+            }
+         },
          "RequestRest":{
             "type":"object",
             "properties":{
@@ -8905,6 +8942,12 @@
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/RequestCouponRest"
+                  }
+               },
+               "requestProductLmesRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestProductLmesRest"
                   }
                }
             }
