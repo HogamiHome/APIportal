@@ -48,6 +48,9 @@
          "name":"MediaGalleryController"
       },
       {
+         "name":"PersonTypeController"
+      },
+      {
          "name":"OperationAddressController"
       },
       {
@@ -7664,6 +7667,54 @@
             ]
          }
       },
+      "/professional/v1/personType":{
+         "get":{
+            "tags":[
+               "PersonTypeController"
+            ],
+            "summary":"The following types of people are recovered correctly",
+            "operationId":"retrieveAllPersonTypes",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The following types of people are recovered correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListPersonTypeRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListPersonTypeRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/professional/v1/offered-service-role-document-type/offered-service-id/{offeredServiceId}":{
          "get":{
             "tags":[
@@ -10113,13 +10164,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -10132,9 +10183,6 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -10143,10 +10191,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
                   "type":"boolean"
                }
             }
@@ -10175,10 +10226,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -10535,13 +10586,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -11304,13 +11355,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -11767,6 +11818,12 @@
                "available":{
                   "type":"boolean"
                },
+               "documents":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/DocumentRest"
+                  }
+               },
                "document":{
                   "type":"string"
                },
@@ -11814,6 +11871,12 @@
                   "type":"array",
                   "items":{
                      "$ref":"#/components/schemas/ContactEmailRest"
+                  }
+               },
+               "addressRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
                   }
                }
             },
@@ -12139,13 +12202,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -12560,13 +12623,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -13481,13 +13544,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
@@ -14126,6 +14189,31 @@
                   "description":"Contain data related to request",
                   "items":{
                      "$ref":"#/components/schemas/ProfessionalRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseListPersonTypeRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/PersonTypeRest"
                   }
                }
             },
@@ -14791,13 +14879,13 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
+                  "type":"boolean"
+               },
+               "first":{
                   "type":"boolean"
                }
             },
