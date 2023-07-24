@@ -686,6 +686,73 @@
                   }
                }
             }
+         },
+         "post":{
+            "tags":[
+               "PaymentRestController"
+            ],
+            "summary":"Generate Order Payment",
+            "operationId":"generateOrderPayment",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"paymentConcept",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PaymentInfoRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Reference TPV created",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentInfoRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
       },
       "/payment-server/api/v1/payments/operation/{operationId}":{
@@ -2757,6 +2824,24 @@
                }
             }
          },
+         "PaymentConceptRest":{
+            "required":[
+               "code"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               }
+            }
+         },
          "PaymentsRest":{
             "type":"object",
             "properties":{
@@ -2803,6 +2888,9 @@
                },
                "createUser":{
                   "type":"string"
+               },
+               "paymentConceptRest":{
+                  "$ref":"#/components/schemas/PaymentConceptRest"
                }
             }
          },
@@ -3028,6 +3116,49 @@
                }
             }
          },
+         "PaymentInfoRest":{
+            "required":[
+               "amount",
+               "currency"
+            ],
+            "type":"object",
+            "properties":{
+               "amount":{
+                  "type":"number",
+                  "description":"payment info amount"
+               },
+               "currency":{
+                  "type":"string",
+                  "description":"payment info currency"
+               },
+               "paymentReference":{
+                  "type":"string",
+                  "description":"payment info reference"
+               },
+               "paymentStatus":{
+                  "type":"integer",
+                  "description":"payment info payment status",
+                  "format":"int64"
+               }
+            }
+         },
+         "SingapurResponsePaymentInfoRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PaymentInfoRest"
+               }
+            }
+         },
          "PaymentClientResponseRest":{
             "type":"object",
             "properties":{
@@ -3239,24 +3370,6 @@
                "createDate":{
                   "type":"string",
                   "format":"date-time"
-               }
-            }
-         },
-         "PaymentConceptRest":{
-            "required":[
-               "code"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
                }
             }
          },
@@ -3570,15 +3683,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -3595,19 +3708,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -3935,49 +4048,6 @@
                   "items":{
                      "$ref":"#/components/schemas/TransferRest"
                   }
-               }
-            }
-         },
-         "PaymentInfoRest":{
-            "required":[
-               "amount",
-               "currency"
-            ],
-            "type":"object",
-            "properties":{
-               "amount":{
-                  "type":"number",
-                  "description":"payment info amount"
-               },
-               "currency":{
-                  "type":"string",
-                  "description":"payment info currency"
-               },
-               "paymentReference":{
-                  "type":"string",
-                  "description":"payment info reference"
-               },
-               "paymentStatus":{
-                  "type":"integer",
-                  "description":"payment info payment status",
-                  "format":"int64"
-               }
-            }
-         },
-         "SingapurResponsePaymentInfoRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/PaymentInfoRest"
                }
             }
          },
@@ -4518,15 +4588,15 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "first":{
+                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
