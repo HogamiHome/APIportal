@@ -17,9 +17,6 @@
    ],
    "tags":[
       {
-         "name":"PaymentOperationsBillingController"
-      },
-      {
          "name":"SepaDocumentTypeController"
       },
       {
@@ -32,13 +29,10 @@
          "name":"Alive Controller"
       },
       {
-         "name":"BillableOperationsReportController"
-      },
-      {
-         "name":"PayCometSearchOperationController"
-      },
-      {
          "name":"PayCometTransferController"
+      },
+      {
+         "name":"PaymentDataOrder"
       },
       {
          "name":"PaymentRestController"
@@ -48,6 +42,15 @@
       },
       {
          "name":"PaymentBlockController"
+      },
+      {
+         "name":"PaymentOperationsBillingController"
+      },
+      {
+         "name":"BillableOperationsReportController"
+      },
+      {
+         "name":"PayCometSearchOperationController"
       },
       {
          "name":"PaymentNotificationRestController"
@@ -748,6 +751,57 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponsePaymentInfoRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/payment-server/api/v1/payments/operations/notification":{
+         "post":{
+            "tags":[
+               "PaymentDataOrder"
+            ],
+            "summary":"Save a payment data order notification",
+            "operationId":"savePaymentDataOrder",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/PaymentDataOrderRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The payment notification order is correctly registered.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
                         }
                      }
                   }
@@ -3228,6 +3282,84 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PaymentClientResponseRest"
+               }
+            }
+         },
+         "PaymentDataOrderRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "transactionType":{
+                  "type":"string"
+               },
+               "signature":{
+                  "type":"string"
+               },
+               "orderReference":{
+                  "type":"string"
+               },
+               "response":{
+                  "type":"string"
+               },
+               "errorId":{
+                  "type":"string"
+               },
+               "accountCode":{
+                  "type":"string"
+               },
+               "idUser":{
+                  "type":"string"
+               },
+               "authCode":{
+                  "type":"string"
+               },
+               "tokenUser":{
+                  "type":"string"
+               },
+               "amount":{
+                  "type":"string"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "isProcessed":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponsePaymentDataOrderRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PaymentDataOrderRest"
                }
             }
          },
