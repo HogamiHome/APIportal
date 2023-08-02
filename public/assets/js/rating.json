@@ -25,6 +25,50 @@
       }
    ],
    "paths":{
+      "/rating-server/api/v1/ratings/operations":{
+         "get":{
+            "tags":[
+               "RatingController"
+            ],
+            "operationId":"retrieveOperationIdWithoutRating",
+            "parameters":[
+               {
+                  "name":"operationIds",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"integer",
+                        "format":"int64"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListLong"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/rating-server/api/v1/professionals/{professionalId}/ratings":{
          "get":{
             "tags":[
@@ -682,6 +726,27 @@
                }
             }
          },
+         "SingapurResponseListLong":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            }
+         },
          "Pageable":{
             "type":"object",
             "properties":{
@@ -706,13 +771,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -728,21 +793,21 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
                },
                "last":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                }
             }
          },
@@ -752,9 +817,6 @@
                "offset":{
                   "type":"integer",
                   "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
                },
                "pageNumber":{
                   "type":"integer",
@@ -769,6 +831,9 @@
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
