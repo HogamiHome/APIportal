@@ -1752,6 +1752,58 @@
             }
          }
       },
+      "/operation-server/api/v1/operations/{operationId}/chatId":{
+         "get":{
+            "tags":[
+               "Operation Controller"
+            ],
+            "summary":"${api.operation-server.defs.operation.retrieveChatIdByOperationId.name}",
+            "operationId":"retrieveChatIdByOperationId",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The chat id is correct operation is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/operations/status":{
          "get":{
             "tags":[
@@ -3798,6 +3850,9 @@
                "profitMargin":{
                   "type":"number"
                },
+               "profitMarginDiscount":{
+                  "type":"number"
+               },
                "paymentReference":{
                   "type":"string"
                },
@@ -3810,6 +3865,9 @@
                "operationId":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             },
             "description":"List  of the services performed in the operation"
@@ -4026,8 +4084,8 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "last":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
@@ -4039,8 +4097,8 @@
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -4051,8 +4109,11 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                },
                "pageSize":{
                   "type":"integer",
@@ -4062,11 +4123,8 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -4097,6 +4155,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -4676,6 +4737,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetails"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
@@ -4714,6 +4778,9 @@
                },
                "taxDetails":{
                   "$ref":"#/components/schemas/TaxDetails"
+               },
+               "idMessageFirebase":{
+                  "type":"string"
                }
             }
          },
