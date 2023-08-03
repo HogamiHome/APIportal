@@ -27,9 +27,6 @@
          "name":"BannerController"
       },
       {
-         "name":"CouponVersionController"
-      },
-      {
          "name":"Alive Controller"
       },
       {
@@ -37,6 +34,9 @@
       },
       {
          "name":"CommunityController"
+      },
+      {
+         "name":"${api.search-api.defs.coupon-version.name}"
       },
       {
          "name":"ProfessionalRestController"
@@ -102,6 +102,15 @@
                   "required":false,
                   "schema":{
                      "type":"string"
+                  }
+               },
+               {
+                  "name":"professionalId",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
                   }
                }
             ],
@@ -759,9 +768,9 @@
       "/search/v1/coupon-version/{couponVersionId}":{
          "get":{
             "tags":[
-               "CouponVersionController"
+               "${api.search-api.defs.coupon-version.name}"
             ],
-            "summary":"Retrieve a coupon version by id (and language)",
+            "summary":"${api.search-api.defs.offered-service.retrieveCouponVersionById.description}",
             "operationId":"retrieveCouponVersionById",
             "parameters":[
                {
@@ -1316,6 +1325,9 @@
                "createDate":{
                   "type":"string"
                },
+               "updateDate":{
+                  "type":"string"
+               },
                "level":{
                   "type":"integer",
                   "format":"int64"
@@ -1368,6 +1380,9 @@
                },
                "restriction":{
                   "$ref":"#/components/schemas/RestrictionRest"
+               },
+               "parentOfferedService":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
                }
             },
             "description":"This model represents the offered service"

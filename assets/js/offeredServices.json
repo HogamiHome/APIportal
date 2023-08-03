@@ -3556,16 +3556,16 @@
             }
          }
       },
-      "/offered-services-server/v1/coupon-entity-relation/coupon/{couponId}":{
+      "/offered-services-server/v1/coupon-entity-relation/coupon-version/{couponVersionId}":{
          "get":{
             "tags":[
                "${api.offered-services-server.defs.coupon-entity-relation.name}"
             ],
-            "summary":"${api.offered-services-server.defs.coupon-entity-relation.retrieveCouponEntityRelationByCouponId.description}",
+            "summary":"${api.offered-services-server.defs.coupon-entity-relation.retrieveCouponEntityRelationByCouponVersionId.description}",
             "operationId":"retrieveCouponEntityRelationByCouponId",
             "parameters":[
                {
-                  "name":"couponId",
+                  "name":"couponVersionId",
                   "in":"path",
                   "required":true,
                   "schema":{
@@ -3861,6 +3861,9 @@
                },
                "parentOfferedService":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "landingPage":{
+                  "type":"string"
                }
             },
             "description":"This model represents the offered service"
@@ -4278,13 +4281,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -4303,18 +4306,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             },
             "description":"Contain data related to request"
@@ -4329,19 +4332,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
                "paged":{
                   "type":"boolean"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -4369,10 +4372,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4957,6 +4960,12 @@
                   "format":"int64"
                },
                "code":{
+                  "type":"string"
+               },
+               "value":{
+                  "type":"string"
+               },
+               "couponType":{
                   "type":"string"
                }
             }
@@ -5792,8 +5801,8 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "couponDto":{
-                  "$ref":"#/components/schemas/CouponDto"
+               "couponVersionDto":{
+                  "$ref":"#/components/schemas/CouponVersionDto"
                },
                "platformEntityDto":{
                   "$ref":"#/components/schemas/PlatformEntityDto"
