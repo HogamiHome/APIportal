@@ -1768,6 +1768,9 @@
                },
                "parentOfferedService":{
                   "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "restriction":{
+                  "$ref":"#/components/schemas/RestrictionRest"
                }
             }
          },
