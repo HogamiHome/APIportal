@@ -40,9 +40,6 @@
       },
       {
          "name":"ProfessionalRestController"
-      },
-      {
-         "name":"${api.search-api.defs.cache.name}"
       }
    ],
    "paths":{
@@ -931,98 +928,6 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListCommunityRest"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/search/v1/cache/{cacheName}/invalidate":{
-         "delete":{
-            "tags":[
-               "${api.search-api.defs.cache.name}"
-            ],
-            "summary":"${api.offered-services-server.defs.cache.invalidateCacheOfferedServiceByName.description}",
-            "operationId":"invalidateCacheOfferedServiceByName",
-            "parameters":[
-               {
-                  "name":"cacheName",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"string"
-                  }
-               }
-            ],
-            "responses":{
-               "500":{
-                  "description":"Internal server error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"The service delete the cache correctly",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseString"
-                        }
-                     }
-                  }
-               },
-               "400":{
-                  "description":"Bad request \r\n",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseString"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/search/v1/cache/invalidate":{
-         "delete":{
-            "tags":[
-               "${api.search-api.defs.cache.name}"
-            ],
-            "summary":"${api.offered-services-server.defs.cache.invalidateAllCachesOfferedService.description}",
-            "operationId":"invalidateAllCachesOfferedService",
-            "responses":{
-               "500":{
-                  "description":"Internal server error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"The service delete the cache correctly",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseString"
-                        }
-                     }
-                  }
-               },
-               "400":{
-                  "description":"Bad request \r\n",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -2478,23 +2383,6 @@
                }
             }
          },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "type":"string"
-               }
-            }
-         },
          "AccessibilityRest":{
             "type":"object",
             "properties":{
@@ -2656,6 +2544,23 @@
                "endDate":{
                   "type":"string",
                   "format":"date-time"
+               }
+            }
+         },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"string"
                }
             }
          }
