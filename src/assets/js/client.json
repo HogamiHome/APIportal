@@ -24,6 +24,9 @@
          "name":"${api.client.defs.password.name}"
       },
       {
+         "name":"${api.client.defs.short-url.name}"
+      },
+      {
          "name":"${api.client.defs.rating.name}"
       },
       {
@@ -129,6 +132,47 @@
                      "application/json;charset=UTF-8":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/client/v2/professionals/{friendlyUrl}/public-profile":{
+         "get":{
+            "tags":[
+               "${api.client.defs.professional.name}"
+            ],
+            "summary":"${api.client.defs.professional.retrieveProfessionalPublicProfileV2.description}",
+            "operationId":"retrieveProfessionalPublicProfileV2",
+            "parameters":[
+               {
+                  "name":"friendlyUrl",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalDataRest"
                         }
                      }
                   }
@@ -485,6 +529,64 @@
                   }
                }
             }
+         }
+      },
+      "/client/v1/short-url/{keyUrl}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.short-url.name}"
+            ],
+            "summary":"${api.client.defs.short-url.retrieveShortUrl.description}",
+            "operationId":"retrieveShortUrl",
+            "parameters":[
+               {
+                  "name":"keyUrl",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseShortUrlRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The short URL data was retrieve correctly.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseShortUrlRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/client/v1/rollback/sendAddress/{requestId}/client/{clientId}":{
@@ -6094,7 +6196,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -6145,177 +6247,6 @@
             ]
          },
          "put":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "post":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "delete":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "options":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
@@ -6372,7 +6303,64 @@
                }
             ]
          },
-         "head":{
+         "post":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_5",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "delete":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
@@ -6429,12 +6417,126 @@
                }
             ]
          },
+         "options":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_6",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "head":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_2",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
          "patch":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -7215,13 +7317,83 @@
             },
             "description":"This model is the envelope"
          },
-         "OfferedServiceRest":{
+         "AddressRest":{
             "required":[
-               "currency",
-               "offeredServiceId",
-               "price",
-               "title"
+               "address",
+               "city",
+               "province",
+               "zipCode"
             ],
+            "type":"object",
+            "properties":{
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
+         "AverageHistoricalRatingsRest":{
+            "type":"object",
+            "properties":{
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "accumulatedAverage":{
+                  "$ref":"#/components/schemas/AverageRatingRest"
+               },
+               "activeServicesAccumulatedAverage":{
+                  "$ref":"#/components/schemas/AverageRatingRest"
+               }
+            },
+            "description":"This model will represent the average of the types of rating history we have for a professional."
+         },
+         "AverageRatingRest":{
+            "type":"object",
+            "properties":{
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "OfferedServiceRest":{
             "type":"object",
             "properties":{
                "id":{
@@ -7232,57 +7404,128 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "code":{
-                  "type":"string"
-               },
                "title":{
                   "type":"string"
                },
                "description":{
                   "type":"string"
                },
-               "price":{
-                  "type":"number"
-               },
-               "priceOriginal":{
-                  "type":"number"
-               },
-               "currency":{
+               "code":{
                   "type":"string"
                },
-               "duration":{
+               "type":{
                   "type":"integer",
                   "format":"int64"
                },
-               "unit":{
+               "parentName":{
                   "type":"string"
                },
-               "basePrice":{
-                  "type":"number"
-               },
-               "earlyPayment":{
-                  "type":"number"
-               },
-               "profitMargin":{
-                  "type":"number"
-               },
-               "displacementFee":{
-                  "type":"number"
-               },
-               "image":{
+               "landingPage":{
                   "type":"string"
                },
-               "taxDetails":{
-                  "$ref":"#/components/schemas/TaxDetailsRest"
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
                },
-               "nameType":{
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            }
+         },
+         "ProfessionalDataRest":{
+            "type":"object",
+            "properties":{
+               "informationPage":{
+                  "$ref":"#/components/schemas/ProfessionalPublicProfileRest"
+               },
+               "services":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"array",
+                     "items":{
+                        "$ref":"#/components/schemas/OfferedServiceRest"
+                     }
+                  }
+               },
+               "ratings":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageHistoricalRatingsRest"
+                  }
+               }
+            },
+            "description":"This model represents the complete data for professional"
+         },
+         "ProfessionalPublicProfileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Unique id ",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Professional's name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Professional's last name"
+               },
+               "avatar":{
                   "type":"string"
                },
-               "idMessageFirebase":{
+               "country":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "slogan":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
+               },
+               "provincesProfessional":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "friendlyUrl":{
                   "type":"string"
                }
             },
-            "description":"This model represents the offered service"
+            "description":"This model represents a professional"
+         },
+         "SingapurResponseProfessionalDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProfessionalDataRest"
+               }
+            },
+            "description":"This model is the envelope"
          },
          "ProductRest":{
             "required":[
@@ -7980,6 +8223,36 @@
             },
             "description":"This model is the envelope"
          },
+         "ShortUrlRest":{
+            "type":"object",
+            "properties":{
+               "url":{
+                  "type":"string"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "SingapurResponseShortUrlRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ShortUrlRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "Pageable":{
             "type":"object",
             "properties":{
@@ -8032,15 +8305,15 @@
                "first":{
                   "type":"boolean"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -8055,11 +8328,11 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
@@ -8158,47 +8431,13 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
-         },
-         "AverageRatingRest":{
-            "type":"object",
-            "properties":{
-               "professionalId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "averageGeneralRating":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averagePunctual":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageBehavior":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageSatisfied":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageClean":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "totalAverage":{
-                  "type":"integer",
-                  "format":"int32"
-               }
-            },
-            "description":"This model represents the average for all ratings for a professional"
          },
          "SingapurResponseAverageRatingRest":{
             "type":"object",
@@ -8220,81 +8459,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "AddressRest":{
-            "required":[
-               "address",
-               "city",
-               "province",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
-                  "type":"string"
-               }
-            }
-         },
-         "ProfessionalPublicProfileRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Unique id ",
-                  "format":"int64"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Professional's name"
-               },
-               "lastName":{
-                  "type":"string",
-                  "description":"Professional's last name"
-               },
-               "avatar":{
-                  "type":"string"
-               },
-               "country":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string"
-               },
-               "slogan":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "addresses":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/AddressRest"
-                  }
-               },
-               "provincesProfessional":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               },
-               "friendlyUrl":{
-                  "type":"string"
-               }
-            },
-            "description":"This model represents a professional"
          },
          "SingapurResponseProfessionalPublicProfileRest":{
             "type":"object",
@@ -8335,22 +8499,6 @@
                   }
                }
             }
-         },
-         "AverageHistoricalRatingsRest":{
-            "type":"object",
-            "properties":{
-               "professionalId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "accumulatedAverage":{
-                  "$ref":"#/components/schemas/AverageRatingRest"
-               },
-               "activeServicesAccumulatedAverage":{
-                  "$ref":"#/components/schemas/AverageRatingRest"
-               }
-            },
-            "description":"This model will represent the average of the types of rating history we have for a professional."
          },
          "SingapurResponseListAverageHistoricalRatingsRest":{
             "type":"object",

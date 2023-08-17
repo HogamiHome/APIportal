@@ -1,7 +1,7 @@
 {
    "openapi":"3.0.1",
    "info":{
-      "title":"Operation Batch",
+      "title":"Operation Btch",
       "description":"Operation API to Singapur Project",
       "termsOfService":"https://www.everis.com",
       "license":{
@@ -19,6 +19,9 @@
    "tags":[
       {
          "name":"Dashboard Coverage Professional Batch"
+      },
+      {
+         "name":"Short Url Batch"
       },
       {
          "name":"Operation Batch Hierarchy Professional"
@@ -52,6 +55,36 @@
                "Generate Sitemap file in storage"
             ],
             "operationId":"generateSitemap",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/operation-batch/api/v1/short-url/expired":{
+         "delete":{
+            "tags":[
+               "Short Url Batch"
+            ],
+            "operationId":"deleteShortUrlWithDateExpired",
             "responses":{
                "500":{
                   "description":"Internal Server Error",
