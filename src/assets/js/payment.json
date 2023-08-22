@@ -809,6 +809,114 @@
             }
          }
       },
+      "/payment-server/api/v1/payments/operations/notification/{paymentReference}":{
+         "get":{
+            "tags":[
+               "PaymentDataOrder"
+            ],
+            "summary":"Retrieve a payment data order notification by Payment Reference",
+            "operationId":"retrievePaymentDataOrder",
+            "parameters":[
+               {
+                  "name":"paymentReference",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The payment notification order is correctly retrieved.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
+                        }
+                     }
+                  }
+               }
+            }
+         },
+         "put":{
+            "tags":[
+               "PaymentDataOrder"
+            ],
+            "summary":"${api.payment-server.defs.payment-data-order.markProcessedPaymentDataOrder.description}",
+            "operationId":"markProcessedPaymentDataOrder",
+            "parameters":[
+               {
+                  "name":"paymentReference",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"isProcessed",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"boolean"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The payment notification order is marked as processed or not without error.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request when marking the payment reference.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePaymentDataOrderRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/payment-server/api/v1/payments/operation/{operationId}":{
          "get":{
             "tags":[
@@ -2370,6 +2478,14 @@
                "statusCode":{
                   "type":"string",
                   "description":"result of the payment action, it can return success or error depending if the payment has been processed"
+               },
+               "errorId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "descriptionTranslate":{
+                  "type":"string",
+                  "description":"Description of the service"
                }
             }
          },
@@ -3818,12 +3934,12 @@
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "first":{
-                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
@@ -3840,17 +3956,17 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
                "unpaged":{
                   "type":"boolean"
                },
-               "pageSize":{
+               "paged":{
+                  "type":"boolean"
+               },
+               "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageNumber":{
+               "pageSize":{
                   "type":"integer",
                   "format":"int32"
                }
@@ -3991,10 +4107,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4723,12 +4839,12 @@
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "first":{
-                  "type":"boolean"
                },
                "last":{
                   "type":"boolean"
