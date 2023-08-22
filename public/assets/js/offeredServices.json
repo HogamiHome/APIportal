@@ -5125,9 +5125,6 @@
             ],
             "type":"object",
             "properties":{
-               "active":{
-                  "type":"boolean"
-               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",
