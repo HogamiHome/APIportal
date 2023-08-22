@@ -208,6 +208,47 @@
             }
          }
       },
+      "/professional/v3/professionals/{friendlyUrl}/public-profile":{
+         "get":{
+            "tags":[
+               "ProfessionalController"
+            ],
+            "summary":"Retrieve public profile from a professional V3",
+            "operationId":"retrieveProfessionalPublicProfileV3",
+            "parameters":[
+               {
+                  "name":"friendlyUrl",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalDataRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/professional/v2/professionals":{
          "get":{
             "tags":[
@@ -1849,6 +1890,90 @@
                   }
                }
             }
+         }
+      },
+      "/professional/v1/professionals/{professionalId}/services/{offeredServiceId}/status":{
+         "put":{
+            "tags":[
+               "OfferedServiceController"
+            ],
+            "summary":"Active or Inactive professional offered service",
+            "operationId":"activeOrInactiveProfessionalOfferedService",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"offeredServiceId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"statusService",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"apiTokenExternal",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The professional offered service updated corrrectly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SPRO-400-1 Invalid input parameters, unauthorized user.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseProfessionalOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/professional/v1/professionals/{professionalId}/services/{offeredServiceId}/cost":{
@@ -10283,10 +10408,10 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                }
             }
@@ -10315,13 +10440,240 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
+         },
+         "AddressRest":{
+            "required":[
+               "address",
+               "addressType",
+               "city",
+               "province",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "addressType":{
+                  "$ref":"#/components/schemas/AddressTypeRest"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            }
+         },
+         "AddressTypeRest":{
+            "required":[
+               "type"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"string"
+               }
+            }
+         },
+         "AverageHistoricalRatingsRest":{
+            "type":"object",
+            "properties":{
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "accumulatedAverage":{
+                  "$ref":"#/components/schemas/AverageRatingRest"
+               },
+               "activeServicesAccumulatedAverage":{
+                  "$ref":"#/components/schemas/AverageRatingRest"
+               }
+            },
+            "description":"This model will represent the average of the types of rating history we have for a professional."
+         },
+         "AverageRatingRest":{
+            "type":"object",
+            "properties":{
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "DetailOfferedServiceBasicRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "parentName":{
+                  "type":"string"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "description":"This model represents the offered service with basic information"
+         },
+         "ProfessionalDataRest":{
+            "type":"object",
+            "properties":{
+               "informationPage":{
+                  "$ref":"#/components/schemas/ProfessionalPublicProfileRest"
+               },
+               "services":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"array",
+                     "items":{
+                        "$ref":"#/components/schemas/DetailOfferedServiceBasicRest"
+                     }
+                  }
+               },
+               "ratings":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageHistoricalRatingsRest"
+                  }
+               }
+            },
+            "description":"This model represents a professional"
+         },
+         "ProfessionalPublicProfileRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Unique id ",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Professional's name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Professional's last name"
+               },
+               "avatar":{
+                  "type":"string"
+               },
+               "country":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "slogan":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
+               },
+               "provincesProfessional":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "friendlyUrl":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents a professional"
+         },
+         "SingapurResponseProfessionalDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProfessionalDataRest"
+               }
+            },
+            "description":"This model is the envelope"
          },
          "ProfessionalCampaignRest":{
             "type":"object",
@@ -10981,104 +11333,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "AddressRest":{
-            "required":[
-               "address",
-               "addressType",
-               "city",
-               "province",
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "addressType":{
-                  "$ref":"#/components/schemas/AddressTypeRest"
-               },
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
-                  "type":"string"
-               }
-            }
-         },
-         "AddressTypeRest":{
-            "required":[
-               "type"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"string"
-               }
-            }
-         },
-         "ProfessionalPublicProfileRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Unique id ",
-                  "format":"int64"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Professional's name"
-               },
-               "lastName":{
-                  "type":"string",
-                  "description":"Professional's last name"
-               },
-               "avatar":{
-                  "type":"string"
-               },
-               "country":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string"
-               },
-               "slogan":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "addresses":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/AddressRest"
-                  }
-               },
-               "provincesProfessional":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               },
-               "friendlyUrl":{
-                  "type":"string"
-               }
-            },
-            "description":"This model represents a professional"
          },
          "SingapurResponseProfessionalPublicProfileRest":{
             "type":"object",
@@ -12273,6 +12527,27 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseProfessionalOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ProfessionalOfferedServiceRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "PageRequestRest":{
             "type":"object",
             "properties":{
@@ -12758,40 +13033,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "AverageRatingRest":{
-            "type":"object",
-            "properties":{
-               "professionalId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "averageGeneralRating":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averagePunctual":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageBehavior":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageSatisfied":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageClean":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "totalAverage":{
-                  "type":"integer",
-                  "format":"int32"
-               }
-            },
-            "description":"This model represents the average for all ratings for a professional"
          },
          "SingapurResponseAverageRatingRest":{
             "type":"object",
@@ -13440,22 +13681,6 @@
                   }
                }
             }
-         },
-         "AverageHistoricalRatingsRest":{
-            "type":"object",
-            "properties":{
-               "professionalId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "accumulatedAverage":{
-                  "$ref":"#/components/schemas/AverageRatingRest"
-               },
-               "activeServicesAccumulatedAverage":{
-                  "$ref":"#/components/schemas/AverageRatingRest"
-               }
-            },
-            "description":"This model will represent the average of the types of rating history we have for a professional."
          },
          "SingapurResponseListAverageHistoricalRatingsRest":{
             "type":"object",
