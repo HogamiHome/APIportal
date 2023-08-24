@@ -39,6 +39,9 @@
          "name":"${api.offered-services-server.defs.platform-entity.name}"
       },
       {
+         "name":"${api.offered-services-server.defs.cache.name}"
+      },
+      {
          "name":"${api.offered-services-server.defs.price.name}"
       },
       {
@@ -125,6 +128,73 @@
             }
          }
       },
+      "/offered-services-server/v2/services/{landing}":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retrieveOfferedServiceByLandingPage.description}",
+            "operationId":"retrieveOfferedServiceByLandingPage",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"landing",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"provinceName",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceDataRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceDataRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v2/services/province/{zipCode}":{
          "get":{
             "tags":[
@@ -173,6 +243,47 @@
                },
                "200":{
                   "description":"The services are found and they are returned to the user by zip code",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v2/services/all-services":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retrieveAllOfferedServiceV2.description}",
+            "operationId":"retrieveAllOfferedServiceV2",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
                   "content":{
                      "application/json":{
                         "schema":{
@@ -293,7 +404,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/offered-services-server/v1/services/{offeredId}/province/{provinceId}":{
@@ -3703,6 +3815,98 @@
             }
          }
       },
+      "/offered-services-server/v1/cache/{cacheName}/invalidate":{
+         "delete":{
+            "tags":[
+               "${api.offered-services-server.defs.cache.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.cache.invalidateCacheByName.description}",
+            "operationId":"invalidateCacheByName",
+            "parameters":[
+               {
+                  "name":"cacheName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v1/cache/invalidate":{
+         "delete":{
+            "tags":[
+               "${api.offered-services-server.defs.cache.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.cache.invalidateAllCaches.description}",
+            "operationId":"invalidateAllCaches",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/health/live":{
          "get":{
             "tags":[
@@ -4193,6 +4397,205 @@
             },
             "description":"This model is the envelope"
          },
+         "AverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ratingType":{
+                  "type":"string"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "OfferedServiceBasicRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "metaDescription":{
+                  "type":"string"
+               },
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               }
+            }
+         },
+         "OfferedServiceDataRest":{
+            "type":"object",
+            "properties":{
+               "informationPage":{
+                  "$ref":"#/components/schemas/OfferedServiceV2Rest"
+               },
+               "ratings":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageRatingTotalRest"
+                  }
+               },
+               "services":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceBasicRest"
+                  }
+               }
+            },
+            "description":"This model represents the complete data for each service offered"
+         },
+         "OfferedServiceV2Rest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
+                  "format":"int64"
+               },
+               "parentId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Service's internal code"
+               },
+               "level":{
+                  "type":"integer",
+                  "description":"Level assigned to the service",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "metaDescription":{
+                  "type":"string"
+               },
+               "chatQuestion":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string",
+                  "description":"Ttile of landing page to be used"
+               },
+               "description":{
+                  "type":"string",
+                  "description":"Brief explanation about the service"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sectionTitle":{
+                  "type":"string",
+                  "description":"Section title of a service related to your province"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "keyWords":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "offeredServiceCoverageRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceCoverageRest"
+                  }
+               },
+               "offeredServiceQuantifyRest":{
+                  "$ref":"#/components/schemas/OfferedServiceQuantifyRest"
+               },
+               "offeredServiceQuestionRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceQuestionRest"
+                  }
+               },
+               "offeredServiceVisibleContentRest":{
+                  "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
+               },
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "parentOfferedService":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "restriction":{
+                  "$ref":"#/components/schemas/RestrictionRest"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceDataRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "SingapurResponseListOfferedServiceRest":{
             "type":"object",
             "properties":{
@@ -4306,18 +4709,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -4336,15 +4739,15 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "unpaged":{
-                  "type":"boolean"
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "paged":{
                   "type":"boolean"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -4372,10 +4775,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -4722,9 +5125,6 @@
             ],
             "type":"object",
             "properties":{
-               "active":{
-                  "type":"boolean"
-               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",

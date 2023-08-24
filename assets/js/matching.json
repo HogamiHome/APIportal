@@ -40,6 +40,9 @@
       },
       {
          "name":"ProfessionalRestController"
+      },
+      {
+         "name":"${api.search-api.defs.cache.name}"
       }
    ],
    "paths":{
@@ -206,7 +209,8 @@
                      }
                   }
                }
-            }
+            },
+            "deprecated":true
          }
       },
       "/search/v1/services/{offeredServiceId}":{
@@ -371,6 +375,73 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseOfferedServiceVisibleContentRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/search/v1/services/{landing}/data":{
+         "get":{
+            "tags":[
+               "OfferedServiceController"
+            ],
+            "summary":"Retrieve Offered Service By Landing Page",
+            "operationId":"retrieveOfferedServiceByLandingPage",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"landing",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"provinceName",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The level is correct and the corresponding services are returned ",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceDataRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOfferedServiceDataRest"
                         }
                      }
                   }
@@ -867,6 +938,98 @@
             }
          }
       },
+      "/search/v1/cache/{cacheName}/invalidate":{
+         "delete":{
+            "tags":[
+               "${api.search-api.defs.cache.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.cache.invalidateCacheOfferedServiceByName.description}",
+            "operationId":"invalidateCacheOfferedServiceByName",
+            "parameters":[
+               {
+                  "name":"cacheName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/search/v1/cache/invalidate":{
+         "delete":{
+            "tags":[
+               "${api.search-api.defs.cache.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.cache.invalidateAllCachesOfferedService.description}",
+            "operationId":"invalidateAllCachesOfferedService",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/search/v1/banner/{language}":{
          "get":{
             "tags":[
@@ -1214,6 +1377,9 @@
                "description":{
                   "type":"string"
                },
+               "title":{
+                  "type":"string"
+               },
                "image":{
                   "type":"string"
                },
@@ -1490,6 +1656,16 @@
                "metaDescription":{
                   "type":"string"
                },
+               "provinceName":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sectionTitle":{
+                  "type":"string"
+               },
                "meta":{
                   "type":"string"
                },
@@ -1512,6 +1688,201 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
+               }
+            }
+         },
+         "AverageRatingTotalRest":{
+            "type":"object",
+            "properties":{
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "ratingType":{
+                  "type":"string"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "OfferedServiceBasicRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "metaDescription":{
+                  "type":"string"
+               },
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               }
+            }
+         },
+         "OfferedServiceDataRest":{
+            "type":"object",
+            "properties":{
+               "informationPage":{
+                  "$ref":"#/components/schemas/OfferedServiceV2Rest"
+               },
+               "ratings":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AverageRatingTotalRest"
+                  }
+               },
+               "services":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceBasicRest"
+                  }
+               }
+            },
+            "description":"This model represents the complete data for each service offered"
+         },
+         "OfferedServiceV2Rest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
+                  "format":"int64"
+               },
+               "parentId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Service's internal code"
+               },
+               "level":{
+                  "type":"integer",
+                  "description":"Level assigned to the service",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "metaDescription":{
+                  "type":"string"
+               },
+               "chatQuestion":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string",
+                  "description":"Ttile of landing page to be used"
+               },
+               "description":{
+                  "type":"string",
+                  "description":"Brief explanation about the service"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sectionTitle":{
+                  "type":"string",
+                  "description":"Section title of a service related to your province"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "keyWords":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "offeredServiceCoverageRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceCoverageRest"
+                  }
+               },
+               "offeredServiceQuantifyRest":{
+                  "$ref":"#/components/schemas/OfferedServiceQuantifyRest"
+               },
+               "offeredServiceQuestionRests":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceQuestionRest"
+                  }
+               },
+               "offeredServiceVisibleContentRest":{
+                  "$ref":"#/components/schemas/OfferedServiceVisibleContentRest"
+               },
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "parentOfferedService":{
+                  "$ref":"#/components/schemas/OfferedServiceRest"
+               },
+               "restriction":{
+                  "$ref":"#/components/schemas/RestrictionRest"
+               }
+            }
+         },
+         "SingapurResponseOfferedServiceDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OfferedServiceDataRest"
                }
             }
          },
@@ -2107,6 +2478,23 @@
                }
             }
          },
+         "SingapurResponseString":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"string"
+               }
+            }
+         },
          "AccessibilityRest":{
             "type":"object",
             "properties":{
@@ -2268,23 +2656,6 @@
                "endDate":{
                   "type":"string",
                   "format":"date-time"
-               }
-            }
-         },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "type":"string"
                }
             }
          }
