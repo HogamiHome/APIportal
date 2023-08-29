@@ -30,6 +30,9 @@
          "name":"Coupon Version Controller"
       },
       {
+         "name":"Client Address Type"
+      },
+      {
          "name":"Hierarchy Price Controller"
       },
       {
@@ -69,10 +72,16 @@
          "name":"Alive Controller"
       },
       {
+         "name":"Client Type Controller"
+      },
+      {
          "name":"Batch Execution Controller"
       },
       {
          "name":"Operation Controller"
+      },
+      {
+         "name":"Client Controller"
       },
       {
          "name":"Direct Controller"
@@ -4812,6 +4821,206 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/clients":{
+         "post":{
+            "tags":[
+               "Client Controller"
+            ],
+            "summary":"Retrieve clients taking into account the established filter",
+            "operationId":"retrieveClients",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "properties":{
+                           "pageable":{
+                              "$ref":"#/components/schemas/Pageable"
+                           },
+                           "filterClientRest":{
+                              "$ref":"#/components/schemas/FilterClientRest"
+                           }
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageClientRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/clients/{clientId}":{
+         "get":{
+            "tags":[
+               "Client Controller"
+            ],
+            "summary":"Retrieve a cliente by identifier",
+            "operationId":"retrieveClientV2",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "put":{
+            "tags":[
+               "Client Controller"
+            ],
+            "summary":"Update a cliente by identifier",
+            "operationId":"updateClientV2",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ClientRestV2"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/client-type":{
+         "get":{
+            "tags":[
+               "Client Type Controller"
+            ],
+            "summary":"Retrieve All Client Types",
+            "operationId":"retrieveClientType",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListClientTypeRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/chat/{chatId}":{
          "get":{
             "tags":[
@@ -5346,6 +5555,44 @@
                }
             ]
          }
+      },
+      "/backoffice-server/api/v1/address-type":{
+         "get":{
+            "tags":[
+               "Client Address Type"
+            ],
+            "summary":"Retrieve All Client Address Type",
+            "operationId":"retrieveAddressType",
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAddressTypeRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
       }
    },
    "components":{
@@ -5487,18 +5734,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -5512,12 +5759,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -5525,6 +5766,12 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -6132,18 +6379,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -6734,6 +6981,10 @@
          "AcceptTermsRest":{
             "type":"object",
             "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "acceptCommunications":{
                   "type":"boolean"
                },
@@ -7117,18 +7368,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -7871,18 +8122,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -8250,18 +8501,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -8528,18 +8779,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -9300,18 +9551,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -10200,18 +10451,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -10458,18 +10709,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -10870,6 +11121,360 @@
                }
             }
          },
+         "FilterClientRest":{
+            "type":"object",
+            "properties":{
+               "nameAndLastNameClient":{
+                  "type":"string"
+               },
+               "countryCode":{
+                  "type":"string"
+               },
+               "phoneClient":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "clientTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "createDateStart":{
+                  "type":"string"
+               },
+               "createDateEnd":{
+                  "type":"string"
+               }
+            }
+         },
+         "ClientRest":{
+            "required":[
+               "acceptCommunications",
+               "acceptPrivacyPolicy",
+               "acceptTermsAndConditions",
+               "email",
+               "lastName",
+               "name",
+               "password",
+               "phones"
+            ],
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "description":"Id,  internal identifier for the client",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string",
+                  "description":"Client email register"
+               },
+               "password":{
+                  "type":"string",
+                  "description":"Client password \n Original must match the regular expression ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(.){8,50}$  and then be encoded in base 64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Client name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Client last name"
+               },
+               "acceptCommunications":{
+                  "type":"boolean",
+                  "description":"Client last name"
+               },
+               "acceptPrivacyPolicy":{
+                  "type":"boolean",
+                  "description":"Client accept or no the privacy policy"
+               },
+               "acceptTermsAndConditions":{
+                  "type":"boolean",
+                  "description":"Informs if the client accepts or not the terms and conditions"
+               },
+               "userId":{
+                  "type":"integer",
+                  "description":"Id of the user in Oauth2 Identity-Server",
+                  "format":"int64"
+               },
+               "phones":{
+                  "type":"array",
+                  "description":"List contains phones of user \n Optional list of numbers",
+                  "items":{
+                     "$ref":"#/components/schemas/PhoneRest"
+                  }
+               },
+               "documentNumber":{
+                  "type":"string",
+                  "description":"Unique identifier document"
+               },
+               "firebaseUid":{
+                  "type":"string",
+                  "description":"Client uid firebase"
+               },
+               "lastActivityDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "clientType":{
+                  "type":"string",
+                  "description":"Client Type"
+               },
+               "address":{
+                  "type":"array",
+                  "description":"Address Billing for Client",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestAddressRest"
+                  }
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            },
+            "description":"This model represents the client"
+         },
+         "PageClientRest":{
+            "type":"object",
+            "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "SingapurResponsePageClientRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageClientRest"
+               }
+            }
+         },
+         "BillingDataRestV2":{
+            "required":[
+               "addressData",
+               "clientType",
+               "documentNumber",
+               "name",
+               "phone"
+            ],
+            "type":"object",
+            "properties":{
+               "billId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "clientType":{
+                  "$ref":"#/components/schemas/ClientTypeRest"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "lastName":{
+                  "type":"string"
+               },
+               "phone":{
+                  "type":"string"
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "addressData":{
+                  "$ref":"#/components/schemas/AddressRest"
+               },
+               "countryCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "ClientRestV2":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "lastName":{
+                  "type":"string"
+               },
+               "acceptTerms":{
+                  "$ref":"#/components/schemas/AcceptTermsRest"
+               },
+               "userId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "phones":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/PhoneRest"
+                  }
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "firebaseUid":{
+                  "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "avatar":{
+                  "type":"string"
+               },
+               "isChatClient":{
+                  "type":"boolean"
+               },
+               "storeCard":{
+                  "type":"boolean"
+               },
+               "billingData":{
+                  "$ref":"#/components/schemas/BillingDataRestV2"
+               }
+            },
+            "description":"This model represents the all information of client"
+         },
+         "ClientTypeRest":{
+            "required":[
+               "name"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseClientRestV2":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ClientRestV2"
+               }
+            }
+         },
+         "SingapurResponseListClientTypeRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientTypeRest"
+                  }
+               }
+            }
+         },
          "ChatRest":{
             "type":"object",
             "properties":{
@@ -11115,18 +11720,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
+               "first":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
                }
             }
          },
@@ -11186,6 +11791,26 @@
                   "items":{
                      "type":"integer",
                      "format":"int64"
+                  }
+               }
+            }
+         },
+         "SingapurResponseListAddressTypeRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressTypeRest"
                   }
                }
             }
