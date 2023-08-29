@@ -6479,7 +6479,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -6530,177 +6530,6 @@
             ]
          },
          "put":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "post":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "delete":{
-            "tags":[
-               "${api.client.defs.operation-offered-service.name}"
-            ],
-            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "required":true,
-                  "schema":{
-                     "type":"integer",
-                     "format":"int64"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         },
-         "options":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
@@ -6757,7 +6586,64 @@
                }
             ]
          },
-         "head":{
+         "post":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_2",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "delete":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
@@ -6814,12 +6700,126 @@
                }
             ]
          },
-         "patch":{
+         "options":{
             "tags":[
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
             "operationId":"createOperationService_1",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "head":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_6",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationOfferedServicesRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationOfferedServicesRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "patch":{
+            "tags":[
+               "${api.client.defs.operation-offered-service.name}"
+            ],
+            "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -8044,18 +8044,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -8070,19 +8070,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -8164,10 +8164,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -8940,6 +8940,9 @@
                   "items":{
                      "$ref":"#/components/schemas/OperationCouponRest"
                   }
+               },
+               "isRated":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9063,18 +9066,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "last":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
