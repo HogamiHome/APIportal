@@ -26,25 +26,25 @@
    ],
    "paths":{
       "/rating-server/api/v1/ratings/operations":{
-         "get":{
+         "post":{
             "tags":[
                "RatingController"
             ],
             "operationId":"retrieveOperationIdWithoutRating",
-            "parameters":[
-               {
-                  "name":"operationIds",
-                  "in":"query",
-                  "required":true,
-                  "schema":{
-                     "type":"array",
-                     "items":{
-                        "type":"integer",
-                        "format":"int64"
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "type":"integer",
+                           "format":"int64"
+                        }
                      }
                   }
-               }
-            ],
+               },
+               "required":true
+            },
             "responses":{
                "500":{
                   "description":"Internal Server Error",
@@ -445,6 +445,58 @@
             }
          }
       },
+      "/rating-server/api/v1/operations/{operationId}/ratings":{
+         "get":{
+            "tags":[
+               "RatingController"
+            ],
+            "summary":"${api.rating.defs.rating.retrieveRatingByOperationId.description}",
+            "operationId":"retrieveRatingByOperationId",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Rating of operation retrieved successfully",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/rating-server/api/v1/clients/{clientId}/ratings":{
          "get":{
             "tags":[
@@ -771,13 +823,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -793,8 +845,8 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
+               "first":{
+                  "type":"boolean"
                },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
@@ -803,8 +855,8 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
-                  "type":"boolean"
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -818,13 +870,8 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "paged":{
                   "type":"boolean"
@@ -832,8 +879,13 @@
                "unpaged":{
                   "type":"boolean"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -895,6 +947,9 @@
                   "format":"int64"
                },
                "titleOfferedService":{
+                  "type":"string"
+               },
+               "createDateShow":{
                   "type":"string"
                }
             },
