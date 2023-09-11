@@ -5821,18 +5821,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -5846,6 +5846,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -5853,12 +5859,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -5882,10 +5882,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -6466,18 +6466,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -7452,18 +7452,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -8206,18 +8206,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -8588,18 +8588,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -8852,6 +8852,13 @@
                      "type":"integer",
                      "format":"int64"
                   }
+               },
+               "nameAndLastNameProfessional":{
+                  "type":"string"
+               },
+               "phoneProfessional":{
+                  "type":"integer",
+                  "format":"int64"
                }
             }
          },
@@ -8883,18 +8890,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -9655,18 +9662,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -10558,18 +10565,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -10816,18 +10823,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -11388,18 +11395,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
@@ -11827,18 +11834,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "last":{
-                  "type":"boolean"
-               },
-               "first":{
-                  "type":"boolean"
-               },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
+                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                }
             }
          },
