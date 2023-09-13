@@ -96,6 +96,9 @@
          "name":"JourneyDetailsController"
       },
       {
+         "name":"Master Area Controller"
+      },
+      {
          "name":"Request Controller"
       },
       {
@@ -3573,6 +3576,72 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/master-area/zip-code/{zipCode}":{
+         "get":{
+            "tags":[
+               "Master Area Controller"
+            ],
+            "summary":"Retrieve Master Area By Zip Code City",
+            "operationId":"retrieveMasterAreaByZipCodeCity",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"zipCode",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Information of the zipcode (Master Area) retrieve correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad Request \\r\\n SPRO-400-1 Invalid input parameters",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseMasterAreaZipCodeCityRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/logout":{
          "delete":{
             "tags":[
@@ -5796,13 +5865,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -5818,20 +5887,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -5846,12 +5915,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -5859,6 +5922,12 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -6441,13 +6510,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -6463,20 +6532,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -6506,6 +6575,9 @@
             ],
             "type":"object",
             "properties":{
+               "active":{
+                  "type":"boolean"
+               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",
@@ -7427,13 +7499,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -7449,20 +7521,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -8181,13 +8253,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8203,20 +8275,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -8563,13 +8635,13 @@
          "PageTimelineRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8585,20 +8657,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -8865,13 +8937,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8887,20 +8959,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -9637,13 +9709,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -9659,20 +9731,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -9917,6 +9989,41 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationBatchResultRest"
+               }
+            }
+         },
+         "MasterAreaZipCodeCityRest":{
+            "required":[
+               "city",
+               "provinceName"
+            ],
+            "type":"object",
+            "properties":{
+               "city":{
+                  "type":"string",
+                  "description":"Area Label (City) of zip code on Master Area"
+               },
+               "provinceName":{
+                  "type":"string",
+                  "description":"Province Name (Master Area lvl 3) of zip code on Master Area"
+               }
+            },
+            "description":"This model represents a city and province name for a zip code"
+         },
+         "SingapurResponseMasterAreaZipCodeCityRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/MasterAreaZipCodeCityRest"
                }
             }
          },
@@ -10540,13 +10647,13 @@
          "PagePaycometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10562,20 +10669,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -10798,13 +10905,13 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -10820,20 +10927,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -11370,13 +11477,13 @@
          "PageClientRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11392,20 +11499,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
@@ -11809,13 +11916,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -11831,20 +11938,20 @@
                   "type":"integer",
                   "format":"int32"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
                },
-               "first":{
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "last":{
                   "type":"boolean"
                }
             }
