@@ -254,6 +254,47 @@
             }
          }
       },
+      "/offered-services-server/v2/services/full":{
+         "get":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retrieveAllOfferedServices.description}",
+            "operationId":"retrieveAllOfferedServices",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/offered-services-server/v2/services/all-services":{
          "get":{
             "tags":[
@@ -1195,6 +1236,60 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListDetailedOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         },
+         "post":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retriveOfferedServicesByIdListV2.description}",
+            "operationId":"retrieveOfferedServicesByIdListV2",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "uniqueItems":true,
+                        "type":"array",
+                        "items":{
+                           "type":"integer",
+                           "format":"int64"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListDetailOfferedServiceBasicRest"
                         }
                      }
                   }
@@ -4735,6 +4830,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
@@ -4742,12 +4843,6 @@
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
                }
             }
          },
@@ -4775,10 +4870,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4986,6 +5081,65 @@
                      "type":"integer",
                      "description":"Contain data related to request",
                      "format":"int64"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "DetailOfferedServiceBasicRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "parentName":{
+                  "type":"string"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "description":"This model represents the offered service with basic information"
+         },
+         "SingapurResponseListDetailOfferedServiceBasicRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/DetailOfferedServiceBasicRest"
                   }
                }
             },

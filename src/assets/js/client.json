@@ -48,6 +48,9 @@
          "name":"${api.client.defs.operation.name}"
       },
       {
+         "name":"${api.client.defs.client-type.name}"
+      },
+      {
          "name":"${api.client.defs.media-gallery.name}"
       },
       {
@@ -100,6 +103,9 @@
       },
       {
          "name":"${api.client.defs.client.name}"
+      },
+      {
+         "name":"${api.client.defs.address-type.name}"
       },
       {
          "name":"${api.client.defs.budget.name}"
@@ -178,6 +184,228 @@
                   }
                }
             }
+         }
+      },
+      "/client/v2/clients":{
+         "post":{
+            "tags":[
+               "${api.client.defs.client.name}"
+            ],
+            "summary":"${api.client.defs.client.retrieveClientsAll.description}",
+            "operationId":"retrieveClients",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"object",
+                        "properties":{
+                           "pageable":{
+                              "$ref":"#/components/schemas/Pageable"
+                           },
+                           "filterClientRest":{
+                              "$ref":"#/components/schemas/FilterClientRest"
+                           }
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageClientRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Retrieve the clients correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageClientRest"
+                        }
+                     }
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized for this service \r\n SIDS-401-1 Bad Credentials  \r\n SIDS-401-2 User account is locked\r\n SCLI-400-2 Invalid login email \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponsePageClientRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v2/clients/{clientId}":{
+         "get":{
+            "tags":[
+               "${api.client.defs.client.name}"
+            ],
+            "summary":"${api.client.defs.client.updateClientV2.description}",
+            "operationId":"retrieveClientV2",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Retrieve the clients correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized for this service \r\n SIDS-401-1 Bad Credentials  \r\n SIDS-401-2 User account is locked\r\n SCLI-400-2 Invalid login email \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         },
+         "put":{
+            "tags":[
+               "${api.client.defs.client.name}"
+            ],
+            "summary":"${api.client.defs.client.updateClientV2.description}",
+            "operationId":"updateClientV2",
+            "parameters":[
+               {
+                  "name":"clientId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ClientRestV2"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400.",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Update the client correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized for this service \r\n SIDS-401-1 Bad Credentials  \r\n SIDS-401-2 User account is locked\r\n SCLI-400-2 Invalid login email \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseClientRestV2"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/client/v2/clients/{clientId}/{requestId}":{
@@ -579,14 +807,7 @@
                      }
                   }
                }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
+            }
          }
       },
       "/client/v1/rollback/sendAddress/{requestId}/client/{clientId}":{
@@ -1646,6 +1867,68 @@
                   }
                }
             }
+         }
+      },
+      "/client/v1/clientsclient-list":{
+         "post":{
+            "tags":[
+               "${api.client.defs.client.name}"
+            ],
+            "summary":"${api.client.defs.client.retrieveClientsList.description}",
+            "operationId":"retrieveClientsList",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "type":"integer",
+                           "format":"int64"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListClientDataRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
          }
       },
       "/client/v1/clients":{
@@ -6196,7 +6479,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -6308,7 +6591,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -6365,7 +6648,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
+            "operationId":"createOperationService",
             "parameters":[
                {
                   "name":"operationId",
@@ -6422,7 +6705,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -6479,7 +6762,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -6536,7 +6819,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -6651,7 +6934,7 @@
                "${api.client.defs.client.name}"
             ],
             "summary":"${api.client.defs.client.retrieveClients.description}",
-            "operationId":"retrieveClients",
+            "operationId":"retrieveClients_1",
             "parameters":[
                {
                   "name":"Authorization",
@@ -6691,68 +6974,6 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListClientRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
-      "/client/v1/clients/client-list":{
-         "post":{
-            "tags":[
-               "${api.client.defs.client.name}"
-            ],
-            "summary":"${api.client.defs.client.retrieveClientsList.description}",
-            "operationId":"retrieveClientsList",
-            "parameters":[
-               {
-                  "name":"Authorization",
-                  "in":"header",
-                  "required":true,
-                  "schema":{
-                     "type":"string"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "type":"array",
-                        "items":{
-                           "type":"integer",
-                           "format":"int64"
-                        }
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseListClientDataRest"
                         }
                      }
                   }
@@ -6930,6 +7151,54 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListClientRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v1/client-type":{
+         "get":{
+            "tags":[
+               "${api.client.defs.client-type.name}"
+            ],
+            "summary":"${api.client.defs.client-type.retrieveClientType.description}",
+            "operationId":"retrieveClientType",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400-3 The clients is incorrect data",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListClientTypeRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The customer list has been successfully retrieved",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListClientTypeRest"
                         }
                      }
                   }
@@ -7240,6 +7509,54 @@
             }
          }
       },
+      "/client/v1/address-type":{
+         "get":{
+            "tags":[
+               "${api.client.defs.address-type.name}"
+            ],
+            "summary":"${api.client.defs.address-type.retrieveAddressType.description}",
+            "operationId":"retrieveAddressType",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n SCLI-400-3 The clients is incorrect data",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAddressTypeRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The list of address types has been successfully retrieved",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListAddressTypeRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/":{
          "get":{
             "tags":[
@@ -7326,6 +7643,10 @@
             ],
             "type":"object",
             "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "address":{
                   "type":"string"
                },
@@ -7339,6 +7660,21 @@
                   "type":"string"
                },
                "province":{
+                  "type":"string"
+               },
+               "addressTypeRest":{
+                  "$ref":"#/components/schemas/AddressTypeRest"
+               }
+            }
+         },
+         "AddressTypeRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
                   "type":"string"
                }
             }
@@ -7527,6 +7863,479 @@
             },
             "description":"This model is the envelope"
          },
+         "Pageable":{
+            "type":"object",
+            "properties":{
+               "page":{
+                  "minimum":0,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "minimum":1,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "FilterClientRest":{
+            "type":"object",
+            "properties":{
+               "nameAndLastNameClient":{
+                  "type":"string"
+               },
+               "countryCode":{
+                  "type":"string"
+               },
+               "phoneClient":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "clientTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "createDateStart":{
+                  "type":"string"
+               },
+               "createDateEnd":{
+                  "type":"string"
+               }
+            }
+         },
+         "ClientRest":{
+            "required":[
+               "acceptCommunications",
+               "acceptPrivacyPolicy",
+               "acceptTermsAndConditions",
+               "email",
+               "lastName",
+               "name",
+               "password",
+               "phones"
+            ],
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "description":"Id,  internal identifier for the client",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string",
+                  "description":"Client email register"
+               },
+               "password":{
+                  "type":"string",
+                  "description":"Client password \n Original must match the regular expression ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(.){8,50}$  and then be encoded in base 64"
+               },
+               "name":{
+                  "type":"string",
+                  "description":"Client name"
+               },
+               "lastName":{
+                  "type":"string",
+                  "description":"Client last name"
+               },
+               "acceptCommunications":{
+                  "type":"boolean",
+                  "description":"Client last name"
+               },
+               "acceptPrivacyPolicy":{
+                  "type":"boolean",
+                  "description":"Client accept or no the privacy policy"
+               },
+               "acceptTermsAndConditions":{
+                  "type":"boolean",
+                  "description":"Informs if the client accepts or not the terms and conditions"
+               },
+               "userId":{
+                  "type":"integer",
+                  "description":"Id of the user in Oauth2 Identity-Server",
+                  "format":"int64"
+               },
+               "phones":{
+                  "type":"array",
+                  "description":"List contains phones of user \n Optional list of numbers",
+                  "items":{
+                     "$ref":"#/components/schemas/PhoneRest"
+                  }
+               },
+               "documentNumber":{
+                  "type":"string",
+                  "description":"Unique identifier document"
+               },
+               "firebaseUid":{
+                  "type":"string",
+                  "description":"Client uid firebase"
+               },
+               "lastActivityDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "clientType":{
+                  "type":"string",
+                  "description":"Client Type"
+               },
+               "address":{
+                  "type":"array",
+                  "description":"Address Billing for Client",
+                  "items":{
+                     "$ref":"#/components/schemas/RequestAddressRest"
+                  }
+               },
+               "isActive":{
+                  "type":"boolean"
+               }
+            },
+            "description":"This model represents the client"
+         },
+         "PageClientRest":{
+            "type":"object",
+            "properties":{
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "size":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "content":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientRest"
+                  }
+               },
+               "number":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "first":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
+               }
+            },
+            "description":"Contain data related to request"
+         },
+         "PageableObject":{
+            "type":"object",
+            "properties":{
+               "offset":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            }
+         },
+         "PhoneRest":{
+            "required":[
+               "number"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "number":{
+                  "type":"integer",
+                  "description":"Phone number",
+                  "format":"int64"
+               },
+               "countryCode":{
+                  "type":"string"
+               }
+            },
+            "description":"List contains phones of user \n Optional list of numbers"
+         },
+         "RequestAddressRest":{
+            "required":[
+               "address",
+               "zipCode"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "address":{
+                  "type":"string"
+               },
+               "complementAddress":{
+                  "type":"string"
+               },
+               "zipCode":{
+                  "type":"string"
+               },
+               "requestId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "city":{
+                  "type":"string"
+               },
+               "province":{
+                  "type":"string"
+               }
+            },
+            "description":"Address Billing for Client"
+         },
+         "SingapurResponsePageClientRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/PageClientRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "Sort":{
+            "type":"object",
+            "properties":{
+               "sorted":{
+                  "type":"boolean"
+               },
+               "unsorted":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "AcceptTermsRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "acceptCommunications":{
+                  "type":"boolean"
+               },
+               "acceptPrivacyPolicy":{
+                  "type":"boolean"
+               },
+               "acceptTermsAndConditions":{
+                  "type":"boolean"
+               }
+            }
+         },
+         "BillingDataRest":{
+            "required":[
+               "addressData",
+               "clientType",
+               "documentNumber",
+               "name",
+               "phone"
+            ],
+            "type":"object",
+            "properties":{
+               "billId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "clientType":{
+                  "$ref":"#/components/schemas/ClientTypeRest"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "lastName":{
+                  "type":"string"
+               },
+               "phone":{
+                  "type":"string"
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "addressData":{
+                  "$ref":"#/components/schemas/AddressRest"
+               },
+               "countryCode":{
+                  "type":"string"
+               }
+            }
+         },
+         "ClientRestV2":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string"
+               },
+               "updateDate":{
+                  "type":"string"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "email":{
+                  "type":"string"
+               },
+               "name":{
+                  "type":"string"
+               },
+               "lastName":{
+                  "type":"string"
+               },
+               "acceptTerms":{
+                  "$ref":"#/components/schemas/AcceptTermsRest"
+               },
+               "userId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "phones":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/PhoneRest"
+                  }
+               },
+               "documentNumber":{
+                  "type":"string"
+               },
+               "firebaseUid":{
+                  "type":"string"
+               },
+               "addresses":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressRest"
+                  }
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "avatar":{
+                  "type":"string"
+               },
+               "isChatClient":{
+                  "type":"boolean"
+               },
+               "storeCard":{
+                  "type":"boolean"
+               },
+               "billingData":{
+                  "$ref":"#/components/schemas/BillingDataRest"
+               }
+            },
+            "description":"This model represents the all information of client"
+         },
+         "ClientTypeRest":{
+            "required":[
+               "name"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "name":{
+                  "type":"string"
+               }
+            }
+         },
+         "SingapurResponseClientRestV2":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ClientRestV2"
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "ProductRest":{
             "required":[
                "taxDetails"
@@ -7550,33 +8359,6 @@
                   "$ref":"#/components/schemas/TaxDetailsRest"
                },
                "idMessageFirebase":{
-                  "type":"string"
-               }
-            }
-         },
-         "RequestAddressRest":{
-            "required":[
-               "zipCode"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "address":{
-                  "type":"string"
-               },
-               "complementAddress":{
-                  "type":"string"
-               },
-               "zipCode":{
-                  "type":"string"
-               },
-               "city":{
-                  "type":"string"
-               },
-               "province":{
                   "type":"string"
                }
             }
@@ -8158,6 +8940,9 @@
                   "items":{
                      "$ref":"#/components/schemas/OperationCouponRest"
                   }
+               },
+               "isRated":{
+                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -8253,37 +9038,16 @@
             },
             "description":"This model is the envelope"
          },
-         "Pageable":{
-            "type":"object",
-            "properties":{
-               "page":{
-                  "minimum":0,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "size":{
-                  "minimum":1,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "sort":{
-                  "type":"array",
-                  "items":{
-                     "type":"string"
-                  }
-               }
-            }
-         },
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalPages":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "totalElements":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "totalPages":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "size":{
                   "type":"integer",
@@ -8305,44 +9069,18 @@
                "first":{
                   "type":"boolean"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
                }
             },
             "description":"Contain data related to request"
-         },
-         "PageableObject":{
-            "type":"object",
-            "properties":{
-               "offset":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               }
-            }
          },
          "RatingRest":{
             "required":[
@@ -8427,17 +9165,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "Sort":{
-            "type":"object",
-            "properties":{
-               "sorted":{
-                  "type":"boolean"
-               },
-               "unsorted":{
-                  "type":"boolean"
-               }
-            }
          },
          "SingapurResponseAverageRatingRest":{
             "type":"object",
@@ -8925,165 +9652,6 @@
             },
             "description":"This model is the envelope"
          },
-         "ClientRest":{
-            "required":[
-               "acceptCommunications",
-               "acceptPrivacyPolicy",
-               "acceptTermsAndConditions",
-               "email",
-               "lastName",
-               "name",
-               "password",
-               "phones"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id,  internal identifier for the client",
-                  "format":"int64"
-               },
-               "email":{
-                  "type":"string",
-                  "description":"Client email register"
-               },
-               "password":{
-                  "type":"string",
-                  "description":"Client password \n Original must match the regular expression ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(.){8,50}$  and then be encoded in base 64"
-               },
-               "name":{
-                  "type":"string",
-                  "description":"Client name"
-               },
-               "lastName":{
-                  "type":"string",
-                  "description":"Client last name"
-               },
-               "acceptCommunications":{
-                  "type":"boolean",
-                  "description":"Client last name"
-               },
-               "acceptPrivacyPolicy":{
-                  "type":"boolean",
-                  "description":"Client accept or no the privacy policy"
-               },
-               "acceptTermsAndConditions":{
-                  "type":"boolean",
-                  "description":"Informs if the client accepts or not the terms and conditions"
-               },
-               "userId":{
-                  "type":"integer",
-                  "description":"Id of the user in Oauth2 Identity-Server",
-                  "format":"int64"
-               },
-               "phones":{
-                  "type":"array",
-                  "description":"List contains phones of user \n Optional list of numbers",
-                  "items":{
-                     "$ref":"#/components/schemas/PhoneRest"
-                  }
-               },
-               "documentNumber":{
-                  "type":"string",
-                  "description":"Unique identifier document"
-               },
-               "firebaseUid":{
-                  "type":"string",
-                  "description":"Client uid firebase"
-               },
-               "lastActivityDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "clientType":{
-                  "type":"string",
-                  "description":"Client Type"
-               },
-               "address":{
-                  "type":"array",
-                  "description":"Address Billing for Client",
-                  "items":{
-                     "$ref":"#/components/schemas/RequestAddressRest"
-                  }
-               },
-               "isActive":{
-                  "type":"boolean"
-               }
-            },
-            "description":"This model represents the client"
-         },
-         "PhoneRest":{
-            "required":[
-               "number"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "number":{
-                  "type":"integer",
-                  "description":"Phone number",
-                  "format":"int64"
-               },
-               "countryCode":{
-                  "type":"string"
-               }
-            },
-            "description":"List contains phones of user \n Optional list of numbers"
-         },
-         "SingapurResponseClientRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/ClientRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "PasswordChangeRest":{
-            "required":[
-               "currentPassword",
-               "newPassword"
-            ],
-            "type":"object",
-            "properties":{
-               "newPassword":{
-                  "type":"string",
-                  "description":"New password encoded base64"
-               },
-               "currentPassword":{
-                  "type":"string",
-                  "description":"Current password encoded base64"
-               }
-            },
-            "description":"This model is used for voluntary password change"
-         },
-         "NewPasswordRest":{
-            "required":[
-               "newPassword"
-            ],
-            "type":"object",
-            "properties":{
-               "newPassword":{
-                  "type":"string",
-                  "description":"New password encoded base64"
-               }
-            }
-         },
          "ClientDataRest":{
             "required":[
                "avatar",
@@ -9138,6 +9706,82 @@
                }
             },
             "description":"This model represents the client"
+         },
+         "SingapurResponseListClientDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientDataRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseClientRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ClientRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "PasswordChangeRest":{
+            "required":[
+               "currentPassword",
+               "newPassword"
+            ],
+            "type":"object",
+            "properties":{
+               "newPassword":{
+                  "type":"string",
+                  "description":"New password encoded base64"
+               },
+               "currentPassword":{
+                  "type":"string",
+                  "description":"Current password encoded base64"
+               }
+            },
+            "description":"This model is used for voluntary password change"
+         },
+         "NewPasswordRest":{
+            "required":[
+               "newPassword"
+            ],
+            "type":"object",
+            "properties":{
+               "newPassword":{
+                  "type":"string",
+                  "description":"New password encoded base64"
+               }
+            }
          },
          "SingapurResponseClientDataRest":{
             "type":"object",
@@ -10145,54 +10789,6 @@
             },
             "description":"This model represents the application and chat room"
          },
-         "BillingDataRest":{
-            "required":[
-               "addressData",
-               "clientType",
-               "documentNumber",
-               "name",
-               "phone"
-            ],
-            "type":"object",
-            "properties":{
-               "billId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "clientType":{
-                  "$ref":"#/components/schemas/ClientTypeRest"
-               },
-               "name":{
-                  "type":"string"
-               },
-               "lastName":{
-                  "type":"string"
-               },
-               "phone":{
-                  "type":"string"
-               },
-               "documentNumber":{
-                  "type":"string"
-               },
-               "addressData":{
-                  "$ref":"#/components/schemas/AddressRest"
-               },
-               "countryCode":{
-                  "type":"string"
-               }
-            }
-         },
-         "ClientTypeRest":{
-            "required":[
-               "name"
-            ],
-            "type":"object",
-            "properties":{
-               "name":{
-                  "type":"string"
-               }
-            }
-         },
          "SingapurResponseBillingDataRest":{
             "type":"object",
             "properties":{
@@ -10245,21 +10841,6 @@
                }
             },
             "description":"This model is the envelope"
-         },
-         "AcceptTermsRest":{
-            "type":"object",
-            "properties":{
-               "acceptCommunications":{
-                  "type":"boolean"
-               },
-               "acceptPrivacyPolicy":{
-                  "type":"boolean"
-               },
-               "acceptTermsAndConditions":{
-                  "type":"boolean"
-               }
-            },
-            "description":"Contain data related to request"
          },
          "SingapurResponseAcceptTermsRest":{
             "type":"object",
@@ -10488,31 +11069,6 @@
             },
             "description":"This model is the envelope"
          },
-         "SingapurResponseListClientDataRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "$ref":"#/components/schemas/ClientDataRest"
-                  }
-               }
-            },
-            "description":"This model is the envelope"
-         },
          "ClientContactRest":{
             "required":[
                "email",
@@ -10553,6 +11109,31 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ClientContactRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseListClientTypeRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientTypeRest"
+                  }
                }
             },
             "description":"This model is the envelope"
@@ -10873,6 +11454,31 @@
                   "type":"string"
                }
             }
+         },
+         "SingapurResponseListAddressTypeRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/AddressTypeRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
          }
       },
       "securitySchemes":{

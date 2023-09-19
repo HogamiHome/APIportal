@@ -26,25 +26,25 @@
    ],
    "paths":{
       "/rating-server/api/v1/ratings/operations":{
-         "get":{
+         "post":{
             "tags":[
                "RatingController"
             ],
             "operationId":"retrieveOperationIdWithoutRating",
-            "parameters":[
-               {
-                  "name":"operationIds",
-                  "in":"query",
-                  "required":true,
-                  "schema":{
-                     "type":"array",
-                     "items":{
-                        "type":"integer",
-                        "format":"int64"
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "type":"integer",
+                           "format":"int64"
+                        }
                      }
                   }
-               }
-            ],
+               },
+               "required":true
+            },
             "responses":{
                "500":{
                   "description":"Internal Server Error",
@@ -183,6 +183,86 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseAverageRatingRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/rating-server/api/v1/professionals/{professionalId}/operations/{operationId}/ratings/{ratingId}":{
+         "put":{
+            "tags":[
+               "RatingController"
+            ],
+            "summary":"Update values of a rating by rating id",
+            "operationId":"updateRating",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"ratingId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/RatingRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Rating updated successfully",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
                         }
                      }
                   }
@@ -438,6 +518,58 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListAverageHistoricalRatingsRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/rating-server/api/v1/operations/{operationId}/ratings":{
+         "get":{
+            "tags":[
+               "RatingController"
+            ],
+            "summary":"Retrieve a rating filtering by operation id",
+            "operationId":"retrieveRatingByOperationId",
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Rating of operation retrieved successfully",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseRatingRest"
                         }
                      }
                   }
@@ -793,21 +925,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
-               },
-               "numberOfElements":{
-                  "type":"integer",
-                  "format":"int32"
                },
                "first":{
                   "type":"boolean"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "last":{
                   "type":"boolean"
+               },
+               "numberOfElements":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -818,6 +950,15 @@
                   "type":"integer",
                   "format":"int64"
                },
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
+               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -825,15 +966,6 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
                }
             }
          },
@@ -896,6 +1028,9 @@
                },
                "titleOfferedService":{
                   "type":"string"
+               },
+               "createDateShow":{
+                  "type":"string"
                }
             },
             "description":"This model represents the Ratings"
@@ -920,10 +1055,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -979,6 +1114,23 @@
                }
             }
          },
+         "SingapurResponseRatingRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/RatingRest"
+               }
+            }
+         },
          "SingapurResponseBoolean":{
             "type":"object",
             "properties":{
@@ -1017,6 +1169,9 @@
                },
                "previousDate":{
                   "type":"string"
+               },
+               "isNeedProcessedTotals":{
+                  "type":"boolean"
                }
             }
          },
@@ -1109,23 +1264,6 @@
                   "items":{
                      "$ref":"#/components/schemas/AverageHistoricalRatingsRest"
                   }
-               }
-            }
-         },
-         "SingapurResponseRatingRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/RatingRest"
                }
             }
          },
