@@ -1869,68 +1869,6 @@
             }
          }
       },
-      "/client/v1/clientsclient-list":{
-         "post":{
-            "tags":[
-               "${api.client.defs.client.name}"
-            ],
-            "summary":"${api.client.defs.client.retrieveClientsList.description}",
-            "operationId":"retrieveClientsList",
-            "parameters":[
-               {
-                  "name":"Authorization",
-                  "in":"header",
-                  "required":true,
-                  "schema":{
-                     "type":"string"
-                  }
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "type":"array",
-                        "items":{
-                           "type":"integer",
-                           "format":"int64"
-                        }
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "500":{
-                  "description":"Internal Server Error",
-                  "content":{
-                     "*/*":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponse"
-                        }
-                     }
-                  }
-               },
-               "200":{
-                  "description":"OK",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SingapurResponseListClientDataRest"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "bearer-key":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
       "/client/v1/clients":{
          "post":{
             "tags":[
@@ -6479,7 +6417,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_4",
+            "operationId":"createOperationService_5",
             "parameters":[
                {
                   "name":"operationId",
@@ -6591,7 +6529,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_2",
+            "operationId":"createOperationService_1",
             "parameters":[
                {
                   "name":"operationId",
@@ -6705,7 +6643,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_1",
+            "operationId":"createOperationService_4",
             "parameters":[
                {
                   "name":"operationId",
@@ -6762,7 +6700,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_6",
+            "operationId":"createOperationService_2",
             "parameters":[
                {
                   "name":"operationId",
@@ -6819,7 +6757,7 @@
                "${api.client.defs.operation-offered-service.name}"
             ],
             "summary":"${api.client.defs.operation-offered-service.createOperationService.description}",
-            "operationId":"createOperationService_5",
+            "operationId":"createOperationService_6",
             "parameters":[
                {
                   "name":"operationId",
@@ -6974,6 +6912,68 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListClientRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/client/v1/clients/client-list":{
+         "post":{
+            "tags":[
+               "${api.client.defs.client.name}"
+            ],
+            "summary":"${api.client.defs.client.retrieveClientsList.description}",
+            "operationId":"retrieveClientsList",
+            "parameters":[
+               {
+                  "name":"Authorization",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "type":"integer",
+                           "format":"int64"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListClientDataRest"
                         }
                      }
                   }
@@ -8044,18 +8044,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -8070,12 +8070,6 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
-               },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
@@ -8083,6 +8077,12 @@
                "pageSize":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -9066,18 +9066,18 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
+               "last":{
                   "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
                },
+               "first":{
+                  "type":"boolean"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "last":{
-                  "type":"boolean"
                }
             },
             "description":"Contain data related to request"
@@ -9652,6 +9652,57 @@
             },
             "description":"This model is the envelope"
          },
+         "SingapurResponseClientRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/ClientRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "PasswordChangeRest":{
+            "required":[
+               "currentPassword",
+               "newPassword"
+            ],
+            "type":"object",
+            "properties":{
+               "newPassword":{
+                  "type":"string",
+                  "description":"New password encoded base64"
+               },
+               "currentPassword":{
+                  "type":"string",
+                  "description":"Current password encoded base64"
+               }
+            },
+            "description":"This model is used for voluntary password change"
+         },
+         "NewPasswordRest":{
+            "required":[
+               "newPassword"
+            ],
+            "type":"object",
+            "properties":{
+               "newPassword":{
+                  "type":"string",
+                  "description":"New password encoded base64"
+               }
+            }
+         },
          "ClientDataRest":{
             "required":[
                "avatar",
@@ -9706,82 +9757,6 @@
                }
             },
             "description":"This model represents the client"
-         },
-         "SingapurResponseListClientDataRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "$ref":"#/components/schemas/ClientDataRest"
-                  }
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "SingapurResponseClientRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/ClientRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "PasswordChangeRest":{
-            "required":[
-               "currentPassword",
-               "newPassword"
-            ],
-            "type":"object",
-            "properties":{
-               "newPassword":{
-                  "type":"string",
-                  "description":"New password encoded base64"
-               },
-               "currentPassword":{
-                  "type":"string",
-                  "description":"Current password encoded base64"
-               }
-            },
-            "description":"This model is used for voluntary password change"
-         },
-         "NewPasswordRest":{
-            "required":[
-               "newPassword"
-            ],
-            "type":"object",
-            "properties":{
-               "newPassword":{
-                  "type":"string",
-                  "description":"New password encoded base64"
-               }
-            }
          },
          "SingapurResponseClientDataRest":{
             "type":"object",
@@ -10751,6 +10726,12 @@
                },
                "earlyPayment":{
                   "type":"string"
+               },
+               "values":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
                }
             }
          },
@@ -11065,6 +11046,31 @@
                },
                "data":{
                   "$ref":"#/components/schemas/ProcessPaymentRest"
+               }
+            },
+            "description":"This model is the envelope"
+         },
+         "SingapurResponseListClientDataRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/ClientDataRest"
+                  }
                }
             },
             "description":"This model is the envelope"
