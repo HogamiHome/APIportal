@@ -903,13 +903,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -925,21 +925,21 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
-               },
                "first":{
                   "type":"boolean"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
-               "last":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "last":{
+                  "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                }
             }
          },
@@ -953,19 +953,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                },
                "pageNumber":{
                   "type":"integer",
                   "format":"int32"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
+               "unpaged":{
+                  "type":"boolean"
+               },
+               "paged":{
+                  "type":"boolean"
                }
             }
          },
@@ -1031,6 +1031,9 @@
                },
                "createDateShow":{
                   "type":"string"
+               },
+               "updateDateShow":{
+                  "type":"string"
                }
             },
             "description":"This model represents the Ratings"
@@ -1055,10 +1058,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
