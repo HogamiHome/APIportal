@@ -539,6 +539,64 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/services":{
+         "post":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Retrieve all offered services and filter according to criteria",
+            "operationId":"retrieveOfferedServices",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FilterOfferedService"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A list of services is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/services/visible-content":{
          "post":{
             "tags":[
@@ -914,6 +972,67 @@
             ]
          }
       },
+      "/backoffice-server/api/v1/services/order":{
+         "put":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Update the order of each offered service",
+            "operationId":"updateOfferedServicesOrder",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "$ref":"#/components/schemas/OfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The order of services has been correctly updated",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
       "/backoffice-server/api/v1/services/offered-service-role-document-type":{
          "post":{
             "tags":[
@@ -1042,6 +1161,76 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseOfferedServiceRoleDocumentTypeDto"
+                        }
+                     }
+                  }
+               }
+            },
+            "security":[
+               {
+                  "bearer-key":[
+                     
+                  ]
+               }
+            ]
+         }
+      },
+      "/backoffice-server/api/v1/services/level":{
+         "get":{
+            "tags":[
+               "Offered Service Controller"
+            ],
+            "summary":"Retrieve Offered Service By Levels",
+            "operationId":"retrieveOfferedServiceByLevels",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"levelList",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"array",
+                     "items":{
+                        "type":"integer",
+                        "format":"int64"
+                     }
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"A list of services is returned",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
                         }
                      }
                   }
@@ -5865,13 +6054,13 @@
          "PageDetailedOfferedServiceCoverageRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -5893,12 +6082,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -5915,19 +6104,19 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "pageSize":{
-                  "type":"integer",
-                  "format":"int32"
-               },
-               "pageNumber":{
-                  "type":"integer",
-                  "format":"int32"
-               },
                "paged":{
                   "type":"boolean"
                },
                "unpaged":{
                   "type":"boolean"
+               },
+               "pageNumber":{
+                  "type":"integer",
+                  "format":"int32"
+               },
+               "pageSize":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
@@ -6065,6 +6254,253 @@
                }
             }
          },
+         "FilterOfferedService":{
+            "type":"object",
+            "properties":{
+               "offeredServiceCode":{
+                  "type":"string"
+               },
+               "offeredServiceStatus":{
+                  "type":"string"
+               },
+               "offeredServiceParentId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceName":{
+                  "type":"string"
+               },
+               "offeredServiceTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "createDateStart":{
+                  "type":"string"
+               },
+               "createDateEnd":{
+                  "type":"string"
+               },
+               "offeredServiceLevelId":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "description":"This model represents the filter for offered services"
+         },
+         "AverageRatingRest":{
+            "type":"object",
+            "properties":{
+               "professionalId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "averageGeneralRating":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averagePunctual":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageBehavior":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageSatisfied":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "averageClean":{
+                  "type":"number",
+                  "format":"double"
+               },
+               "totalAverage":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            },
+            "description":"This model represents the average for all ratings for a professional"
+         },
+         "OfferedServiceMasterRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "codeOfferedMaster":{
+                  "type":"string"
+               }
+            },
+            "description":"This model represents the offered service master"
+         },
+         "OfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "unit":{
+                  "type":"string"
+               },
+               "title":{
+                  "type":"string"
+               },
+               "description":{
+                  "type":"string"
+               },
+               "price":{
+                  "type":"number"
+               },
+               "priceOriginal":{
+                  "type":"number"
+               },
+               "currency":{
+                  "type":"string"
+               },
+               "duration":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "taxDetails":{
+                  "$ref":"#/components/schemas/TaxDetailsRest"
+               },
+               "level":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string"
+               },
+               "metaDescription":{
+                  "type":"string"
+               },
+               "show":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "typeName":{
+                  "type":"string"
+               },
+               "is_active":{
+                  "type":"boolean"
+               },
+               "parentName":{
+                  "type":"string"
+               },
+               "rating":{
+                  "$ref":"#/components/schemas/AverageRatingRest"
+               },
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "profitMargin":{
+                  "type":"number"
+               },
+               "profitMarginDiscount":{
+                  "type":"number"
+               },
+               "parentId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "chatQuestion":{
+                  "type":"string"
+               },
+               "keyWords":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "parentCode":{
+                  "type":"string"
+               },
+               "offeredServiceMaster":{
+                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
+               },
+               "isActiveDependingEndDate":{
+                  "type":"boolean"
+               },
+               "startTimeOfferedService":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endTimeOfferedService":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "offeredServiceChildren":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               }
+            }
+         },
+         "SingapurResponseListOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               }
+            }
+         },
+         "TaxDetailsRest":{
+            "required":[
+               "taxRate",
+               "taxType"
+            ],
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "taxType":{
+                  "type":"string"
+               },
+               "taxRate":{
+                  "type":"number"
+               }
+            }
+         },
          "OfferedServiceVisibleContentRest":{
             "type":"object",
             "properties":{
@@ -6166,167 +6602,6 @@
                   "items":{
                      "$ref":"#/components/schemas/OfferedServiceTypeRest"
                   }
-               }
-            }
-         },
-         "AverageRatingRest":{
-            "type":"object",
-            "properties":{
-               "professionalId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "averageGeneralRating":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averagePunctual":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageBehavior":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageSatisfied":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "averageClean":{
-                  "type":"number",
-                  "format":"double"
-               },
-               "totalAverage":{
-                  "type":"integer",
-                  "format":"int32"
-               }
-            },
-            "description":"This model represents the average for all ratings for a professional"
-         },
-         "OfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "offeredServiceId":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "unit":{
-                  "type":"string"
-               },
-               "title":{
-                  "type":"string"
-               },
-               "description":{
-                  "type":"string"
-               },
-               "price":{
-                  "type":"number"
-               },
-               "priceOriginal":{
-                  "type":"number"
-               },
-               "currency":{
-                  "type":"string"
-               },
-               "duration":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "image":{
-                  "type":"string"
-               },
-               "taxDetails":{
-                  "$ref":"#/components/schemas/TaxDetailsRest"
-               },
-               "level":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "landingPage":{
-                  "type":"string"
-               },
-               "metaDescription":{
-                  "type":"string"
-               },
-               "show":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "typeName":{
-                  "type":"string"
-               },
-               "is_active":{
-                  "type":"boolean"
-               },
-               "parentName":{
-                  "type":"string"
-               },
-               "rating":{
-                  "$ref":"#/components/schemas/AverageRatingRest"
-               },
-               "createDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updateDate":{
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "profitMargin":{
-                  "type":"number"
-               },
-               "profitMarginDiscount":{
-                  "type":"number"
-               }
-            }
-         },
-         "SingapurResponseListOfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceRest"
-                  }
-               }
-            }
-         },
-         "TaxDetailsRest":{
-            "required":[
-               "taxRate",
-               "taxType"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "format":"int64"
-               },
-               "taxType":{
-                  "type":"string"
-               },
-               "taxRate":{
-                  "type":"number"
                }
             }
          },
@@ -6510,13 +6785,13 @@
          "PageOfferedServiceRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -6538,12 +6813,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7499,13 +7774,13 @@
          "PageRequestRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -7527,12 +7802,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -7967,6 +8242,53 @@
                }
             }
          },
+         "RequestRejectionMotiveRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "motive":{
+                  "type":"string"
+               },
+               "author":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "codeShowView":{
+                  "type":"string"
+               },
+               "language":{
+                  "type":"string"
+               }
+            }
+         },
          "RequestRejectionRest":{
             "type":"object",
             "properties":{
@@ -7984,6 +8306,9 @@
                "createDate":{
                   "type":"string",
                   "format":"date-time"
+               },
+               "requestRejectionMotiveRest":{
+                  "$ref":"#/components/schemas/RequestRejectionMotiveRest"
                }
             }
          },
@@ -8253,13 +8578,13 @@
          "PageRatingRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8281,12 +8606,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -8354,6 +8679,9 @@
                   "type":"string"
                },
                "createDateShow":{
+                  "type":"string"
+               },
+               "updateDateShow":{
                   "type":"string"
                }
             }
@@ -8635,13 +8963,13 @@
          "PageTimelineRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8663,12 +8991,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -8937,13 +9265,13 @@
          "PageProfessionalRestBackoffice":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -8965,12 +9293,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -9530,6 +9858,53 @@
             },
             "description":"List  of the services performed in the operation"
          },
+         "OperationRejectionMotiveRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "motive":{
+                  "type":"string"
+               },
+               "author":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "codeShowView":{
+                  "type":"string"
+               },
+               "language":{
+                  "type":"string"
+               }
+            }
+         },
          "OperationRejectionRest":{
             "required":[
                "message"
@@ -9548,6 +9923,9 @@
                   "maxLength":1000,
                   "minLength":0,
                   "type":"string"
+               },
+               "operationRejectionMotiveRest":{
+                  "$ref":"#/components/schemas/OperationRejectionMotiveRest"
                },
                "createDate":{
                   "type":"string",
@@ -9709,13 +10087,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -9737,12 +10115,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -10647,13 +11025,13 @@
          "PagePaycometWithOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -10675,12 +11053,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -10905,13 +11283,13 @@
          "PageProfessionalHierarchyRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -10933,12 +11311,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -11477,13 +11855,13 @@
          "PageClientRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -11505,12 +11883,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -11735,6 +12113,12 @@
                "idMessage":{
                   "type":"string"
                },
+               "messages":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
                "seen":{
                   "type":"boolean"
                }
@@ -11916,13 +12300,13 @@
          "PageOperationPaymentBilling":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -11944,12 +12328,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
+               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
-               },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"

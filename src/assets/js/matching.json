@@ -42,7 +42,7 @@
          "name":"ProfessionalRestController"
       },
       {
-         "name":"${api.search-api.defs.cache.name}"
+         "name":"CacheController"
       }
    ],
    "paths":{
@@ -941,10 +941,61 @@
       "/search/v1/cache/{cacheName}/invalidate":{
          "delete":{
             "tags":[
-               "${api.search-api.defs.cache.name}"
+               "CacheController"
             ],
-            "summary":"${api.offered-services-server.defs.cache.invalidateCacheOfferedServiceByName.description}",
+            "summary":"Invalidate cache offered service by name",
             "operationId":"invalidateCacheOfferedServiceByName",
+            "parameters":[
+               {
+                  "name":"cacheName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/search/v1/cache/{cacheName}/chat/invalidate":{
+         "delete":{
+            "tags":[
+               "CacheController"
+            ],
+            "summary":"Invalidate cache chat api by name",
+            "operationId":"invalidateCacheChatApiByName",
             "parameters":[
                {
                   "name":"cacheName",
@@ -992,10 +1043,51 @@
       "/search/v1/cache/invalidate":{
          "delete":{
             "tags":[
-               "${api.search-api.defs.cache.name}"
+               "CacheController"
             ],
-            "summary":"${api.offered-services-server.defs.cache.invalidateAllCachesOfferedService.description}",
+            "summary":"Invalidate all chaches offered service",
             "operationId":"invalidateAllCachesOfferedService",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/search/v1/cache/chat/invalidate":{
+         "delete":{
+            "tags":[
+               "CacheController"
+            ],
+            "summary":"Invalidate all caches chat api",
+            "operationId":"invalidateAllCachesChatApi",
             "responses":{
                "500":{
                   "description":"Internal server error",
@@ -1389,6 +1481,10 @@
                "metaDescription":{
                   "type":"string"
                },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
                "level":{
                   "type":"integer",
                   "format":"int32"
@@ -1757,6 +1853,10 @@
                },
                "code":{
                   "type":"string"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
                }
             }
          },
@@ -1797,6 +1897,10 @@
                "code":{
                   "type":"string",
                   "description":"Service's internal code"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "level":{
                   "type":"integer",

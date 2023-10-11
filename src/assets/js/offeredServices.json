@@ -126,6 +126,55 @@
                   }
                }
             }
+         },
+         "post":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.retrieveOfferedServices.description}",
+            "operationId":"retrieveOfferedServices",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/FilterOfferedService"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service is found and returned to the user",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
          }
       },
       "/offered-services-server/v2/services/{landing}":{
@@ -247,6 +296,60 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseListOfferedServiceRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/offered-services-server/v2/services/order":{
+         "put":{
+            "tags":[
+               "${api.offered-services-server.defs.offered-service.name}"
+            ],
+            "summary":"${api.offered-services-server.defs.offered-service.updateOfferedServicesOrder.description}",
+            "operationId":"updateOfferedServicesOrder",
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "type":"array",
+                        "items":{
+                           "$ref":"#/components/schemas/OfferedServiceRest"
+                        }
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The order of services has been correctly updated",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
                         }
                      }
                   }
@@ -411,6 +514,14 @@
                         "type":"integer",
                         "format":"int64"
                      }
+                  }
+               },
+               {
+                  "name":"allServices",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"boolean"
                   }
                }
             ],
@@ -4057,6 +4168,184 @@
             },
             "description":"This model is the envelope"
          },
+         "FilterOfferedService":{
+            "type":"object",
+            "properties":{
+               "offeredServiceCode":{
+                  "type":"string"
+               },
+               "offeredServiceStatus":{
+                  "type":"string"
+               },
+               "offeredServiceParentId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "offeredServiceName":{
+                  "type":"string"
+               },
+               "offeredServiceTypeId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "createDateStart":{
+                  "type":"string"
+               },
+               "createDateEnd":{
+                  "type":"string"
+               },
+               "offeredServiceLevelId":{
+                  "type":"integer",
+                  "format":"int64"
+               }
+            },
+            "description":"This model represents the filter for offered services"
+         },
+         "OfferedServiceMasterRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id of the associated master service",
+                  "format":"int64"
+               },
+               "codeOfferedMaster":{
+                  "type":"string",
+                  "description":"Code offered service master"
+               }
+            },
+            "description":"This model represents the offered service master"
+         },
+         "OfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "description":"Id, internal identifier for the offered service",
+                  "format":"int64"
+               },
+               "image":{
+                  "type":"string"
+               },
+               "parentId":{
+                  "type":"integer",
+                  "description":"Id  of the corresponding parent for this serive",
+                  "format":"int64"
+               },
+               "description":{
+                  "type":"string",
+                  "description":"Brief explanation about the service"
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Service's internal code"
+               },
+               "level":{
+                  "type":"integer",
+                  "description":"Level assigned to the service",
+                  "format":"int64"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "landingPage":{
+                  "type":"string",
+                  "description":"String to create url to landing page"
+               },
+               "metaDescription":{
+                  "type":"string",
+                  "description":"Meta description for landing page"
+               },
+               "show":{
+                  "type":"integer",
+                  "description":"Show or not in searches",
+                  "format":"int64"
+               },
+               "type":{
+                  "type":"integer",
+                  "description":"Type of landigpage to be used",
+                  "format":"int64"
+               },
+               "typeName":{
+                  "type":"string",
+                  "description":"Type of landigpage to be used"
+               },
+               "chatQuestion":{
+                  "type":"string",
+                  "description":"Offered Service chat question"
+               },
+               "keyWords":{
+                  "type":"array",
+                  "description":"Offered Service keywords",
+                  "items":{
+                     "type":"string",
+                     "description":"Offered Service keywords"
+                  }
+               },
+               "is_active":{
+                  "type":"boolean",
+                  "description":"Offered Service Active"
+               },
+               "parentName":{
+                  "type":"string",
+                  "description":"Offered Service Parent Name"
+               },
+               "parentCode":{
+                  "type":"string",
+                  "description":"Offered Service Parent Code"
+               },
+               "startTimeOfferedService":{
+                  "type":"string",
+                  "description":"Start date of the active service offered",
+                  "format":"date-time"
+               },
+               "endTimeOfferedService":{
+                  "type":"string",
+                  "description":"End date of the active service offered",
+                  "format":"date-time"
+               },
+               "offeredServiceMaster":{
+                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
+               },
+               "isActiveDependingEndDate":{
+                  "type":"boolean",
+                  "description":"Id of the associated master service"
+               },
+               "offeredServiceChildren":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               }
+            },
+            "description":"This model represents the offered service"
+         },
+         "SingapurResponseListOfferedServiceRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string",
+                  "description":"Result of the action, for example \"Success\"."
+               },
+               "code":{
+                  "type":"string",
+                  "description":"Status code, extra information related to HTTP response"
+               },
+               "message":{
+                  "type":"string",
+                  "description":"Specific message, result of the action"
+               },
+               "data":{
+                  "type":"array",
+                  "description":"Contain data related to request",
+                  "items":{
+                     "$ref":"#/components/schemas/OfferedServiceRest"
+                  }
+               }
+            },
+            "description":"This model is the envelope"
+         },
          "DetailedOfferedServiceRest":{
             "type":"object",
             "properties":{
@@ -4206,21 +4495,6 @@
             },
             "description":"This model represents the offered service coverage"
          },
-         "OfferedServiceMasterRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id of the associated master service",
-                  "format":"int64"
-               },
-               "codeOfferedMaster":{
-                  "type":"string",
-                  "description":"Code offered service master"
-               }
-            },
-            "description":"This model represents the offered service master"
-         },
          "OfferedServiceQuantifyRest":{
             "type":"object",
             "properties":{
@@ -4267,101 +4541,6 @@
                   "type":"boolean"
                }
             }
-         },
-         "OfferedServiceRest":{
-            "type":"object",
-            "properties":{
-               "id":{
-                  "type":"integer",
-                  "description":"Id, internal identifier for the offered service",
-                  "format":"int64"
-               },
-               "image":{
-                  "type":"string"
-               },
-               "parentId":{
-                  "type":"integer",
-                  "description":"Id  of the corresponding parent for this serive",
-                  "format":"int64"
-               },
-               "description":{
-                  "type":"string",
-                  "description":"Brief explanation about the service"
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Service's internal code"
-               },
-               "level":{
-                  "type":"integer",
-                  "description":"Level assigned to the service",
-                  "format":"int64"
-               },
-               "landingPage":{
-                  "type":"string",
-                  "description":"String to create url to landing page"
-               },
-               "metaDescription":{
-                  "type":"string",
-                  "description":"Meta description for landing page"
-               },
-               "show":{
-                  "type":"integer",
-                  "description":"Show or not in searches",
-                  "format":"int64"
-               },
-               "type":{
-                  "type":"integer",
-                  "description":"Type of landigpage to be used",
-                  "format":"int64"
-               },
-               "typeName":{
-                  "type":"string",
-                  "description":"Type of landigpage to be used"
-               },
-               "chatQuestion":{
-                  "type":"string",
-                  "description":"Offered Service chat question"
-               },
-               "keyWords":{
-                  "type":"array",
-                  "description":"Offered Service keywords",
-                  "items":{
-                     "type":"string",
-                     "description":"Offered Service keywords"
-                  }
-               },
-               "is_active":{
-                  "type":"boolean",
-                  "description":"Offered Service Active"
-               },
-               "parentName":{
-                  "type":"string",
-                  "description":"Offered Service Parent Name"
-               },
-               "parentCode":{
-                  "type":"string",
-                  "description":"Offered Service Parent Code"
-               },
-               "startTimeOfferedService":{
-                  "type":"string",
-                  "description":"Start date of the active service offered",
-                  "format":"date-time"
-               },
-               "endTimeOfferedService":{
-                  "type":"string",
-                  "description":"End date of the active service offered",
-                  "format":"date-time"
-               },
-               "offeredServiceMaster":{
-                  "$ref":"#/components/schemas/OfferedServiceMasterRest"
-               },
-               "isActiveDependingEndDate":{
-                  "type":"boolean",
-                  "description":"Id of the associated master service"
-               }
-            },
-            "description":"This model represents the offered service"
          },
          "OfferedServiceVisibleContentRest":{
             "type":"object",
@@ -4691,7 +4870,7 @@
             },
             "description":"This model is the envelope"
          },
-         "SingapurResponseListOfferedServiceRest":{
+         "SingapurResponseString":{
             "type":"object",
             "properties":{
                "status":{
@@ -4707,11 +4886,8 @@
                   "description":"Specific message, result of the action"
                },
                "data":{
-                  "type":"array",
-                  "description":"Contain data related to request",
-                  "items":{
-                     "$ref":"#/components/schemas/OfferedServiceRest"
-                  }
+                  "type":"string",
+                  "description":"Contain data related to request"
                }
             },
             "description":"This model is the envelope"
@@ -4804,12 +4980,12 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "first":{
-                  "type":"boolean"
-               },
                "numberOfElements":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "first":{
+                  "type":"boolean"
                },
                "pageable":{
                   "$ref":"#/components/schemas/PageableObject"
@@ -4830,10 +5006,10 @@
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
-               "paged":{
+               "unpaged":{
                   "type":"boolean"
                },
-               "unpaged":{
+               "paged":{
                   "type":"boolean"
                },
                "pageSize":{
@@ -4870,10 +5046,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                },
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                }
             }
@@ -4977,28 +5153,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/PriceRest"
-               }
-            },
-            "description":"This model is the envelope"
-         },
-         "SingapurResponseString":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string",
-                  "description":"Result of the action, for example \"Success\"."
-               },
-               "code":{
-                  "type":"string",
-                  "description":"Status code, extra information related to HTTP response"
-               },
-               "message":{
-                  "type":"string",
-                  "description":"Specific message, result of the action"
-               },
-               "data":{
-                  "type":"string",
-                  "description":"Contain data related to request"
                }
             },
             "description":"This model is the envelope"
@@ -5279,6 +5433,9 @@
             ],
             "type":"object",
             "properties":{
+               "active":{
+                  "type":"boolean"
+               },
                "offeredServiceId":{
                   "type":"integer",
                   "description":"OfferedService Role DocumentType offeredServiceId primary key",

@@ -39,6 +39,9 @@
          "name":"Chat Controller"
       },
       {
+         "name":"CacheController"
+      },
+      {
          "name":"Menu Controller"
       }
    ],
@@ -1096,6 +1099,98 @@
             }
          }
       },
+      "/chat/v1/cache/{cacheName}/invalidate":{
+         "delete":{
+            "tags":[
+               "CacheController"
+            ],
+            "summary":"Invalidate Cache By Name",
+            "operationId":"invalidateCacheByName",
+            "parameters":[
+               {
+                  "name":"cacheName",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/chat/v1/cache/invalidate":{
+         "delete":{
+            "tags":[
+               "CacheController"
+            ],
+            "summary":"Invalidate All Caches",
+            "operationId":"invalidateAllCaches",
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"The service delete the cache correctly",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request \r\n",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseString"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/chat/v1/banner/{language}":{
          "get":{
             "tags":[
@@ -1629,6 +1724,12 @@
                },
                "idMessage":{
                   "type":"string"
+               },
+               "messages":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
                },
                "seen":{
                   "type":"boolean"
