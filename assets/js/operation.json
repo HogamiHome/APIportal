@@ -58,6 +58,9 @@
       },
       {
          "name":"Rejection Controller"
+      },
+      {
+         "name":"Operation Rejection Motive Controller"
       }
    ],
    "paths":{
@@ -184,6 +187,67 @@
                      "application/json":{
                         "schema":{
                            "$ref":"#/components/schemas/SingapurResponseOperationRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/operation-server/api/v2/professionals/{professionalId}/operations/{operationId}/rejection":{
+         "post":{
+            "tags":[
+               "Rejection Controller"
+            ],
+            "summary":"${api.operation-server.defs.rejection.rejectOperationV2.name}",
+            "operationId":"rejectOperationV2",
+            "parameters":[
+               {
+                  "name":"professionalId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"integer",
+                     "format":"int64"
+                  }
+               }
+            ],
+            "requestBody":{
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/OperationRejectionRest"
+                     }
+                  }
+               },
+               "required":true
+            },
+            "responses":{
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseOperationRejectionRest"
                         }
                      }
                   }
@@ -2614,6 +2678,73 @@
             }
          }
       },
+      "/operation-server/api/v1/operation-rejection-motive":{
+         "get":{
+            "tags":[
+               "Operation Rejection Motive Controller"
+            ],
+            "summary":"Retrieve Operation Rejection Motives",
+            "operationId":"retrieveOperationRejectionMotives",
+            "parameters":[
+               {
+                  "name":"Accept-Language",
+                  "in":"header",
+                  "required":true,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"author",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               },
+               {
+                  "name":"codeShowView",
+                  "in":"query",
+                  "required":false,
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "500":{
+                  "description":"Internal server error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponse"
+                        }
+                     }
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRejectionMotiveRest"
+                        }
+                     }
+                  }
+               },
+               "200":{
+                  "description":"Operation Rejection Motives retrieve correctly",
+                  "content":{
+                     "application/json;charset=UTF-8":{
+                        "schema":{
+                           "$ref":"#/components/schemas/SingapurResponseListOperationRejectionMotiveRest"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/operation-server/api/v1/offeredServiceOperation/{operationId}":{
          "get":{
             "tags":[
@@ -3872,6 +4003,53 @@
             },
             "description":"List  of the services performed in the operation"
          },
+         "OperationRejectionMotiveRest":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUserId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "motive":{
+                  "type":"string"
+               },
+               "author":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "codeShowView":{
+                  "type":"string"
+               },
+               "language":{
+                  "type":"string"
+               }
+            }
+         },
          "OperationRejectionRest":{
             "required":[
                "message"
@@ -3890,6 +4068,9 @@
                   "maxLength":1000,
                   "minLength":0,
                   "type":"string"
+               },
+               "operationRejectionMotiveRest":{
+                  "$ref":"#/components/schemas/OperationRejectionMotiveRest"
                },
                "createDate":{
                   "type":"string",
@@ -4062,13 +4243,13 @@
          "PageOperationRest":{
             "type":"object",
             "properties":{
-               "totalElements":{
-                  "type":"integer",
-                  "format":"int64"
-               },
                "totalPages":{
                   "type":"integer",
                   "format":"int32"
+               },
+               "totalElements":{
+                  "type":"integer",
+                  "format":"int64"
                },
                "size":{
                   "type":"integer",
@@ -4084,9 +4265,6 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "pageable":{
-                  "$ref":"#/components/schemas/PageableObject"
-               },
                "sort":{
                   "$ref":"#/components/schemas/Sort"
                },
@@ -4096,6 +4274,9 @@
                },
                "first":{
                   "type":"boolean"
+               },
+               "pageable":{
+                  "$ref":"#/components/schemas/PageableObject"
                },
                "last":{
                   "type":"boolean"
@@ -4109,11 +4290,8 @@
                   "type":"integer",
                   "format":"int64"
                },
-               "unpaged":{
-                  "type":"boolean"
-               },
-               "paged":{
-                  "type":"boolean"
+               "sort":{
+                  "$ref":"#/components/schemas/Sort"
                },
                "pageSize":{
                   "type":"integer",
@@ -4123,8 +4301,11 @@
                   "type":"integer",
                   "format":"int32"
                },
-               "sort":{
-                  "$ref":"#/components/schemas/Sort"
+               "paged":{
+                  "type":"boolean"
+               },
+               "unpaged":{
+                  "type":"boolean"
                }
             }
          },
@@ -4181,10 +4362,10 @@
          "Sort":{
             "type":"object",
             "properties":{
-               "sorted":{
+               "unsorted":{
                   "type":"boolean"
                },
-               "unsorted":{
+               "sorted":{
                   "type":"boolean"
                }
             }
@@ -4246,6 +4427,23 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationRest"
+               }
+            }
+         },
+         "SingapurResponseOperationRejectionRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "$ref":"#/components/schemas/OperationRejectionRest"
                }
             }
          },
@@ -4810,6 +5008,56 @@
                },
                "message":{
                   "type":"string"
+               },
+               "operationRejectionMotive":{
+                  "$ref":"#/components/schemas/OperationRejectionMotive"
+               }
+            }
+         },
+         "OperationRejectionMotive":{
+            "type":"object",
+            "properties":{
+               "createDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "updateDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "createUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "updateUser":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "motive":{
+                  "type":"string"
+               },
+               "author":{
+                  "type":"string"
+               },
+               "isActive":{
+                  "type":"boolean"
+               },
+               "order":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "codeShowView":{
+                  "type":"string"
+               },
+               "language":{
+                  "type":"string"
                }
             }
          },
@@ -4891,23 +5139,6 @@
                },
                "data":{
                   "$ref":"#/components/schemas/OperationOfferedServicesRest"
-               }
-            }
-         },
-         "SingapurResponseOperationRejectionRest":{
-            "type":"object",
-            "properties":{
-               "status":{
-                  "type":"string"
-               },
-               "code":{
-                  "type":"string"
-               },
-               "message":{
-                  "type":"string"
-               },
-               "data":{
-                  "$ref":"#/components/schemas/OperationRejectionRest"
                }
             }
          },
@@ -5226,6 +5457,26 @@
                }
             }
          },
+         "SingapurResponseListOperationRejectionMotiveRest":{
+            "type":"object",
+            "properties":{
+               "status":{
+                  "type":"string"
+               },
+               "code":{
+                  "type":"string"
+               },
+               "message":{
+                  "type":"string"
+               },
+               "data":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/OperationRejectionMotiveRest"
+                  }
+               }
+            }
+         },
          "SingapurResponseClientDetails":{
             "type":"object",
             "properties":{
@@ -5255,6 +5506,15 @@
                "time":{
                   "type":"integer",
                   "format":"int64"
+               },
+               "motiveId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "message":{
+                  "maxLength":1000,
+                  "minLength":0,
+                  "type":"string"
                }
             }
          },
